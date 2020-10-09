@@ -14,3 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','inicioController@index');
+Route::post('inicioController/login','inicioController@login');
+Route::get('/inicio','iniciocontroller@inicio')->name ('inicio');

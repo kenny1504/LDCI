@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\usuarioModel;
 
 use Illuminate\Http\Request;
+use App\http\Requests;
 
 class inicioController extends Controller
 {
@@ -11,10 +13,31 @@ class inicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
-        return view('inicio');
+       return view('inicio');
     }
+
+    public function inicio()
+    {
+       return view('theme\bracket\layout');
+    }
+    
+    public function login(Request $request)
+    {
+
+       $password= $request->password;
+       $user= $request->user;
+        $query = (new usuarioModel)->GetUsuario($password,$user);
+
+         if(isset($query))
+           return response()->json($query);
+         else
+          return response()->json(0);
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -5,32 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-    <!-- Twitter -->
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bracket">
-    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="twitter:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/bracket">
-    <meta property="og:title" content="Bracket">
-    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
-
-    <meta property="og:image" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/bracket/img/bracket-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600">
-
     <!-- Meta -->
-    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="author" content="ThemePixels">
+    <meta name="description" content="INTERMODAL LDCI - AGENTE DE CARGA, COURIER Y ADUANA">
+    <meta name="author" content="kennysaenz31@gmail.com">
 
     <title>INTERMODAL LDCI - AGENTE DE CARGA, COURIER Y ADUANA</title>
-  
+    <link rel="icon" href="{{asset("assets/bracket/Logo-Intermodal.ico")}}" >
     <link rel="stylesheet" href="{{asset("assets/bracket/css/bracket.css")}}" >
     <!-- vendor css -->
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/font-awesome/css/font-awesome.css")}}" >
@@ -43,6 +23,14 @@
     
   </head>
   <body>
+     <!--Inicio Header -->
+     @include('theme/bracket/Header')
+     @include('theme/bracket/tabpanel')
+     <!--Fin-->
+     <!--Inicio Aside -->
+     @include('theme/bracket/aside')
+     <!--Fin -->
+
     <div class="br-mainpanel">
             <div class="pd-30">
             <h4 class="tx-gray-800 mg-b-5">Dashboard</h4>
@@ -50,13 +38,7 @@
                 <!--body -->
             <div class="br-pagebody mg-t-5 pd-x-30">
  
-            <!--Inicio Header -->
-            @include('theme/bracket/Header')
-            <!--Fin-->
-            <!--Inicio Aside -->
-            @include('theme/bracket/aside')
-            <!--Fin -->
-
+        
             <div class="br-mainpanel">
  
             </div><!-- br-mainpanel -->

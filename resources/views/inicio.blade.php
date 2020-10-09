@@ -1,1 +1,1 @@
-@include('theme/bracket/layout')
+@include('InicioSesion/inicioSesion')
