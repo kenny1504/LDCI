@@ -2,27 +2,39 @@
 
 function login() {
 
-    /**  Valores  del formulario para agregar o actualizar una raza */
-
-    var user= $('#user').val();
+    var user= $('#user').val(); /** Token obligatorio en ajax */
     var password=  $('#password').val();
     var _token= $('input[name=_token]').val();
 
+               showLoad(true);
                 $.ajax({
                     type: 'POST',
-                    url: '/inicioController/login', //llamada a la ruta ingresar materia
+                    url: '/inicioController/login', //llamada a la ruta
                     data: {
                       _token:_token,
                       password:password ,
                       user: user
                     },
                     success: function(data){
-                      
-                        if (Object.entries(data).length==0)
-                        alert("Credenciales no validas");
+                      showLoad(false);
+         
+                        if (data==0)
+                           alertError("Credenciales no validas");
                         else
-                        window.location.href='inicio';
-                }
+                        {
+
+                          alertSuccess("Bienvenido");
+                          /** Detiene , para mostrar alertSucess  */
+                          setTimeout(function(){
+                            window.location.href='inicio';
+                            }, 200);
+                        }
+                        
+                   },
+                    error : function(err){
+                      showLoad(false);
+                        alertError(err.responseText);
+                    }
 
         });
 

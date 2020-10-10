@@ -21,9 +21,23 @@
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="{{asset("assets/bracket/css/bracket.css")}}" >
 
+     <!-- Core CSS -->
+    <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.default.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
+
   </head>
 
   <body>
+
+         <!--INICIO CONTENEDOR CARGANDO-->
+         <div id="loader-wrapper">
+          <div id="loader"></div>
+          <div class="loader-section section-left"></div>
+          <div class="loader-section section-right"></div>
+        </div>
+        <!--FIN CONTENEDOR CARGANDO-->
 
     <div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v">
 
@@ -41,10 +55,17 @@
       </div><!-- login-wrapper -->
     </div><!-- d-flex -->
 
-    <script src="{{asset("assets/bracket/lib/jquery/jquery.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/jquery.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/jquery.waiting.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/jquery-ui.min.js")}}" ></script>
+
     <script src="{{asset("assets/bracket/lib/popper.js/popper.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/bootstrap/bootstrap.js")}}" ></script>
+    
+    <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/core.js")}}" ></script>
     <script src="{{asset("LDCI/login.js")}}" ></script>
+  
 
   </body>
 </html>

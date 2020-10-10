@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/chartist/chartist.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
 
     
   </head>
@@ -30,6 +32,14 @@
      <!--Inicio Aside -->
      @include('theme/bracket/aside')
      <!--Fin -->
+
+     <!--INICIO CONTENEDOR CARGANDO-->
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+    <!--FIN CONTENEDOR CARGANDO-->
 
     <div class="br-mainpanel">
             <div class="pd-30">
@@ -57,6 +67,7 @@
             </footer>
     </div><!-- br-mainpanel -->
 
+
     <script src="{{asset("assets/bracket/lib/jquery/jquery.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/popper/popper.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/bootstrap/bootstrap.js")}}" ></script>
@@ -74,6 +85,9 @@
     <script src="{{asset("assets/bracket/js/bracket.js")}}" ></script>
     <script src="{{asset("assets/bracket/js/ResizeSensor.js")}}" ></script>
     <script src="{{asset("assets/bracket/js/dashboard.js")}}" ></script>
+    <!-- Core js -->
+    <script src="{{asset("LDCI/Core//alertify.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core//core.js")}}" ></script>
 
 
   </body>

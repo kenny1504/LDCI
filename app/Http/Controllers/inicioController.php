@@ -22,86 +22,32 @@ class inicioController extends Controller
 
     public function inicio()
     {
-       return view('theme\bracket\layout');
+       $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
+      /** revuelve vista y nombre del suuario logueado */
+       return view('theme\bracket\layout')->with('nombre', $nombreUsuario);;
     }
     
     public function login(Request $request)
     {
 
+        /** Recupera parametros enviados por ajax */
        $password= $request->password;
        $user= $request->user;
-        $query = (new usuarioModel)->GetUsuario($password,$user);
+       /** Llama metodo del modelo Usuario */
+       $query = (new usuarioModel)->GetUsuario($password,$user);
+        
+        if(isset($query))
+         {
+            /** iniciamos variables de session con valores recuperados de la consulta */
+            session(['idUsuario' =>($query[0]->id_usuario) ]);
+            session(['nombreUsuario' =>($query[0]->nombre) ]);
+            return response()->json(1);
+         }else
+         {
+            return response()->json(0); /** si es usuario no existe o esta eliminado */
+         } 
+         
 
-         if(isset($query))
-           return response()->json($query);
-         else
-          return response()->json(0);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
