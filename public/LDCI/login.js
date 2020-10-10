@@ -1,5 +1,5 @@
 
-
+/** Funcion para validar credenciales del usuario */
 function login() {
 
     var user= $('#user').val(); /** Token obligatorio en ajax */
@@ -22,14 +22,22 @@ function login() {
                            alertError("Credenciales no validas");
                         else
                         {
-
-                          alertSuccess("Bienvenido");
-                          /** Detiene , para mostrar alertSucess  */
-                          setTimeout(function(){
-                            window.location.href='inicio';
-                            }, 200);
-                        }
-                        
+                          if (data!=1)
+                          {
+                            alertSuccess("El usuario esta desactivado");
+                            $('#user').val("");
+                            $('#password').val("");
+                          }
+                          else
+                          {
+                            alertSuccess("Bienvenido");
+                            /** Detiene , para mostrar alertSucess  */
+                            setTimeout(function(){
+                              window.location.href='inicio';
+                              }, 200);
+                          }
+                         
+                        }   
                    },
                     error : function(err){
                       showLoad(false);
@@ -40,3 +48,4 @@ function login() {
 
     
 }
+

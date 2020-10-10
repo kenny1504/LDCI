@@ -787,4 +787,12 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+/**   Style foooter */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
 /*FIN ESTILO DE SWITCH BUTTON ENTRADAS*/

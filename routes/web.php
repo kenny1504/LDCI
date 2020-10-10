@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','inicioController@index');
 Route::post('inicioController/login','inicioController@login');
 Route::get('/inicio','iniciocontroller@inicio')->name ('inicio');
+Route::get('/login','iniciocontroller@loginOut')->name ('login');
+Route::post('/datos/usuario','iniciocontroller@getUsuario');

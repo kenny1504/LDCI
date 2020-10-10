@@ -9,7 +9,7 @@
     <meta name="description" content="INTERMODAL LDCI - AGENTE DE CARGA, COURIER Y ADUANA">
     <meta name="author" content="kennysaenz31@gmail.com">
 
-    <title>INTERMODAL LDCI - AGENTE DE CARGA, COURIER Y ADUANA</title>
+    <title>@yield('titulo','inicio')-INTERMODAL LDCI</title>
     <link rel="icon" href="{{asset("assets/bracket/Logo-Intermodal.ico")}}" >
     <link rel="stylesheet" href="{{asset("assets/bracket/css/bracket.css")}}" >
     <!-- vendor css -->
@@ -18,14 +18,19 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/perfect-scrollbar/css/perfect-scrollbar.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
-    <link rel="stylesheet" href="{{asset("assets/bracket/lib/chartist/chartist.css")}}"  >
-    <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
-    <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
-
+  
+    
+     <!-- Core CSS -->
+     <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.default.css")}}"  >
+     <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
+     <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
+     <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
+ 
     
   </head>
   <body>
      <!--Inicio Header -->
+     @include('InicioSesion/editarUsuario')
      @include('theme/bracket/Header')
      @include('theme/bracket/tabpanel')
      <!--Fin-->
@@ -48,21 +53,16 @@
                 <!--body -->
             <div class="br-pagebody mg-t-5 pd-x-30">
  
-        
             <div class="br-mainpanel">
- 
-            </div><!-- br-mainpanel -->
+              @section('contenido')<!-- Agrega contenido desde otra vista--> 
 
+              @show  
+            </div><!-- br-mainpanel -->
 
             </div><!--body -->
             <footer class="br-footer">
                 <div class="footer-left">
                     <div class="mg-b-2">Copyright - 2020. LDCI. All Rights Reserved.</div>
-                </div>
-                <div class="footer-right d-flex align-items-center">
-                    <span class="tx-uppercase mg-r-10">Share:</span>
-                    <a target="_blank" class="pd-x-5" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//themepixels.me/bracket/intro"><i class="fa fa-facebook tx-20"></i></a>
-                    <a target="_blank" class="pd-x-5" href="https://twitter.com/home?status=Bracket,%20your%20best%20choice%20for%20premium%20quality%20admin%20template%20from%20Bootstrap.%20Get%20it%20now%20at%20http%3A//themepixels.me/bracket/intro"><i class="fa fa-twitter tx-20"></i></a>
                 </div>
             </footer>
     </div><!-- br-mainpanel -->
@@ -76,18 +76,19 @@
     <script src="{{asset("assets/bracket/lib/jquery-ui/jquery-ui.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/peity/jquery.peity.js")}}" ></script>
-    <script src="{{asset("assets/bracket/lib/chartist/chartist.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/jquery.sparkline.bower/jquery.sparkline.min.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/d3/d3.js")}}" ></script>
-    <script src="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.js")}}" ></script>
 
 
     <script src="{{asset("assets/bracket/js/bracket.js")}}" ></script>
     <script src="{{asset("assets/bracket/js/ResizeSensor.js")}}" ></script>
-    <script src="{{asset("assets/bracket/js/dashboard.js")}}" ></script>
-    <!-- Core js -->
-    <script src="{{asset("LDCI/Core//alertify.min.js")}}" ></script>
-    <script src="{{asset("LDCI/Core//core.js")}}" ></script>
+      
+    <!-- js Core-->
+      <script src="{{asset("LDCI/Core/jquery.waiting.js")}}" ></script>
+      
+      <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
+      <script src="{{asset("LDCI/Core/core.js")}}" ></script>
+    
 
 
   </body>
