@@ -18,7 +18,7 @@ class inicioController extends Controller
     public function index()
     {
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
-          if(isset($nombreUsuario))
+          if(!empty($nombreUsuario))
           return view('theme\bracket\layout')->with('nombre', $nombreUsuario);
          else
            return view('inicio');
@@ -42,9 +42,9 @@ class inicioController extends Controller
        $password= $request->password;
        $user= $request->user;
        /** Llama metodo del modelo Usuario */
-       $query = (new usuarioModel)->GetUsuario($password,$user);
+        $query = (new usuarioModel)->GetUsuario($password,$user);
 
-        if(isset($query))
+        if(!empty($query))
          {
             /** iniciamos variables de session con valores recuperados de la consulta */
             session(['idUsuario' =>($query[0]->id_usuario) ]);

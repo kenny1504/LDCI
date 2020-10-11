@@ -4,12 +4,13 @@ function login() {
 
     var user= $('#user').val(); /** Token obligatorio en ajax */
     var password=  $('#password').val();
+    password=Base64.encode(password);/** Encripta password */
     var _token= $('input[name=_token]').val();
 
                showLoad(true);
                 $.ajax({
                     type: 'POST',
-                    url: '/inicioController/login', //llamada a la ruta
+                    url: '/login/in', //llamada a la ruta
                     data: {
                       _token:_token,
                       password:password ,
@@ -30,7 +31,7 @@ function login() {
                           }
                           else
                           {
-                            alertSuccess("Bienvenido");
+                            alertSuccess("Credenciales Validadas");
                             /** Detiene , para mostrar alertSucess  */
                             setTimeout(function(){
                               window.location.href='inicio';
