@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\usuarioModel;
+use Mail;
 
 use Illuminate\Http\Request;
 use App\http\Requests;
@@ -75,6 +76,19 @@ class inicioController extends Controller
 
         if(isset($query))
          {
+             
+            /**  Inicio funcion para enviar correo  */
+            $subject ="Cambio de datos"; /** Asunto del Correo */
+            $for ="kennysaenz31@gmail.com";/** correo que recibira el mensaje */
+
+            Mail::send('InicioSesion\mail', $query,function($msj) use($subject,$for){
+                                    /** Mi correo  y  Nombre que Aparecera */
+                    $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
+                    $msj->subject($subject);
+                    $msj->to($for);
+            });
+            /** Fin funcion para enviar correo */
+
             return response()->json($query);
          }else
          {

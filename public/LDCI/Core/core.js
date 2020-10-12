@@ -1,6 +1,14 @@
 /** archivo creado para funciones generales del sistema */
 /** 10-10-2020 Kevin Kenny saenz zapata */
 
+  //Mostrar alerta al usuario
+
+  $(document).ready(function () {
+  
+  console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
+  console.log("%cEl codigo que ingrese en esta consola que pueda altere el comportamiento del sistema sera penalizado.\n", "color: green");
+
+  })
 
 
 var pass=null; /** Variable que guarda contraseña del usuario */
