@@ -25,16 +25,25 @@ function login() {
                         {
                           if (data!=1)
                           {
-                            alertSuccess("El usuario esta desactivado");
-                            $('#user').val("");
-                            $('#password').val("");
+                            if (data==3)
+                            {
+                              alertSuccess("El usuario aun no ha confirmado el correo electronico");
+                              $('#user').val("");
+                              $('#password').val("");
+                            }
+                            else
+                            {
+                              alertSuccess("El usuario esta desactivado");
+                              $('#user').val("");
+                              $('#password').val("");
+                            }
                           }
                           else
                           {
                             alertSuccess("Credenciales Validadas");
                             /** Detiene , para mostrar alertSucess  */
                             setTimeout(function(){
-                              window.location.href='inicio';
+                              window.location.href='/';
                               }, 200);
                           }
                          

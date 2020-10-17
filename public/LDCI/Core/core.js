@@ -182,12 +182,12 @@ var pass=null; /** Variable que guarda contraseña del usuario */
     /** Funcion para cerrar session */
     function loginOut()
     {
-    showLoad(true);
-    alertSuccess("Cerrando session");
+        showLoad(true);
+        alertSuccess("Cerrando session");
 
-    /** Detiene , para mostrar alertSucess  */
+       /** Detiene , para mostrar alertSucess  */
         setTimeout(function(){
-            window.location.href='login';
+            window.location.href='/login';
             showLoad(False);
         }, 200);
 
@@ -207,7 +207,6 @@ var pass=null; /** Variable que guarda contraseña del usuario */
             success: function(data){
                $('#usuario').val(data[0].usuario);
                pass=data[0].pass;
-               $('#nombre').val(data[0].nombre);
                $('#telefono').val(data[0].telefono);
                showLoad(false);
            },
@@ -220,11 +219,10 @@ var pass=null; /** Variable que guarda contraseña del usuario */
     }
 
 
-
     /** Funcion que guardar datos de usuario a modificar*/
     function guardarUsuario()
     {
-        debugger;
+    
         var _token= $('input[name=_token]').val();
         var usuario= $('#usuario').val();
         var nombre= $('#nombre').val();
@@ -265,6 +263,54 @@ var pass=null; /** Variable que guarda contraseña del usuario */
        
         
     }
+
+
+    function registrarUsuario()
+    {
+
+        var _token= $('input[name=_token]').val();
+        var usuario= $('#txt_usuario').val();
+        var correo= $('#txt_correo').val();
+        var telefono =$('#txt_telefono').val();
+        var pass =$('#txt_pass').val();
+        pass=Base64.encode(pass);
+  
+        if(usuario!="" && correo!="" && telefono!="" && pass!=""  )
+        {
+            showLoad(true);
+            $.ajax({
+                type: 'POST',
+                url: '/registro/usuario', //llamada a la ruta
+                data: {
+                _token:_token,
+                usuario:usuario,
+                correo:correo,
+                telefono:telefono,
+                pass:pass
+                },
+                success: function(data){
+                    if(data==1)
+                    {
+                        alertSuccess("Se ha enviado un correo de confirmacion");
+                        /** Detiene , para mostrar alertSucess  */
+                            setTimeout(function(){
+                                window.location.href='/login';
+                                showLoad(False);
+                            }, 200);
+                    }
+
+                },
+                error : function(err){
+                    alertError(err.responseText);
+                }
+
+            });
+        }
+        else
+            alertError("Favor completar todos los campos");
+
+    }
+
 
       /*** Funcion para Codificar o Decodificar */
       var Base64 = {

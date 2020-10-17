@@ -8,6 +8,7 @@
     <title>Correo de Registro</title>
 </head>
 <body>
+    <p><b> ENVIO DE CORREO DESDE LARAVEL </b></p>
     <p>Hola! Se ha reportado un nuevo un cambio de contraseña</p>
     <ul>
         <li>Usuario:Ingfeliz</li>

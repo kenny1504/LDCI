@@ -44,14 +44,18 @@
         <div class="tx-center mg-b-60">LOGISTICA DE CARGA INTERMODAL</div>
         @csrf <!-- esta varible es para TOken, siempre ponerla-->
         <div class="form-group">
-          <input type="text" id="user" class="form-control" placeholder="Ingrese Usuario">
+          <input type="text" id="txt_usuario" required class="form-control" placeholder="Ingrese Usuario">
         </div><!-- form-group -->
+          <div class="form-group">
+            <input type="email" id="txt_correo" required class="form-control" placeholder="Ingrese Correo">
+          </div><!-- form-group -->
+          <div class="form-group">
+            <input type="text" id="txt_telefono" required class="form-control" placeholder="Ingrese Telefono">
+          </div><!-- form-group -->
         <div class="form-group">
-          <input type="password" id="password" class="form-control" placeholder="Ingrese Contraseña">
+          <input type="password" id="txt_pass" requireds class="form-control" placeholder="Ingrese Contraseña">
         </div><!-- form-group -->
-        <button  onclick="login()" class="btn btn-info btn-block">Entrar</button>
-        <br>
-        <center><a href="/registro" > <label class="tx-normal">Registrarse</label></a></center> 
+        <button onclick="registrarUsuario();" class="btn btn-info btn-block">Registrarse</button>
       </div><!-- login-wrapper -->
     </div><!-- d-flex -->
     <footer class="br-footer">
