@@ -43,12 +43,11 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                 cancel: "Cancelar"
             }
         });
-        alertify.confirm(texto, function (e) {
-            if (is.function(callback))
-                callback(e);
+        alertify.confirm(texto, function(action){
+            if(action)
+                callback();
             else
-                alertError("No se puede llamar a esta function");
-
+              alertify.error('Cancelado');
         });
     }
 
@@ -208,10 +207,12 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                $('#usuario').val(data[0].usuario);
                pass=data[0].pass;
                $('#telefono').val(data[0].telefono);
+               $('#correo').val(data[0].correo);
                showLoad(false);
            },
             error : function(err){
                 alertError(err.responseText);
+                showLoad(false);
             }
 
         });
@@ -225,13 +226,14 @@ var pass=null; /** Variable que guarda contraseña del usuario */
     
         var _token= $('input[name=_token]').val();
         var usuario= $('#usuario').val();
-        var nombre= $('#nombre').val();
+        //var nombre= $('#nombre').val();
         var telefono =$('#telefono').val();
+        var correo =$('#correo').val();
         var pass_old =$('#pass_old').val();
         var pass_new=$('#pass_new').val();
-        pass_old=Base64.encode(pass_old);
+        var pass_confirm =$("#pass_new_confirm").val();
 
-    if(pass_old!=pass)
+    if(pass_confirm!==pass_new || pass_new ==='' || pass_new === undefined || pass_old ==='' )
     {
         alertError("Contraseña anterior no coincide");
     }
@@ -241,19 +243,30 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                 showLoad(true);
                 $.ajax({
                     type: 'POST',
-                    url: '/datos/usuario', //llamada a la ruta
+                    url: '/datos/modificaUsuario', //llamada a la ruta
                     data: {
-                    _token:_token
+                    _token:_token,
+                    usuario:usuario,
+                    correo:correo,
+                    telefono:telefono,
+                    pass_old:Base64.encode(pass_old),
+                    password:Base64.encode(pass_new)
+  
                     },
                     success: function(data){
+                        showLoad(false);
+                        if(data.error){
+                            alertError(data.mensaje);
+                            return;
+                        }
                         $('#usuario').val(data[0].usuario);
                         pass=data[0].pass;
                         $('#nombre').val(data[0].nombre);
                         $('#telefono').val(data[0].telefono);
-                        showLoad(false);
                     },
                     error : function(err){
                         alertError(err.responseText);
+                        showLoad(false);
                     }
 
                 });

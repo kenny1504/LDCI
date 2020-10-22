@@ -18,6 +18,7 @@ Route::get('/inicio','iniciocontroller@inicio')->name ('inicio');
 Route::get('/login','iniciocontroller@loginOut')->name ('login');
 Route::get('/registro','iniciocontroller@registro')->name ('registro');
 Route::post('/registro/usuario','iniciocontroller@guardarUsuario')->name ('guardar_usuario');
+Route::post('/datos/modificaUsuario','iniciocontroller@editarUsuario')->name ('editar_usuario');
 Route::post('/datos/usuario','iniciocontroller@getUsuario');
 
 Route::post('/login/in','inicioController@login')->name ('login-in');
