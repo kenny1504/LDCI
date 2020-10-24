@@ -22,7 +22,7 @@ class usuarioModel extends Model
     public function GetDatosUsuario($id_usuario)
     {
         $query = new static;
-        $query= DB::select("select usuario,telefono,password,correo from ldci.tb_usuario where id_usuario=?;",[$id_usuario]);
+        $query= DB::select("select usuario,telefono,correo from ldci.tb_usuario where id_usuario=?;",[$id_usuario]);
         return $query;
     }
     // Este metodo sirve para verificar que no exista
@@ -64,19 +64,20 @@ class usuarioModel extends Model
         return $query;
     }
 
-    public function validarcontrasena($id_usuario,$passwordViejo)
+    public function validarcontrasena($id_usuario,$passwordActual)
     {
         $query =  DB::select("SELECT * FROM ldci.tb_usuario WHERE id_usuario = ?", [$id_usuario]);
-        if($query[0]->password !== $passwordViejo)
+        if($query[0]->password !== $passwordActual)
            return false;
         return true;
     }
-    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica, $passwordViejo, $codigo)
+
+    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica, $passwordActual, $codigo)
     {
         $query = new static;
         // SI password es vacio 
         if( empty($password))
-            $password = $passwordViejo;
+            $password = $passwordActual;
 
         $query= DB::statement(
          "UPDATE ldci.tb_usuario 

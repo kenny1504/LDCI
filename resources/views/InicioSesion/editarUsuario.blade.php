@@ -13,10 +13,10 @@
                               <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> Usuario <span class="tx-normal">]</span></div>
                               <br>
                               <div class="form-group">
-                                <input  id="usuario" type="text" class="form-control" placeholder="Ingrese Usuario">
+                                <input  id="usuario"  type="text" class="form-control" placeholder="Ingrese Usuario">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="pass_old" type="password" class="form-control" placeholder="Ingrese Anterior Contraseña">
+                                <input id="pass_now" type="password" class="form-control" placeholder="Ingrese Actual Contraseña">
                               </div><!-- form-group -->
                               <div class="form-group">
                                 <input id="pass_new" type="password" class="form-control" placeholder="Ingrese Nueva Contraseña (Opcional)">
@@ -25,13 +25,13 @@
                                 <input id="pass_new_confirm" type="password" class="form-control" placeholder="Confirmar contraseña nueva (Opcional)">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="telefono" type="text" class="form-control" placeholder="Ingrese Telefono" maxlength="25">
+                                <input id="telefono" name="telefono" onkeypress="return soloNumeros(event,telefono);" type="text" class="form-control" placeholder="Ingrese Telefono" maxlength="25">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="correo" type="text" class="form-control" placeholder="Correo Electronico">
+                                <input id="correo" type="email" class="form-control" placeholder="Correo Electronico">
                               </div><!-- form-group -->
                               <div class="form-group tx-12">Al hacer clic en el botón Guardar a continuación, acepta nuestra política de privacidad y los términos de uso</div>
-                              <a onclick="guardarUsuario()" class="btn btn-info btn-block text-white">Guardar</a>
+                              <a id="btnGuardar" onclick="guardarUsuario()" class="btn btn-info btn-block text-white">Guardar</a>
                             </div><!-- login-wrapper -->
                           </div><!-- d-flex -->
                 </div>

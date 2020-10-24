@@ -30,12 +30,12 @@
   </head>
   <body>
      <!--Inicio Header -->
-     @include('InicioSesion/editarUsuario')
-     @include('theme/bracket/Header')
-     @include('theme/bracket/tabpanel')
+     @include('InicioSesion.editarUsuario')
+     @include('theme.bracket.Header')
+     @include('theme.bracket.tabpanel')
      <!--Fin-->
      <!--Inicio Aside -->
-     @include('theme/bracket/aside')
+     @include('theme.bracket.aside')
      <!--Fin -->
 
      <!--INICIO CONTENEDOR CARGANDO-->

@@ -21,7 +21,7 @@ class inicioController extends Controller
     {
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
           if(!empty($nombreUsuario))
-          return view('theme\bracket\layout')->with('nombre', $nombreUsuario);
+          return view('theme.bracket.layout')->with('nombre', $nombreUsuario);
          else
            return view('inicio');
     }
@@ -31,8 +31,8 @@ class inicioController extends Controller
        $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
       /** revuelve vista y nombre del usuario logueado */
 
-      if(isset($nombreUsuario))
-       return view('theme\bracket\layout')->with('nombre', $nombreUsuario);
+      if(!empty($nombreUsuario))
+       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);
       else
         return view('inicio');
     }
@@ -45,9 +45,6 @@ class inicioController extends Controller
        $user= $request->user;
        /** Llama metodo del modelo Usuario */
         $query = (new usuarioModel)->GetUsuario($password,$user);
-        error_log($password);
-        error_log($user);
-        error_log($query[0]->confirmado);
         if(!empty($query))
          {
             if($query[0]->confirmado==true)
@@ -84,20 +81,6 @@ class inicioController extends Controller
 
         if(isset($query))
          {
-             
-              //Inicio funcion para enviar correo  
-           /* $subject ="Cambio de datos";  // Asunto del Correo 
-            $for ="kennysaenz31@gmail.com"; //correo que recibira el mensaje 
-
-            Mail::send('InicioSesion\mail', $query,function($msj) use($subject,$for){
-                                    // Mi correo  y  Nombre que Aparecera 
-                    $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
-                    $msj->subject($subject);
-                    $msj->to($for);
-            });
-            // Fin funcion para enviar correo 
-            */
-
             return response()->json($query);
          }else
          {
@@ -166,12 +149,12 @@ class inicioController extends Controller
       $user= $request->usuario;
       $correo= $request->correo;
       $telefono= $request->telefono;
-      $passwordViejo= $request->pass_old;
+      $passwordActual= $request->pass_now;
       $correoUnico = (new usuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
       
-      if(!(new usuarioModel)->validarcontrasena($id_usuario, $passwordViejo)){
+      if(!(new usuarioModel)->validarcontrasena($id_usuario, $passwordActual)){
          return collect([
-            'mensaje' => 'Contraseñas diferentes',
+            'mensaje' => 'La Contraseña actual es diferente a la ingresada',
             'error' => true,
         ]);
       }    
@@ -183,27 +166,27 @@ class inicioController extends Controller
          $resultado = (new usuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,now(),$id_usuario, $passwordViejo, $codigo_confirmacion);
          if($resultado){
              
-        session()->forget('idUsuario');
-        session()->forget('nombreUsuario');
-        $subject ="Confirmacion de correo"; /** Asunto del Correo */
-        $for =$correo;/** correo que recibira el mensaje */
+                     session()->forget('idUsuario');
+                     session()->forget('nombreUsuario');
+                     $subject ="Confirmacion de correo"; /** Asunto del Correo */
+                     $for =$correo;/** correo que recibira el mensaje */
 
-        
-        $data['confirmation_code']=$codigo_confirmacion;
-        $data['name']=$user;
-        Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
-                                // Mi correo  y  Nombre que Aparecera 
-                 $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
-                 $msj->subject($subject);
-                 $msj->to($for);
-        }); 
-        
-        return collect([
-         'mensaje' => 'Información actualizada',
-         'error' => false
-        ]);
+                     
+                     $data['confirmation_code']=$codigo_confirmacion;
+                     $data['name']=$user;
+                     Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
+                                             // Mi correo  y  Nombre que Aparecera 
+                              $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
+                              $msj->subject($subject);
+                              $msj->to($for);
+                     }); 
+                     
+                     return collect([
+                        'mensaje' => 'Información actualizada',
+                        'error' => false
+                     ]);
 
-         }
+            }
          return collect([
             'mensaje' => 'Error al actualizar',
             'error' => true,
@@ -240,7 +223,7 @@ class inicioController extends Controller
              session(['idUsuario' =>($id_usuario) ]);
              session(['nombreUsuario' =>($usuario) ]);
 
-             return view('theme\bracket\layout')->with('nombre', $usuario);
+             return view('theme.bracket.layout')->with('nombre', $usuario);
           }
           else
                 return view('inicio');
