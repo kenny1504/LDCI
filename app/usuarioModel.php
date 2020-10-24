@@ -72,7 +72,7 @@ class usuarioModel extends Model
         return true;
     }
 
-    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica, $passwordActual, $codigo)
+    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica, $passwordActual, $codigo,$confirmado)
     {
         $query = new static;
         // SI password es vacio 
@@ -83,9 +83,9 @@ class usuarioModel extends Model
          "UPDATE ldci.tb_usuario 
           SET usuario=?, password=?, telefono=?, 
               correo=?, usuario_modificacion=?, fecha_modificacion=?,
-              confirmado=0, codigo_confirmacion=?
+              confirmado=?, codigo_confirmacion=?
           WHERE id_usuario=?",
-         [$user, $password, $telefono, $correo, $usuario_modifica,$fecha, $codigo, $id_usuario ]);
+         [$user, $password, $telefono, $correo, $usuario_modifica,$fecha,$confirmado, $codigo, $id_usuario ]);
         return $query > 0;
         
     }

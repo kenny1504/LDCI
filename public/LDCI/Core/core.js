@@ -206,6 +206,7 @@
                 pass = data[0].pass;
                 $('#telefono').val(data[0].telefono);
                 $('#correo').val(data[0].correo);
+                $('#correo').attr("data-correo",data[0].correo);
                 showLoad(false);
             },
             error: function (err) {
@@ -226,6 +227,7 @@
         var usuario = $('#usuario').val();
         var telefono = $('#telefono').val();
         var correo = $('#correo').val();
+        var correo_old=$('#correo').attr("data-correo");
         var pass_now = $('#pass_now').val();
         var pass_new = $('#pass_new').val();
         var pass_confirm = $("#pass_new_confirm").val();
@@ -237,43 +239,51 @@
             }
         }
 
-        if (ok == true) {
-            alertConfirm("¿Está seguro que desea guardar?", function (e) {
-                showLoad(true);
-                $.ajax({
-                    type: 'POST',
-                    url: '/datos/modificaUsuario', //llamada a la ruta
-                    data: {
-                        _token:_token,
-                        usuario:usuario,
-                        correo:correo,
-                        telefono:telefono,
-                        pass_old:Base64.encode(pass_old),
-                        pass_now:Base64.encode(pass_now)
-                    },
-                    success: function (data) {
-                        showLoad(false);
-                        if (data.error) {
-                            alertError(data.mensaje);
-                            return;
+        if ( pass_now!="") 
+        {
+            if(ok == true)
+            {
+                alertConfirm("¿Está seguro que desea guardar?", function (e) {
+                    showLoad(true);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/datos/modificaUsuario', //llamada a la ruta
+                        data: {
+                            _token:_token,
+                            usuario:usuario,
+                            correo:correo,
+                            correo_old:correo_old,
+                            telefono:telefono,
+                            pass_new:Base64.encode(pass_new),
+                            pass_now:Base64.encode(pass_now)
+                        },
+                        success: function (data) {
+                            showLoad(false);
+                            if (data.error) {
+                                alertError(data.mensaje);
+                                return;
+                            }
+                            else
+                            {
+                                alertSuccess("Se ha actualizado la información");
+                                setTimeout(function(){
+                                    window.location.href='';
+                                    showLoad(false);
+                                },200);
+                            }
+                        },
+                        error: function (err) {
+                            alertError(err.responseText);
+                            showLoad(false);
                         }
-                        else
-                        {
-                            alertSuccess("Se ha actualizado la información");
-                            setTimeout(function () {
-                                window.location.href = '/';
-                                showLoad(false);
-                            }, 200);
-                        }
-                    },
-                    error: function (err) {
-                        alertError(err.responseText);
-                        showLoad(false);
-                    }
-
+    
+                    });
                 });
-            });
+            
+            }
         }
+        else
+          alertError("Favor ingrese contreña actual para efectuar cambios");
 
     }
 

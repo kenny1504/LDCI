@@ -138,40 +138,48 @@ class inicioController extends Controller
 
     public function editarUsuario(Request $request)
     {
-      $id_usuario = 0;
       // Validar si esta aun la variable de sesion.
-      if(session('idUsuario') === null)
+      if(!empty(session('idUsuario')))
          $id_usuario = session('idUsuario');     
       else
          $id_usuario = (new usuarioModel)->GetIdByUser(session('nombreUsuario'));
       
-      $password= $request->password;
+      $password= $request->pass_new;
       $user= $request->usuario;
       $correo= $request->correo;
+      $correo_old= $request->correo_old;
       $telefono= $request->telefono;
-      $passwordActual= $request->pass_now;
+      $passwordViejo= $request->pass_now;
       $correoUnico = (new usuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
       
-      if(!(new usuarioModel)->validarcontrasena($id_usuario, $passwordActual)){
+      if(!(new usuarioModel)->validarcontrasena($id_usuario, $passwordViejo)){
          return collect([
-            'mensaje' => 'La Contraseña actual es diferente a la ingresada',
+            'mensaje' => 'Contraseña actual es incorrecta',
             'error' => true,
         ]);
       }    
 
       if($correoUnico)
       {
+         $confirmado=false;
          $codigo_confirmacion=Str::random(24);/** Genera un Codigo Ramdom */
+
+         if($correo_old==$correo)
+         {
+            $codigo_confirmacion=null; 
+            $confirmado=true;
+         }
          // Actualizamos
-         $resultado = (new usuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,now(),$id_usuario, $passwordViejo, $codigo_confirmacion);
+         $resultado = (new usuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,now(),$id_usuario, $passwordViejo, $codigo_confirmacion,$confirmado);
          if($resultado){
              
-                     session()->forget('idUsuario');
-                     session()->forget('nombreUsuario');
+                  session()->forget('idUsuario');
+                  session()->forget('nombreUsuario');
+                  if($correo_old!=$correo)
+                  {
                      $subject ="Confirmacion de correo"; /** Asunto del Correo */
                      $for =$correo;/** correo que recibira el mensaje */
-
-                     
+   
                      $data['confirmation_code']=$codigo_confirmacion;
                      $data['name']=$user;
                      Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
@@ -180,13 +188,14 @@ class inicioController extends Controller
                               $msj->subject($subject);
                               $msj->to($for);
                      }); 
-                     
-                     return collect([
-                        'mensaje' => 'Información actualizada',
-                        'error' => false
-                     ]);
+                  }
+                  
+                  return collect([
+                     'mensaje' => 'Información actualizada',
+                     'error' => false
+                  ]);
 
-            }
+         }
          return collect([
             'mensaje' => 'Error al actualizar',
             'error' => true,
@@ -195,7 +204,7 @@ class inicioController extends Controller
       else
       {
          return collect([
-            'mensaje' => 'Correo duplicado',
+            'mensaje' => 'El correo que ingreso ya existe',
             'error' => true,
         ]);
       }
