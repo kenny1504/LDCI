@@ -233,7 +233,7 @@ var pass=null; /** Variable que guarda contraseña del usuario */
         var pass_new=$('#pass_new').val();
         var pass_confirm =$("#pass_new_confirm").val();
 
-    if(pass_confirm!==pass_new || pass_new ==='' || pass_new === undefined || pass_old ==='' )
+    if(pass_confirm!==pass_new || pass_old ==='' )
     {
         alertError("Contraseña anterior no coincide");
     }
@@ -259,10 +259,11 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                             alertError(data.mensaje);
                             return;
                         }
-                        $('#usuario').val(data[0].usuario);
-                        pass=data[0].pass;
-                        $('#nombre').val(data[0].nombre);
-                        $('#telefono').val(data[0].telefono);
+                        alertSuccess("Se ha actualizado la información");
+                        setTimeout(function(){
+                            window.location.href='';
+                            showLoad(false);
+                        },200);
                     },
                     error : function(err){
                         alertError(err.responseText);
@@ -302,16 +303,25 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                 pass:pass
                 },
                 success: function(data){
-                    if(data==1)
+                    switch (data)
                     {
-                        alertSuccess("Se ha enviado un correo de confirmacion");
-                        /** Detiene , para mostrar alertSucess  */
-                            setTimeout(function(){
-                                window.location.href='/login';
-                                showLoad(False);
-                            }, 200);
-                    }
+                        case 1: 
+                            alertSuccess("Se ha enviado un correo de confirmacion");
+                            /** Detiene , para mostrar alertSucess  */
+                                setTimeout(function(){
+                                    window.location.href='/login';
+                                }, 200);break;
+                        
+                        case 0:
+                            alertSuccess("El correo ya esta siendo usado por otro usuario");break;
 
+                        case 2:
+                            alertSuccess("El usuario ya esta siendo usado por otro usuario");break;
+                        default:
+                            alertSuccess("Error desconocido");break;
+                    }
+                    showLoad(false);
+                    
                 },
                 error : function(err){
                     alertError(err.responseText);

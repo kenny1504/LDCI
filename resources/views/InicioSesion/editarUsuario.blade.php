@@ -19,13 +19,13 @@
                                 <input id="pass_old" type="password" class="form-control" placeholder="Ingrese Anterior Contraseña">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="pass_new" type="password" class="form-control" placeholder="Ingrese Nueva Contraseña">
+                                <input id="pass_new" type="password" class="form-control" placeholder="Ingrese Nueva Contraseña (Opcional)">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="pass_new_confirm" type="password" class="form-control" placeholder="Confirmar contraseña nueva">
+                                <input id="pass_new_confirm" type="password" class="form-control" placeholder="Confirmar contraseña nueva (Opcional)">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="telefono" type="text" class="form-control" placeholder="Ingrese Telefono">
+                                <input id="telefono" type="text" class="form-control" placeholder="Ingrese Telefono" maxlength="25">
                               </div><!-- form-group -->
                               <div class="form-group">
                                 <input id="correo" type="text" class="form-control" placeholder="Correo Electronico">

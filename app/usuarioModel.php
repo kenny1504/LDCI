@@ -39,6 +39,20 @@ class usuarioModel extends Model
         }
         return true;
     }
+
+    public function ValidaUsuarioDuplicado($usuario)
+    {
+        $query = new static;
+        $query = DB::select('select * from ldci.tb_usuario where usuario = ? ',[$usuario]);
+        if(!empty($query))
+        {
+            // Usuario ya esta tomado. Mostramos un mensaje
+            return false;
+        }
+        return true;
+    }
+
+    
     /** Metodo para guardar un nuevo usuario*/
     public function registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion)
     {
@@ -49,33 +63,29 @@ class usuarioModel extends Model
         return $query;
     }
 
-    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica,$passwordViejo)
+    public function validarcontrasena($id_usuario,$passwordViejo)
     {
-        $q =  DB::select("SELECT * FROM ldci.tb_usuario WHERE id_usuario = ?", [$id_usuario]);
-        error_log("Ventana: ".$passwordViejo);
-        error_log("DB: ".$q[0]->password);
-
-        if($q[0]->password !== $passwordViejo)
-        {
-            return collect([
-                'mensaje' => 'Contraseñas diferentes',
-                'error' => true,
-            ]);
-        }
-
+        $query =  DB::select("SELECT * FROM ldci.tb_usuario WHERE id_usuario = ?", [$id_usuario]);
+        if($query[0]->password !== $passwordViejo)
+           return false;
+        return true;
+    }
+    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica, $passwordViejo, $codigo)
+    {
         $query = new static;
+        // SI password es vacio 
+        if( empty($password))
+            $password = $passwordViejo;
+
         $query= DB::statement(
          "UPDATE ldci.tb_usuario 
           SET usuario=?, password=?, telefono=?, 
-              correo=?, usuario_modificacion=?, fecha_modificacion=?
+              correo=?, usuario_modificacion=?, fecha_modificacion=?,
+              confirmado=0, codigo_confirmacion=?
           WHERE id_usuario=?",
-         [$user, $password, $telefono, $correo, $usuario_modifica,$fecha, $id_usuario]);
-        if($query > 0 ) // Guardado
-           return DB::select("select usuario,telefono,password,correo from ldci.tb_usuario where id_usuario=?;",[$id_usuario]);
-        return collect([
-            'mensaje' => 'Error al actualizar',
-            'error' => true,
-        ]);
+         [$user, $password, $telefono, $correo, $usuario_modifica,$fecha, $codigo, $id_usuario ]);
+        return $query > 0;
+        
     }
 
     public function GetIdByUser($username)
