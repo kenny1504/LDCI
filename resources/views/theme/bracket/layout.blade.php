@@ -31,11 +31,11 @@
   <body>
      <!--Inicio Header -->
      @include('InicioSesion/editarUsuario')
-     @include('theme/bracket/Header')
-     @include('theme/bracket/tabpanel')
+     @include('theme.bracket.header')
+     @include('theme.bracket.tabPanel')
      <!--Fin-->
      <!--Inicio Aside -->
-     @include('theme/bracket/aside')
+     @include('theme.bracket.aside')
      <!--Fin -->
 
      <!--INICIO CONTENEDOR CARGANDO-->

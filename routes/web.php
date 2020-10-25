@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','inicioController@index');
-Route::get('/inicio','iniciocontroller@inicio')->name ('inicio');
-Route::get('/login','iniciocontroller@loginOut')->name ('login');
-Route::get('/registro','iniciocontroller@registro')->name ('registro');
-Route::post('/registro/usuario','iniciocontroller@guardarUsuario')->name ('guardar_usuario');
-Route::post('/datos/usuario','iniciocontroller@getUsuario');
+Route::get('/','InicioController@index');
+Route::get('/inicio','InicioController@inicio')->name ('inicio');
+Route::get('/login','InicioController@loginOut')->name ('login');
+Route::get('/registro', 'InicioController@registro' )->name ('registro');
+Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');
+Route::post('/datos/usuario','InicioController@getUsuario');
 
-Route::post('/login/in','inicioController@login')->name ('login-in');
+Route::post('/login/in','InicioController@login')->name ('login-in');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Confirmacion de email
-Route::get('/registro/vericar/{code}', 'iniciocontroller@verificar')->name ('Vericada');
+Route::get('/registro/vericar/{code}', 'InicioController@verificar')->name ('Vericada');

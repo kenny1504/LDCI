@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\http\Requests;
 
-class inicioController extends Controller
+class InicioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class inicioController extends Controller
     {
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
           if(!empty($nombreUsuario))
-          return view('theme\bracket\layout')->with('nombre', $nombreUsuario);
+          return view('theme/bracket/layout')->with('nombre', $nombreUsuario);
          else
            return view('inicio');
     }
@@ -32,7 +32,7 @@ class inicioController extends Controller
       /** revuelve vista y nombre del suuario logueado */
 
       if(isset($nombreUsuario))
-       return view('theme\bracket\layout')->with('nombre', $nombreUsuario);
+       return view('theme/bracket/layout')->with('nombre', $nombreUsuario);
       else
         return view('inicio');
     }
@@ -127,7 +127,7 @@ class inicioController extends Controller
          $subject ="Confirmacion de correo"; /** Asunto del Correo */
          $for =$correo;/** correo que recibira el mensaje */
 
-         Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
+         Mail::send('InicioSesion/mailRegistro',$data,function($msj) use($subject,$for){
                                  /** Mi correo  y  Nombre que Aparecera */
                   $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
                   $msj->subject($subject);
@@ -162,7 +162,7 @@ class inicioController extends Controller
              session(['idUsuario' =>($id_usuario) ]);
              session(['nombreUsuario' =>($usuario) ]);
 
-             return view('theme\bracket\layout')->with('nombre', $usuario);
+             return view('theme/bracket/layout')->with('nombre', $usuario);
           }
           else
                 return view('inicio');
