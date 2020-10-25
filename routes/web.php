@@ -16,8 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','InicioController@index');
 Route::get('/inicio','InicioController@inicio')->name ('inicio');
 Route::get('/login','InicioController@loginOut')->name ('login');
+<<<<<<< HEAD
 Route::get('/registro', 'InicioController@registro' )->name ('registro');
 Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');
+=======
+Route::get('/registro','InicioController@registro')->name ('registro');
+Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');
+Route::post('/datos/modificaUsuario','InicioController@editarUsuario')->name ('editar_usuario');
+>>>>>>> 0573dd75e6f26360a0f3e79bfb204a7b609cbd2a
 Route::post('/datos/usuario','InicioController@getUsuario');
 
 Route::post('/login/in','InicioController@login')->name ('login-in');

@@ -1,17 +1,17 @@
 /** archivo creado para funciones generales del sistema */
 /** 10-10-2020 Kevin Kenny saenz zapata */
 
-  //Mostrar alerta al usuario
-
-  $(document).ready(function () {
-  
-  console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
-  console.log("%cEl codigo que ingrese en esta consola que pueda altere el comportamiento del sistema sera penalizado.\n", "color: green");
-
-  })
 
 
-var pass=null; /** Variable que guarda contraseña del usuario */
+    $(document).ready(function () {
+
+        console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
+        console.log("%cEl codigo que ingrese en esta consola que pueda altere el comportamiento del sistema sera penalizado.\n", "color: green");
+
+    })
+
+
+    var pass = null; /** Variable que guarda contraseña del usuario */
     /*
         Mostrar mensaje cuando la ejecucion sea correcta
     */
@@ -36,19 +36,18 @@ var pass=null; /** Variable que guarda contraseña del usuario */
      * @param {function} callback Funcion que se ejecutar una vez confirmada o denegada la accion
      */
     function alertConfirm(texto, callback) {
-        alertify.set({buttonFocus: "cancel"});
+        alertify.set({ buttonFocus: "cancel" });
         alertify.set({
             labels: {
                 ok: "Continuar",
                 cancel: "Cancelar"
             }
         });
-        alertify.confirm(texto, function (e) {
-            if (is.function(callback))
-                callback(e);
+        alertify.confirm(texto, function (action) {
+            if (action)
+                callback();
             else
-                alertError("No se puede llamar a esta function");
-
+                alertify.error('Cancelado');
         });
     }
 
@@ -57,14 +56,14 @@ var pass=null; /** Variable que guarda contraseña del usuario */
         if (option) {
             //
             $("#loader-wrapper").css("display", "block");
-            $(".section-left").show("slide", {direction: "left"}, 500);
-            $(".section-right").show("slide", {direction: "right"}, 500, function () {
+            $(".section-left").show("slide", { direction: "left" }, 500);
+            $(".section-right").show("slide", { direction: "right" }, 500, function () {
                 $("#loader").fadeIn();
             });
         } else {
             $("#loader").hide();
-            $(".section-left").hide("slide", {direction: "left"}, 500);
-            $(".section-right").hide("slide", {direction: "right"}, 500, function () {
+            $(".section-left").hide("slide", { direction: "left" }, 500);
+            $(".section-right").hide("slide", { direction: "right" }, 500, function () {
                 //$("#loader-wrapper").remove();
                 $("#loader-wrapper").css("display", "none");
             });
@@ -92,7 +91,7 @@ var pass=null; /** Variable que guarda contraseña del usuario */
      * @param {string} idTabla Identificador del elemento en el DOM
      */
     function setDataTable(idTabla, config) {
-        var configParam = config || {ajax: {}};
+        var configParam = config || { ajax: {} };
 
         //configParam.ajax = typeof(configParam.ajax) == "undefined" ? false : $.extend(configParam.ajax,dt_extra_params);
         /*if(configParam.ajax){
@@ -124,7 +123,7 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                 "search": {
                     "regex": true
                 },
-                "lengthMenu": [[10, 25, 50,500,1000], [10, 25, 50,500,1000]],
+                "lengthMenu": [[10, 25, 50, 500, 1000], [10, 25, 50, 500, 1000]],
                 "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
@@ -154,8 +153,8 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                     header: true,
                     footer: true
                 },
-                processing: typeof(configParam.ajax.url) == "undefined" ? false : true,
-                serverSide: typeof(configParam.ajax.url) == "undefined" ? false : true,
+                processing: typeof (configParam.ajax.url) == "undefined" ? false : true,
+                serverSide: typeof (configParam.ajax.url) == "undefined" ? false : true,
                 ajax: {
                     url: configParam.ajax.url,
                     type: configParam.ajax.type,
@@ -166,10 +165,10 @@ var pass=null; /** Variable que guarda contraseña del usuario */
 
                     }
                 },
-                aoColumns: typeof(configParam.aoColumns) == "undefined" ? null : configParam.aoColumns,
-                order: typeof(configParam.order) == "undefined" ? [] : configParam.order,
-                fnRowCallback: typeof(configParam.fnRowCallback) == "undefined" ? null : configParam.fnRowCallback,
-                columnDefs: typeof(configParam.columnDefs) == "undefined" ? false : configParam.columnDefs
+                aoColumns: typeof (configParam.aoColumns) == "undefined" ? null : configParam.aoColumns,
+                order: typeof (configParam.order) == "undefined" ? [] : configParam.order,
+                fnRowCallback: typeof (configParam.fnRowCallback) == "undefined" ? null : configParam.fnRowCallback,
+                columnDefs: typeof (configParam.columnDefs) == "undefined" ? false : configParam.columnDefs
 
             });
         } catch (err) {
@@ -180,127 +179,166 @@ var pass=null; /** Variable que guarda contraseña del usuario */
 
 
     /** Funcion para cerrar session */
-    function loginOut()
-    {
+    function loginOut() {
         showLoad(true);
         alertSuccess("Cerrando session");
 
-       /** Detiene , para mostrar alertSucess  */
-        setTimeout(function(){
-            window.location.href='/login';
+        /** Detiene , para mostrar alertSucess  */
+        setTimeout(function () {
+            window.location.href = '/login';
             showLoad(False);
         }, 200);
 
     }
 
     /** Funcion que recupera datos del usuario para modificar*/
-    function editarUsuario()
-    {
-        var _token= $('input[name=_token]').val();
+    function editarUsuario() {
+        var _token = $('input[name=_token]').val();
         showLoad(true);
         $.ajax({
             type: 'POST',
             url: '/datos/usuario', //llamada a la ruta
             data: {
-              _token:_token
+                _token: _token
             },
-            success: function(data){
-               $('#usuario').val(data[0].usuario);
-               pass=data[0].pass;
-               $('#telefono').val(data[0].telefono);
-               showLoad(false);
-           },
-            error : function(err){
+            success: function (data) {
+                $('#usuario').val(data[0].usuario);
+                pass = data[0].pass;
+                $('#telefono').val(data[0].telefono);
+                $('#correo').val(data[0].correo);
+                $('#correo').attr("data-correo",data[0].correo);
+                showLoad(false);
+            },
+            error: function (err) {
                 alertError(err.responseText);
+                showLoad(false);
             }
 
         });
-        
+
     }
 
 
     /** Funcion que guardar datos de usuario a modificar*/
-    function guardarUsuario()
-    {
-    
-        var _token= $('input[name=_token]').val();
-        var usuario= $('#usuario').val();
-        var nombre= $('#nombre').val();
-        var telefono =$('#telefono').val();
-        var pass_old =$('#pass_old').val();
-        var pass_new=$('#pass_new').val();
-        pass_old=Base64.encode(pass_old);
+    function guardarUsuario() {
 
-    if(pass_old!=pass)
-    {
-        alertError("Contraseña anterior no coincide");
-    }
-    else
-    {
-        alertConfirm("¿Está seguro que desea guardar?", function (e) {
-                showLoad(true);
-                $.ajax({
-                    type: 'POST',
-                    url: '/datos/usuario', //llamada a la ruta
-                    data: {
-                    _token:_token
-                    },
-                    success: function(data){
-                        $('#usuario').val(data[0].usuario);
-                        pass=data[0].pass;
-                        $('#nombre').val(data[0].nombre);
-                        $('#telefono').val(data[0].telefono);
-                        showLoad(false);
-                    },
-                    error : function(err){
-                        alertError(err.responseText);
-                    }
+        var ok = true;
+        var _token = $('input[name=_token]').val();
+        var usuario = $('#usuario').val();
+        var telefono = $('#telefono').val();
+        var correo = $('#correo').val();
+        var correo_old=$('#correo').attr("data-correo");
+        var pass_now = $('#pass_now').val();
+        var pass_new = $('#pass_new').val();
+        var pass_confirm = $("#pass_new_confirm").val();
 
-                });
-       });
-    }
+        if (pass_new !="") {
+            if (pass_confirm !== pass_new) {
+                alertError("Las contraseñas no coiciden");
+                ok = false;
+            }
+        }
 
-       
-        
-    }
-
-
-    function registrarUsuario()
-    {
-
-        var _token= $('input[name=_token]').val();
-        var usuario= $('#txt_usuario').val();
-        var correo= $('#txt_correo').val();
-        var telefono =$('#txt_telefono').val();
-        var pass =$('#txt_pass').val();
-        pass=Base64.encode(pass);
-  
-        if(usuario!="" && correo!="" && telefono!="" && pass!=""  )
+        if ( pass_now!="") 
         {
+            if(ok == true)
+            {
+                alertConfirm("¿Está seguro que desea guardar?", function (e) {
+                    showLoad(true);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/datos/modificaUsuario', //llamada a la ruta
+                        data: {
+                            _token:_token,
+                            usuario:usuario,
+                            correo:correo,
+                            correo_old:correo_old,
+                            telefono:telefono,
+                            pass_new:Base64.encode(pass_new),
+                            pass_now:Base64.encode(pass_now)
+                        },
+                        success: function (data) {
+                            showLoad(false);
+                            if (data.error) {
+                                alertError(data.mensaje);
+                                return;
+                            }
+                            else
+                            {
+                                alertSuccess("Se ha actualizado la información");
+                                setTimeout(function(){
+                                    window.location.href='';
+                                    showLoad(false);
+                                },200);
+                            }
+                        },
+                        error: function (err) {
+                            alertError(err.responseText);
+                            showLoad(false);
+                        }
+    
+                    });
+                });
+            
+            }
+        }
+        else
+          alertError("Favor ingrese contreña actual para efectuar cambios");
+
+    }
+
+    /** Funcion para activar el button guardar al hacer click (Login) */
+    function pulsar(e) {
+        if (e.keyCode === 13 && !e.shiftKey) {
+            e.preventDefault();
+            var boton = document.getElementById("btnEntrar");
+            boton.click();
+        }
+    }
+
+
+    function registrarUsuario() {
+
+        var _token = $('input[name=_token]').val();
+        var usuario = $('#txt_usuario').val();
+        var correo = $('#txt_correo').val();
+        var telefono = $('#txt_telefono').val();
+        var pass = $('#txt_pass').val();
+        pass = Base64.encode(pass);
+
+        if (usuario != "" && correo != "" && telefono != "" && pass != "") {
             showLoad(true);
             $.ajax({
                 type: 'POST',
                 url: '/registro/usuario', //llamada a la ruta
                 data: {
-                _token:_token,
-                usuario:usuario,
-                correo:correo,
-                telefono:telefono,
-                pass:pass
+                    _token: _token,
+                    usuario: usuario,
+                    correo: correo,
+                    telefono: telefono,
+                    pass: pass
                 },
-                success: function(data){
-                    if(data==1)
-                    {
-                        alertSuccess("Se ha enviado un correo de confirmacion");
-                        /** Detiene , para mostrar alertSucess  */
-                            setTimeout(function(){
-                                window.location.href='/login';
-                                showLoad(False);
-                            }, 200);
+                success: function (data) {
+                    switch (data) {
+                        case 1:
+                            alertSuccess("Se ha enviado un correo de confirmacion");
+                            /** Detiene , para mostrar alertSucess  */
+                            setTimeout(function () {
+                                window.location.href = '/login';
+                            }, 200); break;
+
+                        case 0:
+                            alertSuccess("El correo ya esta siendo usado por otro usuario"); break;
+
+                        case 2:
+                            alertSuccess("El nombre de usuario ya esta siendo usado"); break;
+                        default:
+                            alertSuccess("Error desconocido"); break;
                     }
+                    showLoad(false);
 
                 },
-                error : function(err){
+                error: function (err) {
                     alertError(err.responseText);
                 }
 
@@ -312,96 +350,96 @@ var pass=null; /** Variable que guarda contraseña del usuario */
     }
 
 
-      /*** Funcion para Codificar o Decodificar */
-      var Base64 = {
+    /*** Funcion para Codificar o Decodificar */
+    var Base64 = {
 
         // Clave
-        _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-    
+        _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+
         // public methodo para codificiar
-        encode : function (input) {
+        encode: function (input) {
             var output = "";
             var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
             var i = 0;
-    
+
             input = Base64._utf8_encode(input);
-    
+
             while (i < input.length) {
-    
+
                 chr1 = input.charCodeAt(i++);
                 chr2 = input.charCodeAt(i++);
                 chr3 = input.charCodeAt(i++);
-    
+
                 enc1 = chr1 >> 2;
                 enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
                 enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
                 enc4 = chr3 & 63;
-    
+
                 if (isNaN(chr2)) {
                     enc3 = enc4 = 64;
                 } else if (isNaN(chr3)) {
                     enc4 = 64;
                 }
-    
+
                 output = output +
                     this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
                     this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
-    
+
             }
-    
+
             return output;
         },
-    
+
         // public methodo decodificar
-        decode : function (input) {
+        decode: function (input) {
             var output = "";
             var chr1, chr2, chr3;
             var enc1, enc2, enc3, enc4;
             var i = 0;
-    
+
             input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-    
+
             while (i < input.length) {
-    
+
                 enc1 = this._keyStr.indexOf(input.charAt(i++));
                 enc2 = this._keyStr.indexOf(input.charAt(i++));
                 enc3 = this._keyStr.indexOf(input.charAt(i++));
                 enc4 = this._keyStr.indexOf(input.charAt(i++));
-    
+
                 chr1 = (enc1 << 2) | (enc2 >> 4);
                 chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
                 chr3 = ((enc3 & 3) << 6) | enc4;
-    
+
                 output = output + String.fromCharCode(chr1);
-    
+
                 if (enc3 != 64) {
                     output = output + String.fromCharCode(chr2);
                 }
                 if (enc4 != 64) {
                     output = output + String.fromCharCode(chr3);
                 }
-    
+
             }
-    
+
             output = Base64._utf8_decode(output);
-    
+
             return output;
-    
+
         },
-    
+
         // private methodo para UTF-8 codificar
-        _utf8_encode : function (string) {
-            string = string.replace(/\r\n/g,"\n");
+        _utf8_encode: function (string) {
+            string = string.replace(/\r\n/g, "\n");
             var utftext = "";
-    
+
             for (var n = 0; n < string.length; n++) {
-    
+
                 var c = string.charCodeAt(n);
-    
+
                 if (c < 128) {
                     utftext += String.fromCharCode(c);
                 }
-                else if((c > 127) && (c < 2048)) {
+                else if ((c > 127) && (c < 2048)) {
                     utftext += String.fromCharCode((c >> 6) | 192);
                     utftext += String.fromCharCode((c & 63) | 128);
                 }
@@ -410,42 +448,72 @@ var pass=null; /** Variable que guarda contraseña del usuario */
                     utftext += String.fromCharCode(((c >> 6) & 63) | 128);
                     utftext += String.fromCharCode((c & 63) | 128);
                 }
-    
+
             }
-    
+
             return utftext;
         },
-    
+
         // private method para UTF-8 decodificar
-        _utf8_decode : function (utftext) {
+        _utf8_decode: function (utftext) {
             var string = "";
             var i = 0;
             var c = c1 = c2 = 0;
-    
-            while ( i < utftext.length ) {
-    
+
+            while (i < utftext.length) {
+
                 c = utftext.charCodeAt(i);
-    
+
                 if (c < 128) {
                     string += String.fromCharCode(c);
                     i++;
                 }
-                else if((c > 191) && (c < 224)) {
-                    c2 = utftext.charCodeAt(i+1);
+                else if ((c > 191) && (c < 224)) {
+                    c2 = utftext.charCodeAt(i + 1);
                     string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
                     i += 2;
                 }
                 else {
-                    c2 = utftext.charCodeAt(i+1);
-                    c3 = utftext.charCodeAt(i+2);
+                    c2 = utftext.charCodeAt(i + 1);
+                    c3 = utftext.charCodeAt(i + 2);
                     string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
                     i += 3;
                 }
-    
+
             }
-    
+
             return string;
         }
+
+    }
+
+    /** Funcion para evitar que ingrese Letras */
+    function soloNumeros(e,id) {
+
+            // capturamos la tecla pulsada
+            var teclaPulsada=window.event ? window.event.keyCode:e.which;
     
-      }
+            // capturamos el contenido del input
+            var valor=id.value;
     
+            // 45 = tecla simbolo menos (-)
+            // Si el usuario pulsa la tecla menos, y no se ha pulsado anteriormente
+            // Modificamos el contenido del mismo añadiendo el simbolo menos al
+            // inicio
+            if(teclaPulsada==45 && valor.indexOf("-")==-1)
+            {
+                id.value="-"+valor;
+            }
+    
+            // 13 = tecla enter
+            // 46 = tecla punto (.)
+            // Si el usuario pulsa la tecla enter o el punto y no hay ningun otro
+            // punto
+            if(teclaPulsada==13 || (teclaPulsada==46 && valor.indexOf(".")==-1))
+            {
+                return true;
+            }
+    
+            // devolvemos true o false dependiendo de si es numerico o no
+            return /\d/.test(String.fromCharCode(teclaPulsada));
+    }

@@ -47,9 +47,9 @@
           <input type="text" id="user" class="form-control" placeholder="Ingrese Usuario">
         </div><!-- form-group -->
         <div class="form-group">
-          <input type="password" id="password" class="form-control" placeholder="Ingrese Contraseña">
+          <input onkeypress="pulsar(event)" type="password" id="password" class="form-control" placeholder="Ingrese Contraseña">
         </div><!-- form-group -->
-        <button  onclick="login()" class="btn btn-info btn-block">Entrar</button>
+        <button id="btnEntrar"  onclick="login()" class="btn btn-info btn-block">Entrar</button>
         <br>
         <center><a href="/registro" > <label class="tx-normal">Registrarse</label></a></center> 
       </div><!-- login-wrapper -->
