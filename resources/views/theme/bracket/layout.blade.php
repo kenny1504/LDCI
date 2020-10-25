@@ -47,24 +47,18 @@
     <!--FIN CONTENEDOR CARGANDO-->
 
     <div class="br-mainpanel">
-            <div class="pd-30">
-            <h4 class="tx-gray-800 mg-b-5">Dashboard</h4>
-            </div><!-- d-flex -->
-                <!--body -->
-            <div class="br-pagebody mg-t-5 pd-x-30">
- 
-            <div class="br-mainpanel">
+      <div class="br-section-wrapper">
+            <div class="row">
               @section('contenido')<!-- Agrega contenido desde otra vista--> 
 
-              @show  
-            </div><!-- br-mainpanel -->
-
-            </div><!--body -->
-            <footer class="br-footer">
-                <div class="footer-left">
-                    <div class="mg-b-2">Copyright - 2020. LDCI. All Rights Reserved.</div>
-                </div>
-            </footer>
+              @show
+            </div>
+        </div>
+      <footer class="br-footer">
+        <div class="footer-left">
+            <div class="mg-b-2">Copyright - 2020. LDCI. All Rights Reserved.</div>
+        </div>
+      </footer>
     </div><!-- br-mainpanel -->
 
 
@@ -93,3 +87,4 @@
 
   </body>
 </html>
+

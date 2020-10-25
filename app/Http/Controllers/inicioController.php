@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\usuarioModel;
 use Mail;
 use Illuminate\Support\Str;
-
 use Illuminate\Http\Request;
 use App\http\Requests;
 
@@ -15,7 +14,6 @@ class InicioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
 
     public function index()
     {
@@ -123,8 +121,8 @@ class InicioController extends Controller
          $for =$correo;/** correo que recibira el mensaje */
    
          Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
-                                 // Mi correo  y  Nombre que Aparecera 
-                  $msj->from("guisselalemanbonilla@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
+                                 // Correo  y  Nombre que Aparecera 
+                  $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
                   $msj->subject($subject);
                   $msj->to($for);
          }); 

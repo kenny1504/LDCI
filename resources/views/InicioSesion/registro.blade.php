@@ -50,7 +50,7 @@
             <input type="email" id="txt_correo" required class="form-control" placeholder="Ingrese Correo">
           </div><!-- form-group -->
           <div class="form-group">
-            <input type="text" id="txt_telefono" required class="form-control" placeholder="Ingrese Telefono" maxlength=" 25">
+            <input type="text" id="txt_telefono" name="txt_telefono" onkeypress="return soloNumeros(event,txt_telefono);" required class="form-control" placeholder="Ingrese Telefono" maxlength=" 25">
           </div><!-- form-group -->
         <div class="form-group">
           <input type="password" id="txt_pass" requireds class="form-control" placeholder="Ingrese Contraseña">
