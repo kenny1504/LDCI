@@ -30,15 +30,9 @@
   </head>
   <body>
      <!--Inicio Header -->
-<<<<<<< HEAD
-     @include('InicioSesion/editarUsuario')
+     @include('InicioSesion.editarUsuario')
      @include('theme.bracket.header')
      @include('theme.bracket.tabPanel')
-=======
-     @include('InicioSesion.editarUsuario')
-     @include('theme.bracket.Header')
-     @include('theme.bracket.tabpanel')
->>>>>>> 0573dd75e6f26360a0f3e79bfb204a7b609cbd2a
      <!--Fin-->
      <!--Inicio Aside -->
      @include('theme.bracket.aside')

@@ -21,11 +21,7 @@ class InicioController extends Controller
     {
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
           if(!empty($nombreUsuario))
-<<<<<<< HEAD
-          return view('theme/bracket/layout')->with('nombre', $nombreUsuario);
-=======
           return view('theme.bracket.layout')->with('nombre', $nombreUsuario);
->>>>>>> 0573dd75e6f26360a0f3e79bfb204a7b609cbd2a
          else
            return view('inicio');
     }
@@ -35,13 +31,9 @@ class InicioController extends Controller
        $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
       /** revuelve vista y nombre del usuario logueado */
 
-<<<<<<< HEAD
-      if(isset($nombreUsuario))
-       return view('theme/bracket/layout')->with('nombre', $nombreUsuario);
-=======
+      
       if(!empty($nombreUsuario))
-       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);
->>>>>>> 0573dd75e6f26360a0f3e79bfb204a7b609cbd2a
+       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);  
       else
         return view('inicio');
     }
@@ -129,17 +121,10 @@ class InicioController extends Controller
          /**  Inicio funcion para enviar correo  */
          $subject ="Confirmacion de correo"; /** Asunto del Correo */
          $for =$correo;/** correo que recibira el mensaje */
-
-<<<<<<< HEAD
-         Mail::send('InicioSesion/mailRegistro',$data,function($msj) use($subject,$for){
-                                 /** Mi correo  y  Nombre que Aparecera */
-                  $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
-=======
-         
+   
          Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
                                  // Mi correo  y  Nombre que Aparecera 
                   $msj->from("guisselalemanbonilla@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
->>>>>>> 0573dd75e6f26360a0f3e79bfb204a7b609cbd2a
                   $msj->subject($subject);
                   $msj->to($for);
          }); 
@@ -247,11 +232,7 @@ class InicioController extends Controller
              session(['idUsuario' =>($id_usuario) ]);
              session(['nombreUsuario' =>($usuario) ]);
 
-<<<<<<< HEAD
-             return view('theme/bracket/layout')->with('nombre', $usuario);
-=======
              return view('theme.bracket.layout')->with('nombre', $usuario);
->>>>>>> 0573dd75e6f26360a0f3e79bfb204a7b609cbd2a
           }
           else
                 return view('inicio');
