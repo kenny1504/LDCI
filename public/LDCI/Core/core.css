@@ -1,4 +1,11 @@
 /*COLORES*/
+/**   Style foooter */
+footer {
+  position: fixed !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 40px !important;
+}
 
 .pagination > li > a, .pagination > li > span {
   position: relative!important;

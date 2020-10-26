@@ -58,13 +58,14 @@
               @section('contenido')<!-- Agrega contenido desde otra vista--> 
 
               @show
+              
+            <footer class="br-footer">
+              <div class="footer-left">
+                  <div class="mg-b-2">Copyright - 2020. LDCI. All Rights Reserved.</div>
+              </div>
+            </footer>
             </div>
-        </div>
-      <footer class="br-footer">
-        <div class="footer-left">
-            <div class="mg-b-2">Copyright - 2020. LDCI. All Rights Reserved.</div>
-        </div>
-      </footer>
+      </div>
     </div><!-- br-mainpanel -->
 
 
