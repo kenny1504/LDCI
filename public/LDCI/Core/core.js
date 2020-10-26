@@ -1,13 +1,16 @@
 /** archivo creado para funciones generales del sistema */
 /** 10-10-2020 Kevin Kenny saenz zapata */
 
-
+//Variables adicionales para el filtro de registro
+//en el datatable
+var dt_extra_params = {};
+var configDataTable = {};
 
     $(document).ready(function () {
 
         console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
         console.log("%cEl codigo que ingrese en esta consola que pueda altere el comportamiento del sistema sera penalizado.\n", "color: green");
-
+        $('#btnLeftMenu').click();
     })
 
 
@@ -175,6 +178,14 @@
             alertError("Ocurrio un error inesperado");
             console.log(err);
         }
+    }
+
+
+    configDataTable.clearFilter = function (reload) {
+        dt_extra_params = {};
+    }
+    configDataTable.extra_params = function (params) {
+        dt_extra_params = params;
     }
 
 

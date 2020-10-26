@@ -31,4 +31,5 @@ Route::get('/registro/vericar/{code}', 'InicioController@verificar')->name ('Ver
 
 //Rutas Usuarios
 Route::get('/usuarios', 'UsuarioController@index')->name('Usuarios');
+Route::post('/usuarios/getAll', 'UsuarioController@getUsuarios')->name('getAll');
 

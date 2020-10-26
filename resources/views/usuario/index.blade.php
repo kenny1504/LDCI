@@ -6,7 +6,7 @@
 @endsection
 
 @section('contenido')  <!--agrega codigo a la seccion contenido del layout-->
-
+@csrf
 <div class="col-md-4">
     <div class="box box-primary">
         <div class="box-heading"><h5 class="text-center">Catálogo de Usuarios</h5></div>
@@ -14,70 +14,61 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="id_parcela">Código</label>
-                            <input name="id_parcela" id="id_parcela" readonly class="form-control input-sm">
+                            <label for="id_usuario">Código</label>
+                            <input name="id_usuario" id="id_usuario" readonly class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <label >Estado</label>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input id="ckestado" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input name="nombre" id="nombre" class="form-control input-sm" type="text" maxlength="40">
+                            <label for="txt_usuario">Usuario</label>
+                            <input name="txt_usuario" id="txt_usuario" class="form-control input-sm" type="text" maxlength="40">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label >Finca</label>
-                            <select id="selecFinca" name="selecFinca" class="form-control">
-                                <option value ="" >Seleccione</option>
-                                    <option value ="">
-                                    </option>
+                            <label for="txt_telefono">Telefono</label>
+                            <input onkeypress="return soloNumeros(event,txt_telefono);" name="txt_telefono" id="txt_telefono" class="form-control input-sm maxlength="40">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="txt_correo">Correo</label>
+                            <input name="txt_correo" id="txt_correo" class="form-control input-sm" type="email" maxlength="40">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >Tipo</label>
+                            <select id="selecTipo" name="selecTipo" class="form-control">
+                                    <option selected disabled value ="" >Seleccione</option>
+                                    <option value ="1">Administrador</option>
+                                    <option value ="2">Vendedor</option>
+                                    <option value ="3">Cliente</option>
                             </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label >Tipo Cobertura</label>
-                            <select id="selecTipoCobertura" name="selecTipoCobertura" class="form-control">
-                                <option value ="" >Seleccione</option>
-                                    <option value ="">
-                                    </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label >Tipo Suelo</label>
-                            <select id="selecTipoSuelo" name="selecTipoSuelo" class="form-control">
-                                <option value ="" >Seleccione</option>
-                                    <option value ="">
-                                    </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="manzanasParcela">Manzanas</label>
-                            <input name="manzanasParcela" id="manzanasParcela" class="form-control input-sm" type="text">
                         </div>
                     </div>
                 </div>
         </div>
         <div class="box-footer text-right">
-            <button class="btn btn-success btn-sm" id="btnGuardarParcela">
+            <button class="btn btn-success btn-sm" id="btnGuardarUsuario">
                 <i class="fa fa-save"> </i> Guardar
-            </button>
-            <button class="btn btn-danger btn-sm" id="btnEliminarParcela">
-                <i class="fa fa-recycle"> </i> Eliminar
             </button>
             <a onclick="resetForm()" class="btn btn-md btn-warning btn-sm optionMenu" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
@@ -93,21 +84,20 @@
             <div class="row form-group">
                     <div class="col-lg-12">
                         <div id="results" class="table-responsive">
-                            <table class="table table-hover" id="tblParcela">
+                            <table class="table table-hover" id="tblUsuario">
                                 <thead>
                                 <tr>
-                                    <th>Codigo parcela</th>
-                                    <th>No</th>
-                                    <th>Nombre Parcela</th>
-                                    <th>Codigo Finca</th>
-                                    <th>Finca</th>
-                                    <th>Codigo Cobertura</th>
-                                    <th>Tipo Cobertura</th>
-                                    <th>Codigo Tipo Suelo</th>
-                                    <th>Tipo Suelo</th>
-                                    <th>No Manzanas</th>
-                                    <th>Alquilada</th>
+                                    <th></th>
+                                    <th>Usuario</th>
+                                    <th>Telefono</th>
+                                    <th>Estado Correo</th>
+                                    <th>Correo</th>
+                                    <th></th>
+                                    <th>Tipo</th>
+                                    <th></th>
+                                    <th>Estado</th>
                                     <th>Acción</th>
+
                                 </tr>
                                 </thead>
                             </table>
@@ -118,3 +108,8 @@
     </div>
 </div>
 @endsection
+
+<!-- js -->
+@section('script')
+    <script src="{{asset("LDCI/js/usuario.js")}}" ></script>
+@stop

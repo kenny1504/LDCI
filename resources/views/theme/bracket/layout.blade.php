@@ -19,11 +19,17 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
   
+
+    <!-- Core DATABLE -->
+  
+    <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/dataTables.bootstrap.min.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/bootstrap.scss")}}"  >
+    
     
      <!-- Core CSS -->
      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.default.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
-     <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
  
     
@@ -78,12 +84,14 @@
     <script src="{{asset("assets/bracket/js/ResizeSensor.js")}}" ></script>
       
     <!-- js Core-->
-      <script src="{{asset("LDCI/Core/jquery.waiting.js")}}" ></script>
-      
       <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
+      <script src="{{asset("LDCI/Core/jquery.dataTables.js")}}" ></script>
+      <script src="{{asset("LDCI/Core/dataTables.bootstrap.min.js")}}" ></script>
+      
       <script src="{{asset("LDCI/Core/core.js")}}" ></script>
     
-
+      <!-- js externos-->
+      @yield('script')
 
   </body>
 </html>

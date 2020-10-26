@@ -1,4 +1,17 @@
 /*COLORES*/
+
+.pagination > li > a, .pagination > li > span {
+  position: relative!important;
+  float: left!important;
+  padding: 6px 12px!important;
+  margin-left: -1px!important;
+  line-height: 1.42857143!important;
+  color: #337ab7!important;
+  text-decoration: none!important;
+  background-color: #fff!important;
+  border: 1px solid #ddd!important;
+}
+
 .bgVerde {
   background-color: #57d4b4;
   color: #fff;
@@ -555,6 +568,8 @@ A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themefores
 Licensed under MIT
 ***/
 /* Tabs panel */
+
+
 .tabbable-panel {
   border: 1px solid #eee;
   padding: 10px;

@@ -4,12 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\ssp\SSP;
+use App\ssp\SSP; /** Libreria para cargar Datatables */
 
 class usuarioModel extends Model
 {
-
-    
+   
     /** Metodo para buscar un usario- login */
     public function GetUsuario($password,$user)
     {
@@ -105,13 +104,53 @@ class usuarioModel extends Model
     }
 
      /** Metodo para actualizar estado de cuenta de email */
-     public function actualizarEstado($id_usuario)
-     {
+    public function actualizarEstado($id_usuario)
+    {
          $query = new static;
          $query= DB::select("UPDATE ldci.tb_usuario
                             SET  fecha_modificacion=now(), usuario_modificacion=0,  confirmado=true, codigo_confirmacion=null
                             WHERE id_usuario=?",[$id_usuario]);
          return $query;
-     }
+    }
+
+    /** Funcion para cargar tabla usuarios */
+    public function getUsuarios()
+    {
+        $table = "(select id_usuario,usuario,telefono,
+                        case confirmado when true then 'Confirmar'
+                            else 'Sin confirmar' end as estado_correo
+                        ,correo,tipo,
+                        case tipo when 1 then 'Admin'
+                                    when 2 then 'Vendedor'
+                                    when 3 then 'Cliente'
+                                    end as tipo_usuario,estado,
+                        case estado when 1 then 'Activo'
+                                    when -1 then 'Desactivado'
+                                end as estado_usuario
+                    from ldci.tb_usuario) as tb ";
+
+        $primaryKey = 'id_usuario';
+        $columns = [
+        ['db' => 'id_usuario', 'dt' => 0],
+        ['db' => 'usuario', 'dt' => 1],
+        ['db' => 'telefono', 'dt' => 2],
+        ['db' => 'estado_correo', 'dt' => 3],
+        ['db' => 'correo', 'dt' => 4],
+        ['db' => 'tipo', 'dt' => 5],
+        ['db' => 'tipo_usuario', 'dt' => 6],
+        ['db' => 'estado', 'dt' => 7],
+        ['db' => 'estado_usuario', 'dt' => 8]
+        ];
+
+        /*** Config DB */
+        $db = array(
+            'host' =>$_ENV['DB_HOST'],
+            'db' =>$_ENV['DB_DATABASE'],
+            'user' =>$_ENV['DB_USERNAME'],
+            'pass' =>$_ENV['DB_PASSWORD']
+        );
+        return SSP::complex($_POST,$db,$table, $primaryKey, $columns);
+
+    }
 
 }

@@ -11,17 +11,9 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $db;
+    
 
-    function __construct() {
-      $db = array(
-         'host' =>$_ENV['DB_HOST'],
-         'db' => $_ENV['DB_DATABASE'],
-         'user' => $_ENV['DB_USERNAME'],
-         'pass' => $_ENV['DB_PASSWORD']
-     );
-    }
-
+     /** Retorna vista Usuarios */
     public function index()
     {
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
@@ -31,5 +23,12 @@ class UsuarioController extends Controller
            return view('inicio');
     }
 
+    /** Funcion que recupera todos los usuarios*/
+    public function getUsuarios()
+    {
+        $datos= (new usuarioModel)->getUsuarios();
+        return response()->json($datos);
+ 
+    }
 
 }
