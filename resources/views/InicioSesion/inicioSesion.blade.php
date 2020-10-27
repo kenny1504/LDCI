@@ -27,7 +27,7 @@
 
   </head>
 
-  <body>
+  <body class="bg-br-primary">
 
          <!--INICIO CONTENEDOR CARGANDO-->
          <div id="loader-wrapper">
@@ -36,24 +36,25 @@
           <div class="loader-section section-right"></div>
         </div>
         <!--FIN CONTENEDOR CARGANDO-->
+    <div class="row" style="display:contents;">
+        <div class="d-flex align-items-center justify-content-center  ht-100v">
 
-    <div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v">
-
-      <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
-        <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> LDCI <span class="tx-normal">]</span></div>
-        <div class="tx-center mg-b-60">LOGISTICA DE CARGA INTERMODAL</div>
-        @csrf <!-- esta varible es para TOken, siempre ponerla-->
-        <div class="form-group">
-          <input type="text" id="user" class="form-control" placeholder="Ingrese Usuario">
-        </div><!-- form-group -->
-        <div class="form-group">
-          <input onkeypress="pulsar(event)" type="password" id="password" class="form-control" placeholder="Ingrese Contraseña">
-        </div><!-- form-group -->
-        <button id="btnEntrar"  onclick="login()" class="btn btn-info btn-block">Entrar</button>
-        <br>
-        <center><a href="/registro" > <label class="tx-normal">Registrarse</label></a></center> 
-      </div><!-- login-wrapper -->
-    </div><!-- d-flex -->
+          <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
+            <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> LDCI <span class="tx-normal">]</span></div>
+            <div class="tx-center mg-b-60">LOGISTICA DE CARGA INTERMODAL</div>
+            @csrf <!-- esta varible es para TOken, siempre ponerla-->
+            <div class="form-group">
+              <input type="text" id="user" class="form-control" placeholder="Ingrese Usuario">
+            </div><!-- form-group -->
+            <div class="form-group">
+              <input onkeypress="pulsar(event)" type="password" id="password" class="form-control" placeholder="Ingrese Contraseña">
+            </div><!-- form-group -->
+            <button id="btnEntrar"  onclick="login()" class="btn btn-info btn-block">Entrar</button>
+            <br>
+            <center><a href="InicioSesion.registro" class="optionMenu" > <label class="tx-normal">Registrarse</label></a></center> 
+          </div><!-- login-wrapper -->
+        </div><!-- d-flex -->
+    </div>
     <footer class="br-footer">
       <div class="footer-left">
           <div class="mg-b-2">Copyright - 2020. LDCI. All Rights Reserved.</div>

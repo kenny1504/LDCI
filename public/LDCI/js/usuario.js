@@ -147,3 +147,5 @@ var tblUsuario = null;
         $('#ckestado').removeAttr('checked');
         $("#id_usuario,#txt_usuario,#txt_telefono,#txt_correo,#selecTipo").val("");
     }
+
+

@@ -2,8 +2,8 @@
 <div class="br-logo"><a href="/"><span>[</span>LDCI<span>]</span></a></div>
 <div class="br-sideleft overflow-y-auto ps ps--theme_default ps--active-x ps--active-y">
   <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
-  <div class="br-sideleft-menu">
-    <a href="/usuarios" class="br-menu-link">
+  <div class="br-sideleft-menu">@csrf
+    <a href="usuario.index" class="optionMenu br-menu-link">
       <div class="br-menu-item">
         <i class="menu-item-icon icon ion-person-stalker tx-22"></i>
         <span class="menu-item-label">Usuarios</span>

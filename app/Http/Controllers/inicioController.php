@@ -69,7 +69,7 @@ class InicioController extends Controller
         session()->forget('idUsuario');
         session()->forget('nombreUsuario');
 
-        return view('inicio');
+        return redirect('/');
 
     }
 
@@ -87,12 +87,6 @@ class InicioController extends Controller
          } 
 
     }
-
-    public function registro()
-    {
-      return view('InicioSesion/registro');
-    }
-
 
     /** Funcion que permite guardar un nuevo usuario */
     public function guardarUsuario(Request $request)
@@ -230,10 +224,10 @@ class InicioController extends Controller
              session(['idUsuario' =>($id_usuario) ]);
              session(['nombreUsuario' =>($usuario) ]);
 
-             return view('theme.bracket.layout')->with('nombre', $usuario);
+             return redirect('/');
           }
           else
-                return view('inicio');
+             return redirect('/');
           
    }
 

@@ -1,11 +1,4 @@
-@extends("theme.$theme.layout")  <!--extiendo del layout "pagina inicio" -->
 
-<!--agrega titulo a la pagina-->
-@section('titulo')  
-    Usuarios
-@endsection
-
-@section('contenido')  <!--agrega codigo a la seccion contenido del layout-->
 @csrf
 <div class="col-md-4">
     <div class="box box-primary">
@@ -107,9 +100,5 @@
         </div>
     </div>
 </div>
-@endsection
-
 <!-- js -->
-@section('script')
-    <script src="{{asset("LDCI/js/usuario.js")}}" ></script>
-@stop
+<script src="{{asset("LDCI/js/usuario.js")}}" ></script>

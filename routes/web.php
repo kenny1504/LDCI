@@ -12,11 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/','TemplateController@template');
 Route::get('/','InicioController@index');
 Route::get('/inicio','InicioController@inicio')->name ('inicio');
 Route::get('/login','InicioController@loginOut')->name ('login');
-Route::get('/registro', 'InicioController@registro' )->name ('registro');
 Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');
 Route::get('/registro','InicioController@registro')->name ('registro');
 Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');

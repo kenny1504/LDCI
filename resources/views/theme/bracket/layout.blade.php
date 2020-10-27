@@ -54,17 +54,14 @@
 
     <div class="br-mainpanel">
       <div class="br-section-wrapper">
-            <div class="row">
-              @section('contenido')<!-- Agrega contenido desde otra vista--> 
-
-              @show
-              
+            <div class="row"><!-- Agrega contenido desde otra vista--> 
+        
+            </div>
             <footer class="br-footer">
               <div class="footer-left">
                   <div class="mg-b-2">Copyright - 2020. LDCI. All Rights Reserved.</div>
               </div>
             </footer>
-            </div>
       </div>
     </div><!-- br-mainpanel -->
 
@@ -86,7 +83,7 @@
       
     <!-- js Core-->
       <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
-      <script src="{{asset("LDCI/Core/jquery.dataTables.js")}}" ></script>
+      <script src="{{asset("LDCI/Core/jquery.dataTables.min.js")}}" ></script>
       <script src="{{asset("LDCI/Core/dataTables.bootstrap.min.js")}}" ></script>
       
       <script src="{{asset("LDCI/Core/core.js")}}" ></script>
@@ -96,4 +93,3 @@
 
   </body>
 </html>
-

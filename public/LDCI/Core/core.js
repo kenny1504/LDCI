@@ -528,3 +528,33 @@ var configDataTable = {};
             // devolvemos true o false dependiendo de si es numerico o no
             return /\d/.test(String.fromCharCode(teclaPulsada));
     }
+
+
+    /** Metodo para Cargar Vistas */
+    $(document).off("click", ".optionMenu").on('click', '.optionMenu', clickOpcionMenu);
+
+    function clickOpcionMenu(e) {
+
+        var _token= $('input[name=_token]').val();
+        e.preventDefault();
+        e.stopPropagation();
+        var vista = $(this).attr("href");
+        $.ajax({
+            url: window.location.pathname,
+            method: 'POST',
+            data:{
+                _token:_token,
+                vista:vista},
+            success: function (response) {
+                $(".row").empty();
+                $(".row").html(response);
+            },
+            error: function (err) {
+                if (err.status == 403) {
+                    location.reload();
+                } else {
+                    alertError("Ocurrio un error al ejecutar la accion");
+                }
+            }
+        })
+    }
