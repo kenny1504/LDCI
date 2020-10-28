@@ -9,7 +9,7 @@
    <meta name="description" content="SISTEMA - LOGISTICA DE CARGA INTERMODAL">
    <meta name="author" content="kennysaenz31@gmail.com">
 
-   <title>SISTEMA - LOGISTICA DE CARGA INTERMODAL 2</title>
+   <title>SISTEMA - LOGISTICA DE CARGA INTERMODAL</title>
    <link rel="icon" href="{{asset("assets/bracket/Logo-Intermodal.ico")}}" >
 
     <!-- vendor css -->
