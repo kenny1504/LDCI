@@ -10,6 +10,10 @@ class TemplateController extends Controller
    public function template(Request $request)
    {
       $vista= $request->vista;
+      if(empty($nombreUsuario))
       return response()->view($vista);
+      else
+      return response(-1);
+
    }
 }

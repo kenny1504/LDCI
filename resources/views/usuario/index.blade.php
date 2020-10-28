@@ -77,7 +77,7 @@
             <div class="row form-group">
                     <div class="col-lg-12">
                         <div id="results" class="table-responsive">
-                            <table class="table table-hover" id="tblUsuario">
+                            <table class="table table-hover table-strippet " id="tblUsuario">
                                 <thead>
                                 <tr>
                                     <th></th>

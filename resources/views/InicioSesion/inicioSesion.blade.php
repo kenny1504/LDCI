@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
    <!-- Meta -->
-   <meta name="description" content="INTERMODAL LDCI - AGENTE DE CARGA, COURIER Y ADUANA">
+   <meta name="description" content="SISTEMA - LOGISTICA DE CARGA INTERMODAL">
    <meta name="author" content="kennysaenz31@gmail.com">
 
-   <title>INTERMODAL LDCI - AGENTE DE CARGA, COURIER Y ADUANA</title>
+   <title>SISTEMA - LOGISTICA DE CARGA INTERMODAL 2</title>
    <link rel="icon" href="{{asset("assets/bracket/Logo-Intermodal.ico")}}" >
 
     <!-- vendor css -->

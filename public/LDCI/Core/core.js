@@ -294,7 +294,7 @@ var configDataTable = {};
             }
         }
         else
-          alertError("Favor ingrese contreña actual para efectuar cambios");
+          alertError("Favor ingrese contraseña actual para efectuar cambios");
 
     }
 
@@ -546,8 +546,16 @@ var configDataTable = {};
                 _token:_token,
                 vista:vista},
             success: function (response) {
-                $(".row").empty();
-                $(".row").html(response);
+                if(response==-1)
+                {   
+                    alertError("Sesion Expirada");
+                    window.location.href = '/login';
+                }
+                else
+                { 
+                    $(".row").empty();
+                    $(".row").html(response);
+                }
             },
             error: function (err) {
                 if (err.status == 403) {
@@ -558,3 +566,59 @@ var configDataTable = {};
             }
         })
     }
+
+
+    /**
+ * Asigna a los input cuya propiedad type-input es igual a date el calendario datepicker
+ */
+function setTypeDate() {
+    if (is.desktop()) {
+        //Configurar el ditepicker en español
+        $.datepicker.regional['es'] =
+            {
+                closeText: 'Cerrar',
+                prevText: 'Previo',
+                nextText: 'Próximo',
+
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sáb'],
+                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                dateFormat: 'dd/mm/yy', firstDay: 0,
+                initStatus: 'Selecciona la fecha', isRTL: false
+            };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+
+        //asignarle al input el calendario
+        $('input[type-input="date"]').attr("type", "text");
+        $('input[type-input="date"]').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            minDate: new Date("1920/01/01")
+        });
+        $(".ui-datepicker-month").css("color", "#444");
+        $(".ui-datepicker-year").css("color", "#444");
+    } else {
+        $('input[type-input="date"]').attr("type", "date");
+    }
+
+    $(document).on("click", 'input[type-input="date"]', function () {
+        if ($(this).hasClass("hasDatepicker"))
+            return
+        else {
+            $(this).datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+            $(this).focus();
+            $(".ui-datepicker-month").css("color", "#444");
+            $(".ui-datepicker-year").css("color", "#444");
+        }
+    });
+
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+}
