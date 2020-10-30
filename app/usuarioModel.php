@@ -8,7 +8,7 @@ use App\ssp\SSP; /** Libreria para cargar Datatables */
 
 class usuarioModel extends Model
 {
-   
+
     /** Metodo para buscar un usario- login */
     public function GetUsuario($password,$user)
     {
@@ -26,7 +26,7 @@ class usuarioModel extends Model
     }
     // Este metodo sirve para verificar que no exista
     // otro usuario con el correo solicitado.
-    // Return true, si el correo esta disponible; false 
+    // Return true, si el correo esta disponible; false
     // si esta ocupado por otro usuario.
     public function ValidaCorreoDuplicado($correo, $usuario)
     {
@@ -52,13 +52,12 @@ class usuarioModel extends Model
         return true;
     }
 
-    
+
     /** Metodo para guardar un nuevo usuario*/
     public function registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion)
     {
         $query = new static;
-        $query= DB::select("INSERT INTO ldci.tb_usuario(
-            usuario, tipo, password,fecha_grabacion,  usuario_grabacion, telefono,codigo_confirmacion, correo)
+        $query= DB::insert("INSERT INTO ldci.tb_usuario(usuario, tipo, password,fecha_grabacion,  usuario_grabacion, telefono,codigo_confirmacion, correo)
            VALUES ( ?, ?, ?, now(), ?, ?, ?, ?)",[$user,3,$password,0,$telefono,$codigo_confirmacion,$correo]);
         return $query;
     }
@@ -74,19 +73,19 @@ class usuarioModel extends Model
     public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica, $passwordActual, $codigo,$confirmado)
     {
         $query = new static;
-        // SI password es vacio 
+        // SI password es vacio
         if( empty($password))
             $password = $passwordActual;
 
         $query= DB::statement(
-         "UPDATE ldci.tb_usuario 
-          SET usuario=?, password=?, telefono=?, 
+         "UPDATE ldci.tb_usuario
+          SET usuario=?, password=?, telefono=?,
               correo=?, usuario_modificacion=?, fecha_modificacion=?,
               confirmado=?, codigo_confirmacion=?
           WHERE id_usuario=?",
          [$user, $password, $telefono, $correo, $usuario_modifica,$fecha,$confirmado, $codigo, $id_usuario ]);
         return $query > 0;
-        
+
     }
 
     public function GetIdByUser($username)
@@ -94,7 +93,7 @@ class usuarioModel extends Model
         $query =  DB::select("SELECT id_usuario FROM ldci.tb_usuario WHERE usuario = ?", [$username]);
         return $query[0]->id_usuario;
     }
-    
+
     /** Metodo para verificar correo */
     public function verificarCorreo($codigo_confirmacion)
     {
@@ -150,6 +149,17 @@ class usuarioModel extends Model
             'pass' =>$_ENV['DB_PASSWORD']
         );
         return SSP::complex($_POST,$db,$table, $primaryKey, $columns);
+
+    }
+
+    /** Metodo para activar o desactivar usuario */
+    public function cambiarEstado($id_session,$id_usuario,$estado)
+    {
+         $query = new static;
+         $query= DB::update("UPDATE ldci.tb_usuario
+                        SET estado=?, usuario_modificacion=?, fecha_modificacion=now()
+                        WHERE id_usuario=?",[$estado,$id_session,$id_usuario]);
+         return $query;
 
     }
 

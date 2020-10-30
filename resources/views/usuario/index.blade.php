@@ -33,7 +33,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="txt_telefono">Telefono</label>
-                            <input onkeypress="return soloNumeros(event,txt_telefono);" name="txt_telefono" id="txt_telefono" class="form-control input-sm maxlength="40">
+                            <input onkeypress="return soloNumeros(event,txt_telefono);" name="txt_telefono" id="txt_telefono" class="form-control input-sm" maxlength="40">
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
             <button class="btn btn-success btn-sm" id="btnGuardarUsuario">
                 <i class="fa fa-save"> </i> Guardar
             </button>
-            <a onclick="resetForm()" class="btn btn-md btn-warning btn-sm optionMenu" ><i class="fa fa-recycle"></i> Limpiar</a>
+            <a onclick="resetForm()" class="btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>
 </div>

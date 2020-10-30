@@ -116,7 +116,7 @@ class InicioController extends Controller
    
          Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
                                  // Correo  y  Nombre que Aparecera 
-                  $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
+                  $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL"); 
                   $msj->subject($subject);
                   $msj->to($for);
          }); 
@@ -176,7 +176,7 @@ class InicioController extends Controller
                      $data['name']=$user;
                      Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
                                              // Mi correo  y  Nombre que Aparecera 
-                              $msj->from("kennysaenz31@gmail.com","LOGISTICA DE CARGA INTERMODAL"); 
+                              $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL"); 
                               $msj->subject($subject);
                               $msj->to($for);
                      }); 

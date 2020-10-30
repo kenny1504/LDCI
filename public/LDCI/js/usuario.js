@@ -29,7 +29,7 @@ var tblUsuario = null;
                         targets: 3,
                         data: null,
                         orderable: false,
-                        render: function (json) { 
+                        render: function (json) {
                             $Estado =json[3];
                             if ($Estado!="Confirmar")
                             return '<div class="form-group">'
@@ -45,7 +45,7 @@ var tblUsuario = null;
                                         +'<span class="slider round"></span>'
                                         +'</label>'
                                     +'</div>';
-                            
+
 
                         }
                     },
@@ -63,23 +63,23 @@ var tblUsuario = null;
                         targets: 8,
                         data: null,
                         orderable: false,
-                        render: function (json) { 
+                        render: function (json) {
                             $Estado =json[8];
                             if ($Estado!="Activo")
                             return '<div class="form-group">'
                                      +'<label class="switch">'
-                                        +'<input type="checkbox">'
+                                        +'<input class="cambiar" type="checkbox">'
                                         +'<span class="slider round"></span>'
                                      +'</label>'
                                    +'</div>';
                             else
                             return '<div class="form-group">'
                                         +'<label class="switch">'
-                                        +'<input checked type="checkbox">'
+                                        +'<input class="cambiar" checked type="checkbox">'
                                         +'<span class="slider round"></span>'
                                         +'</label>'
                                     +'</div>';
-                            
+
 
                         }
                     },
@@ -91,7 +91,7 @@ var tblUsuario = null;
                    }
                 ]
             });
-        
+
       /** se ejecuta despues que la tabla cargo datos, GIF CARGANDO */
       $('#tblUsuario').DataTable().on("draw", function(){
         showLoad(false);
@@ -99,24 +99,21 @@ var tblUsuario = null;
 
     }
 
-
     /** Selecciona el usuario de  y carga valores en formulario */
     function selectUsuario(datos) {
-
 
         var tr = $(datos).parents("tr")
         var data = tblUsuario.row(tr).data();
         //Capturamos valores de tabla
         usuario = {
-
-            id_usuario: data[0],
-            usuario:data[1],
-            telefono:data[2],
-            correo: data[4],
-            tipo: data[5],
-            estado: data[7]
+                id_usuario: data[0],
+                usuario:data[1],
+                telefono:data[2],
+                correo: data[4],
+                tipo: data[5],
+                estado: data[7]
         };
-        
+
         //Asignamos valores a formulario
         $('#id_usuario').val(usuario.id_usuario);
         $('#txt_usuario').val(usuario.usuario);
@@ -138,9 +135,45 @@ var tblUsuario = null;
                 $('#ckestado').click();
         }
 
-
     }
 
+    /** Funcion para capturar datos de usuario */
+    $(document).off("click", ".cambiar").on("click", ".cambiar", function () {
+
+        showLoad(true);
+        let estado;var _token= $('input[name=_token]').val();
+        var dt = tblUsuario.row($(this).parents('tr')).data();
+
+        var checkbox=$(this);
+        if (checkbox[0].checked == false)
+             estado=-1;
+        if (checkbox[0].checked == true)
+             estado=1;
+        $.ajax({
+            type: 'POST',
+            url: '/usuarios/estado', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_usuario: dt[0],
+                estado:estado
+            },
+            success: function(data){
+                if(data==1)
+                    alertSuccess("Usuario actualizado");
+                else
+                    alertError("hubo un error al actualizar usuario");
+
+                showLoad(false);
+
+            },
+            error : function(err){
+                showLoad(false);
+                alertError(err.responseText);
+            }
+
+        });
+
+    });
 
       /** Limpia el formulario */
       function resetForm() {
