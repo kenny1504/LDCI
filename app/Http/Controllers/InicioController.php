@@ -29,13 +29,13 @@ class InicioController extends Controller
        $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
       /** revuelve vista y nombre del usuario logueado */
 
-      
+
       if(!empty($nombreUsuario))
-       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);  
+       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);
       else
         return view('inicio');
     }
-    
+
     public function login(Request $request)
     {
 
@@ -58,8 +58,8 @@ class InicioController extends Controller
          }else
          {
             return response()->json(0); /** si es usuario no existe o esta eliminado */
-         } 
-         
+         }
+
 
     }
 
@@ -84,7 +84,7 @@ class InicioController extends Controller
          }else
          {
             return response()->json(0); /** si es usuario no existe o esta eliminado */
-         } 
+         }
 
     }
 
@@ -113,14 +113,14 @@ class InicioController extends Controller
          /**  Inicio funcion para enviar correo  */
          $subject ="Confirmacion de correo"; /** Asunto del Correo */
          $for =$correo;/** correo que recibira el mensaje */
-   
-         Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
-                                 // Correo  y  Nombre que Aparecera 
-                  $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL"); 
+
+         Mail::send('InicioSesion.mailRegistro',$data,function($msj) use($subject,$for){
+                                 // Correo  y  Nombre que Aparecera
+                  $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
                   $msj->subject($subject);
                   $msj->to($for);
-         }); 
-         
+         });
+
          /** Fin funcion para enviar correo */
 
          return response()->json(1);
@@ -132,10 +132,10 @@ class InicioController extends Controller
     {
       // Validar si esta aun la variable de sesion.
       if(!empty(session('idUsuario')))
-         $id_usuario = session('idUsuario');     
+         $id_usuario = session('idUsuario');
       else
          $id_usuario = (new usuarioModel)->GetIdByUser(session('nombreUsuario'));
-      
+
       $password= $request->pass_new;
       $user= $request->usuario;
       $correo= $request->correo;
@@ -143,13 +143,13 @@ class InicioController extends Controller
       $telefono= $request->telefono;
       $passwordViejo= $request->pass_now;
       $correoUnico = (new usuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
-      
+
       if(!(new usuarioModel)->validarcontrasena($id_usuario, $passwordViejo)){
          return collect([
             'mensaje' => 'Contraseña actual es incorrecta',
             'error' => true,
         ]);
-      }    
+      }
 
       if($correoUnico)
       {
@@ -158,30 +158,30 @@ class InicioController extends Controller
 
          if($correo_old==$correo)
          {
-            $codigo_confirmacion=null; 
+            $codigo_confirmacion=null;
             $confirmado=true;
          }
          // Actualizamos
          $resultado = (new usuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,now(),$id_usuario, $passwordViejo, $codigo_confirmacion,$confirmado);
          if($resultado){
-             
+
                   session()->forget('idUsuario');
                   session()->forget('nombreUsuario');
                   if($correo_old!=$correo)
                   {
                      $subject ="Confirmacion de correo"; /** Asunto del Correo */
                      $for =$correo;/** correo que recibira el mensaje */
-   
+
                      $data['confirmation_code']=$codigo_confirmacion;
                      $data['name']=$user;
-                     Mail::send('InicioSesion\mailRegistro',$data,function($msj) use($subject,$for){
-                                             // Mi correo  y  Nombre que Aparecera 
-                              $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL"); 
+                     Mail::send('InicioSesion.mailRegistro',$data,function($msj) use($subject,$for){
+                                             // Mi correo  y  Nombre que Aparecera
+                              $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
                               $msj->subject($subject);
                               $msj->to($for);
-                     }); 
+                     });
                   }
-                  
+
                   return collect([
                      'mensaje' => 'Información actualizada',
                      'error' => false
@@ -205,12 +205,12 @@ class InicioController extends Controller
     /** Metodo de verificacion de correo */
     public function verificar($code)
    {
-      
+
         /** Recupera codigo de confirmacion*/
         $codigo_confirmacion= $code;
         /** Busca el usuario segun el codigo*/
          $query = (new usuarioModel)->verificarCorreo($codigo_confirmacion);
- 
+
          if(!empty($query))
           {
 
@@ -228,7 +228,7 @@ class InicioController extends Controller
           }
           else
              return redirect('/');
-          
+
    }
 
 
