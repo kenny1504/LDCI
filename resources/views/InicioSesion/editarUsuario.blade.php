@@ -1,12 +1,12 @@
 <!--form para poder activar la ruta y poder guardar el registro--><!-- -->
 <form id="ingresar_materia" >
     <div class="modal  modal-info fade" id="editar_Usuario" >
-              <div class="modal-dialog" >           
+              <div class="modal-dialog" >
                 <div class="modal-content" >
                     <div class="modal-header" style="align-self: flex-end;" >
                         <a  type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span></a>
-                      </div>    
+                      </div>
                         <div class="align-items-center justify-content-center">
                             @csrf
                             <div class="login-wrapper wd-300 wd-xs-400 pd-25 pd-xs-40 bg-white rounded shadow-base">
@@ -25,7 +25,7 @@
                                 <input id="pass_new_confirm" type="password" class="form-control" placeholder="Confirmar contraseña nueva (Opcional)">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="telefono" name="telefono" onkeypress="return soloNumeros(event,telefono);" type="text" class="form-control" placeholder="Ingrese Telefono" maxlength="25">
+                                  <input id="phone" onkeypress="return soloNumeros(event,phone);" name="phone" class="form-control" maxlength="25" type="tel">
                               </div><!-- form-group -->
                               <div class="form-group">
                                 <input id="correo"  type="email" class="form-control" placeholder="Correo Electronico">
@@ -38,6 +38,6 @@
                 <!-- /.modal-content -->
               </div>
               <!-- /.modal-dialog -->
-              
+
     </div>
 </form>

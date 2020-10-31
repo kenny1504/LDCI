@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
     <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
 
+    <link rel="stylesheet" href="{{asset("LDCI/Core/intlTelInput.css")}}"  >
+    <link rel="stylesheet" href="{{asset("LDCI/Core/demo.css")}}">
+
   </head>
 
   <body class="bg-br-primary">
@@ -51,7 +54,7 @@
             </div><!-- form-group -->
             <button id="btnEntrar"  onclick="login()" class="btn btn-info btn-block">Entrar</button>
             <br>
-            <center><a href="InicioSesion.registro" class="optionMenu" > <label class="tx-normal">Registrarse</label></a></center> 
+            <center><a href="InicioSesion.registro" class="optionMenu" > <label class="tx-normal">Registrarse</label></a></center>
           </div><!-- login-wrapper -->
         </div><!-- d-flex -->
     </div>
@@ -68,11 +71,13 @@
 
     <script src="{{asset("assets/bracket/lib/popper.js/popper.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/bootstrap/bootstrap.js")}}" ></script>
-    
+
     <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/intlTelInput.js")}}" ></script>
     <script src="{{asset("LDCI/Core/core.js")}}" ></script>
     <script src="{{asset("LDCI/login.js")}}" ></script>
-  
+
+
 
   </body>
 </html>

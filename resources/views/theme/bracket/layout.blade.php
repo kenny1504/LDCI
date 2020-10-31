@@ -18,21 +18,25 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/perfect-scrollbar/css/perfect-scrollbar.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
-  
+
 
     <!-- Core DATABLE -->
-  
+
     <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
     <link rel="stylesheet" href="{{asset("LDCI/Core/dataTables.bootstrap.min.css")}}"  >
     <link rel="stylesheet" href="{{asset("LDCI/Core/bootstrap.scss")}}"  >
-    
-    
+
+
      <!-- Core CSS -->
      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.default.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
- 
-    
+
+
+      <link rel="stylesheet" href="{{asset("LDCI/Core/intlTelInput.css")}}"  >
+      <link rel="stylesheet" href="{{asset("LDCI/Core/demo.css")}}">
+
+
   </head>
   <body>
      <!--Inicio Header -->
@@ -54,8 +58,8 @@
 
     <div class="br-mainpanel">
       <div class="br-section-wrapper">
-            <div class="row"><!-- Agrega contenido desde otra vista--> 
-        
+            <div class="row"><!-- Agrega contenido desde otra vista-->
+
             </div>
             <footer class="br-footer">
               <div class="footer-left">
@@ -80,14 +84,15 @@
 
     <script src="{{asset("assets/bracket/js/bracket.js")}}" ></script>
     <script src="{{asset("assets/bracket/js/ResizeSensor.js")}}" ></script>
-      
+
     <!-- js Core-->
       <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
       <script src="{{asset("LDCI/Core/jquery.dataTables.min.js")}}" ></script>
       <script src="{{asset("LDCI/Core/dataTables.bootstrap.min.js")}}" ></script>
-      
+
+      <script src="{{asset("LDCI/Core/intlTelInput.js")}}" ></script>
       <script src="{{asset("LDCI/Core/core.js")}}" ></script>
-    
+
       <!-- js externos-->
       @yield('script')
 

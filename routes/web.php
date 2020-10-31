@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/','TemplateController@template');
 
 Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');
-Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');
 Route::post('/datos/modificaUsuario','InicioController@editarUsuario')->name ('editar_usuario');
 Route::post('/datos/usuario','InicioController@getUsuario');
 Route::post('/login/in','InicioController@login')->name ('login-in');

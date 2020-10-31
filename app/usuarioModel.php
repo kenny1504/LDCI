@@ -21,7 +21,7 @@ class usuarioModel extends Model
     public function GetDatosUsuario($id_usuario)
     {
         $query = new static;
-        $query= DB::select("select usuario,telefono,correo from ldci.tb_usuario where id_usuario=?;",[$id_usuario]);
+        $query= DB::select("select iso2,usuario,telefono,correo from ldci.tb_usuario where id_usuario=?;",[$id_usuario]);
         return $query;
     }
     // Este metodo sirve para verificar que no exista
@@ -54,11 +54,11 @@ class usuarioModel extends Model
 
 
     /** Metodo para guardar un nuevo usuario*/
-    public function registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion)
+    public function registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion,$iso)
     {
         $query = new static;
-        $query= DB::insert("INSERT INTO ldci.tb_usuario(usuario, tipo, password,fecha_grabacion,  usuario_grabacion, telefono,codigo_confirmacion, correo)
-           VALUES ( ?, ?, ?, now(), ?, ?, ?, ?)",[$user,3,$password,0,$telefono,$codigo_confirmacion,$correo]);
+        $query= DB::insert("INSERT INTO ldci.tb_usuario(usuario, tipo, password,fecha_grabacion, usuario_grabacion, telefono,iso2 ,codigo_confirmacion, correo)
+           VALUES ( ?, ?, ?, now(), ?, ?, ?, ?, ?)",[$user,3,$password,0,$telefono,$iso,$codigo_confirmacion,$correo]);
         return $query;
     }
 
@@ -70,7 +70,7 @@ class usuarioModel extends Model
         return true;
     }
 
-    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$fecha,$usuario_modifica, $passwordActual, $codigo,$confirmado)
+    public function actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$usuario_modifica, $passwordActual, $codigo,$confirmado,$iso)
     {
         $query = new static;
         // SI password es vacio
@@ -79,11 +79,11 @@ class usuarioModel extends Model
 
         $query= DB::statement(
          "UPDATE ldci.tb_usuario
-          SET usuario=?, password=?, telefono=?,
-              correo=?, usuario_modificacion=?, fecha_modificacion=?,
+          SET usuario=?, password=?, telefono=?,iso2=?,
+              correo=?, usuario_modificacion=?, fecha_modificacion=now(),
               confirmado=?, codigo_confirmacion=?
           WHERE id_usuario=?",
-         [$user, $password, $telefono, $correo, $usuario_modifica,$fecha,$confirmado, $codigo, $id_usuario ]);
+         [$user, $password, $telefono,$iso, $correo, $usuario_modifica,$confirmado, $codigo, $id_usuario ]);
         return $query > 0;
 
     }

@@ -1,8 +1,31 @@
 var tblUsuario = null;
 
     $(document).ready(function () {
-    showLoad(true);
-    listarUsuarios();
+
+        showLoad(true);
+        listarUsuarios();
+
+        var input = document.querySelector("#txt_telefono");
+        select = window.intlTelInput(input, {
+            allowDropdown: true,
+            autoHideDialCode: false,
+            autoPlaceholder: "off",
+            dropdownContainer: document.body,
+            formatOnDisplay: false,
+            geoIpLookup: function(callback) {
+                $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            hiddenInput: "full_number",
+            initialCountry: "auto",
+            nationalMode: false,
+            placeholderNumberType: "MOBILE",
+            separateDialCode: true,
+            setNumber:351,
+            utilsScript: "LDCI/Core/utils.js",
+        });
 
     });
 

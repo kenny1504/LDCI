@@ -97,6 +97,7 @@ class InicioController extends Controller
       $user= $request->usuario;
       $correo= $request->correo;
       $telefono= $request->telefono;
+      $iso= $request->iso;
       $codigo_confirmacion=Str::random(24);/** Genera un Codigo Ramdom */
       $data['confirmation_code']=$codigo_confirmacion;
       $data['name']=$user;
@@ -108,7 +109,7 @@ class InicioController extends Controller
 
       if($correoUnico)
       {
-         $query = (new usuarioModel)->registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion);
+         $query = (new usuarioModel)->registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion,$iso);
 
          /**  Inicio funcion para enviar correo  */
          $subject ="Confirmacion de correo"; /** Asunto del Correo */
@@ -142,6 +143,7 @@ class InicioController extends Controller
       $correo_old= $request->correo_old;
       $telefono= $request->telefono;
       $passwordViejo= $request->pass_now;
+      $iso= $request->iso;
       $correoUnico = (new usuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
 
       if(!(new usuarioModel)->validarcontrasena($id_usuario, $passwordViejo)){
@@ -162,7 +164,7 @@ class InicioController extends Controller
             $confirmado=true;
          }
          // Actualizamos
-         $resultado = (new usuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,now(),$id_usuario, $passwordViejo, $codigo_confirmacion,$confirmado);
+         $resultado = (new usuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$id_usuario, $passwordViejo, $codigo_confirmacion,$confirmado,$iso);
          if($resultado){
 
                   session()->forget('idUsuario');

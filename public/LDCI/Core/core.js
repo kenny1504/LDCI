@@ -5,16 +5,40 @@
 //en el datatable
 var dt_extra_params = {};
 var configDataTable = {};
+var pass = null; /** Variable que guarda contraseña del usuario */
+var select=null; /** Variable pára guardar inicializacion de select flag (countries) */
 
     $(document).ready(function () {
 
         console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
         console.log("%cEl codigo que ingrese en esta consola que pueda altere el comportamiento del sistema sera penalizado.\n", "color: green");
         $('#btnLeftMenu').click();
+
+        var input = document.querySelector("#phone");
+        select = window.intlTelInput(input, {
+            allowDropdown: true,
+            autoHideDialCode: false,
+            autoPlaceholder: "off",
+            dropdownContainer: document.body,
+            formatOnDisplay: false,
+            geoIpLookup: function(callback) {
+                $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            hiddenInput: "full_number",
+            initialCountry: "auto",
+            nationalMode: false,
+            placeholderNumberType: "MOBILE",
+            separateDialCode: true,
+            setNumber:351,
+            utilsScript: "LDCI/Core/utils.js",
+        });
+
     })
 
 
-    var pass = null; /** Variable que guarda contraseña del usuario */
     /*
         Mostrar mensaje cuando la ejecucion sea correcta
     */
@@ -54,7 +78,6 @@ var configDataTable = {};
         });
     }
 
-
     function showLoad(option) {
         if (option) {
             //
@@ -72,7 +95,6 @@ var configDataTable = {};
             });
         }
     }
-
 
     /** Metodo pára darle formato a las consultas de tipo con campos que involucren dinero */
     function formatNumber(num) {
@@ -96,32 +118,9 @@ var configDataTable = {};
     function setDataTable(idTabla, config) {
         var configParam = config || { ajax: {} };
 
-        //configParam.ajax = typeof(configParam.ajax) == "undefined" ? false : $.extend(configParam.ajax,dt_extra_params);
-        /*if(configParam.ajax){
-            configParam.ajax.data = function ( d ) {
-                return $.extend(d, configParam.ajax.data,{
-                    "extra_params" : dt_extra_params
-                } );
-                }
-        }
-        debugger*/
         try {
-            //var config = configParam || {};
-
             var ajax = {};
 
-            /*if(typeof(configParam.ajax) != "undefined"){
-                ajax = {
-                    url : configParam.ajax.url,
-                    type: configParam.ajax.type,
-                    data: function(d){
-                        return $.extend(d, configParam.ajax.data,{
-                            "extra_params" : dt_extra_params
-                        });
-
-                    }
-                }
-            }*/
             return $(idTabla).DataTable({
                 "search": {
                     "regex": true
@@ -180,7 +179,6 @@ var configDataTable = {};
         }
     }
 
-
     configDataTable.clearFilter = function (reload) {
         dt_extra_params = {};
     }
@@ -215,7 +213,8 @@ var configDataTable = {};
             success: function (data) {
                 $('#usuario').val(data[0].usuario);
                 pass = data[0].pass;
-                $('#telefono').val(data[0].telefono);
+                $('#phone').val(data[0].telefono);
+                select.setCountry(data[0].iso2);
                 $('#correo').val(data[0].correo);
                 $('#correo').attr("data-correo",data[0].correo);
                 showLoad(false);
@@ -234,9 +233,10 @@ var configDataTable = {};
     function guardarUsuario() {
 
         var ok = true;
+        var iso=select.getSelectedCountryData().iso2;
         var _token = $('input[name=_token]').val();
         var usuario = $('#usuario').val();
-        var telefono = $('#telefono').val();
+        var telefono = $('#phone').val();
         var correo = $('#correo').val();
         var correo_old=$('#correo').attr("data-correo");
         var pass_now = $('#pass_now').val();
@@ -250,7 +250,7 @@ var configDataTable = {};
             }
         }
 
-        if ( pass_now!="") 
+        if ( pass_now!="")
         {
             if(ok == true)
             {
@@ -266,7 +266,8 @@ var configDataTable = {};
                             correo_old:correo_old,
                             telefono:telefono,
                             pass_new:Base64.encode(pass_new),
-                            pass_now:Base64.encode(pass_now)
+                            pass_now:Base64.encode(pass_now),
+                            iso:iso
                         },
                         success: function (data) {
                             showLoad(false);
@@ -287,10 +288,10 @@ var configDataTable = {};
                             alertError(err.responseText);
                             showLoad(false);
                         }
-    
+
                     });
                 });
-            
+
             }
         }
         else
@@ -310,10 +311,11 @@ var configDataTable = {};
 
     function registrarUsuario() {
 
+        var iso=select.getSelectedCountryData().iso2;
         var _token = $('input[name=_token]').val();
         var usuario = $('#txt_usuario').val();
         var correo = $('#txt_correo').val();
-        var telefono = $('#txt_telefono').val();
+        var telefono = $('#phone').val();
         var pass = $('#txt_pass').val();
         pass = Base64.encode(pass);
 
@@ -327,7 +329,8 @@ var configDataTable = {};
                     usuario: usuario,
                     correo: correo,
                     telefono: telefono,
-                    pass: pass
+                    pass: pass,
+                    iso:iso
                 },
                 success: function (data) {
                     switch (data) {
@@ -503,28 +506,10 @@ var configDataTable = {};
 
             // capturamos la tecla pulsada
             var teclaPulsada=window.event ? window.event.keyCode:e.which;
-    
+
             // capturamos el contenido del input
             var valor=id.value;
-    
-            // 45 = tecla simbolo menos (-)
-            // Si el usuario pulsa la tecla menos, y no se ha pulsado anteriormente
-            // Modificamos el contenido del mismo añadiendo el simbolo menos al
-            // inicio
-            if(teclaPulsada==45 && valor.indexOf("-")==-1)
-            {
-                id.value="-"+valor;
-            }
-    
-            // 13 = tecla enter
-            // 46 = tecla punto (.)
-            // Si el usuario pulsa la tecla enter o el punto y no hay ningun otro
-            // punto
-            if(teclaPulsada==13 || (teclaPulsada==46 && valor.indexOf(".")==-1))
-            {
-                return true;
-            }
-    
+
             // devolvemos true o false dependiendo de si es numerico o no
             return /\d/.test(String.fromCharCode(teclaPulsada));
     }
@@ -547,12 +532,12 @@ var configDataTable = {};
                 vista:vista},
             success: function (response) {
                 if(response==-1)
-                {   
+                {
                     alertError("Sesion Expirada");
                     window.location.href = '/login';
                 }
                 else
-                { 
+                {
                     $(".row").empty();
                     $(".row").html(response);
                 }
@@ -569,56 +554,62 @@ var configDataTable = {};
 
 
     /**
- * Asigna a los input cuya propiedad type-input es igual a date el calendario datepicker
- */
-function setTypeDate() {
-    if (is.desktop()) {
-        //Configurar el ditepicker en español
-        $.datepicker.regional['es'] =
-            {
-                closeText: 'Cerrar',
-                prevText: 'Previo',
-                nextText: 'Próximo',
+     * Asigna a los input cuya propiedad type-input es igual a date el calendario datepicker
+     */
+    function setTypeDate() {
+        if (is.desktop()) {
+            //Configurar el ditepicker en español
+            $.datepicker.regional['es'] =
+                {
+                    closeText: 'Cerrar',
+                    prevText: 'Previo',
+                    nextText: 'Próximo',
 
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sáb'],
-                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                dateFormat: 'dd/mm/yy', firstDay: 0,
-                initStatus: 'Selecciona la fecha', isRTL: false
-            };
-        $.datepicker.setDefaults($.datepicker.regional['es']);
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
+                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sáb'],
+                    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                    dateFormat: 'dd/mm/yy', firstDay: 0,
+                    initStatus: 'Selecciona la fecha', isRTL: false
+                };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
 
-        //asignarle al input el calendario
-        $('input[type-input="date"]').attr("type", "text");
-        $('input[type-input="date"]').datepicker({
-            changeMonth: true,
-            changeYear: true,
-            minDate: new Date("1920/01/01")
-        });
-        $(".ui-datepicker-month").css("color", "#444");
-        $(".ui-datepicker-year").css("color", "#444");
-    } else {
-        $('input[type-input="date"]').attr("type", "date");
-    }
-
-    $(document).on("click", 'input[type-input="date"]', function () {
-        if ($(this).hasClass("hasDatepicker"))
-            return
-        else {
-            $(this).datepicker({
+            //asignarle al input el calendario
+            $('input[type-input="date"]').attr("type", "text");
+            $('input[type-input="date"]').datepicker({
                 changeMonth: true,
-                changeYear: true
+                changeYear: true,
+                minDate: new Date("1920/01/01")
             });
-            $(this).focus();
             $(".ui-datepicker-month").css("color", "#444");
             $(".ui-datepicker-year").css("color", "#444");
+        } else {
+            $('input[type-input="date"]').attr("type", "date");
         }
-    });
 
-    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
-}
+        $(document).on("click", 'input[type-input="date"]', function () {
+            if ($(this).hasClass("hasDatepicker"))
+                return
+            else {
+                $(this).datepicker({
+                    changeMonth: true,
+                    changeYear: true
+                });
+                $(this).focus();
+                $(".ui-datepicker-month").css("color", "#444");
+                $(".ui-datepicker-year").css("color", "#444");
+            }
+        });
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+    }
+
+
+
+
+
+

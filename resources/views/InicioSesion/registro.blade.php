@@ -12,7 +12,7 @@
             <input type="email" id="txt_correo" required class="form-control" placeholder="Ingrese Correo">
           </div><!-- form-group -->
           <div class="form-group">
-            <input type="text" id="txt_telefono" name="txt_telefono" onkeypress="return soloNumeros(event,txt_telefono);" required class="form-control" placeholder="Ingrese Telefono" maxlength=" 25">
+             <input id="phone"  onkeypress="return soloNumeros(event,phone);" name="phone" class="form-control" maxlength="25" type="tel">
           </div><!-- form-group -->
         <div class="form-group">
           <input type="password" id="txt_pass" requireds class="form-control" placeholder="Ingrese Contraseña">
@@ -20,3 +20,30 @@
         <button onclick="registrarUsuario();" class="btn btn-info btn-block">Registrarse</button>
       </div><!-- login-wrapper -->
     </div><!-- d-flex -->
+
+
+    <script>
+
+        var input = document.querySelector("#phone");
+        select = window.intlTelInput(input, {
+            allowDropdown: true,
+            autoHideDialCode: false,
+            autoPlaceholder: "off",
+            dropdownContainer: document.body,
+            formatOnDisplay: false,
+            geoIpLookup: function(callback) {
+                $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            hiddenInput: "full_number",
+            initialCountry: "auto",
+            nationalMode: false,
+            placeholderNumberType: "MOBILE",
+            separateDialCode: true,
+            setNumber:351,
+            utilsScript: "LDCI/Core/utils.js",
+        });
+
+    </script>
