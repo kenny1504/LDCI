@@ -46,14 +46,17 @@
     </a>
     <a href="" class="br-menu-link">
       <div class="br-menu-item">
-        <i class="menu-item-icon icon ion-briefcase tx-24"></i>
-        <span class="menu-item-label">Productos</span>
+        <i class="menu-item-icon fa fa-briefcase tx-24"></i>
+        <span class="menu-item-label">Catalogos</span>
           <i class="menu-item-arrow fa fa-angle-down"></i>
       </div><!-- menu-item -->
     </a><!-- br-menu-link -->
       <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link">Ver Productos</a></li>
-          <li class="nav-item"><a href="" class="nav-link">Agregar</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Tipo Transporte</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Tipo Mercancia</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Proveedores</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Productos</a></li>
+          <li class="nav-item"><a href="" class="nav-link">Modo Transporte</a></li>
       </ul>
       <a href="" class="br-menu-link">
           <div class="br-menu-item">

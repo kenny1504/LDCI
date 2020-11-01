@@ -33,4 +33,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Rutas Usuarios
 Route::post('/usuarios/getAll', 'UsuarioController@getUsuarios')->name('getAll');
 Route::post('/usuarios/estado', 'UsuarioController@cambiarEstado');
+Route::post('/usuarios/guardar', 'UsuarioController@guardar');
 

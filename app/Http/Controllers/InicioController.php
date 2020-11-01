@@ -27,18 +27,15 @@ class InicioController extends Controller
     public function inicio()
     {
        $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
-      /** revuelve vista y nombre del usuario logueado */
-
 
       if(!empty($nombreUsuario))
-       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);
+       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);   /** revuelve vista y nombre del usuario logueado */
       else
         return view('inicio');
     }
 
     public function login(Request $request)
     {
-
         /** Recupera parametros enviados por ajax */
        $password= $request->password;
        $user= $request->user;
@@ -49,8 +46,12 @@ class InicioController extends Controller
             if($query[0]->confirmado==true)
             {
                /** iniciamos variables de session con valores recuperados de la consulta */
-               session(['idUsuario' =>($query[0]->id_usuario) ]);
-               session(['nombreUsuario' =>($query[0]->usuario) ]);
+               if ($query[0]->estado==1)
+               {
+                   session(['idUsuario' =>($query[0]->id_usuario) ]);
+                   session(['nombreUsuario' =>($query[0]->usuario) ]);
+                   session(['tipoUsuario' =>($query[0]->tipo) ]);
+               }
                return response()->json(($query[0]->estado));
             }
             else
@@ -91,7 +92,6 @@ class InicioController extends Controller
     /** Funcion que permite guardar un nuevo usuario */
     public function guardarUsuario(Request $request)
     {
-
       /** Recupera parametros enviados por ajax */
       $password= $request->pass;
       $user= $request->usuario;

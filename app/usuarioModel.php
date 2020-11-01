@@ -52,7 +52,6 @@ class usuarioModel extends Model
         return true;
     }
 
-
     /** Metodo para guardar un nuevo usuario*/
     public function registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion,$iso)
     {
@@ -115,7 +114,7 @@ class usuarioModel extends Model
     /** Funcion para cargar tabla usuarios */
     public function getUsuarios()
     {
-        $table = "(select id_usuario,usuario,telefono,
+        $table = "(select id_usuario,usuario,iso2, telefono,
                         case confirmado when true then 'Confirmar'
                             else 'Sin confirmar' end as estado_correo
                         ,correo,tipo,
@@ -132,13 +131,14 @@ class usuarioModel extends Model
         $columns = [
         ['db' => 'id_usuario', 'dt' => 0],
         ['db' => 'usuario', 'dt' => 1],
-        ['db' => 'telefono', 'dt' => 2],
-        ['db' => 'estado_correo', 'dt' => 3],
-        ['db' => 'correo', 'dt' => 4],
-        ['db' => 'tipo', 'dt' => 5],
-        ['db' => 'tipo_usuario', 'dt' => 6],
-        ['db' => 'estado', 'dt' => 7],
-        ['db' => 'estado_usuario', 'dt' => 8]
+        ['db' => 'iso2', 'dt' => 2],
+        ['db' => 'telefono', 'dt' => 3],
+        ['db' => 'estado_correo', 'dt' => 4],
+        ['db' => 'correo', 'dt' => 5],
+        ['db' => 'tipo', 'dt' => 6],
+        ['db' => 'tipo_usuario', 'dt' => 7],
+        ['db' => 'estado', 'dt' => 8],
+        ['db' => 'estado_usuario', 'dt' => 9]
         ];
 
         /*** Config DB */
@@ -161,6 +161,28 @@ class usuarioModel extends Model
                         WHERE id_usuario=?",[$estado,$id_session,$id_usuario]);
          return $query;
 
+    }
+
+    /** Metodo para guardar un nuevo usuario desde menu usuario*/
+    public function guardarUsuario($usuario,$telefono,$iso,$correo,$tipo,$id_session,$codigo_confirmacion)
+    {
+        $query = new static;
+        $query= DB::insert("INSERT INTO ldci.tb_usuario(
+                            usuario, telefono, iso2,password, correo,
+                            codigo_confirmacion,tipo, usuario_grabacion, fecha_grabacion)
+                            VALUES ( ?, ?, ?,?, ?, ?, ?,?, now())",[$usuario,$telefono,$iso,'bGRjaTEyMw==',$correo,$codigo_confirmacion,$tipo,$id_session]);
+        return $query;
+    }
+
+    /** Metodo para guardar un actualizar un usuario desde menu usuario*/
+    public function modificarUsuario($usuario,$telefono,$iso,$correo,$tipo,$confirmado,$codigo_confirmacion,$id_session,$id_usuario)
+    {
+        $query = new static;
+        $query= DB::update ("UPDATE ldci.tb_usuario
+        SET  usuario=?, telefono=?, iso2=?, correo=?, tipo=?,
+        confirmado=?, codigo_confirmacion=?, usuario_modificacion=?, fecha_modificacion=now()
+        WHERE id_usuario=?",[$usuario,$telefono,$iso,$correo,$tipo,$confirmado,$codigo_confirmacion,$id_session,$id_usuario]);
+        return $query;
     }
 
 }

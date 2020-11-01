@@ -7,7 +7,6 @@ var dt_extra_params = {};
 var configDataTable = {};
 var pass = null; /** Variable que guarda contraseña del usuario */
 var select=null; /** Variable pára guardar inicializacion de select flag (countries) */
-var select2=null;
 
     $(document).ready(function () {
 
@@ -188,6 +187,115 @@ var select2=null;
     }
 
 
+    /** Funcion para evitar que ingrese Letras */
+    function soloNumeros(e,id) {
+
+        // capturamos la tecla pulsada
+        var teclaPulsada=window.event ? window.event.keyCode:e.which;
+
+        // capturamos el contenido del input
+        var valor=id.value;
+
+        // devolvemos true o false dependiendo de si es numerico o no
+        return /\d/.test(String.fromCharCode(teclaPulsada));
+    }
+
+
+    /** Metodo para Cargar Vistas */
+    $(document).off("click", ".optionMenu").on('click', '.optionMenu', clickOpcionMenu);
+
+    function clickOpcionMenu(e) {
+
+        var _token= $('input[name=_token]').val();
+        e.preventDefault();
+        e.stopPropagation();
+        var vista = $(this).attr("href");
+        $.ajax({
+            url: window.location.pathname,
+            method: 'POST',
+            data:{
+                _token:_token,
+                vista:vista},
+            success: function (response) {
+                if(response==-1)
+                {
+                    alertError("Sesion Expirada");
+                    window.location.href = '/login';
+                }
+                else
+                {
+                    $(".row").empty();
+                    $(".row").html(response);
+                }
+            },
+            error: function (err) {
+                if (err.status == 403) {
+                    location.reload();
+                } else {
+                    alertError("Ocurrio un error al ejecutar la accion");
+                }
+            }
+        })
+    }
+
+
+    /**
+     * Asigna a los input cuya propiedad type-input es igual a date el calendario datepicker
+     */
+    function setTypeDate() {
+        if (is.desktop()) {
+            //Configurar el ditepicker en español
+            $.datepicker.regional['es'] =
+                {
+                    closeText: 'Cerrar',
+                    prevText: 'Previo',
+                    nextText: 'Próximo',
+
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
+                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sáb'],
+                    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                    dateFormat: 'dd/mm/yy', firstDay: 0,
+                    initStatus: 'Selecciona la fecha', isRTL: false
+                };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+
+            //asignarle al input el calendario
+            $('input[type-input="date"]').attr("type", "text");
+            $('input[type-input="date"]').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date("1920/01/01")
+            });
+            $(".ui-datepicker-month").css("color", "#444");
+            $(".ui-datepicker-year").css("color", "#444");
+        } else {
+            $('input[type-input="date"]').attr("type", "date");
+        }
+
+        $(document).on("click", 'input[type-input="date"]', function () {
+            if ($(this).hasClass("hasDatepicker"))
+                return
+            else {
+                $(this).datepicker({
+                    changeMonth: true,
+                    changeYear: true
+                });
+                $(this).focus();
+                $(".ui-datepicker-month").css("color", "#444");
+                $(".ui-datepicker-year").css("color", "#444");
+            }
+        });
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+    }
+
+    /*******************  Funciones de Usuario en session *****************************************/
+
     /** Funcion para cerrar session */
     function loginOut() {
         showLoad(true);
@@ -198,6 +306,66 @@ var select2=null;
             window.location.href = '/login';
             showLoad(False);
         }, 200);
+
+    }
+
+    /** Funcion para validar credenciales del usuario */
+    function login() {
+
+        var user= $('#user').val(); /** Token obligatorio en ajax */
+        var password=  $('#password').val();
+        password=Base64.encode(password);/** Encripta password */
+        var _token= $('input[name=_token]').val();
+
+        showLoad(true);
+        $.ajax({
+            type: 'POST',
+            url: '/login/in', //llamada a la ruta
+            data: {
+                _token:_token,
+                password:password ,
+                user: user
+            },
+            success: function(data){
+                showLoad(false);
+
+                if (data==0)
+                    alertError("Credenciales no validas");
+                else
+                {
+                    if (data!=1)
+                    {
+                        if (data==3)
+                        {
+                            alertSuccess("El usuario aun no ha confirmado el correo electronico");
+                            $('#user').val("");
+                            $('#password').val("");
+                        }
+                        else
+                        {
+                            alertError("El usuario esta desactivado");
+                            $('#user').val("");
+                            $('#password').val("");
+                        }
+                    }
+                    else
+                    {
+                        alertSuccess("Credenciales Validadas");
+                        /** Detiene , para mostrar alertSucess  */
+                        setTimeout(function(){
+                            window.location.href='/';
+                        }, 200);
+                    }
+
+                }
+            },
+            error : function(err){
+                showLoad(false);
+                alertError(err.responseText);
+            }
+
+        });
+
 
     }
 
@@ -228,7 +396,6 @@ var select2=null;
         });
 
     }
-
 
     /** Funcion que guardar datos de usuario a modificar*/
     function guardarUsuario() {
@@ -309,7 +476,6 @@ var select2=null;
         }
     }
 
-
     function registrarUsuario() {
 
         var iso=select.getSelectedCountryData().iso2;
@@ -363,7 +529,6 @@ var select2=null;
             alertError("Favor completar todos los campos");
 
     }
-
 
     /*** Funcion para Codificar o Decodificar */
     var Base64 = {
@@ -502,112 +667,9 @@ var select2=null;
 
     }
 
-    /** Funcion para evitar que ingrese Letras */
-    function soloNumeros(e,id) {
-
-            // capturamos la tecla pulsada
-            var teclaPulsada=window.event ? window.event.keyCode:e.which;
-
-            // capturamos el contenido del input
-            var valor=id.value;
-
-            // devolvemos true o false dependiendo de si es numerico o no
-            return /\d/.test(String.fromCharCode(teclaPulsada));
-    }
+    /********************************************************************************************** */
 
 
-    /** Metodo para Cargar Vistas */
-    $(document).off("click", ".optionMenu").on('click', '.optionMenu', clickOpcionMenu);
-
-    function clickOpcionMenu(e) {
-
-        var _token= $('input[name=_token]').val();
-        e.preventDefault();
-        e.stopPropagation();
-        var vista = $(this).attr("href");
-        $.ajax({
-            url: window.location.pathname,
-            method: 'POST',
-            data:{
-                _token:_token,
-                vista:vista},
-            success: function (response) {
-                if(response==-1)
-                {
-                    alertError("Sesion Expirada");
-                    window.location.href = '/login';
-                }
-                else
-                {
-                    $(".row").empty();
-                    $(".row").html(response);
-                }
-            },
-            error: function (err) {
-                if (err.status == 403) {
-                    location.reload();
-                } else {
-                    alertError("Ocurrio un error al ejecutar la accion");
-                }
-            }
-        })
-    }
-
-
-    /**
-     * Asigna a los input cuya propiedad type-input es igual a date el calendario datepicker
-     */
-    function setTypeDate() {
-        if (is.desktop()) {
-            //Configurar el ditepicker en español
-            $.datepicker.regional['es'] =
-                {
-                    closeText: 'Cerrar',
-                    prevText: 'Previo',
-                    nextText: 'Próximo',
-
-                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                    monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
-                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sáb'],
-                    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                    dateFormat: 'dd/mm/yy', firstDay: 0,
-                    initStatus: 'Selecciona la fecha', isRTL: false
-                };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-
-            //asignarle al input el calendario
-            $('input[type-input="date"]').attr("type", "text");
-            $('input[type-input="date"]').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                minDate: new Date("1920/01/01")
-            });
-            $(".ui-datepicker-month").css("color", "#444");
-            $(".ui-datepicker-year").css("color", "#444");
-        } else {
-            $('input[type-input="date"]').attr("type", "date");
-        }
-
-        $(document).on("click", 'input[type-input="date"]', function () {
-            if ($(this).hasClass("hasDatepicker"))
-                return
-            else {
-                $(this).datepicker({
-                    changeMonth: true,
-                    changeYear: true
-                });
-                $(this).focus();
-                $(".ui-datepicker-month").css("color", "#444");
-                $(".ui-datepicker-year").css("color", "#444");
-            }
-        });
-
-        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
-    }
 
 
 

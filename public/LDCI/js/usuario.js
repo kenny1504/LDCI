@@ -1,4 +1,5 @@
 var tblUsuario = null;
+var select2=null;
 
     $(document).ready(function () {
 
@@ -29,7 +30,7 @@ var tblUsuario = null;
 
     });
 
-        /** Funcion que lista todos los usuarios registrados */
+    /** Funcion que lista todos los usuarios registrados */
     function listarUsuarios() {
 
         var _token= $('input[name=_token]').val();
@@ -44,16 +45,16 @@ var tblUsuario = null;
                 },
                 columnDefs: [
                     {
-                        targets: [ 0 ],
+                        targets: [0,2,6,8],
                         visible: false,
                         searchable: false
                     },
                     {
-                        targets: 3,
+                        targets: 4,
                         data: null,
                         orderable: false,
                         render: function (json) {
-                            $Estado =json[3];
+                            $Estado =json[4];
                             if ($Estado!="Confirmar")
                             return '<div class="form-group">'
                                      +'<label class="switch">'
@@ -68,26 +69,14 @@ var tblUsuario = null;
                                         +'<span class="slider round"></span>'
                                         +'</label>'
                                     +'</div>';
-
-
                         }
                     },
                     {
-                        targets: [ 5],
-                        visible: false,
-                        searchable: false
-                    },
-                    {
-                        targets: [ 7],
-                        visible: false,
-                        searchable: false
-                    } ,
-                    {
-                        targets: 8,
+                        targets: 9,
                         data: null,
                         orderable: false,
                         render: function (json) {
-                            $Estado =json[8];
+                            $Estado =json[9];
                             if ($Estado!="Activo")
                             return '<div class="form-group">'
                                      +'<label class="switch">'
@@ -102,8 +91,6 @@ var tblUsuario = null;
                                         +'<span class="slider round"></span>'
                                         +'</label>'
                                     +'</div>';
-
-
                         }
                     },
                     {
@@ -131,10 +118,11 @@ var tblUsuario = null;
         usuario = {
                 id_usuario: data[0],
                 usuario:data[1],
-                telefono:data[2],
-                correo: data[4],
-                tipo: data[5],
-                estado: data[7]
+                iso:data[2],
+                telefono:data[3],
+                correo: data[5],
+                tipo: data[6],
+                estado: data[8]
         };
 
         //Asignamos valores a formulario
@@ -142,7 +130,9 @@ var tblUsuario = null;
         $('#txt_usuario').val(usuario.usuario);
         $('#txt_telefono').val(usuario.telefono);
         $('#txt_correo').val(usuario.correo);
+        $('#txt_correo').attr("data-correo",usuario.correo);
         $('#selecTipo').val(usuario.tipo);
+        select2.setCountry(usuario.iso);
 
         var Estado =   document.getElementById('ckestado');
 
@@ -160,11 +150,11 @@ var tblUsuario = null;
 
     }
 
-    /** Funcion para capturar datos de usuario */
+    /** Funcion para cambiar el estado del usuario (desactivar,activar) */
     $(document).off("click", ".cambiar").on("click", ".cambiar", function () {
 
         showLoad(true);
-        let estado;var _token= $('input[name=_token]').val();
+        let estado; var _token= $('input[name=_token]').val();
         var dt = tblUsuario.row($(this).parents('tr')).data();
 
         var checkbox=$(this);
@@ -198,10 +188,71 @@ var tblUsuario = null;
 
     });
 
-      /** Limpia el formulario */
-      function resetForm() {
+    /** Limpia el formulario */
+    function resetForm() {
         $('#ckestado').removeAttr('checked');
         $("#id_usuario,#txt_usuario,#txt_telefono,#txt_correo,#selecTipo").val("");
     }
+
+    /** Funcion que permite actualizar o agregar un nuevo usuario */
+    function guardar()
+    {
+        var _token = $('input[name=_token]').val();
+        var id_usuario= $('#id_usuario').val();
+        var usuario= $('#txt_usuario').val();
+        var telefono= $('#txt_telefono').val();
+        var correo= $('#txt_correo').val();
+        var correo_old=$('#txt_correo').attr("data-correo");
+        var tipo= $('#selecTipo').val();
+        var iso=select2.getSelectedCountryData().iso2;
+
+        if (id_usuario=="")
+            alertSuccess("Al registrar el usuario se genera una contraseña por default 'ldci123' ");
+
+        if (usuario!="" && telefono!="" && correo!="" && tipo!="")
+        {
+            alertConfirm("¿Está seguro que desea guardar?", function (e) {
+                showLoad(true);
+                $.ajax({
+                    type: 'POST',
+                    url: '/usuarios/guardar', //llamada a la ruta
+                    data: {
+                        _token:_token,
+                        id_usuario:id_usuario,
+                        usuario:usuario,
+                        correo:correo,
+                        correo_old:correo_old,
+                        telefono:telefono,
+                        iso:iso,
+                        tipo:tipo
+                    },
+                    success: function (data) {
+                        showLoad(false);
+                        if (data.error) {
+                            alertError(data.mensaje);
+                            return;
+                        }
+                        else
+                        {
+                            alertSuccess(data.mensaje);
+                            tblUsuario.ajax.reload();
+                            resetForm();
+                        }
+                    },
+                    error: function (err) {
+                        alertError(err.responseText);
+                        showLoad(false);
+                    }
+
+                });
+            });
+
+        }
+        else
+            alertError("Favor completar todos los campos");
+
+    }
+
+
 
 

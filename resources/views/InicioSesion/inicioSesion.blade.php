@@ -75,9 +75,6 @@
     <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
     <script src="{{asset("LDCI/Core/intlTelInput.js")}}" ></script>
     <script src="{{asset("LDCI/Core/core.js")}}" ></script>
-    <script src="{{asset("LDCI/login.js")}}" ></script>
-
-
 
   </body>
 </html>

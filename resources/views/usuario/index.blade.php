@@ -15,7 +15,7 @@
                         <label >Estado</label>
                         <div class="form-group">
                             <label class="switch">
-                                <input id="ckestado" type="checkbox">
+                                <input checked id="ckestado" type="checkbox">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -60,7 +60,11 @@
                 </div>
         </div>
         <div class="box-footer text-right">
-            <button class="btn btn-success btn-sm" id="btnGuardarUsuario">
+
+            <button disabled onclick="" class="btn btn-teal" id="btnGuardarUsuario">
+                <i class="fa fa-reply"> </i> Restaurar contraseña
+            </button>
+            <button onclick="guardar()" class="btn btn-success btn-sm" id="btnGuardarUsuario">
                 <i class="fa fa-save"> </i> Guardar
             </button>
             <a onclick="resetForm()" class="btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
@@ -77,11 +81,12 @@
             <div class="row form-group">
                     <div class="col-lg-12">
                         <div id="results" class="table-responsive">
-                            <table class="table table-hover table-strippet " id="tblUsuario">
+                            <table class="table" id="tblUsuario">
                                 <thead>
                                 <tr>
                                     <th></th>
                                     <th>Usuario</th>
+                                    <th></th>
                                     <th>Telefono</th>
                                     <th>Estado Correo</th>
                                     <th>Correo</th>
