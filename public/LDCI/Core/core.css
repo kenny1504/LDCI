@@ -237,7 +237,7 @@ ul {
   color: #444;
 }
 .dataTables_wrapper .row:first-child {
-  background: rgba(32.883828614625024%, 51.816821476987144%, 53.039018758607746%, 1);
+  background: #2fa4e7;
   border-radius: 5px 5px 0 0;
   padding: 5px;
   color: #fff;
