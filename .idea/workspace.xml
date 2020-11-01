@@ -25,7 +25,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a23ae3b7-da97-488a-81b1-d9db452a90d1" name="Default Changelist" comment="" />
+    <list default="true" id="a23ae3b7-da97-488a-81b1-d9db452a90d1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/LDCI/Core/core.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/Core/core.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/LDCI/Core/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/Core/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/LDCI/js/usuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/usuario.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/usuario/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usuario/index.blade.php" afterDir="false" />
+    </list>
     <list id="b94a8949-813f-4dea-a1af-46512da92d71" name="Desactivar e activar usuarios, se agrego el correo de la empresa" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +161,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Numeros" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -183,6 +190,8 @@
       <workItem from="1604029709081" duration="212000" />
       <workItem from="1604030010695" duration="5678000" />
       <workItem from="1604151522194" duration="17263000" />
+      <workItem from="1604187695828" duration="625000" />
+      <workItem from="1604241145032" duration="3470000" />
     </task>
     <task id="LOCAL-00001" summary="Desactivar e activar usuarios, se agrego el correo de la empresa">
       <created>1604034542990</created>
@@ -212,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604187422318</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Subiendo archivos (intl-tel-input)">
+      <created>1604187825018</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604187825018</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +262,8 @@
     <MESSAGE value="Desactivar e activar usuarios, se agrego el correo de la empresa" />
     <MESSAGE value="Modificando envio de correo" />
     <MESSAGE value="Guardando usuario con codigo de pais" />
-    <option name="LAST_COMMIT_MESSAGE" value="Guardando usuario con codigo de pais" />
+    <MESSAGE value="Subiendo archivos (intl-tel-input)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Subiendo archivos (intl-tel-input)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1604173264543">
@@ -262,11 +279,11 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="530" y="292" width="611" height="184" key="VCS.ChangelistChooser/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604034617117" />
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1604187432632">
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1604187842906">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604034922666" />
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1604187432632" />
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1604187842906" />
     <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604033164005">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

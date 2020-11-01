@@ -6,7 +6,7 @@ var tblUsuario = null;
         listarUsuarios();
 
         var input = document.querySelector("#txt_telefono");
-        select = window.intlTelInput(input, {
+        select2 = window.intlTelInput(input, {
             allowDropdown: true,
             autoHideDialCode: false,
             autoPlaceholder: "off",

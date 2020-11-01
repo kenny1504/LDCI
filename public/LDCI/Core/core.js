@@ -7,6 +7,7 @@ var dt_extra_params = {};
 var configDataTable = {};
 var pass = null; /** Variable que guarda contraseña del usuario */
 var select=null; /** Variable pára guardar inicializacion de select flag (countries) */
+var select2=null;
 
     $(document).ready(function () {
 
