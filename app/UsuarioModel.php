@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\ssp\SSP; /** Libreria para cargar Datatables */
 
-class usuarioModel extends Model
+class UsuarioModel extends Model
 {
 
     /** Metodo para buscar un usario- login */
@@ -125,7 +125,7 @@ class usuarioModel extends Model
                         case estado when 1 then 'Activo'
                                     when -1 then 'Desactivado'
                                 end as estado_usuario
-                    from ldci.tb_usuario) as tb ";
+                    from ldci.tb_usuario order by id_usuario asc) as tb ";
 
         $primaryKey = 'id_usuario';
         $columns = [

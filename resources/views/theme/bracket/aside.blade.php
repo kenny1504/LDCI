@@ -3,7 +3,7 @@
 <div class="br-sideleft overflow-y-auto ps ps--theme_default ps--active-x ps--active-y">
   <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
   <div class="br-sideleft-menu">@csrf
-    <a href="usuario.index" class="optionMenu br-menu-link">
+    <a href="catalogos.usuarios" class="optionMenu br-menu-link">
       <div class="br-menu-item">
         <i class="menu-item-icon icon ion-person-stalker tx-22"></i>
         <span class="menu-item-label">Usuarios</span>
@@ -52,7 +52,7 @@
       </div><!-- menu-item -->
     </a><!-- br-menu-link -->
       <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link">Tipo Transporte</a></li>
+          <li class="nav-item"><a href="catalogos.tipoTransporte" class="optionMenu nav-link">Tipo Transporte</a></li>
           <li class="nav-item"><a href="" class="nav-link">Tipo Mercancia</a></li>
           <li class="nav-item"><a href="" class="nav-link">Proveedores</a></li>
           <li class="nav-item"><a href="" class="nav-link">Productos</a></li>

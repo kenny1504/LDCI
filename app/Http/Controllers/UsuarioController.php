@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\usuarioModel;
+use App\UsuarioModel;
 use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -18,7 +18,7 @@ class UsuarioController extends Controller
     /** Funcion que recupera todos los usuarios*/
     public function getUsuarios()
     {
-        $datos= (new usuarioModel)->getUsuarios();
+        $datos= (new UsuarioModel)->getUsuarios();
         return response()->json($datos);
 
     }
@@ -31,7 +31,7 @@ class UsuarioController extends Controller
         $estado=$request->estado;
         $id_session = session('idUsuario');
 
-        $datos= (new usuarioModel)->cambiarEstado(intval($id_session),$id_usuario,$estado);
+        $datos= (new UsuarioModel)->cambiarEstado(intval($id_session),$id_usuario,$estado);
         return response()->json($datos);
 
     }
@@ -53,12 +53,12 @@ class UsuarioController extends Controller
 
         $confirmado=false;
         $codigo_confirmacion=Str::random(24);/** Genera un Codigo Ramdom */
-        $correoUnico = (new usuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
+        $correoUnico = (new UsuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
 
         if($correoUnico)
         {
             if ($id_usuario==0) {
-                $guardar=(new usuarioModel)->guardarUsuario($usuario,$telefono,$iso,$correo,$tipo,$id_session,$codigo_confirmacion);
+                $guardar=(new UsuarioModel)->guardarUsuario($usuario,$telefono,$iso,$correo,$tipo,$id_session,$codigo_confirmacion);
 
                 if (!empty($guardar))
                 {
@@ -93,7 +93,7 @@ class UsuarioController extends Controller
                     $confirmado=true;
                 }
                 // Actualizamos
-                $resultado = (new usuarioModel)->modificarUsuario($usuario,$telefono,$iso,$correo,$tipo,$confirmado,$codigo_confirmacion,$id_session,$id_usuario);
+                $resultado = (new UsuarioModel)->modificarUsuario($usuario,$telefono,$iso,$correo,$tipo,$confirmado,$codigo_confirmacion,$id_session,$id_usuario);
                 if($resultado){
 
                     if($correo_old!=$correo)

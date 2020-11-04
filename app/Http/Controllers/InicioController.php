@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\usuarioModel;
+use App\UsuarioModel;
 use Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class InicioController extends Controller
        $password= $request->password;
        $user= $request->user;
        /** Llama metodo del modelo Usuario */
-        $query = (new usuarioModel)->GetUsuario($password,$user);
+        $query = (new UsuarioModel)->GetUsuario($password,$user);
         if(!empty($query))
          {
             if($query[0]->confirmado==true)
@@ -77,7 +77,7 @@ class InicioController extends Controller
     public function getUsuario()
     {
         $id_usuario=session('idUsuario');
-        $query = (new usuarioModel)->GetDatosUsuario($id_usuario);
+        $query = (new UsuarioModel)->GetDatosUsuario($id_usuario);
 
         if(isset($query))
          {
@@ -101,15 +101,15 @@ class InicioController extends Controller
       $codigo_confirmacion=Str::random(24);/** Genera un Codigo Ramdom */
       $data['confirmation_code']=$codigo_confirmacion;
       $data['name']=$user;
-      $correoUnico = (new usuarioModel)->ValidaCorreoDuplicado($correo, 0);
-      $usuarioUnico = (new usuarioModel)-> ValidaUsuarioDuplicado($user);
+      $correoUnico = (new UsuarioModel)->ValidaCorreoDuplicado($correo, 0);
+      $usuarioUnico = (new UsuarioModel)-> ValidaUsuarioDuplicado($user);
 
       if(!$usuarioUnico)
       return response()->json(2);
 
       if($correoUnico)
       {
-         $query = (new usuarioModel)->registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion,$iso);
+         $query = (new UsuarioModel)->registrarUsuario($password,$user,$correo,$telefono,$codigo_confirmacion,$iso);
 
          /**  Inicio funcion para enviar correo  */
          $subject ="Confirmacion de correo"; /** Asunto del Correo */
@@ -135,7 +135,7 @@ class InicioController extends Controller
       if(!empty(session('idUsuario')))
          $id_usuario = session('idUsuario');
       else
-         $id_usuario = (new usuarioModel)->GetIdByUser(session('nombreUsuario'));
+         $id_usuario = (new UsuarioModel)->GetIdByUser(session('nombreUsuario'));
 
       $password= $request->pass_new;
       $user= $request->usuario;
@@ -144,9 +144,9 @@ class InicioController extends Controller
       $telefono= $request->telefono;
       $passwordViejo= $request->pass_now;
       $iso= $request->iso;
-      $correoUnico = (new usuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
+      $correoUnico = (new UsuarioModel)->ValidaCorreoDuplicado($correo, $id_usuario);
 
-      if(!(new usuarioModel)->validarcontrasena($id_usuario, $passwordViejo)){
+      if(!(new UsuarioModel)->validarcontrasena($id_usuario, $passwordViejo)){
          return collect([
             'mensaje' => 'Contraseña actual es incorrecta',
             'error' => true,
@@ -164,7 +164,7 @@ class InicioController extends Controller
             $confirmado=true;
          }
          // Actualizamos
-         $resultado = (new usuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$id_usuario, $passwordViejo, $codigo_confirmacion,$confirmado,$iso);
+         $resultado = (new UsuarioModel)->actualizarUsuario($id_usuario, $password,$user,$correo,$telefono,$id_usuario, $passwordViejo, $codigo_confirmacion,$confirmado,$iso);
          if($resultado){
 
                   session()->forget('idUsuario');
@@ -211,7 +211,7 @@ class InicioController extends Controller
         /** Recupera codigo de confirmacion*/
         $codigo_confirmacion= $code;
         /** Busca el usuario segun el codigo*/
-         $query = (new usuarioModel)->verificarCorreo($codigo_confirmacion);
+         $query = (new UsuarioModel)->verificarCorreo($codigo_confirmacion);
 
          if(!empty($query))
           {
@@ -220,7 +220,7 @@ class InicioController extends Controller
             $usuario=$query[0]->usuario;
 
             /** Actualiza el estado de la cuenta a confirmado */
-             $query = (new usuarioModel)->actualizarEstado($id_usuario);
+             $query = (new UsuarioModel)->actualizarEstado($id_usuario);
 
              /** iniciamos variables de session con valores recuperados de la consulta */
              session(['idUsuario' =>($id_usuario) ]);

@@ -21,7 +21,7 @@ Route::post('/datos/modificaUsuario','InicioController@editarUsuario')->name ('e
 Route::post('/datos/usuario','InicioController@getUsuario');
 Route::post('/login/in','InicioController@login')->name ('login-in');
 
-// Rutas Get
+// Rutas Get Unicas
 Route::get('/registro/vericar/{code}', 'InicioController@verificar')->name ('Vericada'); //Ruta para verificar correo
 Route::get('/usuarios', 'UsuarioController@index')->name('Usuarios');
 Route::get('/registro','InicioController@registro')->name ('registro');
@@ -35,3 +35,8 @@ Route::post('/usuarios/getAll', 'UsuarioController@getUsuarios')->name('getAll')
 Route::post('/usuarios/estado', 'UsuarioController@cambiarEstado');
 Route::post('/usuarios/guardar', 'UsuarioController@guardar');
 
+
+//Rutas Tipo Transporte
+Route::post('/tipoTransporte/getAll', 'TipoTransporteController@getTipoTransporte')->name('getAll');
+Route::post('/tipoTransporte/guardar', 'TipoTransporteController@guardar')->name('guardar');
+Route::post('/tipoTransporte/eliminar', 'TipoTransporteController@eliminar')->name('eliminar');

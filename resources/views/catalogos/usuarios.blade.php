@@ -94,8 +94,7 @@
                                     <th>Tipo</th>
                                     <th></th>
                                     <th>Estado</th>
-                                    <th>Acción</th>
-
+                                    <th>Selecione</th>
                                 </tr>
                                 </thead>
                             </table>
