@@ -9,7 +9,7 @@
         <span class="menu-item-label">Usuarios</span>
       </div><!-- menu-item -->
     </a><!-- br-menu-link -->
-    <a href="" class="br-menu-link">
+    <a href="vendedor.vendedor" class="optionMenu br-menu-link">
       <div class="br-menu-item">
         <i class="menu-item-icon icon ion-person tx-24"></i>
         <span class="menu-item-label">Vendedores</span>
