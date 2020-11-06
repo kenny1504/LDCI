@@ -53,7 +53,7 @@
     </a><!-- br-menu-link -->
       <ul class="br-menu-sub nav flex-column">
           <li class="nav-item"><a href="catalogos.tipoTransporte" class="optionMenu nav-link">Tipo Transporte</a></li>
-          <li class="nav-item"><a href="" class="nav-link">Tipo Mercancia</a></li>
+          <li class="nav-item"><a href="catalogos.tipoMercancia" class="optionMenu nav-link">Tipo Mercancia</a></li>
           <li class="nav-item"><a href="" class="nav-link">Proveedores</a></li>
           <li class="nav-item"><a href="" class="nav-link">Productos</a></li>
           <li class="nav-item"><a href="" class="nav-link">Modo Transporte</a></li>

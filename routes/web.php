@@ -40,3 +40,9 @@ Route::post('/usuarios/guardar', 'UsuarioController@guardar');
 Route::post('/tipoTransporte/getAll', 'TipoTransporteController@getTipoTransporte')->name('getAll');
 Route::post('/tipoTransporte/guardar', 'TipoTransporteController@guardar')->name('guardar');
 Route::post('/tipoTransporte/eliminar', 'TipoTransporteController@eliminar')->name('eliminar');
+
+
+//Rutas Tipo Mercancia
+Route::post('/tipoMercancia/getAll', 'TipoMercanciaController@getTipoMercancia')->name('getAll');
+Route::post('/tipoMercancia/guardar', 'TipoMercanciaController@guardar')->name('guardar');
+Route::post('/tipoMercancia/eliminar', 'TipoMercanciaController@eliminar')->name('eliminar');
