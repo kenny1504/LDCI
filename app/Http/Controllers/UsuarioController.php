@@ -13,8 +13,6 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     /** Funcion que recupera todos los usuarios*/
     public function getUsuarios()
     {
@@ -131,5 +129,46 @@ class UsuarioController extends Controller
             ]);
         }
     }
+    public function ressetpassword(Request $request)
+    {
+        //datos enviados por ajax
+        $id_usuario=$request->id_usuario;
+        $id_session = session('idUsuario');
 
+        //buscar correo y nombre de usuario, requeridos para el correo a enviar
+        $query = (new UsuarioModel)->DatosUsuario($id_usuario);
+        $correo=$query[0]->correo;
+        $usuario=$query[0]->usuario;
+
+        //generador de contraseña
+        $newpass = array();
+        $lengt=8;//longitud de la contraseña a generar
+        for($i = 0; $i < $lengt; $i++)
+        {
+            $pass[] =chr(mt_rand(48,90));
+        }
+        $password=implode($pass);
+        $password=base64_encode($password);
+        $datos= (new UsuarioModel)->ressetpassword(intval($id_session),$id_usuario,$password);
+
+        if(!empty($datos))
+        {
+            $subject ="Restablecimiento de Contraseña"; /** Asunto del Correo */
+                    $for =$correo;/** correo que recibira el mensaje */
+
+                    $data['newpass']=implode($pass);
+                    $data['name']=$usuario;
+                    Mail::send('Password.ressetPass',$data,function($msj) use($subject,$for){
+                        // Mi correo  y  Nombre que Aparecera
+                        $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+
+                    return collect([
+                        'mensaje' => 'Se ha enviado un correo al usuario con su nueva contraseña',
+                        'error' => false
+                    ]);
+        }
+        }
 }

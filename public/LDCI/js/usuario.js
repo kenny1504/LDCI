@@ -253,6 +253,46 @@ var select2=null;
 
     }
 
+    //funcion para resetear password
+    function ressetpassword()
+    {
+        var _token = $('input[name=_token]').val();
+        var id_usuario=$('#id_usuario').val();
+        var usuario= $('#txt_usuario').val();
+        var correo= $('#txt_correo').val();
 
-
-
+        if(id_usuario=="")
+        {
+            alertError("Ningun Usuario Seleccionado");
+        }
+        if(id_usuario!="")
+        {
+            alertConfirm("Proceder a restaurar contraseña", function (e){
+                showLoad(true);
+                $.ajax({
+                    type:'POST',
+                    url: '/usuario/resetpassword',
+                    data:{
+                        _token:_token,
+                        id_usuario:id_usuario
+                    },
+                    success: function(data){
+                        showLoad(false);
+                        if(data.error){
+                            alertError(data.mensaje);
+                            return;
+                        }
+                        else{
+                            alertSuccess(data.mensaje);
+                            tblUsuario.ajax.reload();
+                            resetForm();
+                        }
+                    },
+                    error: function(err){
+                        alertError(err.responseText);
+                        showLoad(false);
+                    }
+                });
+            });
+        }
+    }
