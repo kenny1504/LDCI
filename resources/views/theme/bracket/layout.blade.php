@@ -35,6 +35,8 @@
 
       <link rel="stylesheet" href="{{asset("LDCI/Core/intlTelInput.css")}}"  >
       <link rel="stylesheet" href="{{asset("LDCI/Core/demo.css")}}">
+      <link rel="stylesheet" href="{{asset("LDCI/Core/avilon.css")}}">
+
 
 
   </head>
@@ -59,6 +61,54 @@
     <div class="br-mainpanel">
       <div class="br-section-wrapper">
             <div class="row"><!-- Agrega contenido desde otra vista-->
+
+                <section id="features">
+                    <div class="container">
+
+                        <div class="row mg-l-50">
+                            <div class="col-md-4 features-img">
+                                <img src="assets/product-features.png" alt="" class="wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                            </div>
+                            <div class="col-md-8" >
+                                <div class="col-md-12" style="margin-left: 10%;">
+                                    <div class="section-header wow fadeIn" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: fadeIn;">
+                                        <h3 class="section-title">Productos / Servicio</h3>
+                                        <span class="section-divider"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="margin-left: 15%;">
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 fadeInRight" style="width: 90%!important;  visibility: visible; animation-name: fadeInRight;">
+                                            <div class="icon"><i class="ion-plane"></i></div>
+                                            <h4 class="title"><a href="">Transporte Aéreo</a></h4>
+                                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident clarida perendo.</p>
+                                        </div>
+                                        <div class="col-md-6 fadeInRight" data-wow-delay="0.1s" style="width: 90%!important; visibility: visible; animation-delay: 0.1s; animation-name: fadeInRight;">
+                                            <div class="icon"><i class="ion-model-s"></i></div>
+                                            <h4 class="title"><a href="">Transporte Terrestre</a></h4>
+                                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata noble dynala mark.</p>
+                                        </div>
+                                        <div class="col-md-6 fadeInRight" data-wow-delay="0.2s" style="width: 90%!important; visibility: visible; animation-delay: 0.2s; animation-name: fadeInRight;">
+                                            <div class="icon"><i class="ion-android-compass"></i></div>
+                                            <h4 class="title"><a href="">Transporte Marítimo</a></h4>
+                                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur teleca starter sinode park ledo.</p>
+                                        </div>
+                                        <div class="col-md-6 fadeInRight" data-wow-delay="0.3s" style="width: 90%!important; visibility: visible; animation-delay: 0.3s; animation-name: fadeInRight;">
+                                            <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
+                                            <h4 class="title"><a href="">Gelpack y Hielo Seco</a></h4>
+                                            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum dinoun trade capsule.</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
 
             </div>
             <footer class="br-footer">
