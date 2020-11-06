@@ -43,6 +43,11 @@ Route::post('/tipoTransporte/getAll', 'TipoTransporteController@getTipoTransport
 Route::post('/tipoTransporte/guardar', 'TipoTransporteController@guardar')->name('guardar');
 Route::post('/tipoTransporte/eliminar', 'TipoTransporteController@eliminar')->name('eliminar');
 
+//Rutas Tipo Modo Transporte
+Route::post('/tipoModoTransporte/getAll', 'TipoModoTransporteController@getTipoModoTransporte')->name('getAll');
+Route::post('/tipoModoTransporte/guardar', 'TipoModoTransporteController@guardar')->name('guardar');
+Route::post('/tipoModoTransporte/eliminar', 'TipoModoTransporteController@eliminar')->name('eliminar');
+
 
 //Rutas Tipo Mercancia
 Route::post('/tipoMercancia/getAll', 'TipoMercanciaController@getTipoMercancia')->name('getAll');
