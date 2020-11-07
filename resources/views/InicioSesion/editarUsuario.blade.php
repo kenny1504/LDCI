@@ -3,7 +3,7 @@
     <div class="modal  modal-info fade" id="editar_Usuario" >
               <div class="modal-dialog" >
                 <div class="modal-content" >
-                    <div class="modal-header" style="align-self: flex-end;" >
+                    <div class="modal-header"  style="align-self: flex-end;">
                         <a  type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span></a>
                       </div>

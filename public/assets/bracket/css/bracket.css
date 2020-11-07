@@ -907,14 +907,7 @@ pre code {
   }
 }
 
-.container-fluid {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 15px;
-  padding-left: 15px;
-  width: 100%;
-}
+
 
 .row {
   display: flex;

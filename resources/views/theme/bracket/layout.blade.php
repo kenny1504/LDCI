@@ -62,12 +62,13 @@
       <div class="br-section-wrapper">
             <div class="row"><!-- Agrega contenido desde otra vista-->
 
-                <section id="features">
+                <center>
+                <section style="margin-top: 7%; width: 100%;" id="features">
                     <div class="container">
 
-                        <div class="row mg-l-50">
+                        <div class="row">
                             <div class="col-md-4 features-img">
-                                <img src="assets/product-features.png" alt="" class="wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                                <img class="img-fluid" src="assets/product-features.png" alt="" class="wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
                             </div>
                             <div class="col-md-8" >
                                 <div class="col-md-12" style="margin-left: 10%;">
@@ -109,7 +110,7 @@
                     </div>
 
                 </section>
-
+                </center>
             </div>
             <footer class="br-footer">
               <div class="footer-left">

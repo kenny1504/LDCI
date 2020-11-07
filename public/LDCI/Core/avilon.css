@@ -320,7 +320,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav Meu Container */
 #nav-menu-container {
-    float: right;
     margin: 0;
 }
 
@@ -665,8 +664,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 #features {
     background: #fff;
-    padding: 60px 0 0 0;
-    overflow: hidden;
 }
 
 #features .features-img {
@@ -894,7 +891,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #more-features p {
     font-size: 14px;
-    margin-left: 100px;
     margin-bottom: 0;
     line-height: 24px;
 }

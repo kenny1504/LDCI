@@ -19,7 +19,7 @@
                                     <div class="input-group">
                                         <input type="text" id="id_empleado" name="id_empleado" class="form-control input-md">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#mdbBuscarEmpleado"
+                                            <button onclick="listarVendedores()" class="btn btn-default" data-toggle="modal" data-target="#ModalVendedores"
                                                     id="btnBuscarEmpleado" type="button"><i class="fa fa-search"></i></button>
                                         </span>
                                     </div>
@@ -34,32 +34,32 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="">Nombres</label>
-                            <input type="text" id="nombres"  readonly name="nombres" class="form-control input-md">
+                            <input type="text" id="nombres"  name="nombres" class="form-control input-md">
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Apellido 1</label>
-                            <input type="text" id="apellido1" readonly name="apellidos" class="form-control input-md">
+                            <input type="text" id="apellido1"  name="apellidos" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Apellido 2</label>
-                            <input type="text" id="apellido2" readonly name="apellidos" class="form-control input-md">
+                            <input type="text" id="apellido2"  name="apellidos" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Edad</label>
-                            <input type="text" id="edad" name="edad" readonly class="form-control input-md" disabled>
+                            <input type="text" id="edad" name="edad"  class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Sexo</label>
-                            <select name="sexo" id="sexo" readonly="" class="form-control input-md">
+                            <select name="sexo" id="sexo"  class="form-control input-md">
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
                             </select>
@@ -68,7 +68,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Estado Civil</label>
-                            <select name="estado_civil" readonly="" id="estado_civil" class="form-control input-md">
+                            <select name="estado_civil"  id="estado_civil" class="form-control input-md">
                                 <option value="1">Casado/a</option>
                                 <option value="2">Divoriciado/a</option>
                                 <option value="3">Unión Libre</option>
@@ -80,7 +80,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Cédula Nacional</label>
-                            <input type="text" name="cedula" readonly id="cedula" class="form-control input-md">
+                            <input type="text" name="cedula"  id="cedula" class="form-control input-md">
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Departamento</label>
-                            <select name="id_departamento" readonly="" id="id_departamento" class="form-control input-md">
+                            <select name="SelectDepartamento"  id="SelectDepartamento" class="form-control input-md">
                             </select>
                         </div>
                     </div>
@@ -137,15 +137,65 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Telefono</label>
-                            <input type="text" maxlength="8" id="telf_notifica" name="telf_notifica" class="form-control input-md">
+                            <input type="text" maxlength="8" id="txt_telefono" name="txt_telefono" class="form-control input-md">
                         </div>
-                        <input type="hidden" readonly id="id_contrato_anterior" name="id_contrato_anterior" class="form-control input-md">
-                        <input type="hidden" readonly id="existeContratoHistorico" name="existeContratoHistorico" class="form-control input-md">
-                        <input type="hidden" readonly id="nuevoContrato" name="nuevoContrato" class="form-control input-md">
-                        <input type="hidden" readonly id="conAdendum" name="conAdendum" class="form-control input-md">
                     </div>
                 </div >
+            </div>
+            <div class="box-footer text-center">
+                <div class="col-md-12">
+                    <button onclick="guardar()" class="btn btn-success" id="btnGuardarEmpleado">
+                        <i class="fa fa-save"> </i> Guardar
+                    </button>
+                    <button disabled onclick="" class="btn btn-danger" id="btnEliminarEmpleado">
+                        <i class="fa fa-trash-o"> </i> Eliminar
+                    </button>
+                    <button onclick="resetForm()" class="btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
+                   <br><br>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+    <div id="ModalVendedores" class="modal fade" role="document" >
+        <div class="modal-dialog modal-lg" style="width: 1400px;">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="align-self: flex-end;" >
+                    <button type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="box box-success">
+                        <div class="box-heading text-success">
+                            <div class="row"></div>
+                            <h4 align="center">Busqueda de Registro</h4>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblVendedores" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nombre</th>
+                                        <th>Cedula</th>
+                                        <th>Correo</th>
+                                        <th>Telefono</th>
+                                        <th>Seleccione</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- js -->
+<script src="{{asset("LDCI/js/vendedor.js")}}" ></script>
