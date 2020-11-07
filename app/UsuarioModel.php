@@ -185,4 +185,21 @@ class UsuarioModel extends Model
         return $query;
     }
 
+    /**Metodo para resetear contraseña de usuario */
+    public function ressetpassword($id_session,$id_usuario,$newpass)
+    {
+
+        $query= new static;
+        $query = DB::update("UPDATE ldci.tb_usuario SET password=?, usuario_modificacion=?, fecha_modificacion=now()
+        WHERE id_usuario=?", [$newpass,$id_session,$id_usuario]);
+
+        return $query;
+    }
+    //buscar usuario para resetear password
+    public function DatosUsuario($id_usuario)
+    {
+        $query = new static;
+        $query= DB::select("select usuario,correo from ldci.tb_usuario where id_usuario=?;",[$id_usuario]);
+        return $query;
+    }
 }

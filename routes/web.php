@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,12 +35,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/usuarios/getAll', 'UsuarioController@getUsuarios')->name('getAll');
 Route::post('/usuarios/estado', 'UsuarioController@cambiarEstado');
 Route::post('/usuarios/guardar', 'UsuarioController@guardar');
+Route::post('/usuario/resetpassword', 'UsuarioController@ressetpassword');
 
 
 //Rutas Tipo Transporte
 Route::post('/tipoTransporte/getAll', 'TipoTransporteController@getTipoTransporte')->name('getAll');
 Route::post('/tipoTransporte/guardar', 'TipoTransporteController@guardar')->name('guardar');
 Route::post('/tipoTransporte/eliminar', 'TipoTransporteController@eliminar')->name('eliminar');
+
+//Rutas Tipo Modo Transporte
+Route::post('/tipoModoTransporte/getAll', 'TipoModoTransporteController@getTipoModoTransporte')->name('getAll');
+Route::post('/tipoModoTransporte/guardar', 'TipoModoTransporteController@guardar')->name('guardar');
+Route::post('/tipoModoTransporte/eliminar', 'TipoModoTransporteController@eliminar')->name('eliminar');
 
 
 //Rutas Tipo Mercancia
