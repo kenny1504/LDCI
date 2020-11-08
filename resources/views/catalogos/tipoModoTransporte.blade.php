@@ -2,7 +2,7 @@
 @csrf
 <div class="col-md-4">
     <div class="box box-success">
-        <div class="box-heading"><h5 class="text-center">Catálogo Tipo Modo Transporte</h5></div>
+        <div class="box-heading"><h5 class="text-center">Catálogo Modo Transporte</h5></div>
         <div class="box-body">
             <div class="row">
                 <div class="col-md-4">

@@ -114,6 +114,7 @@ var select2=null;
 
         var tr = $(datos).parents("tr")
         var data = tblUsuario.row(tr).data();
+        $('#btnResetUser').removeAttr('disabled');
         //Capturamos valores de tabla
         usuario = {
                 id_usuario: data[0],
@@ -192,6 +193,7 @@ var select2=null;
     function resetForm() {
         $('#ckestado').removeAttr('checked');
         $("#id_usuario,#txt_usuario,#txt_telefono,#txt_correo,#selecTipo").val("");
+        $('#btnResetUser').attr("disabled", "FALSE");
     }
 
     /** Funcion que permite actualizar o agregar un nuevo usuario */
@@ -258,8 +260,6 @@ var select2=null;
     {
         var _token = $('input[name=_token]').val();
         var id_usuario=$('#id_usuario').val();
-        var usuario= $('#txt_usuario').val();
-        var correo= $('#txt_correo').val();
 
         if(id_usuario=="")
         {

@@ -61,7 +61,7 @@
         </div>
         <div class="box-footer text-right">
 
-            <button onclick="ressetpassword()" class="btn btn-teal" id="btnResetUser">
+            <button onclick="ressetpassword()" disabled class="btn btn-teal" id="btnResetUser">
                 <i class="fa fa-reply"> </i> Restaurar contraseña
             </button>
             <button onclick="guardar()" class="btn btn-success btn-sm" id="btnGuardarUsuario">

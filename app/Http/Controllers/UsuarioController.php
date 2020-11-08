@@ -141,7 +141,6 @@ class UsuarioController extends Controller
         $usuario=$query[0]->usuario;
 
         //generador de contraseña
-        $newpass = array();
         $lengt=8;//longitud de la contraseña a generar
         for($i = 0; $i < $lengt; $i++)
         {
@@ -153,12 +152,12 @@ class UsuarioController extends Controller
 
         if(!empty($datos))
         {
-            $subject ="Restablecimiento de Contraseña"; /** Asunto del Correo */
+            $subject ="Restablecer Contraseña"; /** Asunto del Correo */
                     $for =$correo;/** correo que recibira el mensaje */
 
                     $data['newpass']=implode($pass);
                     $data['name']=$usuario;
-                    Mail::send('Password.ressetPass',$data,function($msj) use($subject,$for){
+                    Mail::send('Password.mailRessetPass',$data,function($msj) use($subject,$for){
                         // Mi correo  y  Nombre que Aparecera
                         $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
                         $msj->subject($subject);
