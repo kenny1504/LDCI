@@ -3,6 +3,7 @@ var tblVendedores = null;
 
     $(document).ready(function () {
 
+        $('#txt_cedula').mask('00/00/0000');
         var _token= $('input[name=_token]').val();
         showLoad(true);
 
