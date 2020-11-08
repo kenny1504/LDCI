@@ -670,9 +670,71 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
     /********************************************************************************************** */
 
 
+    function verificar_cedula(input)
+    {
+        var valor=input.value;
+
+        var  ced1=valor;
+        let  ced2=valor;
+        let  ced3=valor;
+        ced1=ced1.substr(0,3);
+        ced2=ced2.substr(3,6);
+        ced3=ced3.substr(9,5);
+        let band= false;
+
+        if(valor!="")
+        {
+            if ((ced1.length<3) || (ced2.length<6) || (ced3.length<5) || (valor.length!=14))
+            {
+                input.value="";
+                alertError("Cedula debe tener 14 digitos")
+            }
+            else
+            {
+                var union=ced1+"-"+ced2+"-"+ced3;
+                if (validar_cedula(union)==false)
+                {
+                    alertError("Cedula invalida");
+                    input.value="";
+                }
+            }
+        }
+        return band
+    }
 
 
+    /**
+     *Valida numeros de cedula nicaraguense correctos
+     * @param {string}  numero de cedula separado por guiones
+     * @return verdadero o falso
+     */
+    function validar_cedula(num_ced) {
+        if (num_ced.length == 16) {
+            var letras = new Array("A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y");
+            tfecha = new String;
+            partes = num_ced.split("-");
+            tfecha = partes[1];
+            dia = tfecha.substr(0, 2);
+            mes = tfecha.substr(2, 2);
+            anno = tfecha.substr(4, 2);
+            conletra = partes[2];
+            sinletras = conletra.substr(0, 4);
+            num_ced = partes[0] + partes[1] + sinletras;
+            letra = conletra.substr(4, 1);
+            letra = letra.toUpperCase();
+            p1 = num_ced / 23;
+            temporal = parseInt(p1);
+            digito = num_ced - (temporal) * 23;
 
+            if (letras[digito] == letra) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 
 
 

@@ -31,35 +31,35 @@
                         <img class="img-responsive" width="100px"
                              src="LDCI/img/user.png" alt="">
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="">Nombres</label>
-                            <input type="text" id="nombres"  name="nombres" class="form-control input-md">
+                            <label for="txt_nombres">Nombres</label>
+                            <input type="text" id="txt_nombres"  name="txt_nombres" class="form-control input-md">
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="">Apellido 1</label>
-                            <input type="text" id="apellido1"  name="apellidos" class="form-control input-md">
+                            <label for="txt_apellido1">Apellido 1</label>
+                            <input type="text" id="txt_apellido1"  name="txt_apellido1" class="form-control input-md">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="">Apellido 2</label>
-                            <input type="text" id="apellido2"  name="apellidos" class="form-control input-md">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Edad</label>
-                            <input type="text" id="edad" name="edad"  class="form-control input-md">
+                            <label for="txt_apellido2">Apellido 2</label>
+                            <input type="text" id="txt_apellido2"  name="txt_apellido2" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Sexo</label>
-                            <select name="sexo" id="sexo"  class="form-control input-md">
+                            <label for="txt_edad">Edad</label>
+                            <input type="text" id="txt_edad" name="txt_edad"  class="form-control input-md">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="cmb_sexo">Sexo</label>
+                            <select name="cmb_sexo" id="cmb_sexo"  class="form-control input-md">
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
                             </select>
@@ -67,8 +67,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Estado Civil</label>
-                            <select name="estado_civil"  id="estado_civil" class="form-control input-md">
+                            <label for="cmb_estado_civil">Estado Civil</label>
+                            <select name="cmb_estado_civil"  id="cmb_estado_civil" class="form-control input-md">
                                 <option value="1">Casado/a</option>
                                 <option value="2">Divoriciado/a</option>
                                 <option value="3">Unión Libre</option>
@@ -77,10 +77,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="form-group">
-                            <label for="">Cédula Nacional</label>
-                            <input type="text" name="cedula"  id="cedula" class="form-control input-md">
+                            <label for="txt_cedula">Cédula Nacional</label>
+                            <input onblur="verificar_cedula(this)" type="text" name="txt_cedula"  id="txt_cedula" class="form-control input-md">
                         </div>
                     </div>
                 </div>
@@ -92,33 +92,33 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="">Dirección</label>
-                            <input type="text" id="direccion" name="direccion" class="form-control input-md">
+                            <label for="txt_direccion">Dirección</label>
+                            <input type="text" id="txt_direccion" name="txt_direccion" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Departamento</label>
-                            <select name="SelectDepartamento"  id="SelectDepartamento" class="form-control input-md">
+                            <label for="cmb_Departamento">Departamento</label>
+                            <select name="cmb_Departamento"  id="cmb_Departamento" class="form-control input-md">
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="form-group">
-                            <label for="">Correo</label>
-                            <input type="text" id="correo" name="correo" class="form-control input-md">
+                            <label for="txt_correo">Correo</label>
+                            <input type="text" id="txt_correo" name="txt_correo" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Telefono Domicilio</label>
-                            <input type="text" id="telfono_1" maxlength="8" name="telfono_1" class="form-control input-md">
+                            <label for="txt_telefono_1">Telefono Domicilio</label>
+                            <input type="text" id="txt_telefono_1" maxlength="8" name="txt_telefono_1" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Telefono Personal</label>
-                            <input type="text" id="telfono_2" maxlength="8" name="telfono_2" class="form-control input-md">
+                            <label for="txt_telefono_2">Telefono Personal</label>
+                            <input type="text" id="txt_telefono_2" maxlength="8" name="txt_telefono_2" class="form-control input-md">
                         </div>
                     </div>
                 </div>
@@ -130,14 +130,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Notificar a</label>
-                            <input type="text" id="nomb_notifica" name="nomb_notifica" class="form-control input-md">
+                            <label for="txt_nomb_notifica">Notificar a</label>
+                            <input type="text" id="txt_nomb_notifica" name="txt_nomb_notifica" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Telefono</label>
-                            <input type="text" maxlength="8" id="txt_telefono" name="txt_telefono" class="form-control input-md">
+                            <label for="txt_telefono_not">Telefono</label>
+                            <input type="text" maxlength="8" id="txt_telefono_not" name="txt_telefono_not" class="form-control input-md">
                         </div>
                     </div>
                 </div >
