@@ -19,7 +19,7 @@ class VendedorModel extends Model
     /** Funcion para cargar tabla vendedores*/
     public function getVendedores()
     {
-        $table = "(select v.id_vendedor,p.nombre || p.apellido1 || p.apellido2 as nombre,
+        $table = "(select v.id_vendedor,p.nombre ||' '|| p.apellido1 ||' '|| p.apellido2 as nombre,
                     p.cedula,p.correo,p.telefono_1
                     from ldci.tb_vendedor as v
                     join ldci.tb_persona as p on v.id_persona=p.id_persona
@@ -45,4 +45,64 @@ class VendedorModel extends Model
 
     }
 
+    /** Metodo para validar si existe un registro de cedula */
+    public function existe($cedula)
+    {
+        $query = new static;
+        $query = DB::select('select * from ldci.tb_persona
+        where upper(cedula)=upper(?) and estado=1', [$cedula]);
+
+        if(empty($query))
+            return false;
+        else
+            return true;
+    }
+
+    /** Funcion para guardar un vendedor */
+    public function guardar($nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$nomb_notifica,$estado_civil,$telefono_not,$edad,$correo,$id_session)
+    {
+        DB::beginTransaction();
+
+        $query_persona = new static;
+        $query_persona = DB::select('INSERT INTO ldci.tb_persona(
+        nombre, apellido1, apellido2, direccion, correo, edad, id_departamento,
+        telefono_1, telefono_2, iso, iso_2, cedula,usuario_grabacion, fecha_grabacion)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now()) RETURNING id_persona', [$nombres,$apellido1,$apellido2,$direccion,$correo,$edad,$departamento,$telefono_1,$telefono_2,"ni","ni",$cedula,$id_session]);
+
+        if (empty($query_persona))
+        {
+            DB::rollBack();
+            return collect([
+                'mensaje' => 'Hubo un error al guardar vendedor',
+                'error' => true,
+            ]);
+        }
+        else
+        {
+            $query_vendedor = new static;
+            $query_vendedor = DB::select('INSERT INTO ldci.tb_vendedor(
+            id_persona, estado_civil, contacto_emergencia,
+            telefono_emergencia, usuario_grabacion, fecha_grabacion)
+            VALUES ( ?, ?, ?, ?, ?, now()) RETURNING id_vendedor', [$query_persona[0]->id_persona,$estado_civil,$nomb_notifica,$telefono_not,$id_session]);
+
+            if (empty($query_vendedor))
+            {
+                DB::rollBack();
+                return collect([
+                    'mensaje' => 'Hubo un error al guardar vendedor',
+                    'error' => true,
+                ]);
+            }
+            else
+            {
+                DB::commit();
+                return collect([
+                    'mensaje' => 'vendedor guardado con exito',
+                    'error' => false,
+                ]);
+            }
+
+        }
+
+    }
 }

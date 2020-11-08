@@ -46,12 +46,17 @@
             <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> LDCI <span class="tx-normal">]</span></div>
             <div class="tx-center mg-b-60">LOGISTICA DE CARGA INTERMODAL</div>
             @csrf <!-- esta varible es para TOken, siempre ponerla-->
-            <div class="form-group">
-              <input type="text" id="user" class="form-control" placeholder="Ingrese Usuario">
-            </div><!-- form-group -->
-            <div class="form-group">
-              <input onkeypress="pulsar(event)" type="password" id="password" class="form-control" placeholder="Ingrese Contraseña">
-            </div><!-- form-group -->
+
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="icon ion-person tx-16 lh-0 op-6"></i></span>
+                  <input type="text" id="user" class="form-control" placeholder="Ingrese Usuario">
+              </div>
+              <br>
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="icon ion-ios-locked-outline tx-16 lh-0 op-6"></i></span>
+                  <input onkeypress="pulsar(event)" type="password" id="password" class="inline-block form-control" placeholder="Ingrese Contraseña">
+              </div><!-- form-group -->
+              <br>
             <button id="btnEntrar"  onclick="login()" class="btn btn-info btn-block">Entrar</button>
             <br>
             <center><a href="InicioSesion.registro" class="optionMenu" > <label class="tx-normal">Registrarse</label></a></center>

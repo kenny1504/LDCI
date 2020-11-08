@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <label for="">No.Empleado</label>
                                     <div class="input-group">
-                                        <input type="text" id="id_empleado" name="id_empleado" class="form-control input-md">
+                                        <input disabled type="text" id="id_empleado" name="id_empleado" class="form-control input-md">
                                         <span class="input-group-btn">
                                             <button onclick="listarVendedores()" class="btn btn-default" data-toggle="modal" data-target="#ModalVendedores"
                                                     id="btnBuscarEmpleado" type="button"><i class="fa fa-search"></i></button>
@@ -60,6 +60,7 @@
                         <div class="form-group">
                             <label for="cmb_sexo">Sexo</label>
                             <select name="cmb_sexo" id="cmb_sexo"  class="form-control input-md">
+                                <option selected disabled value="">Seleccione</option>
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
                             </select>
@@ -69,6 +70,7 @@
                         <div class="form-group">
                             <label for="cmb_estado_civil">Estado Civil</label>
                             <select name="cmb_estado_civil"  id="cmb_estado_civil" class="form-control input-md">
+                                <option selected disabled value="">Seleccione</option>
                                 <option value="1">Casado/a</option>
                                 <option value="2">Divoriciado/a</option>
                                 <option value="3">Unión Libre</option>
@@ -111,14 +113,14 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="txt_telefono_1">Telefono Domicilio</label>
-                            <input type="text" id="txt_telefono_1" maxlength="8" name="txt_telefono_1" class="form-control input-md">
+                            <label for="txt_telefono_1">Telefono Personal</label>
+                            <input onkeypress="return soloNumeros(event,txt_telefono_1);" type="text" required id="txt_telefono_1" maxlength="8" name="txt_telefono_1" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="txt_telefono_2">Telefono Personal</label>
-                            <input type="text" id="txt_telefono_2" maxlength="8" name="txt_telefono_2" class="form-control input-md">
+                            <label for="txt_telefono_2">Telefono Domicilio</label>
+                            <input onkeypress="return soloNumeros(event,txt_telefono_2);"  type="text" id="txt_telefono_2" maxlength="8" name="txt_telefono_2" class="form-control input-md">
                         </div>
                     </div>
                 </div>
@@ -137,7 +139,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="txt_telefono_not">Telefono</label>
-                            <input type="text" maxlength="8" id="txt_telefono_not" name="txt_telefono_not" class="form-control input-md">
+                            <input onkeypress="return soloNumeros(event,txt_telefono_not);"  type="text" maxlength="8" id="txt_telefono_not" name="txt_telefono_not" class="form-control input-md">
                         </div>
                     </div>
                 </div >
@@ -160,13 +162,13 @@
 
 
     <div id="ModalVendedores" class="modal fade" role="document" >
-        <div class="modal-dialog modal-lg" style="width: 1400px;">
+        <div class="modal-dialog modal-lg" style="max-width: 1200px!important;">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" style="align-self: flex-end;" >
-                    <button type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                    <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                    </button>
+                    </a>
                 </div>
                 <div class="modal-body">
                     <div class="box box-success">
@@ -199,3 +201,6 @@
 
 <!-- js -->
 <script src="{{asset("LDCI/js/vendedor.js")}}" ></script>
+
+
+

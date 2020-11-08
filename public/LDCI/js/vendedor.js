@@ -3,7 +3,7 @@ var tblVendedores = null;
 
     $(document).ready(function () {
 
-        $('#txt_cedula').mask('00/00/0000');
+        $('#txt_cedula').mask('000-000000-0000S');
         var _token= $('input[name=_token]').val();
         showLoad(true);
 
@@ -57,7 +57,6 @@ var tblVendedores = null;
         });
     }
 
-
     /** Guarda / actualiza un  registros*/
     function guardar()
     {
@@ -67,6 +66,8 @@ var tblVendedores = null;
         var apellido1= $('#txt_apellido1').val();
         var apellido2= $('#txt_apellido2').val();
         var cedula= $('#txt_cedula').val();
+        cedula = cedula.split("-")
+        cedula=cedula[0]+cedula[1]+cedula[2]
         var direccion= $('#txt_direccion').val();
         var departamento= $('#cmb_Departamento').val();
         var telefono_1= $('#txt_telefono_1').val();
@@ -74,26 +75,33 @@ var tblVendedores = null;
         var nomb_notifica= $('#txt_nomb_notifica').val();
         var estado_civil= $('#cmb_estado_civil').val();
         var telefono_not= $('#txt_telefono_not').val();
+        var edad= $('#txt_edad').val();
+        var correo= $('#txt_correo').val();
 
-        if (id_usuario=="")
-            alertSuccess("Al registrar el usuario se genera una contraseña por default 'ldci123' ");
 
-        if (usuario!="" && telefono!="" && correo!="" && tipo!="")
+        if (correo!="" && edad!="" && estado_civil!="" && nombres!="" && apellido1!="" && apellido2!="" && cedula!="" && cedula!=""&& direccion!="" && departamento!="" && telefono_1!="" && nomb_notifica!="" && telefono_not!="")
         {
             alertConfirm("¿Está seguro que desea guardar?", function (e) {
                 showLoad(true);
                 $.ajax({
                     type: 'POST',
-                    url: '/usuarios/guardar', //llamada a la ruta
+                    url: '/vendedor/guardar', //llamada a la ruta
                     data: {
                         _token:_token,
-                        id_usuario:id_usuario,
-                        usuario:usuario,
-                        correo:correo,
-                        correo_old:correo_old,
-                        telefono:telefono,
-                        iso:iso,
-                        tipo:tipo
+                        id_empleado:id_empleado,
+                        nombres:nombres.trim().toUpperCase(),
+                        apellido1:apellido1.trim().toUpperCase(),
+                        apellido2:apellido2.trim().toUpperCase(),
+                        cedula:cedula.toUpperCase(),
+                        direccion:direccion.trim(),
+                        departamento:departamento,
+                        telefono_1:telefono_1,
+                        telefono_2:telefono_2,
+                        nomb_notifica:nomb_notifica,
+                        estado_civil:estado_civil,
+                        telefono_not:telefono_not,
+                        edad:edad,
+                        correo:correo
                     },
                     success: function (data) {
                         showLoad(false);
@@ -104,7 +112,7 @@ var tblVendedores = null;
                         else
                         {
                             alertSuccess(data.mensaje);
-                            tblUsuario.ajax.reload();
+                            tblVendedores.ajax.reload();
                             resetForm();
                         }
                     },
@@ -120,4 +128,11 @@ var tblVendedores = null;
         else
             alertError("Favor completar todos los campos");
 
+    }
+
+    /** Limpia el formulario */
+    function resetForm() {
+
+        $("#txt_correo,#txt_edad,#id_empleado,#txt_nombres,#txt_apellido1,#txt_apellido2,#txt_cedula,#txt_direccion,#cmb_Departamento,#txt_telefono_1,#txt_telefono_2,#txt_nomb_notifica,#cmb_estado_civil,#txt_telefono_not").val("");
+        $('#btnEliminarEmpleado').attr("disabled", "FALSE");
     }

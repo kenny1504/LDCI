@@ -4442,7 +4442,7 @@ button.list-group-item-dark.active {
 
 .close {
   float: right;
-  font-size: 1.3125rem;
+  font-size: 2rem;
   font-weight: bold;
   line-height: 1;
   color: #000;
@@ -4527,7 +4527,6 @@ button.close {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
   border-bottom: 1px solid #e9ecef;
 }
 
@@ -58118,3 +58117,6 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 .mx-wd-1350 {
   max-width: 1350px;
 }
+
+
+
