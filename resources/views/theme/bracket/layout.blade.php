@@ -62,7 +62,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-4 features-img">
-                                    <img class="img-fluid" src="assets/prueba.png" alt="" class="wow fadeInLeft" style="padding-top: 7%; visibility: visible; animation-name: fadeInLeft;">
+                                    <img class="img-fluid" src="assets/product-features.png" alt="" class="wow fadeInLeft" style="    max-width: 150%!important; margin-left: -25%; padding-top: 7%; visibility: visible; animation-name: fadeInLeft;">
                                 </div>
                                 <div class="col-md-8" >
                                     <div class="col-md-12" style="margin-left: 10%;">
