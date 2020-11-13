@@ -49,7 +49,7 @@ class TipoModoTransporteController extends Controller
         }
         else
             return collect([
-                'mensaje' => 'El Tipo Modo Transporte ya existe',
+                'mensaje' => 'El Modo Transporte ya existe',
                 'error' => true,
             ]);
     }

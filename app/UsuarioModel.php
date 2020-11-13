@@ -196,8 +196,6 @@ class UsuarioModel extends Model
 
         return $query;
     }
-
-    //buscar usuario para resetear password
     public function DatosUsuario($id_usuario)
     {
         $query = new static;
