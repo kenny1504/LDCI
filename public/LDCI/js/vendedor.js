@@ -7,7 +7,7 @@ var tblVendedores = null;
         var _token= $('input[name=_token]').val();
         showLoad(true);
 
-        /** recupera los departmentos de Nicaragua */
+        /** recupera los departamentos de Nicaragua */
         $.ajax({
             type: 'POST',
             url: '/departamentos/getAll', //llamada a la ruta
@@ -52,7 +52,7 @@ var tblVendedores = null;
                 targets: -1,
                 data: null,
                 orderable: false,
-                defaultContent: '<button class="btn btn-info btnSeleccionarRegistro" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
+                defaultContent: '<button class="btn btn-info" onclick="selectVendedor(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
             }]
         });
     }
@@ -66,8 +66,6 @@ var tblVendedores = null;
         var apellido1= $('#txt_apellido1').val();
         var apellido2= $('#txt_apellido2').val();
         var cedula= $('#txt_cedula').val();
-        cedula = cedula.split("-")
-        cedula=cedula[0]+cedula[1]+cedula[2]
         var direccion= $('#txt_direccion').val();
         var departamento= $('#cmb_Departamento').val();
         var telefono_1= $('#txt_telefono_1').val();
@@ -77,9 +75,10 @@ var tblVendedores = null;
         var telefono_not= $('#txt_telefono_not').val();
         var edad= $('#txt_edad').val();
         var correo= $('#txt_correo').val();
+        var sexo= $('#cmb_sexo').val();
 
 
-        if (correo!="" && edad!="" && estado_civil!="" && nombres!="" && apellido1!="" && apellido2!="" && cedula!="" && cedula!=""&& direccion!="" && departamento!="" && telefono_1!="" && nomb_notifica!="" && telefono_not!="")
+        if (correo!="" && edad!="" && estado_civil!="" && nombres!="" && apellido1!="" && apellido2!="" && cedula!="" && sexo!=""&& direccion!="" && departamento!="" && telefono_1!="" && nomb_notifica!="" && telefono_not!="")
         {
             alertConfirm("¿Está seguro que desea guardar?", function (e) {
                 showLoad(true);
@@ -101,7 +100,8 @@ var tblVendedores = null;
                         estado_civil:estado_civil,
                         telefono_not:telefono_not,
                         edad:edad,
-                        correo:correo
+                        correo:correo,
+                        sexo:sexo.trim()
                     },
                     success: function (data) {
                         showLoad(false);
@@ -130,9 +130,100 @@ var tblVendedores = null;
 
     }
 
+    function eliminar()
+    {
+        var _token = $('input[name=_token]').val();
+        var id_empleado= $('#id_empleado').val();
+
+
+        alertConfirm("¿Está seguro que desea eliminar?", function (e) {
+            showLoad(true);
+            $.ajax({
+                type: 'POST',
+                url: '/vendedor/eliminar', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    id_empleado:id_empleado
+                },
+                success: function (data) {
+                    showLoad(false);
+                    if (data.error) {
+                        alertError(data.mensaje);
+                        return;
+                    }
+                    else
+                    {
+                        alertSuccess(data.mensaje);
+                        tblVendedores.ajax.reload();
+                        resetForm();
+                    }
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        });
+    }
+
+    /** Selecciona el vendedor y carga valores en formulario */
+    function selectVendedor(datos) {
+
+        showLoad(true);
+        var _token = $('input[name=_token]').val();
+        var tr = $(datos).parents("tr")
+        var data = tblVendedores.row(tr).data();
+        $('#btnEliminarEmpleado').removeAttr('disabled');
+
+        //Capturamos valores de tabla
+        Vendedor = {
+            id_vendedor: data[0]
+        };
+
+
+        $.ajax({
+            type:'POST',
+            url: '/vendedor/datos',
+            data:{
+                _token:_token,
+                id_vendedor:Vendedor.id_vendedor
+            },
+            success: function(data){
+                showLoad(false);
+
+                $('#id_empleado').val(Vendedor.id_vendedor);
+                $('#txt_nombres').val(data[0].nombre);
+                $('#txt_apellido1').val(data[0].apellido1);
+                $('#txt_apellido2').val(data[0].apellido2);
+                $('#txt_cedula').val(data[0].cedula);
+                $('#txt_direccion').val(data[0].direccion);
+                $('#cmb_Departamento').val(data[0].id_departamento);
+                $('#txt_telefono_1').val(data[0].telefono_1);
+                $('#txt_telefono_2').val(data[0].telefono_2);
+                $('#txt_nomb_notifica').val(data[0].contacto_emergencia);
+                $('#cmb_estado_civil').val(data[0].estado_civil);
+                $('#txt_telefono_not').val(data[0].telefono_emergencia);
+                $('#txt_edad').val(data[0].edad);
+                $('#txt_correo').val(data[0].correo);
+                $('#cmb_sexo').val(data[0].sexo);
+
+            },
+            error: function(err){
+                alertError(err.responseText);
+                showLoad(false);
+            }
+        });
+
+
+
+    }
+
     /** Limpia el formulario */
     function resetForm() {
 
         $("#txt_correo,#txt_edad,#id_empleado,#txt_nombres,#txt_apellido1,#txt_apellido2,#txt_cedula,#txt_direccion,#cmb_Departamento,#txt_telefono_1,#txt_telefono_2,#txt_nomb_notifica,#cmb_estado_civil,#txt_telefono_not").val("");
         $('#btnEliminarEmpleado').attr("disabled", "FALSE");
     }
+
+

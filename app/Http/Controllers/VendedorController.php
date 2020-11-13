@@ -23,6 +23,7 @@ class VendedorController extends Controller
 
     }
 
+    /** Funcion para actualizar/guardar un vendedor */
     public function guardar(Request $request)
     {
         /** Recupera parametros enviados por ajax */
@@ -40,22 +41,24 @@ class VendedorController extends Controller
         $telefono_not=$request->telefono_not;
         $edad=$request->edad;
         $correo=$request->correo;
+        $sexo=$request->sexo;
 
 
         $id_session = session('idUsuario');
 
-        $existe= (new VendedorModel)->existe($cedula);
+        $existe= (new VendedorModel)->existe($cedula,$id_empleado);
 
         if(!$existe)
         {
             if (empty($id_empleado))
             {
-                $guardar= (new VendedorModel)->guardar($nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$nomb_notifica,$estado_civil,$telefono_not,$edad,$correo,$id_session);
+                $guardar= (new VendedorModel)->guardar($nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$nomb_notifica,$estado_civil,$telefono_not,$edad,$correo,$sexo,$id_session);
                 return $guardar;
             }
             else
             {
-                //Actualizar
+                $guardar= (new VendedorModel)->actualizar($id_empleado,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$nomb_notifica,$estado_civil,$telefono_not,$edad,$correo,$sexo,$id_session);
+                return $guardar;
             }
         }
         else
@@ -67,5 +70,24 @@ class VendedorController extends Controller
 
     }
 
+    /** Funcion para eliminar un vendedor */
+    public  function eliminar(Request $request)
+    {
+        $id_empleado= $request->id_empleado;
+        $id_session = session('idUsuario');
+
+        $guardar= (new VendedorModel)->eliminar($id_empleado,$id_session);
+        return $guardar;
+
+    }
+
+    public  function getDatosVendedor(Request $request)
+    {
+        $id_vendedor= $request->id_vendedor;
+
+        $datos= (new VendedorModel)->getDatosVendedor($id_vendedor);
+        return response()->json($datos);
+
+    }
 
 }

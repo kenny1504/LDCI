@@ -17,19 +17,19 @@
 }
 .jqvmap-zoomin, .jqvmap-zoomout
 {
-	position: absolute;
-	left: 10px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	background: #000000;
-	padding: 3px;
-	color: white;
-	width: 10px;
-	height: 10px;
-	cursor: pointer;
-	line-height: 10px;
-	text-align: center;
+    position: absolute;
+    left: 10px;
+    /* -webkit-border-radius: 3px; */
+    -moz-border-radius: 3px;
+    /* border-radius: 3px; */
+    background: #000000;
+    padding: 3px;
+    color: white;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    line-height: 10px;
+    text-align: center;
 }
 .jqvmap-zoomin
 {
@@ -37,7 +37,7 @@
 }
 .jqvmap-zoomout
 {
-	top: 30px;
+	top: 35px;
 }
 .jqvmap-region
 {
@@ -47,4 +47,9 @@
 {
   width: 100%;
   height: 500px;
+}
+
+svg{
+    width: 1498px;
+    height: 450px;
 }

@@ -82,7 +82,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="txt_cedula">Cédula Nacional</label>
-                            <input onblur="verificar_cedula(this)" type="text" name="txt_cedula"  id="txt_cedula" class="form-control input-md">
+                            <input placeholder="001-000000-0000A" onblur="verificar_cedula(this)" type="text" name="txt_cedula"  id="txt_cedula" class="form-control input-md">
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                     <button onclick="guardar()" class="btn btn-success" id="btnGuardarEmpleado">
                         <i class="fa fa-save"> </i> Guardar
                     </button>
-                    <button disabled onclick="" class="btn btn-danger" id="btnEliminarEmpleado">
+                    <button disabled onclick="eliminar()" class="btn btn-danger" id="btnEliminarEmpleado">
                         <i class="fa fa-trash-o"> </i> Eliminar
                     </button>
                     <button onclick="resetForm()" class="btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
@@ -162,7 +162,7 @@
 
 
     <div id="ModalVendedores" class="modal fade" role="document" >
-        <div class="modal-dialog modal-lg" style="max-width: 1200px!important;">
+        <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" style="align-self: flex-end;" >

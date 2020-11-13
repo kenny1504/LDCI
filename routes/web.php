@@ -58,4 +58,6 @@ Route::post('/tipoMercancia/eliminar', 'TipoMercanciaController@eliminar')->name
 Route::post('/departamentos/getAll', 'VendedorController@getDepartamentos')->name('getAll');
 Route::post('/vendedor/getAll', 'VendedorController@getVendedores')->name('getAll');
 Route::post('/vendedor/guardar', 'VendedorController@guardar')->name('guardar');
+Route::post('/vendedor/datos', 'VendedorController@getDatosVendedor')->name('vendedor');
+Route::post('/vendedor/eliminar', 'VendedorController@eliminar')->name('eliminar');
 

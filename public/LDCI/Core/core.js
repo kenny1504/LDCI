@@ -675,7 +675,7 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
         var valor=input.value;
         valor = valor.split("-")
         valor=valor[0]+valor[1]+valor[2]
-        debugger;
+
         var  ced1=valor;
         let  ced2=valor;
         let  ced3=valor;
