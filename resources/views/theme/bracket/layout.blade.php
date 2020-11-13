@@ -19,22 +19,20 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
 
-
     <!-- Core DATABLE -->
 
     <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
     <link rel="stylesheet" href="{{asset("LDCI/Core/dataTables.bootstrap.min.css")}}"  >
     <link rel="stylesheet" href="{{asset("LDCI/Core/bootstrap.scss")}}"  >
 
-
      <!-- Core CSS -->
      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.default.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
 
-
       <link rel="stylesheet" href="{{asset("LDCI/Core/intlTelInput.css")}}"  >
       <link rel="stylesheet" href="{{asset("LDCI/Core/demo.css")}}">
+      <link rel="stylesheet" href="{{asset("LDCI/Core/avilon.css")}}">
 
 
   </head>
@@ -59,6 +57,61 @@
     <div class="br-mainpanel">
       <div class="br-section-wrapper">
             <div class="row"><!-- Agrega contenido desde otra vista-->
+
+                    <section style="margin-top: 3%; width: 100%;" id="features">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 features-img">
+                                    <img class="img-fluid" src="assets/product-features.png" alt="" class="wow fadeInLeft" style="    max-width: 150%!important; margin-left: -30%; padding-top: 50%; visibility: visible; animation-name: fadeInLeft;">
+                                </div>
+                                <div class="col-md-8" >
+                                    <div class="col-md-12" style="margin-left: 10%;">
+                                        <div class="section-header wow fadeIn" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: fadeIn;">
+                                            <h3 class="section-title">Productos / Servicio</h3>
+                                            <span class="section-divider"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: 15%;">
+
+                                        <div class="row">
+
+                                            <div class="col-md-6 fadeInRight" style="width: 90%!important;  visibility: visible; animation-name: fadeInRight;">
+                                                <div class="icon"><i class="ion-plane"></i></div>
+                                                <h4 class="title"><a href="">Transporte Aéreo</a></h4>
+                                                <p class="description">Embarques directos con cualquier línea aérea carguera y pasajero</p>
+                                                <p class="description">Carga consolidada desde cualquier origen/destino</p>
+                                                <p class="description">Itinerarios, tiempo de tránsito y servicios pre-establecidos</p>
+                                                <p class="description"> Tarifas económicas y competitivas</p>
+                                            </div>
+                                            <div class="col-md-6 fadeInRight" data-wow-delay="0.1s" style="width: 90%!important; visibility: visible; animation-delay: 0.1s; animation-name: fadeInRight;">
+                                                <div class="icon"><i class="ion-model-s"></i></div>
+                                                <h4 class="title"><a href="">Transporte Terrestre</a></h4>
+                                                <p class="description"> Embarques en camiones completos, furgón, rastras</p>
+                                                <p class="description"> Embarques de mercaderías extra-dimensionales y pesadas en equipos Low Boys o plataformas</p>
+                                                <p class="description"> Embarques consolidados en Centroamérica, México y Panamá con horarios publicados</p>
+                                            </div>
+                                            <div class="col-md-6 fadeInRight" data-wow-delay="0.2s" style="width: 90%!important; visibility: visible; animation-delay: 0.2s; animation-name: fadeInRight;">
+                                                <div class="icon"><i class="ion-android-compass"></i></div>
+                                                <h4 class="title"><a href="">Transporte Marítimo</a></h4>
+                                                <p class="description">Contenedores completos FCL/FCL</p>
+                                                <p class="description">Carga consolidada LCL/LCL desde cualquier origen/destino hasta Managua y viceversa</p>
+                                                <p class="description">Itinerarios, tiempo de tránsito y servicios pre-establecidos</p>
+                                                <p class="description"> Tarifas económicas y competitivas</p>
+                                            </div>
+                                            <div class="col-md-6 fadeInRight" data-wow-delay="0.3s" style="width: 90%!important; visibility: visible; animation-delay: 0.3s; animation-name: fadeInRight;">
+                                                <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
+                                                <h4 class="title"><a href="">Gelpack y Hielo Seco</a></h4>
+                                                <p class="description">Tenemos a la venta de Gel Pack como refrigerante para
+                                                    mantener la temperatura de su carga perecedera,
+                                                    importado directamente de USA</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
             </div>
             <footer class="br-footer">
@@ -86,15 +139,13 @@
     <script src="{{asset("assets/bracket/js/ResizeSensor.js")}}" ></script>
 
     <!-- js Core-->
-      <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
+      <script src="{{asset("LDCI/Core/jquery.mask.js")}}" ></script>
+     <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
       <script src="{{asset("LDCI/Core/jquery.dataTables.min.js")}}" ></script>
       <script src="{{asset("LDCI/Core/dataTables.bootstrap.min.js")}}" ></script>
 
       <script src="{{asset("LDCI/Core/intlTelInput.js")}}" ></script>
       <script src="{{asset("LDCI/Core/core.js")}}" ></script>
-
-      <!-- js externos-->
-      @yield('script')
 
   </body>
 </html>

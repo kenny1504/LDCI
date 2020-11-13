@@ -82,7 +82,6 @@ class UsuarioController extends Controller
                         'mensaje' => 'Error al guardar usuario',
                         'error' => true,
                     ]);
-
             }else
             {
                 if($correo_old==$correo)
@@ -108,12 +107,10 @@ class UsuarioController extends Controller
                             $msj->to($for);
                         });
                     }
-
                     return collect([
                         'mensaje' => 'Información actualizada',
                         'error' => false
                     ]);
-
                 }
                 return collect([
                     'mensaje' => 'Error al actualizar',

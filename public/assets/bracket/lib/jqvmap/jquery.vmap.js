@@ -889,6 +889,9 @@ JQVMap.prototype.resize = function () {
     this.baseScale = this.width / this.defaultWidth;
     this.baseTransY = Math.abs(this.height - this.defaultHeight * this.baseScale) / (2 * this.baseScale);
   }
+    if (this.baseScale === 0) {
+        this.baseScale = 0.88;
+    }
   this.scale *= this.baseScale / curBaseScale;
   this.transX *= this.baseScale / curBaseScale;
   this.transY *= this.baseScale / curBaseScale;

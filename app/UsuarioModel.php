@@ -24,6 +24,7 @@ class UsuarioModel extends Model
         $query= DB::select("select iso2,usuario,telefono,correo from ldci.tb_usuario where id_usuario=?;",[$id_usuario]);
         return $query;
     }
+
     // Este metodo sirve para verificar que no exista
     // otro usuario con el correo solicitado.
     // Return true, si el correo esta disponible; false
@@ -195,7 +196,6 @@ class UsuarioModel extends Model
 
         return $query;
     }
-    //buscar usuario para resetear password y devolver nombre usuario y correo
     public function DatosUsuario($id_usuario)
     {
         $query = new static;

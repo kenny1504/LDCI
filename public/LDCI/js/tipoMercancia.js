@@ -38,7 +38,6 @@ var tblTipoMercancia = null;
 
     }
 
-
     /** Funcion que permite actualizar o agregar un nuevo registro */
     function guardar()
     {
