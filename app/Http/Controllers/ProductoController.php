@@ -45,7 +45,7 @@ class ProductoController extends Controller
 
                     $imageName=uniqid().'.'.$imagen->extension();
                     $url='/images/productos'; //Ruta donde guarda imagenes de productos
-                    $imagen->move(public_path('images/productos/'),$imageName,0777,true); //Guarda imagen en servidor
+                    $imagen->move('/var/www/LDCI/public/images/productos/',$imageName,0777,true); //Guarda imagen en servidor
 
                     $guardarImagen=(new ProductoModel)->guardarImagenProducto($guardar[0]->id_producto,$url,$imageName,$id_session);
 
