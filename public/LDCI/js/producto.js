@@ -147,7 +147,7 @@ var tblProducto = null;
                 data.forEach(element => {
 
                     /**Ruta donde se gurda imagen */
-                    var file_image = element.url+'\\'+element.nombre;
+                    var file_image = element.url+'/'+element.nombre;
                     /**Archivo (Imagen) */
                     var mockFile = { name: element.nombre, size: 12345 };
 

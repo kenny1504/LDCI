@@ -44,8 +44,8 @@ class ProductoController extends Controller
                 foreach ($image as $imagen) {
 
                     $imageName=uniqid().'.'.$imagen->extension();
-                    $url='\images\productos'; //Ruta donde guarda imagenes de productos
-                    $imagen->move(public_path('images\productos'),$imageName); //Guarda imagen en servidor
+                    $url='/images/productos'; //Ruta donde guarda imagenes de productos
+                    $imagen->move(public_path('images/productos'),$imageName); //Guarda imagen en servidor
 
                     $guardarImagen=(new ProductoModel)->guardarImagenProducto($guardar[0]->id_producto,$url,$imageName,$id_session);
 
