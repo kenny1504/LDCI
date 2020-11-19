@@ -25,17 +25,17 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a23ae3b7-da97-488a-81b1-d9db452a90d1" name="Default Changelist" comment="TERMINANDO CATALOGO USUARIOS">
+    <list default="true" id="a23ae3b7-da97-488a-81b1-d9db452a90d1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/LDCI/Core/dropzone.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/LDCI/Core/dropzone.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/LDCI/js/producto.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/catalogos/producto.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VendedorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VendedorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/VendedorModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/VendedorModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/LDCI/Core/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/Core/core.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/LDCI/Core/demo.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/Core/demo.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/LDCI/js/vendedor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/vendedor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/bracket/css/bracket.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/bracket/css/bracket.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/product-features2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/InicioSesion/inicioSesion.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/InicioSesion/inicioSesion.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendedor/vendedor.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendedor/vendedor.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/LDCI/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/catalogos/usuarios.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/catalogos/usuarios.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/theme/bracket/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/theme/bracket/layout.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <list id="b94a8949-813f-4dea-a1af-46512da92d71" name="Desactivar e activar usuarios, se agrego el correo de la empresa" comment="" />
@@ -55,6 +55,9 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -192,11 +195,19 @@
       <recent name="C:\laragon\www\LDCI\public\LDCI\img" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.ProductoController.php">
+    <configuration name="ProductoController.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/LDCI/Http/Controllers/ProductoController.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.ProductoController.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -213,7 +224,9 @@
       <workItem from="1604187695828" duration="625000" />
       <workItem from="1604241145032" duration="32181000" />
       <workItem from="1604544329411" duration="28318000" />
-      <workItem from="1604717325173" duration="30809000" />
+      <workItem from="1604717325173" duration="40576000" />
+      <workItem from="1605229632439" duration="15782000" />
+      <workItem from="1605543655220" duration="72890000" />
     </task>
     <task id="LOCAL-00001" summary="Desactivar e activar usuarios, se agrego el correo de la empresa">
       <created>1604034542990</created>
@@ -320,7 +333,21 @@
       <option name="project" value="LOCAL" />
       <updated>1604809074026</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Guardando vendedor">
+      <created>1604870881472</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1604870881472</updated>
+    </task>
+    <task id="LOCAL-00017" summary="CRUD Empleado (Vendedor)">
+      <created>1605249025237</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1605249025237</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,19 +391,25 @@
     <MESSAGE value="Avances template Vendedor" />
     <MESSAGE value="Validando cedula" />
     <MESSAGE value="Terminando vista inicio(Cliente)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Terminando vista inicio(Cliente)" />
+    <MESSAGE value="Guardando vendedor" />
+    <MESSAGE value="CRUD Empleado (Vendedor)" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD Empleado (Vendedor)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604634024969">
+    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605711910535">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604634024969" />
-    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768@0.0.1366.768" timestamp="1604263220808" />
-    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1604799609719">
+    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768@0.0.1366.768" timestamp="1605711910535" />
+    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1605241753469">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604466634239" />
+    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605241753469" />
     <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1604799609719" />
+    <state x="517" y="303" key="NewPhpFileDialog" timestamp="1604872195956">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="517" y="303" key="NewPhpFileDialog/0.0.1366.768@0.0.1366.768" timestamp="1604872195956" />
     <state x="184" y="29" key="SettingsEditor" timestamp="1604029956573">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -385,23 +418,29 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="530" y="292" width="611" height="184" key="VCS.ChangelistChooser/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604034617117" />
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1604809087222">
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1605249085909">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604717695941" />
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1604809087222" />
-    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604033164005">
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605249085909" />
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1604870886432" />
+    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605732220786">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604033164005" />
+    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605596650283" />
+    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768@0.0.1366.768" timestamp="1605732220786" />
     <state x="501" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604250826589">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="501" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604035271075" />
     <state x="501" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1604250826589" />
-    <state x="339" y="175" key="run.anything.popup" timestamp="1604554294865">
+    <state x="234" y="31" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605719550543">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="234" y="31" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.768@0.0.1366.768" timestamp="1605719550543" />
+    <state x="339" y="175" key="run.anything.popup" timestamp="1605556499820">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="339" y="175" key="run.anything.popup/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604554294865" />
+    <state x="339" y="175" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1605556499820" />
   </component>
 </project>

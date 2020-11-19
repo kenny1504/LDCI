@@ -181,7 +181,6 @@ var tblVendedores = null;
             id_vendedor: data[0]
         };
 
-
         $.ajax({
             type:'POST',
             url: '/vendedor/datos',
@@ -214,8 +213,6 @@ var tblVendedores = null;
                 showLoad(false);
             }
         });
-
-
 
     }
 

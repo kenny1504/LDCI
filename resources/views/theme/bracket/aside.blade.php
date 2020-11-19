@@ -55,7 +55,7 @@
           <li class="nav-item"><a href="catalogos.tipoTransporte" class="optionMenu nav-link">Tipo Transporte</a></li>
           <li class="nav-item"><a href="catalogos.tipoMercancia" class="optionMenu nav-link">Tipo Mercancia</a></li>
           <li class="nav-item"><a href="" class="nav-link">Proveedores</a></li>
-          <li class="nav-item"><a href="" class="nav-link">Productos</a></li>
+          <li class="nav-item"><a href="catalogos.producto" class="optionMenu nav-link">Productos</a></li>
           <li class="nav-item"><a href="catalogos.tipoModoTransporte" class="optionMenu nav-link">Modo Transporte</a></li>
       </ul>
       <a href="" class="br-menu-link">

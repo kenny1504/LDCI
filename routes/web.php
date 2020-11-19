@@ -61,3 +61,9 @@ Route::post('/vendedor/guardar', 'VendedorController@guardar')->name('guardar');
 Route::post('/vendedor/datos', 'VendedorController@getDatosVendedor')->name('vendedor');
 Route::post('/vendedor/eliminar', 'VendedorController@eliminar')->name('eliminar');
 
+//Rutas Producto
+Route::post('/producto/getAll', 'ProductoController@getProducto')->name('getAll');
+Route::post('/producto/guardar', 'ProductoController@guardar')->name('guardarProducto');
+Route::post('/producto/fotos', 'ProductoController@getImagen')->name('fotos');
+Route::post('/producto/eliminarImagen', 'ProductoController@eliminarImagen')->name('eliminarImagen');
+Route::post('/producto/eliminar', 'ProductoController@eliminar')->name('eliminar');
