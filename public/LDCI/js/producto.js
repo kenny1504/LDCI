@@ -2,7 +2,6 @@ var tblProducto = null;
 
     $(document).ready(function () {
 
-        showLoad(true);
         listarProducto();
 
         /** Configuraciones para subir imagen */
@@ -30,6 +29,7 @@ var tblProducto = null;
                         if (nombre!="" && existencia!="" && precio!="" && descripcion!="" && myDropzone.files.length!=0)
                         {
                             alertConfirm("¿Está seguro que desea guardar?", function (ev) {
+                                showLoad(true);
                                 e.preventDefault();
                                 e.stopPropagation();
                                 myDropzone.processQueue();
@@ -42,6 +42,7 @@ var tblProducto = null;
 
                     /** Recupera respuesta si es exitosa*/
                     this.on("successmultiple", function(files, response) {
+                        showLoad(false);
                         alertSuccess(response.mensaje);
                         this.removeAllFiles();//elimina imagenes en dropzone
                         $('#btnlimpiar').click();
@@ -102,18 +103,13 @@ var tblProducto = null;
             ]
         });
 
-        /** se ejecuta despues que la tabla cargo datos, GIF CARGANDO */
-        $('#tblProducto').DataTable().on("draw", function(){
-            showLoad(false);
-        })
-
     }
 
     /** Selecciona el producto y carga valores en formulario */
     function selectProducto(datos) {
 
         showLoad(true);
-        var i=0; //Variable para control (Eliminar imagen)
+
         var tr = $(datos).parents("tr")
         var data = tblProducto.row(tr).data();
         $('#btnEliminarProducto').removeAttr('disabled');
@@ -157,15 +153,17 @@ var tblProducto = null;
                     myDropzone.options.thumbnail.call(myDropzone, mockFile, file_image);
                      /** Redimenciona Imagen */
                     $('.dz-image').last().find('img').attr({width: '100%', height: '100%'});
-
-
+                    var img=null;
                     /** Evento para Eliminar  imagen del servidor y base de datos */
                     myDropzone.on("removedfile", function(file){
 
                         /** Nombre de la imagen */
+                        var i=1; //Variable para control (Eliminar imagen)
                         var archivo=file.name
-                         i++
+                        if(img==archivo)
+                            i++
 
+                        img=archivo
                            if(i<2)
                            {
                                $.ajax({
@@ -192,6 +190,7 @@ var tblProducto = null;
                            }
                     });
                 });
+                showLoad(false);
 
             },
             error: function (err) {
@@ -200,7 +199,7 @@ var tblProducto = null;
             }
 
         });
-        showLoad(false);
+
     }
 
     /** Funcion para eliminar registro*/
@@ -212,7 +211,7 @@ var tblProducto = null;
         if (id_Producto!="")
         {
             alertConfirm("¿Está seguro que desea eliminar?", function (e) {
-
+                showLoad(true);
                 $.ajax({
                     type: 'POST',
                     url: '/producto/eliminar', //llamada a la ruta
@@ -221,6 +220,7 @@ var tblProducto = null;
                         id_Producto:id_Producto
                     },
                     success: function (data) {
+                        showLoad(false);
                         if (data.error) {
                             alertError(data.mensaje);
                         }
