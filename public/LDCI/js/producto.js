@@ -113,6 +113,7 @@ var tblProducto = null;
     function selectProducto(datos) {
 
         showLoad(true);
+        var i=0; //Variable para control (Eliminar imagen)
         var tr = $(datos).parents("tr")
         var data = tblProducto.row(tr).data();
         $('#btnEliminarProducto').removeAttr('disabled');
@@ -163,28 +164,32 @@ var tblProducto = null;
 
                         /** Nombre de la imagen */
                         var archivo=file.name
+                         i++
 
-                        $.ajax({
-                            type: 'POST',
-                            url: '/producto/eliminarImagen', //llamada a la ruta
-                            data: {
-                                _token:$('input[name=_token]').val(),
-                                imagen:archivo
-                            },
-                            success: function (data) {
-                                showLoad(false);
+                           if(i<2)
+                           {
+                               $.ajax({
+                                   type: 'POST',
+                                   url: '/producto/eliminarImagen', //llamada a la ruta
+                                   data: {
+                                       _token:$('input[name=_token]').val(),
+                                       imagen:archivo
+                                   },
+                                   success: function (data) {
+                                       showLoad(false);
 
-                                if(data.error)
-                                    alertError(data.mensaje);
-                                else
-                                   if(data.mensaje!="")
-                                   alertSuccess(data.mensaje);
-                            },
-                            error: function (err) {
-                                alertError(err.responseText);
-                                showLoad(false);
-                            }
-                        });
+                                       if(data.error)
+                                           alertError(data.mensaje);
+                                       else
+                                       if(data.mensaje!="")
+                                           alertSuccess(data.mensaje);
+                                   },
+                                   error: function (err) {
+                                       alertError(err.responseText);
+                                       showLoad(false);
+                                   }
+                               });
+                           }
                     });
                 });
 

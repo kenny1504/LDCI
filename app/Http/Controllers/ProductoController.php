@@ -85,7 +85,6 @@ class ProductoController extends Controller
 
         if($existe)
         {
-
             $eliminar=(new ProductoModel)->eliminarImagen($imagen);
             if ($eliminar)
             {
@@ -130,14 +129,12 @@ class ProductoController extends Controller
                 {
                     /** Elimina imagen del servidor */
                     unlink(public_path('images/productos/'.$imagen->nombre));
-
                 }
                 else
                     return collect([
                         'mensaje' => 'Hubo un error al elimina producto!',
                         'error' => true,
                     ]);
-
             }
             return collect([
                 'mensaje' => 'Producto eliminado con exito!',
