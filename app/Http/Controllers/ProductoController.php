@@ -45,7 +45,7 @@ class ProductoController extends Controller
 
                     $imageName=uniqid().'.'.$imagen->extension();
                     $url='/images/productos'; //Ruta donde guarda imagenes de productos
-                    $imagen->move('/var/www/LDCI/public/images/productos',$imageName,0777,true); //Guarda imagen en servidor
+                    $imagen->move(public_path('images/productos'),$imageName,0777,true); //Guarda imagen en servidor
 
                     $guardarImagen=(new ProductoModel)->guardarImagenProducto($guardar[0]->id_producto,$url,$imageName,$id_session);
 
@@ -90,7 +90,7 @@ class ProductoController extends Controller
             if ($eliminar)
             {
                 /** Elimina imagen del servidor */
-                unlink(public_path('images\productos\\'.$imagen));
+                unlink(public_path('images/productos/'.$imagen));
 
                 return collect([
                     'mensaje' => 'Imagen eliminada con exito!',
@@ -129,7 +129,7 @@ class ProductoController extends Controller
                 if ($eliminar)
                 {
                     /** Elimina imagen del servidor */
-                    unlink(public_path('images\productos\\'.$imagen->nombre));
+                    unlink(public_path('images/productos/'.$imagen->nombre));
 
                 }
                 else
