@@ -61,7 +61,7 @@
       <a href="" class="br-menu-link">
           <div class="br-menu-item">
               <i class="menu-item-icon icon ion-archive tx-20"></i>
-              <span class="menu-item-label">Reportes</span>
+              <span href="catalogos.productoUsuario" class="optionMenu menu-item-label">Reportes</span>
           </div><!-- menu-item -->
       </a>
   </div><!-- br-sideleft-menu -->
