@@ -15,20 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 /** Ruta para retornar cualquier template */
-Route::post('/','TemplateController@template');
+Route::post('/', 'TemplateController@template');
 
-Route::post('/registro/usuario','InicioController@guardarUsuario')->name ('guardar_usuario');
-Route::post('/datos/modificaUsuario','InicioController@editarUsuario')->name ('editar_usuario');
-Route::post('/datos/usuario','InicioController@getUsuario');
-Route::post('/login/in','InicioController@login')->name ('login-in');
+Route::post('/registro/usuario', 'InicioController@guardarUsuario')->name('guardar_usuario');
+Route::post('/datos/modificaUsuario', 'InicioController@editarUsuario')->name('editar_usuario');
+Route::post('/datos/usuario', 'InicioController@getUsuario');
+Route::post('/login/in', 'InicioController@login')->name('login-in');
 
 // Rutas Get Unicas
-Route::get('/registro/vericar/{code}', 'InicioController@verificar')->name ('Vericada'); //Ruta para verificar correo
+Route::get('/registro/vericar/{code}', 'InicioController@verificar')->name('Vericada'); //Ruta para verificar correo
 Route::get('/usuarios', 'UsuarioController@index')->name('Usuarios');
-Route::get('/registro','InicioController@registro')->name ('registro');
-Route::get('/','InicioController@index');
-Route::get('/inicio','InicioController@inicio')->name ('inicio');
-Route::get('/login','InicioController@loginOut')->name ('login');
+Route::get('/registro', 'InicioController@registro')->name('registro');
+Route::get('/', 'InicioController@index');
+Route::get('/inicio', 'InicioController@inicio')->name('inicio');
+Route::get('/login', 'InicioController@loginOut')->name('login');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Rutas Usuarios
@@ -71,3 +71,9 @@ Route::post('/producto/eliminar', 'ProductoController@eliminar')->name('eliminar
 //Rutas producto Vista Usuario
 Route::post('/producto/getProducto', 'ProductoController@getProductoUsario')->name('getProducto');
 Route::post('/producto/getProductoImagenes', 'ProductoController@getProductoImagenes')->name('getProductoImagenes');
+
+//Rutas Proveedor
+Route::post('/proveedor/getAll', 'ProveedorController@getProveedores')->name('getAll');
+Route::post('/proveedor/guardar', 'ProveedorController@guardar')->name('guardar');
+Route::post('/proveedor/datos', 'ProveedorController@getDatosProveedor')->name('proveedor');
+Route::post('/proveedor/eliminar', 'ProveedorController@eliminar')->name('eliminar');
