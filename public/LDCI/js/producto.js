@@ -1,4 +1,6 @@
 var tblProducto = null;
+var estado=null; //Variable para control (Eliminar imagen)
+var img=null;
 
     $(document).ready(function () {
 
@@ -151,20 +153,22 @@ var tblProducto = null;
                     var myDropzone = Dropzone.forElement(".dropzone");
                     myDropzone.options.addedfile.call(myDropzone, mockFile);
                     myDropzone.options.thumbnail.call(myDropzone, mockFile, file_image);
+
                      /** Redimenciona Imagen */
                     $('.dz-image').last().find('img').attr({width: '100%', height: '100%'});
-                    var img=null;
+
                     /** Evento para Eliminar  imagen del servidor y base de datos */
                     myDropzone.on("removedfile", function(file){
 
                         /** Nombre de la imagen */
-                        var i=1; //Variable para control (Eliminar imagen)
                         var archivo=file.name
-                        if(img==archivo)
-                            i++
 
-                        img=archivo
-                           if(i<2)
+                        /** Verifica para evitar que se hagan muchas peticiones de una misma imagen*/
+                        if(img!=archivo)
+                            estado=true
+
+                          img=archivo
+                           if(estado==true)
                            {
                                $.ajax({
                                    type: 'POST',
@@ -175,7 +179,6 @@ var tblProducto = null;
                                    },
                                    success: function (data) {
                                        showLoad(false);
-
                                        if(data.error)
                                            alertError(data.mensaje);
                                        else
@@ -187,6 +190,7 @@ var tblProducto = null;
                                        showLoad(false);
                                    }
                                });
+                               estado=false
                            }
                     });
                 });

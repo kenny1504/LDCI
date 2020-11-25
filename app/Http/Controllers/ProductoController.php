@@ -151,4 +151,21 @@ class ProductoController extends Controller
         }
     }
 
+    /** Funcion que recupera todos los registros de productos*/
+    public function getProductoUsario()
+    {
+        $datos= (new ProductoModel())->getProductoUsario();
+        return response()->json($datos);
+
+    }
+
+    /** Recupera imagenes de un producto  para vista usuario*/
+    function  getProductoImagenes(Request $request)
+    {
+        $id_producto= $request->id_producto;
+
+        $datos= (new ProductoModel)->getProductoImagenes($id_producto);
+        return $datos;
+    }
+
 }

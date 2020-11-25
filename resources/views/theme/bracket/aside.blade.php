@@ -15,7 +15,7 @@
         <span class="menu-item-label">Vendedores</span>
       </div><!-- menu-item -->
     </a><!-- br-menu-link -->
-    <a href="" class="br-menu-link">
+    <a href="cliente.cliente" class="optionMenu br-menu-link">
       <div class="br-menu-item">
         <i class="menu-item-icon icon ion-man tx-20"></i>
         <span class="menu-item-label">Clientes</span>
@@ -58,10 +58,10 @@
           <li class="nav-item"><a href="catalogos.producto" class="optionMenu nav-link">Productos</a></li>
           <li class="nav-item"><a href="catalogos.tipoModoTransporte" class="optionMenu nav-link">Modo Transporte</a></li>
       </ul>
-      <a href="" class="br-menu-link">
+      <a href="catalogos.productoUsuario" class="optionMenu br-menu-link">
           <div class="br-menu-item">
               <i class="menu-item-icon icon ion-archive tx-20"></i>
-              <span href="catalogos.productoUsuario" class="optionMenu menu-item-label">Reportes</span>
+              <span  class=" menu-item-label">Reportes</span>
           </div><!-- menu-item -->
       </a>
   </div><!-- br-sideleft-menu -->

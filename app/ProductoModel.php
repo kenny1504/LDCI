@@ -176,4 +176,27 @@ class ProductoModel extends Model
 
     }
 
+    /** Recupera Productos para mostrar en vista productos usuario */
+    function  getProductoUsario()
+    {
+        $query = new static;
+        $query = DB::select('select id_producto from ldci.tb_producto where estado=1');
+
+        return $query;
+    }
+
+    /** Recupera imagenes de un producto  para vista usuario*/
+    function  getProductoImagenes($id_producto)
+    {
+        $query = new static;
+        $query = DB::select('select i.nombre as imagen,i.url,p.nombre,p.descripcion
+                                    from ldci.tb_detalle_imagen det
+                                    join ldci.tb_imagen i on det.id_imagen=i.id_imagen
+                                    join ldci.tb_producto p on p.id_producto=id_tabla
+                                    where p.id_producto=? and id_tipo=1
+                                    ', [$id_producto]);
+
+        return $query;
+    }
+
 }

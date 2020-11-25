@@ -57,7 +57,7 @@
 
     <div class="br-mainpanel">
       <div class="br-section-wrapper">
-            <div class="row"><!-- Agrega contenido desde otra vista-->
+            <div id="principal" class="row"><!-- Agrega contenido desde otra vista-->
 
                     <section style="margin-top: 3%; width: 100%;" id="features">
                         <div class="container">
