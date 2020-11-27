@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
 
+    showLoad(true);
     /** Recupera id de productos */
     $.ajax({
         type: 'POST',
@@ -23,43 +24,56 @@ $(document).ready(function () {
                         },
                         success: function (data) {
 
-                         var carousel="carousel"+id_producto;
-                           var carou=("<div class=\"col-sm-6 col-lg-4 mg-t-20 mg-lg-t-0\">\n" +
-                                "    <div class=\"card bd-0\">\n" +
-                                "        <div id=\"carousel"+id_producto+"\" class=\"carousel slide\" data-ride=\"carousel\">\n" +
-                                "            <ol class=\"carousel-indicators\">\n" +
-                                "                <li data-target=\"#carousel"+id_producto+"\" data-slide-to=\"0\" class=\"\"></li>\n" +
-                                "                <li data-target=\"#carousel"+id_producto+"\" data-slide-to=\"1\" class=\"\"></li>\n" +
-                                "                <li data-target=\"#carousel"+id_producto+"\" data-slide-to=\"2\" class=\"active\"></li>\n" +
-                                "            </ol>\n" +
-                                "            <div id='listbox' style=\"margin-top: 5%;\" class=\"carousel-inner\" role=\"listbox\">\n" +
-                                "            </div><!-- carousel-inner -->\n" +
-                                "        </div><!-- carousel -->\n" +
-                                "    </div><!-- card -->\n" +
-                                "</div>");
+                           var carousel="#listbox"+id_producto;
+                           var carou="<div id=\"carousel"+id_producto+"\" class=\"carousel slide\" data-ride=\"carousel\">\n" +
+                                "    <ol class=\"carousel-indicators\">\n" +
+                                "        <li data-target=\"#carousel"+id_producto+"\" data-slide-to=\"0\" class=\"active\"></li>\n" +
+                                "        <li data-target=\"#carousel"+id_producto+"\" data-slide-to=\"1\"></li>\n" +
+                                "        <li data-target=\"#carousel"+id_producto+"\" data-slide-to=\"2\"></li>\n" +
+                                "    </ol>\n" +
+                                "    <div id=\"listbox"+id_producto+"\" class=\"carousel-inner\">\n" +
+                                "    </div>\n" +
+                                "    <a class=\"carousel-control-prev\" href=\"#carousel"+id_producto+"\" role=\"button\" data-slide=\"prev\">\n" +
+                                "        <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n" +
+                                "        <span class=\"sr-only\">Previous</span>\n" +
+                                "    </a>\n" +
+                                "    <a class=\"carousel-control-next\" href=\"#carousel"+id_producto+"\" role=\"button\" data-slide=\"next\">\n" +
+                                "        <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n" +
+                                "        <span class=\"sr-only\">Next</span>\n" +
+                                "    </a>\n" +
+                                "</div>"
+
+
 
                             $('#principal').append(carou);
 
-                            var html=''
+                            var html='',control=1;
                             /** recorre arreglo (Rutas de imagenes de un producto) */
                             data.forEach(element => {
 
+                                if(control==1)
+                                {
+                                    html+="<div class=\"carousel-item active\">\n" +
+                                        "            <img class=\"d-block w-100\" src="+element.url+"/"+element.imagen+" alt=\"First slide\">\n" +
+                                        "<div class=\"carousel-caption d-none d-md-block\">\n" +
+                                        "    <h5>"+element.nombre+"</h5>\n" +
+                                        "<p>"+element.descripcion+"</p>"+
+                                        "  </div>" +
+                                        " </div>"
+                                }
+                                control++;
                                  html+="<div class=\"carousel-item\">\n" +
-                                    "                    <div style=\'background-image: url("+element.url+"/"+element.imagen+");\' class=\"bg-purple pd-30 ht-300 d-flex pos-relative align-items-center rounded\">\n" +
-                                    "                        <div class=\"tx-white\">\n" +
-                                    "                            <p class=\"tx-uppercase tx-11 tx-medium tx-mont tx-spacing-2 tx-white-5\">Recent Article</p>\n" +
-                                    "                            <h5 class=\"lh-5 mg-b-20\">10 Reasons Why Travel Makes You a Happier Person</h5>\n" +
-                                    "                            <nav class=\"nav flex-row tx-13\">\n" +
-                                    "                                <a href=\"\" class=\"tx-white-8 hover-white pd-l-0 pd-r-5\">Edit</a>\n" +
-                                    "                                <a href=\"\" class=\"tx-white-8 hover-white pd-x-5\">Unpublish</a>\n" +
-                                    "                                <a href=\"\" class=\"tx-white-8 hover-white pd-x-5\">Delete</a>\n" +
-                                    "                            </nav>\n" +
-                                    "                        </div>\n" +
-                                    "                    </div><!-- d-flex -->\n" +
-                                    "                </div>"
+                                    "            <img class=\"d-block w-100\" src="+element.url+"/"+element.imagen+" alt=\"First slide\">\n" +
+                                     "<div class=\"carousel-caption d-none d-md-block\">\n" +
+                                     "    <h5>"+element.nombre+"</h5>\n" +
+                                     "<p>"+element.descripcion+"</p>"+
+                                     "  </div>" +
+                                     " </div>"
+
                             });
 
-                            $('#listbox').append(html);
+                            $(carousel).append(html);
+                            showLoad(false);
 
                         },
                         error: function (err) {
@@ -77,3 +91,6 @@ $(document).ready(function () {
     });
 
 });
+
+
+var letra="<p></p>"

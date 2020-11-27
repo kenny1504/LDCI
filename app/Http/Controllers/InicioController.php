@@ -18,8 +18,11 @@ class InicioController extends Controller
     public function index()
     {
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
+        $tipoUsuario = session('tipoUsuario'); /** recupera nombre del usuario en session */
+
+
           if(!empty($nombreUsuario))
-          return view('theme.bracket.layout')->with('nombre', $nombreUsuario);
+          return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario);
          else
            return view('inicio');
     }
