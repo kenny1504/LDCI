@@ -19,7 +19,7 @@ class VendedorModel extends Model
     /** Funcion para cargar tabla vendedores*/
     public function getVendedores()
     {
-        $table = "(select v.id_vendedor,p.nombre ||' '|| p.apellido1 ||' '|| p.apellido2 as nombre,
+        $table = "(select v.id_vendedor,p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'') as nombre,
                     p.cedula,p.correo,p.telefono_1
                     from ldci.tb_vendedor as v
                     join ldci.tb_persona as p on v.id_persona=p.id_persona

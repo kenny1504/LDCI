@@ -27,7 +27,6 @@ Route::get('/registro/vericar/{code}', 'InicioController@verificar')->name ('Ver
 Route::get('/usuarios', 'UsuarioController@index')->name('Usuarios');
 Route::get('/registro','InicioController@registro')->name ('registro');
 Route::get('/','InicioController@index');
-Route::get('/inicio','InicioController@inicio')->name ('inicio');
 Route::get('/login','InicioController@loginOut')->name ('login');
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -71,3 +70,8 @@ Route::post('/producto/eliminar', 'ProductoController@eliminar')->name('eliminar
 //Rutas producto Vista Usuario
 Route::post('/producto/getProducto', 'ProductoController@getProductoUsario')->name('getProducto');
 Route::post('/producto/getProductoImagenes', 'ProductoController@getProductoImagenes')->name('getProductoImagenes');
+
+
+//Rutas cliente
+Route::post('/cliente/guardar', 'ClienteController@guardar')->name('guardarCliente');
+Route::post('/cliente/getAll', 'ClienteController@getClientes')->name('getAll');

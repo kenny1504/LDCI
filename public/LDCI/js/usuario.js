@@ -222,7 +222,7 @@ var select2=null;
                         _token:_token,
                         id_usuario:id_usuario,
                         usuario:usuario,
-                        correo:correo,
+                        correo:correo.trim(),
                         correo_old:correo_old,
                         telefono:telefono,
                         iso:iso,

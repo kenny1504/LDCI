@@ -26,14 +26,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a23ae3b7-da97-488a-81b1-d9db452a90d1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/LDCI/Core/dropzone.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/LDCI/Core/dropzone.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/LDCI/js/producto.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/catalogos/producto.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/LDCI/js/rastreo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InicioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InicioController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TemplateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TemplateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VendedorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VendedorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/VendedorModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/VendedorModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/LDCI/Core/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/Core/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/LDCI/js/cliente.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/cliente.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/LDCI/js/usuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/usuario.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/LDCI/js/vendedor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/vendedor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/LDCI/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/catalogos/usuarios.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/catalogos/usuarios.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/productos/5fb69236743b8.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/productos/5fb692a7460e1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cliente/cliente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cliente/cliente.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/rastreo/rastreo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/rastreo/rastreo.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/theme/bracket/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/theme/bracket/layout.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
@@ -177,7 +183,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/LDCI/Core" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/sistemas" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -191,8 +197,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\LDCI\public\LDCI\Core" />
       <recent name="C:\laragon\www\LDCI\public\LDCI\img" />
+      <recent name="C:\laragon\www\LDCI\public\LDCI\Core" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.ProductoController.php">
@@ -226,7 +232,8 @@
       <workItem from="1604544329411" duration="28318000" />
       <workItem from="1604717325173" duration="40576000" />
       <workItem from="1605229632439" duration="15782000" />
-      <workItem from="1605543655220" duration="72890000" />
+      <workItem from="1605543655220" duration="98608000" />
+      <workItem from="1606272932190" duration="31932000" />
     </task>
     <task id="LOCAL-00001" summary="Desactivar e activar usuarios, se agrego el correo de la empresa">
       <created>1604034542990</created>
@@ -347,7 +354,98 @@
       <option name="project" value="LOCAL" />
       <updated>1605249025237</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Catalogo productos con imagenes">
+      <created>1605800715241</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1605800715241</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Validando subida de imagenes en servidor">
+      <created>1605803852484</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1605803852484</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Permiso de escritura">
+      <created>1605804445578</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1605804445578</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Permiso de escritura">
+      <created>1605805065917</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1605805065917</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Permiso de escritura">
+      <created>1605805356523</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1605805356523</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Permiso de escritura">
+      <created>1605807865296</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1605807865296</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Permiso de escritura">
+      <created>1605809358062</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1605809358062</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Corrigiendo Footer">
+      <created>1605810612653</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1605810612653</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Correcciones (Eliminar Imagen)">
+      <created>1605821804559</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1605821804559</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Correccione (Eliminar Imagen)">
+      <created>1605824004003</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1605824004003</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Trabajando en vista producto(Usuario)">
+      <created>1605826155925</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1605826155925</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Pantalla de CLiente">
+      <created>1606279034399</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1606279034399</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Estructurando menu para CLiente">
+      <created>1606451533439</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1606451533439</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,19 +491,28 @@
     <MESSAGE value="Terminando vista inicio(Cliente)" />
     <MESSAGE value="Guardando vendedor" />
     <MESSAGE value="CRUD Empleado (Vendedor)" />
-    <option name="LAST_COMMIT_MESSAGE" value="CRUD Empleado (Vendedor)" />
+    <MESSAGE value="Catalogo productos con imagenes" />
+    <MESSAGE value="Validando subida de imagenes en servidor" />
+    <MESSAGE value="Permiso de escritura" />
+    <MESSAGE value="Corrigiendo Footer" />
+    <MESSAGE value="Correcciones (Eliminar Imagen)" />
+    <MESSAGE value="Correccione (Eliminar Imagen)" />
+    <MESSAGE value="Trabajando en vista producto(Usuario)" />
+    <MESSAGE value="Pantalla de CLiente" />
+    <MESSAGE value="Estructurando menu para CLiente" />
+    <option name="LAST_COMMIT_MESSAGE" value="Estructurando menu para CLiente" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605711910535">
+    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606719148548">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604634024969" />
+    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1606719148548" />
     <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768@0.0.1366.768" timestamp="1605711910535" />
-    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1605241753469">
+    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1606448630346">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605241753469" />
-    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1604799609719" />
+    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1606448630346" />
     <state x="517" y="303" key="NewPhpFileDialog" timestamp="1604872195956">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -418,16 +525,16 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="530" y="292" width="611" height="184" key="VCS.ChangelistChooser/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604034617117" />
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1605249085909">
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1606279044614">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605249085909" />
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1604870886432" />
-    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605732220786">
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1606279044614" />
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1605826162436" />
+    <state x="92" y="92" width="1182" height="583" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606448933775">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605596650283" />
-    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768@0.0.1366.768" timestamp="1605732220786" />
+    <state x="92" y="92" width="1182" height="583" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768@0.0.1366.768" timestamp="1606448933775" />
     <state x="501" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604250826589">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -437,10 +544,14 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="234" y="31" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.768@0.0.1366.768" timestamp="1605719550543" />
-    <state x="339" y="175" key="run.anything.popup" timestamp="1605556499820">
+    <state x="339" y="175" key="run.anything.popup" timestamp="1605805796784">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="339" y="175" key="run.anything.popup/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604554294865" />
-    <state x="339" y="175" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1605556499820" />
+    <state x="339" y="175" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1605805796784" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1605893965995">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1605893965995" />
   </component>
 </project>

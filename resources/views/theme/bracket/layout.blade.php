@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
 
     <!-- Core DATABLE -->
-
     <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
     <link rel="stylesheet" href="{{asset("LDCI/Core/dataTables.bootstrap.min.css")}}"  >
     <link rel="stylesheet" href="{{asset("LDCI/Core/bootstrap.scss")}}"  >
@@ -113,7 +112,6 @@
                             </div>
                         </div>
                     </section>
-
 
             </div>
             <footer class="br-footer">

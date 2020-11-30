@@ -20,21 +20,10 @@ class InicioController extends Controller
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
         $tipoUsuario = session('tipoUsuario'); /** recupera nombre del usuario en session */
 
-
           if(!empty($nombreUsuario))
           return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario);
          else
            return view('inicio');
-    }
-
-    public function inicio()
-    {
-       $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
-
-      if(!empty($nombreUsuario))
-       return view('theme.bracket.layout')->with('nombre', $nombreUsuario);   /** revuelve vista y nombre del usuario logueado */
-      else
-        return view('inicio');
     }
 
     public function login(Request $request)
@@ -63,8 +52,6 @@ class InicioController extends Controller
          {
             return response()->json(0); /** si es usuario no existe o esta eliminado */
          }
-
-
     }
 
     public function loginOut()
@@ -74,7 +61,6 @@ class InicioController extends Controller
         session()->forget('nombreUsuario');
 
         return redirect('/');
-
     }
 
     public function getUsuario()
@@ -89,7 +75,6 @@ class InicioController extends Controller
          {
             return response()->json(0); /** si es usuario no existe o esta eliminado */
          }
-
     }
 
     /** Funcion que permite guardar un nuevo usuario */
@@ -126,7 +111,6 @@ class InicioController extends Controller
          });
 
          /** Fin funcion para enviar correo */
-
          return response()->json(1);
       }
       return response()->json(0);
@@ -229,11 +213,9 @@ class InicioController extends Controller
              session(['idUsuario' =>($id_usuario) ]);
              session(['nombreUsuario' =>($usuario) ]);
 
-             return redirect('/');
           }
-          else
-             return redirect('/');
 
+             return redirect('/');
    }
 
 

@@ -4,7 +4,9 @@
   <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
   <div class="br-sideleft-menu">@csrf
 
-      @if($tipo==1)
+      @if($tipo!=3)
+
+          @if($tipo==1)
             <a href="catalogos.usuarios" class="optionMenu br-menu-link">
               <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-person-stalker tx-22"></i>
@@ -17,6 +19,7 @@
                 <span class="menu-item-label">Vendedores</span>
               </div><!-- menu-item -->
             </a><!-- br-menu-link -->
+          @endif
             <a href="cliente.cliente" class="optionMenu br-menu-link">
               <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-man tx-20"></i>
@@ -60,12 +63,14 @@
                   <li class="nav-item"><a href="catalogos.producto" class="optionMenu nav-link">Productos</a></li>
                   <li class="nav-item"><a href="catalogos.tipoModoTransporte" class="optionMenu nav-link">Modo Transporte</a></li>
               </ul>
+              @if($tipo==1)
               <a href="" class="optionMenu br-menu-link">
                   <div class="br-menu-item">
                       <i class="menu-item-icon icon ion-archive tx-20"></i>
                       <span  class=" menu-item-label">Reportes</span>
                   </div><!-- menu-item -->
               </a>
+              @endif
       @else
           <a href="catalogos.productoUsuario" class="optionMenu br-menu-link">
               <div class="br-menu-item">

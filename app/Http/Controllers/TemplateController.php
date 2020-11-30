@@ -9,8 +9,9 @@ class TemplateController extends Controller
        /** Metodo para retornar vista */
    public function template(Request $request)
    {
+      $id_usuario=session('idUsuario');
       $vista= $request->vista;
-      if(empty($nombreUsuario))
+      if(!empty($id_usuario))
       return response()->view($vista);
       else
       return response(-1);
