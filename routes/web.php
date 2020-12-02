@@ -75,3 +75,5 @@ Route::post('/producto/getProductoImagenes', 'ProductoController@getProductoImag
 //Rutas cliente
 Route::post('/cliente/guardar', 'ClienteController@guardar')->name('guardarCliente');
 Route::post('/cliente/getAll', 'ClienteController@getClientes')->name('getAll');
+Route::post('/cliente/datos', 'ClienteController@getDatosCliente')->name('cliente');
+Route::post('/cliente/eliminar', 'ClienteController@eliminar')->name('eliminar');

@@ -26,6 +26,9 @@ class ClienteController extends Controller
         $correo=$request->correo;
         $sexo=$request->sexo;
         $tipo=$request->tipo;
+        $iso2=$request->iso2;
+        $iso=$request->iso;
+
 
         $id_session = session('idUsuario');
 
@@ -35,12 +38,12 @@ class ClienteController extends Controller
         {
             if (empty($id_cliente))
             {
-                $guardar= (new ClienteModel)->guardar($giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$edad,$correo,$sexo,$tipo,$id_session);
+                $guardar= (new ClienteModel)->guardar($giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$edad,$correo,$sexo,$tipo,$id_session,$iso2,$iso);
                 return $guardar;
             }
             else
             {
-                $guardar= (new ClienteModel)->actualizar($id_cliente,$giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$correo,$sexo,$tipo,$id_session);
+                $guardar= (new ClienteModel)->actualizar($id_cliente,$giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$correo,$sexo,$tipo,$id_session,$iso2,$iso);
                 return $guardar;
             }
         }
@@ -57,6 +60,26 @@ class ClienteController extends Controller
     {
         $datos= (new ClienteModel)->getClientes();
         return response()->json($datos);
+
+    }
+
+    public  function getDatosCliente(Request $request)
+    {
+        $id_cliente= $request->id_cliente;
+
+        $datos= (new ClienteModel)->getDatosCliente($id_cliente);
+        return response()->json($datos);
+
+    }
+
+    /** Funcion para eliminar un cliente */
+    public  function eliminar(Request $request)
+    {
+        $id_cliente= $request->id_cliente;
+        $id_session = session('idUsuario');
+
+        $guardar= (new ClienteModel)->eliminar($id_cliente,$id_session);
+        return $guardar;
 
     }
 
