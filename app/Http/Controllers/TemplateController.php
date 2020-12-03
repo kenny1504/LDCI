@@ -12,7 +12,7 @@ class TemplateController extends Controller
       $id_usuario=session('idUsuario');
       $vista= $request->vista;
 
-      if($vista="InicioSesion.registro")
+      if($vista=="InicioSesion.registro")
           return response()->view($vista);
       if(!empty($id_usuario))
          return response()->view($vista);
