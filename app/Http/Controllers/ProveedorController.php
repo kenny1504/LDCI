@@ -29,6 +29,8 @@ class ProveedorController extends Controller
         $edad = $request->edad;
         $correo = $request->correo;
         $sexo = $request->sexo;
+        $iso = $request->iso;
+        $iso2 = $request->iso2;
 
 
         $id_session = session('idUsuario');
@@ -37,10 +39,10 @@ class ProveedorController extends Controller
 
         if (!$existe) {
             if (empty($id_proveedor)) {
-                $guardar = (new ProveedorModel)->guardar($nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $id_session);
+                $guardar = (new ProveedorModel)->guardar($nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $iso, $iso2, $id_session);
                 return $guardar;
             } else {
-                $guardar = (new ProveedorModel)->actualizar($id_proveedor, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $id_session);
+                $guardar = (new ProveedorModel)->actualizar($id_proveedor, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $iso, $iso2, $id_session);
                 return $guardar;
             }
         } else

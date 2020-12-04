@@ -11,7 +11,7 @@ class ProveedorModel extends Model
     /** Funcion para cargar tabla proveedores*/
     public function getProveedores()
     {
-        $table = "(select pr.id_proveedor,p.nombre ||' '|| p.apellido1 ||' '|| p.apellido2 as nombre,
+        $table = "(select pr.id_proveedor,CONCAT(p.nombre ,' ', p.apellido1 ,' ', p.apellido2) as nombre,
                     p.cedula,p.correo,p.telefono_1
                     from ldci.tb_proveedor as pr
                     join ldci.tb_persona as p on pr.id_persona=p.id_persona
@@ -49,14 +49,14 @@ class ProveedorModel extends Model
     }
 
     /** Funcion para guardar un proveedor */
-    public function guardar($nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $id_session)
+    public function guardar($nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $iso, $iso2, $id_session)
     {
         DB::beginTransaction();
         $query_persona = new static;
         $query_persona = DB::select('INSERT INTO ldci.tb_persona(
         nombre, apellido1, apellido2, direccion, correo, edad, sexo, id_departamento,
         telefono_1, telefono_2, iso, iso_2, cedula,usuario_grabacion, fecha_grabacion)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, now()) RETURNING id_persona', [$nombres, $apellido1, $apellido2, $direccion, $correo, $edad, $sexo, $departamento, $telefono_1, $telefono_2, "ni", "ni", $cedula, $id_session]);
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, now()) RETURNING id_persona', [$nombres, $apellido1, $apellido2, $direccion, $correo, $edad, $sexo, $departamento, $telefono_1, $telefono_2, $iso, $iso2, $cedula, $id_session]);
         if (empty($query_persona)) {
             DB::rollBack();
             return collect([
@@ -89,7 +89,7 @@ class ProveedorModel extends Model
     {
         $query = new static;
         $query = DB::select('select p.nombre,p.apellido1,p.apellido2,edad,ltrim(p.sexo) as sexo,p.cedula,p.correo,
-                                        p.direccion,p.id_departamento,p.telefono_1,p.telefono_2
+                                        p.iso,p.iso_2,p.direccion,p.id_departamento,p.telefono_1,p.telefono_2
                                         from ldci.tb_proveedor pr
                                         join ldci.tb_persona p on pr.id_persona=p.id_persona
                                         where  id_proveedor=? and pr.estado=1', [$id_proveedor]);
@@ -97,16 +97,16 @@ class ProveedorModel extends Model
     }
 
     /** Funcion para actualizar un proveedor */
-    public function actualizar($id_proveedor, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $id_session)
+    public function actualizar($id_proveedor, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $iso, $iso2, $id_session)
     {
         DB::beginTransaction();
 
         $query_persona = new static;
         $query_persona = DB::update('UPDATE  ldci.tb_persona p
             SET nombre=?, apellido1=?, apellido2=?, direccion=?, correo=?,
-            id_departamento=?, telefono_1=?, telefono_2=?,edad=?,
+            id_departamento=?, telefono_1=?, telefono_2=?,edad=?,iso=?, iso_2=?,
             cedula=?, sexo=?,usuario_modificacion=?, fecha_modificacion=now()
-            WHERE id_persona=(select id_persona from ldci.tb_proveedor where id_proveedor=? limit 1)', [$nombres, $apellido1, $apellido2, $direccion, $correo, $departamento, $telefono_1, $edad, $telefono_2, $cedula, $sexo, $id_session, $id_proveedor]);
+            WHERE id_persona=(select id_persona from ldci.tb_proveedor where id_proveedor=? limit 1)', [$nombres, $apellido1, $apellido2, $direccion, $correo, $departamento, $telefono_1, $telefono_2, $edad, $iso, $iso2, $cedula, $sexo, $id_session, $id_proveedor]);
 
         if (!$query_persona) {
             DB::rollBack();

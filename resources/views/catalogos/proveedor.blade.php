@@ -98,16 +98,16 @@
                             <input type="text" id="txt_correo" name="txt_correo" class="form-control input-md">
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="txt_telefono_1">Telefono Personal</label>
-                            <input onkeypress="return soloNumeros(event,txt_telefono_1);" type="text" required id="txt_telefono_1" maxlength="8" name="txt_telefono_1" class="form-control input-md">
+                            <input onkeypress="return soloNumeros(event,txt_telefono_1);" type="tel" required id="txt_telefono_1" maxlength="8" name="txt_telefono_1" class="form-control input-md">
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="txt_telefono_2">Telefono Domicilio</label>
-                            <input onkeypress="return soloNumeros(event,txt_telefono_2);"  type="text" id="txt_telefono_2" maxlength="8" name="txt_telefono_2" class="form-control input-md">
+                            <input onkeypress="return soloNumeros(event,txt_telefono_2);"  type="tel" id="txt_telefono_2" maxlength="8" name="txt_telefono_2" class="form-control input-md">
                         </div>
                     </div>
                 </div>

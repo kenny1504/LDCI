@@ -1,5 +1,48 @@
 var tblProveedores = null;
 
+var input = document.querySelector("#txt_telefono_1");
+    select_1 = window.intlTelInput(input, {
+    allowDropdown: true,
+    autoHideDialCode: false,
+    autoPlaceholder: "off",
+    dropdownContainer: document.body,
+    formatOnDisplay: false,
+    geoIpLookup: function(callback) {
+    $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+        var countryCode = (resp && resp.country) ? resp.country : "";
+        callback(countryCode);
+    });
+    },
+        hiddenInput: "full_number",
+        initialCountry: "auto",
+        nationalMode: false,
+        placeholderNumberType: "MOBILE",
+        separateDialCode: true,
+        setNumber:351,
+        utilsScript: "LDCI/Core/utils.js",
+    });
+
+    var input = document.querySelector("#txt_telefono_2");
+    select_2 = window.intlTelInput(input, {
+        allowDropdown: true,
+        autoHideDialCode: false,
+        autoPlaceholder: "off",
+        dropdownContainer: document.body,
+        formatOnDisplay: false,
+        geoIpLookup: function(callback) {
+            $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                callback(countryCode);
+            });
+        },
+        hiddenInput: "full_number",
+        initialCountry: "auto",
+        nationalMode: false,
+        placeholderNumberType: "MOBILE",
+        separateDialCode: true,
+        setNumber:351,
+        utilsScript: "LDCI/Core/utils.js",
+    });
 
     $(document).ready(function () {
 
@@ -71,8 +114,10 @@ var tblProveedores = null;
         var edad= $('#txt_edad').val();
         var correo= $('#txt_correo').val();
         var sexo= $('#cmb_sexo').val();
+        var iso= select_1.getSelectedCountryData().iso2;
+        var iso2= select_2.getSelectedCountryData().iso2;
 
-        if (correo!="" && edad!="" && nombres!="" && apellido1!="" && apellido2!="" && cedula!="" && sexo!=""&& direccion!="" && departamento!="" && telefono_1!="")
+        if (correo!="" && edad!="" && nombres!="" && apellido1!="" && cedula!="" && sexo!=""&& direccion!="" && departamento!="" && telefono_1!="")
         {
             alertConfirm("¿Está seguro que desea guardar?", function (e) {
                 showLoad(true);
@@ -92,7 +137,9 @@ var tblProveedores = null;
                         telefono_2:telefono_2,
                         edad:edad,
                         correo:correo,
-                        sexo:sexo.trim()
+                        sexo:sexo.trim(),
+                        iso:iso,
+                        iso2:iso2
                     },
                     success: function (data) {
                         showLoad(false);
@@ -192,6 +239,8 @@ var tblProveedores = null;
                 $('#txt_edad').val(data[0].edad);
                 $('#txt_correo').val(data[0].correo);
                 $('#cmb_sexo').val(data[0].sexo);
+                select_1.setCountry(data[0].iso);
+                select_2.setCountry(data[0].iso_2);
             },
             error: function(err){
                 alertError(err.responseText);
