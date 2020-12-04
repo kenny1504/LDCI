@@ -10,9 +10,12 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
 
     $(document).ready(function () {
 
-        console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
-        console.log("%cEl codigo que ingrese en esta consola que pueda altere el comportamiento del sistema sera penalizado.\n", "color: green");
-        $('#btnLeftMenu').click();
+        setTimeout(function () {
+            console.clear();
+            console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
+            console.log("%cEl codigo que ingrese en esta consola que pueda alterar el comportamiento del sistema sera penalizado.\n", "color: green");
+        }, 300);
+       $('#btnLeftMenu').click();
 
         var input = document.querySelector("#phone");
         select = window.intlTelInput(input, {
@@ -39,7 +42,7 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
     })
 
 
-    /*
+    /**
         Mostrar mensaje cuando la ejecucion sea correcta
     */
     function alertSuccess(textHtml) {
@@ -47,7 +50,7 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
         alertify.success(textHtml);
     }
 
-    /*
+    /**
         Mostrar mensaje de error
     */
     function alertError(textHtml) {
@@ -430,7 +433,7 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
                         data: {
                             _token:_token,
                             usuario:usuario,
-                            correo:correo,
+                            correo:correo.trim(),
                             correo_old:correo_old,
                             telefono:telefono,
                             pass_new:Base64.encode(pass_new),
@@ -459,7 +462,6 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
 
                     });
                 });
-
             }
         }
         else

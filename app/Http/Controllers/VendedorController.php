@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\VendedorModel;
 use Illuminate\Http\Request;
 

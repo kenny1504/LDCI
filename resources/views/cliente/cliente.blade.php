@@ -17,10 +17,10 @@
                                 <div class="form-group">
                                     <label for="">No.Cliente</label>
                                     <div class="input-group">
-                                        <input disabled type="text" id="id_empleado" name="id_empleado" class="form-control input-md">
+                                        <input disabled type="text" id="id_cliente" name="id_cliente" class="form-control input-md">
                                         <span class="input-group-btn">
-                                            <button onclick="listarVendedores()" class="btn btn-default" data-toggle="modal" data-target="#ModalVendedores"
-                                                    id="btnBuscarEmpleado" type="button"><i class="fa fa-search"></i></button>
+                                            <button onclick="listarClientes()" class="btn btn-default" data-toggle="modal" data-target="#ModalClientes"
+                                                    id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
                                         </span>
                                     </div>
                                 </div>
@@ -104,20 +104,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="cmb_estado_civil">Estado Civil</label>
-                            <select name="cmb_estado_civil"  id="cmb_estado_civil" class="form-control input-md">
-                                <option selected disabled value="">Seleccione</option>
-                                <option value="1">Casado/a</option>
-                                <option value="2">Divorciado/a</option>
-                                <option value="3">Unión Libre</option>
-                                <option value="4">Soltero/a</option>
-                                <option value="5">Viudo/a</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="txt_cedula">Cédula Nacional</label>
                             <input placeholder="001-000000-0000A" onblur="verificar_cedula(this)" type="text" name="txt_cedula"  id="txt_cedula" class="form-control input-md">
@@ -159,10 +146,10 @@
             </div>
             <div class="box-footer text-center">
                 <div class="col-md-12">
-                    <button onclick="guardar()" class="btn btn-success" id="btnGuardarEmpleado">
+                    <button onclick="guardar()" class="btn btn-success" id="btnGuardarCliente">
                         <i class="fa fa-save"> </i> Guardar
                     </button>
-                    <button disabled onclick="eliminar()" class="btn btn-danger" id="btnEliminarEmpleado">
+                    <button disabled onclick="eliminar()" class="btn btn-danger" id="btnEliminarCliente">
                         <i class="fa fa-trash-o"> </i> Eliminar
                     </button>
                     <button onclick="resetForm()" class="btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
@@ -174,7 +161,7 @@
 </div>
 
 
-<div id="ModalVendedores" class="modal fade" role="document" >
+<div id="ModalClientes" class="modal fade" role="document" >
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
@@ -190,12 +177,12 @@
                         <h4 align="center">Busqueda de Registro</h4>
                     </div>
                     <div class="box-body">
-                        <table id="tblVendedores" class="table table-striped table-bordered">
+                        <table id="tblClientes" class="table table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nombre</th>
-                                <th>Cedula</th>
+                                <th>Identificacion</th>
                                 <th>Correo</th>
                                 <th>Telefono</th>
                                 <th>Seleccione</th>

@@ -19,7 +19,7 @@ class VendedorModel extends Model
     /** Funcion para cargar tabla vendedores*/
     public function getVendedores()
     {
-        $table = "(select v.id_vendedor,p.nombre ||' '|| p.apellido1 ||' '|| p.apellido2 as nombre,
+        $table = "(select v.id_vendedor,p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'') as nombre,
                     p.cedula,p.correo,p.telefono_1
                     from ldci.tb_vendedor as v
                     join ldci.tb_persona as p on v.id_persona=p.id_persona
@@ -114,8 +114,9 @@ class VendedorModel extends Model
     {
 
         $query = new static;
-        $query = DB::select('select p.nombre,p.apellido1,p.apellido2,edad,ltrim(p.sexo) as sexo,v.estado_civil,p.cedula,p.correo,
-                                        p.direccion,p.id_departamento,p.telefono_1,p.telefono_2,v.contacto_emergencia,v.telefono_emergencia
+        $query = DB::select('select p.nombre,p.apellido1,p.apellido2,ltrim(p.sexo) as sexo,v.estado_civil,p.cedula,p.correo,
+                                        p.direccion,p.id_departamento,p.telefono_1,p.telefono_2,v.contacto_emergencia,v.telefono_emergencia,
+                                        ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+1900)-(select extract(year from now())))*(-1) as edad
                                         from ldci.tb_vendedor v
                                         join ldci.tb_persona p on v.id_persona=p.id_persona
                                         where  id_vendedor=? and v.estado=1', [$id_vendedor]);

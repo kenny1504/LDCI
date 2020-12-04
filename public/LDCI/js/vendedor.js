@@ -77,8 +77,10 @@ var tblVendedores = null;
         var correo= $('#txt_correo').val();
         var sexo= $('#cmb_sexo').val();
 
+        if (apellido2!="")
+            apellido2:apellido2.trim().toUpperCase()
 
-        if (correo!="" && edad!="" && estado_civil!="" && nombres!="" && apellido1!="" && apellido2!="" && cedula!="" && sexo!=""&& direccion!="" && departamento!="" && telefono_1!="" && nomb_notifica!="" && telefono_not!="")
+        if (correo!="" && edad!="" && estado_civil!="" && nombres!="" && apellido1!=""  && cedula!="" && sexo!=""&& direccion!="" && departamento!="" && telefono_1!="" && nomb_notifica!="" && telefono_not!="")
         {
             alertConfirm("¿Está seguro que desea guardar?", function (e) {
                 showLoad(true);
@@ -90,17 +92,17 @@ var tblVendedores = null;
                         id_empleado:id_empleado,
                         nombres:nombres.trim().toUpperCase(),
                         apellido1:apellido1.trim().toUpperCase(),
-                        apellido2:apellido2.trim().toUpperCase(),
+                        apellido2:apellido2,
                         cedula:cedula.toUpperCase(),
                         direccion:direccion.trim(),
                         departamento:departamento,
                         telefono_1:telefono_1,
                         telefono_2:telefono_2,
-                        nomb_notifica:nomb_notifica,
+                        nomb_notifica:nomb_notifica.trim().toUpperCase(),
                         estado_civil:estado_civil,
                         telefono_not:telefono_not,
                         edad:edad,
-                        correo:correo,
+                        correo:correo.trim(),
                         sexo:sexo.trim()
                     },
                     success: function (data) {
