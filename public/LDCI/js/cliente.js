@@ -206,12 +206,24 @@ var tblClientes=null;
                     _token:_token
                 },
             },
-            columnDefs: [{
+            columnDefs: [
+                {
+                    targets: 5,
+                    data: null,
+                    orderable: false,
+                    render: function (json) {
+                        if (json[5] == 1)
+                            return '<span data-toggle="tooltip" data-state="1" class="btnStatus btn btn-xs btn-block btn-primary">Natural</span>';
+                        if (json[5] == 2)
+                            return '<span data-toggle="tooltip" data-state="1" class="btnStatus btn btn-xs btn-block btn-success">Juridico</span>';
+                    }
+                },
+                {
                 targets: -1,
                 data: null,
                 orderable: false,
                 defaultContent: '<button class="btn btn-info" onclick="selectCliente(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
-            }]
+              }]
         });
     }
 
@@ -333,5 +345,47 @@ var tblClientes=null;
         $("#id_cliente,#txt_nombreEmpresa,#txt_giroNegocio,#txt_ruc,#txt_nombres").val("");
         $("#txt_telefono_1,#txt_apellido1,#apellido2,#txt_apellido2,#txt_edad").val("");
         $("#cmb_sexo,#txt_cedula,#txt_direccion,#cmb_Departamento,#txt_correo,#txt_telefono_2").val("");
+
+    }
+
+
+    function valida_usuario()
+    {
+        var _token= $('input[name=_token]').val();
+        var correo= $('#txt_correo').val();
+
+        if (correo!="")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/cliente/correo', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    correo:correo
+                },
+                success: function (data) {
+
+                    if (Object.entries(data).length==0)
+                    {
+                        alertError("No existe ningun usuario con este correo asociado");
+                        $('#txt_correo').val("");
+                    }else if (data[0].correo!=null)
+                    {
+                        alertError("Ya existe un usuario con este correo asociado");
+                        $('#txt_correo').val("");
+                    }
+                    else
+                        alertSuccess("Usuario:"+data[0].usuario);
+
+                    showLoad(false);
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        }
+
 
     }

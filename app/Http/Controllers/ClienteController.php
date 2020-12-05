@@ -43,7 +43,7 @@ class ClienteController extends Controller
             }
             else
             {
-                $guardar= (new ClienteModel)->actualizar($id_cliente,$giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$correo,$sexo,$tipo,$id_session,$iso2,$iso);
+                $guardar= (new ClienteModel)->actualizar($id_cliente,$giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$sexo,$tipo,$id_session,$iso2,$iso);
                 return $guardar;
             }
         }
@@ -80,6 +80,16 @@ class ClienteController extends Controller
 
         $guardar= (new ClienteModel)->eliminar($id_cliente,$id_session);
         return $guardar;
+
+    }
+
+    /** Funcion para validar el correo asociado a un usuario*/
+    public  function validacorreo(Request $request)
+    {
+        $correo= $request->correo;
+
+        $datos= (new ClienteModel)->correo($correo);
+        return response()->json($datos);
 
     }
 

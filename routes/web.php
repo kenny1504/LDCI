@@ -36,7 +36,7 @@ Route::post('/usuarios/estado', 'UsuarioController@cambiarEstado');
 Route::post('/usuarios/guardar', 'UsuarioController@guardar');
 Route::post('/usuario/resetpassword', 'UsuarioController@ressetpassword');
 
-  
+
 //Rutas Tipo Transporte
 Route::post('/tipoTransporte/getAll', 'TipoTransporteController@getTipoTransporte')->name('getAll');
 Route::post('/tipoTransporte/guardar', 'TipoTransporteController@guardar')->name('guardar');
@@ -82,4 +82,5 @@ Route::post('/cliente/guardar', 'ClienteController@guardar')->name('guardarClien
 Route::post('/cliente/getAll', 'ClienteController@getClientes')->name('getAll');
 Route::post('/cliente/datos', 'ClienteController@getDatosCliente')->name('cliente');
 Route::post('/cliente/eliminar', 'ClienteController@eliminar')->name('eliminar');
+Route::post('/cliente/correo', 'ClienteController@validacorreo')->name('validar');
 

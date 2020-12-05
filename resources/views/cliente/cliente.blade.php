@@ -133,7 +133,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="txt_correo">Correo</label>
-                            <input type="text" id="txt_correo" name="txt_correo" class="form-control input-md">
+                            <input onblur="valida_usuario()" type="text" id="txt_correo" name="txt_correo" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -185,6 +185,7 @@
                                 <th>Identificacion</th>
                                 <th>Correo</th>
                                 <th>Telefono</th>
+                                <th>Tipo</th>
                                 <th>Seleccione</th>
                             </tr>
                             </thead>

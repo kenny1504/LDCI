@@ -21,7 +21,7 @@ class ClienteModel extends Model
                     case c.tipo when 1
                     then p.telefono_2
                     else p.telefono_1 end as contacto,
-                    p.correo
+                    p.correo,c.tipo
                 from ldci.tb_cliente as c
                 join ldci.tb_persona as p on c.id_persona=p.id_persona
                 where c.estado=1 order by c.id_cliente desc) as tb ";
@@ -32,7 +32,8 @@ class ClienteModel extends Model
             ['db' => 'nombre', 'dt' => 1],
             ['db' => 'identificacion', 'dt' => 2],
             ['db' => 'correo', 'dt' => 3],
-            ['db' => 'contacto', 'dt' => 4]
+            ['db' => 'contacto', 'dt' => 4],
+            ['db' => 'tipo', 'dt' => 5]
         ];
 
         /*** Config DB */
@@ -125,7 +126,7 @@ class ClienteModel extends Model
     }
 
     /** Funcion para actualizar un cliente */
-    public function actualizar($id_cliente,$giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$correo,$sexo,$tipo,$id_session,$iso2,$iso)
+    public function actualizar($id_cliente,$giro_Negocio,$nombre_Empresa,$ruc,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$sexo,$tipo,$id_session,$iso2,$iso)
     {
         DB::beginTransaction();
 
@@ -147,10 +148,10 @@ class ClienteModel extends Model
         {
             $query_persona = new static;
             $query_persona = DB::update('UPDATE  ldci.tb_persona p
-            SET nombre=?, apellido1=?, apellido2=?, direccion=?, correo=?,
+            SET nombre=?, apellido1=?, apellido2=?, direccion=?,
             id_departamento=?, telefono_1=?, telefono_2=?,iso=?,iso_2=?,
             cedula=?, sexo=?,usuario_modificacion=?, fecha_modificacion=now()
-            WHERE id_persona=(select id_persona from ldci.tb_cliente where id_cliente=? limit 1)', [$nombres,$apellido1,$apellido2,$direccion,$correo,$departamento,$telefono_1,$telefono_2,$iso,$iso2,$cedula,$sexo,$id_session,$id_cliente]);
+            WHERE id_persona=(select id_persona from ldci.tb_cliente where id_cliente=? limit 1)', [$nombres,$apellido1,$apellido2,$direccion,$departamento,$telefono_1,$telefono_2,$iso,$iso2,$cedula,$sexo,$id_session,$id_cliente]);
 
             if (!$query_persona)
             {
@@ -217,6 +218,19 @@ class ClienteModel extends Model
 
         }
 
+    }
+
+    /** Funcion para validar el correo asociado a un usuario*/
+    public function correo($correo)
+    {
+
+        $query = new static;
+        $query = DB::select('select  usuario,p.correo from ldci.tb_usuario u
+                            left join ldci.tb_persona p on p.correo=u.correo
+                            left join ldci.tb_cliente c on c.id_persona=p.id_persona
+                            where u.correo=? and u.tipo=3', [$correo]);
+
+        return $query;
     }
 
 }
