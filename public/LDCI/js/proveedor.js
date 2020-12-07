@@ -46,26 +46,27 @@ var input = document.querySelector("#txt_telefono_1");
 
     $(document).ready(function () {
 
+        $('#txt_cedula').mask('000-000000-0000S');
         var _token= $('input[name=_token]').val();
         showLoad(true);
 
-        /** recupera los paises */
+        /** recupera los departamentos de Nicaragua */
         $.ajax({
             type: 'POST',
-            url: '/paises/getAll', //llamada a la ruta
+            url: '/departamentos/getAll', //llamada a la ruta
             data: {
                 _token:_token
             },
             success: function (data) {
 
-                $('#cmb_Pais').empty();
+                $('#cmb_Departamento').empty();
 
                 var datos = '<option selected disabled value ="">Seleccione</option>';
                 data.forEach(element => {
-                    datos += '<option  value="' + element.id_pais + '">' + element.nombre + '</option>';
+                    datos += '<option  value="' + element.id_ciudad + '">' + element.nombre + '</option>';
                 });
 
-                $('#cmb_Pais').append(datos);
+                $('#cmb_Departamento').append(datos);
                 showLoad(false);
             },
             error: function (err) {
@@ -88,15 +89,12 @@ var input = document.querySelector("#txt_telefono_1");
                     _token:_token
                 },
             },
-            columnDefs:
-            [
-                {
+            columnDefs: [{
                 targets: -1,
                 data: null,
                 orderable: false,
                 defaultContent: '<button class="btn btn-info" onclick="selectProveedor(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
-            }
-        ]
+            }]
         });
     }
 
@@ -105,17 +103,21 @@ var input = document.querySelector("#txt_telefono_1");
     {
         var _token = $('input[name=_token]').val();
         var id_proveedor= $('#id_proveedor').val();
-        var nombre= $('#txt_nombre').val();
-        var correo= $('#txt_correo').val();
+        var nombres= $('#txt_nombres').val();
+        var apellido1= $('#txt_apellido1').val();
+        var apellido2= $('#txt_apellido2').val();
+        var cedula= $('#txt_cedula').val();
         var direccion= $('#txt_direccion').val();
-        var pais= $('#cmb_Pais').val();
-        var pagina_web= $('#txt_pagina_web').val();
+        var departamento= $('#cmb_Departamento').val();
         var telefono_1= $('#txt_telefono_1').val();
         var telefono_2= $('#txt_telefono_2').val();
+        var edad= $('#txt_edad').val();
+        var correo= $('#txt_correo').val();
+        var sexo= $('#cmb_sexo').val();
         var iso= select_1.getSelectedCountryData().iso2;
         var iso2= select_2.getSelectedCountryData().iso2;
 
-        if (correo!="" && nombre!="" && direccion!="" && telefono_1!="")
+        if (correo!="" && edad!="" && nombres!="" && apellido1!="" && cedula!="" && sexo!=""&& direccion!="" && departamento!="" && telefono_1!="")
         {
             alertConfirm("¿Está seguro que desea guardar?", function (e) {
                 showLoad(true);
@@ -125,13 +127,17 @@ var input = document.querySelector("#txt_telefono_1");
                     data: {
                         _token:_token,
                         id_proveedor:id_proveedor,
-                        nombre:nombre.trim().toUpperCase(),
-                        correo:correo,
+                        nombres:nombres.trim().toUpperCase(),
+                        apellido1:apellido1.trim().toUpperCase(),
+                        apellido2:apellido2.trim().toUpperCase(),
+                        cedula:cedula.toUpperCase(),
                         direccion:direccion.trim(),
-                        pais:pais,
-                        pagina_web:pagina_web,
+                        departamento:departamento,
                         telefono_1:telefono_1,
                         telefono_2:telefono_2,
+                        edad:edad,
+                        correo:correo,
+                        sexo:sexo.trim(),
                         iso:iso,
                         iso2:iso2
                     },
@@ -222,13 +228,17 @@ var input = document.querySelector("#txt_telefono_1");
                 showLoad(false);
 
                 $('#id_proveedor').val(Proveedor.id_proveedor);
-                $('#txt_nombre').val(data[0].nombre);
-                $('#txt_correo').val(data[0].correo);
+                $('#txt_nombres').val(data[0].nombre);
+                $('#txt_apellido1').val(data[0].apellido1);
+                $('#txt_apellido2').val(data[0].apellido2);
+                $('#txt_cedula').val(data[0].cedula);
                 $('#txt_direccion').val(data[0].direccion);
-                $('#cmb_Pais').val(data[0].id_pais);
-                $('#txt_pagina_web').val(data[0].pagina_web);
+                $('#cmb_Departamento').val(data[0].id_departamento);
                 $('#txt_telefono_1').val(data[0].telefono_1);
                 $('#txt_telefono_2').val(data[0].telefono_2);
+                $('#txt_edad').val(data[0].edad);
+                $('#txt_correo').val(data[0].correo);
+                $('#cmb_sexo').val(data[0].sexo);
                 select_1.setCountry(data[0].iso);
                 select_2.setCountry(data[0].iso_2);
             },
@@ -238,9 +248,10 @@ var input = document.querySelector("#txt_telefono_1");
             }
         });
     }
+
     /** Limpia el formulario */
     function resetForm() {
 
-        $("#id_proveedor,#txt_nombre,#txt_correo,#txt_direccion,#cmb_Pais,#txt_pagina_web,#txt_telefono_1,#txt_telefono_2").val("");
+        $("#txt_correo,#txt_edad,#id_proveedor,#txt_nombres,#txt_apellido1,#txt_apellido2,#txt_cedula,#txt_direccion,#cmb_Departamento,#txt_telefono_1,#txt_telefono_2,#cmb_sexo").val("");
         $('#btnEliminarProveedor').attr("disabled", "FALSE");
     }

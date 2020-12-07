@@ -12,41 +12,42 @@ class ProveedorController extends Controller
         $datos = (new ProveedorModel)->getProveedores();
         return response()->json($datos);
     }
-    public function getPaises()
-    {
-        $datos = (new ProveedorModel)->getPaises();
-        return response()->json($datos);
-    }
+
     /** Funcion para actualizar/guardar un proveedor */
     public function guardar(Request $request)
     {
         /** Recupera parametros enviados por ajax */
         $id_proveedor = $request->id_proveedor;
-        $nombre = $request->nombre;
-        $correo = $request->correo;
+        $nombres = $request->nombres;
+        $apellido1 = $request->apellido1;
+        $apellido2 = $request->apellido2;
+        $cedula = $request->cedula;
         $direccion = $request->direccion;
-        $pais = $request->pais;
-        $pagina_web = $request->pagina_web;
+        $departamento = $request->departamento;
         $telefono_1 = $request->telefono_1;
         $telefono_2 = $request->telefono_2;
+        $edad = $request->edad;
+        $correo = $request->correo;
+        $sexo = $request->sexo;
         $iso = $request->iso;
         $iso2 = $request->iso2;
 
+
         $id_session = session('idUsuario');
 
-        $existe = (new ProveedorModel)->existe($correo, $id_proveedor);
+        $existe = (new ProveedorModel)->existe($cedula, $id_proveedor);
 
         if (!$existe) {
             if (empty($id_proveedor)) {
-                $guardar = (new ProveedorModel)->guardar($nombre, $correo, $direccion, $pais, $pagina_web, $telefono_1, $telefono_2, $iso, $iso2, $id_session);
+                $guardar = (new ProveedorModel)->guardar($nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $iso, $iso2, $id_session);
                 return $guardar;
             } else {
-                $guardar = (new ProveedorModel)->actualizar($id_proveedor, $nombre, $correo, $direccion, $pais, $pagina_web, $telefono_1, $telefono_2, $iso, $iso2, $id_session);
+                $guardar = (new ProveedorModel)->actualizar($id_proveedor, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $iso, $iso2, $id_session);
                 return $guardar;
             }
         } else
             return collect([
-                'mensaje' => 'Ya existe un registro con el correo ingresado',
+                'mensaje' => 'Ya existe un registro con la cedula proporcionada',
                 'error' => true,
             ]);
     }
