@@ -25,9 +25,9 @@ Route::post('/login/in', 'InicioController@login')->name('login-in');
 // Rutas Get Unicas
 Route::get('/registro/vericar/{code}', 'InicioController@verificar')->name('Vericada'); //Ruta para verificar correo
 Route::get('/usuarios', 'UsuarioController@index')->name('Usuarios');
-Route::get('/registro','InicioController@registro')->name ('registro');
-Route::get('/','InicioController@index');
-Route::get('/login','InicioController@loginOut')->name ('login');
+Route::get('/registro', 'InicioController@registro')->name('registro');
+Route::get('/', 'InicioController@index');
+Route::get('/login', 'InicioController@loginOut')->name('login');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Rutas Usuarios
@@ -72,6 +72,7 @@ Route::post('/producto/getProducto', 'ProductoController@getProductoUsario')->na
 Route::post('/producto/getProductoImagenes', 'ProductoController@getProductoImagenes')->name('getProductoImagenes');
 
 //Rutas Proveedor
+Route::post('/paises/getAll', 'ProveedorController@getPaises')->name('getAll');
 Route::post('/proveedor/getAll', 'ProveedorController@getProveedores')->name('getAll');
 Route::post('/proveedor/guardar', 'ProveedorController@guardar')->name('guardar');
 Route::post('/proveedor/datos', 'ProveedorController@getDatosProveedor')->name('proveedor');
@@ -83,4 +84,3 @@ Route::post('/cliente/getAll', 'ClienteController@getClientes')->name('getAll');
 Route::post('/cliente/datos', 'ClienteController@getDatosCliente')->name('cliente');
 Route::post('/cliente/eliminar', 'ClienteController@eliminar')->name('eliminar');
 Route::post('/cliente/correo', 'ClienteController@validacorreo')->name('validar');
-

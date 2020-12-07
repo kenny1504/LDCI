@@ -29,47 +29,18 @@
                     </div>
                     <div class="col-md-2 ">
                         <img class="img-responsive" width="100px"
-                            src="LDCI/img/user.png" alt="">
+                            src="LDCI/img/buildings.png" alt="">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label for="txt_nombres">Nombres</label>
-                            <input type="text" id="txt_nombres"  name="txt_nombres" class="form-control input-md">
+                            <label for="txt_nombres">Nombre</label>
+                            <input type="text" id="txt_nombre"  name="txt_nombre" class="form-control input-md">
                         </div>
                     </div>
-
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label for="txt_apellido1">Apellido 1</label>
-                            <input type="text" id="txt_apellido1"  name="txt_apellido1" class="form-control input-md">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="txt_apellido2">Apellido 2</label>
-                            <input type="text" id="txt_apellido2"  name="txt_apellido2" class="form-control input-md">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="txt_edad">Edad</label>
-                            <input type="text" id="txt_edad" name="txt_edad"  class="form-control input-md">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="cmb_sexo">Sexo</label>
-                            <select name="cmb_sexo" id="cmb_sexo"  class="form-control input-md">
-                                <option selected disabled value="">Seleccione</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="txt_cedula">Cédula Nacional</label>
-                            <input placeholder="001-000000-0000A" onblur="verificar_cedula(this)" type="text" name="txt_cedula"  id="txt_cedula" class="form-control input-md">
+                            <label for="txt_pagina_web">Dirección de Pagina Web</label>
+                            <input type="text" id="txt_pagina_web" name="txt_pagina_web"  class="form-control input-md">
                         </div>
                     </div>
                 </div>
@@ -87,8 +58,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="cmb_Departamento">Departamento</label>
-                            <select name="cmb_Departamento"  id="cmb_Departamento" class="form-control input-md">
+                            <label for="cmb_Pais">Pais</label>
+                            <select name="cmb_Pais"  id="cmb_Pais" class="form-control input-md">
                             </select>
                         </div>
                     </div>
@@ -100,13 +71,13 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="txt_telefono_1">Telefono Personal</label>
+                            <label for="txt_telefono_1">Telefono N#1</label>
                             <input onkeypress="return soloNumeros(event,txt_telefono_1);" type="tel" required id="txt_telefono_1" maxlength="8" name="txt_telefono_1" class="form-control input-md">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="txt_telefono_2">Telefono Domicilio</label>
+                            <label for="txt_telefono_2">Telefono N#2</label>
                             <input onkeypress="return soloNumeros(event,txt_telefono_2);"  type="tel" id="txt_telefono_2" maxlength="8" name="txt_telefono_2" class="form-control input-md">
                         </div>
                     </div>
@@ -149,7 +120,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nombre</th>
-                                        <th>Cedula</th>
                                         <th>Correo</th>
                                         <th>Telefono</th>
                                         <th>Seleccione</th>
