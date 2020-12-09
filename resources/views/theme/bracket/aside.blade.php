@@ -3,7 +3,7 @@
 <div class="br-sideleft overflow-y-auto ps ps--theme_default ps--active-x ps--active-y">
   <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
   <div class="br-sideleft-menu">@csrf
-  
+
       @if($tipo!=3)
 
           @if($tipo==1)
@@ -37,7 +37,7 @@
               <li class="nav-item"><a href="" class="nav-link">Ver Facturas</a></li>
               <li class="nav-item"><a href="" class="nav-link">Generar factura</a></li>
             </ul>
-            <a href="" class="br-menu-link">
+            <a href="cotizacion.cotizacion" class="optionMenu br-menu-link">
               <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-clipboard tx-24"></i>
                 <span class="menu-item-label">Cotizaciones</span>

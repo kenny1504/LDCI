@@ -84,3 +84,7 @@ Route::post('/cliente/getAll', 'ClienteController@getClientes')->name('getAll');
 Route::post('/cliente/datos', 'ClienteController@getDatosCliente')->name('cliente');
 Route::post('/cliente/eliminar', 'ClienteController@eliminar')->name('eliminar');
 Route::post('/cliente/correo', 'ClienteController@validacorreo')->name('validar');
+
+//Rutas cotizacion
+Route::post('/ciudades/getAll', 'CotizacionController@getCiudades')->name('getAll');
+Route::post('/transporte/getAll', 'CotizacionController@getTrasnporte')->name('getAll');
