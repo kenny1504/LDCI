@@ -48,11 +48,52 @@
     </section>
     <h3>Informacion Carga</h3>
     <section>
-        <p>Wonderful transition effects.</p>
-        <div class="form-group wd-xs-300">
-            <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
-            <input id="email" class="form-control" name="email" placeholder="Enter email address" type="email" required>
-        </div><!-- form-group -->
+        <div class="row form-group">
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div id="detallesSanitario" class="table-responsive">
+                        <br>
+                        <table class="table table-hover table-striped table-sm"
+                               id="tblDetalle">
+                            <thead>
+                            <tr>
+                                <th class=" text-center" width="10%">UNIDADES</th>
+                                <th class=" text-center" width="30%">TIPO</th>
+                                <th class=" text-center" width="30%">DESCRIPCION</th>
+                                <th class=" text-center" width="10%">ACCIÓN</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="fila-base">
+                                <td width="10%" class="text-center">
+                                    <input maxlength="8" onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad" onblur="calcularTotal(this)" id="txtCantidad"class="cantidad text-center form-control input-sm">
+                                </td>
+                                <td width="30%" class="text-center">
+                                    <select title="Seleccione Servicio" class="form-control input-sm" id="cmb_tipo_servicio" data-live-search="true">
+                                        <option selected disabled value=""> Seleccione Servicio</option>
+                                    </select>
+                                </td>
+                                <td width="30%" class="text-center">
+                                    <textarea id="txt_observacion" class="form-control"></textarea>
+                                </td>
+
+                                <td width="10%" class="text-center">
+                                    <button class="btn btn-danger eliminarFila"
+                                            title="Eliminar registro"
+                                            id="btnEliminarFila">
+                                        <i class=" fa fa-trash"></i></button>
+                                    <button class="btn btn-primary"
+                                            data-confirm="" id="btnAdicionarFila"
+                                            title="Adicionar registro">
+                                        <i class=" fa fa-plus"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <h3>Informacion Contacto</h3>
     <section>
