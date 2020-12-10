@@ -22,4 +22,20 @@ class CotizacionModel extends Model
         $query = DB::select('select id_tipo_transporte,nombre from ldci.tb_tipo_transporte where estado=1');
         return $query;
     }
+
+    /** Funcion que recupera todos los modo transporte*/
+    function getModoTransporte()
+    {
+        $query = new static;
+        $query = DB::select('select id_tipo_modo_transporte,nombre from ldci.tb_tipo_modo_transporte where estado=1');
+        return $query;
+    }
+
+    /** Funcion que recupera todos los tipos de mercancia*/
+    function getTipoMercancia()
+    {
+        $query = new static;
+        $query = DB::select('select id_tipo_mercancia,nombre from ldci.tb_tipo_mercancia where estado=1');
+        return $query;
+    }
 }

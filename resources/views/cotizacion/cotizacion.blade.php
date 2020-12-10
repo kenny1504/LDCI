@@ -57,20 +57,26 @@
                                id="tblDetalle">
                             <thead>
                             <tr>
-                                <th class=" text-center" width="10%">UNIDADES</th>
-                                <th class=" text-center" width="30%">TIPO</th>
+                                <th class=" text-center" width="5%">UNIDADES</th>
+                                <th class=" text-center" width="30%">TIPO MERCANCIA</th>
+                                <th class=" text-center" width="30%">TRANSPORTE</th>
                                 <th class=" text-center" width="30%">DESCRIPCION</th>
                                 <th class=" text-center" width="10%">ACCIÓN</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr class="fila-base">
-                                <td width="10%" class="text-center">
+                                <td width="5%" class="text-center">
                                     <input maxlength="8" onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad" onblur="calcularTotal(this)" id="txtCantidad"class="cantidad text-center form-control input-sm">
                                 </td>
                                 <td width="30%" class="text-center">
-                                    <select title="Seleccione Servicio" class="form-control input-sm" id="cmb_tipo_servicio" data-live-search="true">
-                                        <option selected disabled value=""> Seleccione Servicio</option>
+                                    <select title="Seleccione" class="form-control input-sm" id="cmb_tipo_mercancia" data-live-search="true">
+                                        <option selected disabled value=""> Seleccione</option>
+                                    </select>
+                                </td>
+                                <td width="30%" class="text-center">
+                                    <select title="Seleccione " class="form-control input-sm" id="cmb_modo_transporte" data-live-search="true">
+                                        <option selected disabled value=""> Seleccione</option>
                                     </select>
                                 </td>
                                 <td width="30%" class="text-center">
@@ -94,6 +100,10 @@
                 </div>
             </div>
         </div>
+    </section>
+    <h3>Servicios adicionales</h3>
+    <section>
+        <p>The next and previous buttons help you to navigate through your content.</p>
     </section>
     <h3>Informacion Contacto</h3>
     <section>

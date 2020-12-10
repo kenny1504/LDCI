@@ -15,9 +15,23 @@ class CotizacionController extends Controller
     }
 
     /** Funcion que recupera todos los tipos de transporte*/
-    public function getTrasnporte()
+    public function getTransporte()
     {
         $datos= (new CotizacionModel)->getTrasnporte();
+        return response()->json($datos);
+    }
+
+    /** Funcion que recupera todos los tipos de mercancia*/
+    public function getTipoMercancia()
+    {
+        $datos= (new CotizacionModel)->getTipoMercancia();
+        return response()->json($datos);
+    }
+
+    /** Funcion que recupera todos los modo transporte*/
+    public function getModoTransporte()
+    {
+        $datos= (new CotizacionModel)->getModoTransporte();
         return response()->json($datos);
     }
 

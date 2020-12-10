@@ -87,4 +87,6 @@ Route::post('/cliente/correo', 'ClienteController@validacorreo')->name('validar'
 
 //Rutas cotizacion
 Route::post('/ciudades/getAll', 'CotizacionController@getCiudades')->name('getAll');
-Route::post('/transporte/getAll', 'CotizacionController@getTrasnporte')->name('getAll');
+Route::post('/transporte/getAll', 'CotizacionController@getTransporte')->name('getAll');
+Route::post('/mercancia/getAll', 'CotizacionController@getTipoMercancia')->name('getAll');
+Route::post('/modoTransporte/getAll', 'CotizacionController@getModoTransporte')->name('getAll');
