@@ -25,6 +25,10 @@ class ProductoController extends Controller
     /** Metodo para guardar o actualizar un producto*/
     function guardar(Request $request)
     {
+        if(isset($request->cktipo))
+            $tipo=2;
+         else
+            $tipo=1;
         $id_Producto= $request->id_Producto;
         $nombre=$request->txt_nombre;
         $existencia=$request->txt_existencia;
@@ -37,7 +41,7 @@ class ProductoController extends Controller
 
         if(!$existe)
         {
-            $guardar=(new ProductoModel)->guardarProducto($id_Producto,strtoupper($nombre),$existencia,$precio,strtoupper($descripcion),$id_session);
+            $guardar=(new ProductoModel)->guardarProducto($id_Producto,strtoupper($nombre),$existencia,$precio,strtoupper($descripcion),$tipo,$id_session);
             if (!empty($guardar))
             {
                 /** Recorre Arreglo de imagenes */
@@ -152,9 +156,9 @@ class ProductoController extends Controller
     }
 
     /** Funcion que recupera todos los registros de productos*/
-    public function getProductoUsario()
+    public function getProductoUsuario()
     {
-        $datos= (new ProductoModel())->getProductoUsario();
+        $datos= (new ProductoModel())->getProductoUsuario();
         return response()->json($datos);
 
     }

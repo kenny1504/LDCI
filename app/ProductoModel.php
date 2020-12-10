@@ -11,7 +11,7 @@ class ProductoModel extends Model
 {
     public function getProducto()
     {
-        $table = "(select id_producto,nombre,descripcion,precio,existencia
+        $table = "(select id_producto,nombre,descripcion,precio,existencia,tipo
                     from ldci.tb_producto where estado=1 order by  id_producto desc) as tb ";
 
         $primaryKey = 'id_producto';
@@ -20,7 +20,8 @@ class ProductoModel extends Model
             ['db' => 'nombre', 'dt' => 1],
             ['db' => 'descripcion', 'dt' => 2],
             ['db' => 'precio', 'dt' => 3],
-            ['db' => 'existencia', 'dt' => 4]
+            ['db' => 'existencia', 'dt' => 4],
+            ['db' => 'tipo', 'dt' => 5]
         ];
 
         /*** Config DB */
@@ -51,23 +52,23 @@ class ProductoModel extends Model
     }
 
     /** Metodo para guardar /actuliazar un registro*/
-    public function guardarProducto($id_Producto,$nombre,$existencia,$precio,$descripcion,$id_session)
+    public function guardarProducto($id_Producto,$nombre,$existencia,$precio,$descripcion,$tipo,$id_session)
     {
         $query = new static;
 
         if (!empty($id_Producto)) // si existe un id, actualiza
         {
             $query= DB::select("UPDATE ldci.tb_producto
-                                SET  nombre=?, precio=?, descripcion=?,  existencia=?,
+                                SET  nombre=?, precio=?, descripcion=?,  existencia=?,tipo=?,
                                 usuario_modificacion=?, fecha_modificacion=now()
-                                WHERE id_producto=? RETURNING id_producto",[$nombre,$precio,$descripcion,$existencia,$id_session,$id_Producto]);
+                                WHERE id_producto=? RETURNING id_producto",[$nombre,$precio,$descripcion,$existencia,$tipo,$id_session,$id_Producto]);
         }
         else
         {
             $query= DB::select("INSERT INTO ldci.tb_producto(
-                                 nombre, precio, descripcion,
+                                 nombre, precio, descripcion,tipo,
                                 existencia, usuario_grabacion,fecha_grabacion)
-                                VALUES (?, ?, ?, ?, ?, now()) RETURNING id_producto",[$nombre,$precio,$descripcion,$existencia,$id_session]);
+                                VALUES (?, ?, ?, ?, ?,?, now()) RETURNING id_producto",[$nombre,$precio,$descripcion,$tipo,$existencia,$id_session]);
         }
         return $query;
     }
@@ -177,10 +178,10 @@ class ProductoModel extends Model
     }
 
     /** Recupera Productos para mostrar en vista productos usuario */
-    function  getProductoUsario()
+    function  getProductoUsuario()
     {
         $query = new static;
-        $query = DB::select('select id_producto from ldci.tb_producto where estado=1');
+        $query = DB::select('select id_producto from ldci.tb_producto where estado=1 and tipo=1');
 
         return $query;
     }

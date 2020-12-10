@@ -68,7 +68,7 @@ Route::post('/producto/eliminarImagen', 'ProductoController@eliminarImagen')->na
 Route::post('/producto/eliminar', 'ProductoController@eliminar')->name('eliminar');
 
 //Rutas producto Vista Usuario
-Route::post('/producto/getProducto', 'ProductoController@getProductoUsario')->name('getProducto');
+Route::post('/producto/getProducto', 'ProductoController@getProductoUsuario')->name('getProducto');
 Route::post('/producto/getProductoImagenes', 'ProductoController@getProductoImagenes')->name('getProductoImagenes');
 
 //Rutas Proveedor

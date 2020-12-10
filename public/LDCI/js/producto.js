@@ -70,7 +70,7 @@ var img=null;
 
     });
 
-    /** Funcion que lista todos los registro de tipo de productos */
+    /** Funcion que lista todos los registro de productos */
     function listarProducto() {
 
         var _token= $('input[name=_token]').val();
@@ -94,6 +94,18 @@ var img=null;
                             return '<span class="label success">'+$Existenca+'</span>';
                         else
                             return '<span class="label danger">'+$Existenca+'</span>';
+                    }
+                },
+                {
+                    targets: 5,
+                    data: null,
+                    orderable: false,
+                    render: function (json) {
+                        $tipo =json[5];
+                        if ($tipo==1)
+                            return '<span class="label  warning">Producto</span>';
+                        else
+                            return '<span class="label info">Servicio</span>';
                     }
                 },
                 {
@@ -122,7 +134,8 @@ var img=null;
             nombre:data[1],
             descricion:data[2],
             precio:data[3],
-            existencia:data[4]
+            existencia:data[4],
+            tipo:data[5]
         };
 
         //Asignamos valores a formulario
@@ -131,6 +144,20 @@ var img=null;
         $('#txt_existencia').val(Producto.existencia);
         $('#txt_precio').val(Producto.precio);
         $('#txt_descripcion').val(Producto.descricion);
+
+        var checkbox=document.getElementById('cktipo');
+
+        /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
+        if (Producto.tipo==2)
+        {
+            if (checkbox.checked == false)
+                $('#cktipo').click();
+        }
+        else
+        {
+            if (checkbox.checked == true)
+                $('#cktipo').click();
+        }
 
         /** Carga imagenes del producto seleccionado */
         $.ajax({

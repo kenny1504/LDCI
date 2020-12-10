@@ -34,6 +34,15 @@
                             <input name="id_Producto" id="id_Producto" readonly class="form-control input-sm">
                         </div>
                     </div>
+                    <div class="col-md-5">
+                        <label >Servicio</label>
+                        <div class="form-group">
+                            <label class="switch">
+                                <input name="cktipo" id="cktipo" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -108,6 +117,7 @@
                                 <th>Descripcion</th>
                                 <th>Precio</th>
                                 <th>Existencia</th>
+                                <th>Tipo</th>
                                 <th>Seleccione</th>
                             </tr>
                             </thead>
