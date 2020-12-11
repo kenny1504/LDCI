@@ -28,10 +28,15 @@
 
                     // Step 2 form validation
                     if(currentIndex === 1) {
-                        var email = $('#email').parsley();
-                        if(email.isValid()) {
-                            return true;
-                        } else { email.validate(); }
+                        return true;
+                    }
+                    // Step 3 form validation
+                    if(currentIndex === 2) {
+                        return true;
+                    }
+                    // Step 4 form validation
+                    if(currentIndex === 3) {
+                        return true;
                     }
                     // Always allow step back to the previous step even if the current step is not valid.
                 } else { return true; }
@@ -47,10 +52,10 @@
             },
             success: function (data) {
 
-                $('#cmb_destino').select2() // agrega el select2 a combobox tutores para buscar
-                $('#cmb_origen').select2()
+                $('#cmb_destino').select2({  height: "40px"}) // agrega el select2 a combobox tutores para buscar
+                $('#cmb_origen').select2({  height: "40px"})
 
-                var datos='';
+                var datos='<option selected disabled value ="">Seleccione</option>';
                 data.forEach(element => {
                     datos += '<option  value="' + element.id_ciudad + '">' + element.ciudad + '</option>';
                 });

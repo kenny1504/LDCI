@@ -64,7 +64,7 @@
                   <li class="nav-item"><a href="catalogos.tipoModoTransporte" class="optionMenu nav-link">Modo Transporte</a></li>
               </ul>
               @if($tipo==1)
-              <a href="" class="optionMenu br-menu-link">
+              <a href="/generate-pdf" class=" br-menu-link">
                   <div class="br-menu-item">
                       <i class="menu-item-icon icon ion-archive tx-20"></i>
                       <span  class=" menu-item-label">Reportes</span>

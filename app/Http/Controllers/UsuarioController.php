@@ -126,6 +126,7 @@ class UsuarioController extends Controller
             ]);
         }
     }
+
     public function ressetpassword(Request $request)
     {
         //datos enviados por ajax

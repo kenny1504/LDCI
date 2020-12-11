@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\VendedorModel;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class VendedorController extends Controller
 {
@@ -88,5 +89,21 @@ class VendedorController extends Controller
         return response()->json($datos);
 
     }
+
+    /** Codigo de prueba */
+    public function download()
+    {
+        $data = [
+            'title' => 'First PDF for Coding Driver',
+            'heading' => 'LOGISTICA DE CARGA INTERMODAL',
+            'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+            ];
+
+
+        return PDF::loadView('vista-pdf', $data)
+            ->stream('archivo.pdf');
+
+    }
+
 
 }
