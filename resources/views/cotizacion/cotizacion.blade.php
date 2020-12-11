@@ -1,5 +1,8 @@
-<link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery.steps/jquery.steps.css")}}" >
+<link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery.steps/jquery.steps.css")}}" xmlns="">
 
+<script>
+    showLoad(true);
+</script>
 
 <div id="wizard">
     <h3>Informacion General</h3>
@@ -11,14 +14,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">Origen <span class="tx-danger">*</span></label>
-                            <select name="cmb_destino"  id="cmb_destino" class="form-control input-md" required>
+                            <select title="Seleccione"  name="cmb_destino"  id="cmb_destino" class=" form-control input-md" required>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">Destino <span class="tx-danger">*</span></label>
-                            <select name="cmb_origen"  id="cmb_origen" class="form-control input-md" required>
+                            <select title="Seleccione"  name="cmb_origen"  id="cmb_origen" class=" form-control input-md" required>
                             </select>
                         </div>
                     </div>

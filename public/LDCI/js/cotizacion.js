@@ -2,7 +2,6 @@
         'use strict';
         var _token= $('input[name=_token]').val();
 
-        showLoad(true);
         $('#wizard').steps({
             headerTag: 'h3',
             bodyTag: 'section',
@@ -48,16 +47,17 @@
             },
             success: function (data) {
 
-                $('#cmb_destino').empty();
-                $('#cmb_origen').empty();
+                $('#cmb_destino').select2() // agrega el select2 a combobox tutores para buscar
+                $('#cmb_origen').select2()
 
-                var datos = '<option selected disabled value ="">Seleccione</option>';
+                var datos='';
                 data.forEach(element => {
                     datos += '<option  value="' + element.id_ciudad + '">' + element.ciudad + '</option>';
                 });
 
                 $('#cmb_destino').append(datos);
                 $('#cmb_origen').append(datos);
+
                 showLoad(false);
             },
             error: function (err) {
@@ -142,6 +142,8 @@
             }
 
         });
+
+
 
     });
 

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/perfect-scrollbar/css/perfect-scrollbar.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
+    <link rel="stylesheet" href="{{asset("assets/bracket/lib/select2/css/select2.min.css")}}"  >
 
     <!-- Core DATABLE -->
     <link rel="stylesheet" href="{{asset("LDCI/Core/core.css")}}"  >
@@ -133,19 +134,21 @@
     <script src="{{asset("assets/bracket/lib/peity/jquery.peity.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/jquery.sparkline.bower/jquery.sparkline.min.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/d3/d3.js")}}" ></script>
+     <script src="{{asset("assets/bracket/lib/select2/js/select2.min.js")}}" ></script>
 
 
     <script src="{{asset("assets/bracket/js/bracket.js")}}" ></script>
     <script src="{{asset("assets/bracket/js/ResizeSensor.js")}}" ></script>
 
     <!-- js Core-->
-      <script src="{{asset("LDCI/Core/jquery.mask.js")}}" ></script>
-     <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
-      <script src="{{asset("LDCI/Core/jquery.dataTables.min.js")}}" ></script>
-      <script src="{{asset("LDCI/Core/dataTables.bootstrap.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/jquery.mask.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/alertify.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/jquery.dataTables.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/dataTables.bootstrap.min.js")}}" ></script>
 
-      <script src="{{asset("LDCI/Core/intlTelInput.js")}}" ></script>
-      <script src="{{asset("LDCI/Core/core.js")}}" ></script>
-      <script src="{{asset("LDCI/Core/dropzone.min.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/intlTelInput.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/core.js")}}" ></script>
+    <script src="{{asset("LDCI/Core/dropzone.min.js")}}" ></script>
+
   </body>
 </html>
