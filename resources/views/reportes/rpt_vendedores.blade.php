@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <title >LOGISTICA DE CARGA INTERMODAL</title>
     <style>
         table, th, td {
@@ -47,17 +50,6 @@
             color: white;
             text-align: center;
         }
-        h5{
-            position:fixed;
-            font-weight: normal;
-            color: black;
-            top: 7.5%;
-            left: 12%;
-        }
-        h2{
-            margin-top: 5%;
-            color: blue;
-        }
     </style>
 </head>
 
@@ -86,6 +78,11 @@
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <td>
+                <div class="text-success">Prueba</div>
+            </td>
+        </tr>
 
         </tbody>
     </table>
