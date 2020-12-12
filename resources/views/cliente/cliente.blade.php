@@ -177,7 +177,7 @@
                         <h4 align="center">Busqueda de Registro</h4>
                     </div>
                     <div class="box-body">
-                        <table id="tblClientes" class="table table-striped table-bordered">
+                        <table id="tblClientes">
                             <thead>
                             <tr>
                                 <th>No</th>

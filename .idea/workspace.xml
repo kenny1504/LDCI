@@ -26,22 +26,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a23ae3b7-da97-488a-81b1-d9db452a90d1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/LDCI/js/rastreo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/Logo-Intermodal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/reportes/rpt_vendedores.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InicioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InicioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TemplateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TemplateController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VendedorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VendedorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/VendedorModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/VendedorModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/LDCI/Core/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/Core/core.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/LDCI/js/cliente.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/cliente.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/LDCI/js/usuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/usuario.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/LDCI/js/vendedor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/LDCI/js/vendedor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/dompdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/dompdf.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/productos/5fb69236743b8.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/images/productos/5fb692a7460e1.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/cliente/cliente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cliente/cliente.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/rastreo/rastreo.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/rastreo/rastreo.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/theme/bracket/aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/theme/bracket/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/theme/bracket/layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vista-pdf.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <list id="b94a8949-813f-4dea-a1af-46512da92d71" name="Desactivar e activar usuarios, se agrego el correo de la empresa" comment="" />
@@ -173,6 +167,11 @@
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ja68WGimEJ9bSZo9XwrBOE7R99" />
@@ -183,7 +182,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/sistemas" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -197,8 +196,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\LDCI\public\LDCI\img" />
+      <recent name="C:\laragon\www\LDCI\public\images" />
       <recent name="C:\laragon\www\LDCI\public\LDCI\Core" />
+      <recent name="C:\laragon\www\LDCI\public\LDCI\img" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.ProductoController.php">
@@ -233,7 +233,14 @@
       <workItem from="1604717325173" duration="40576000" />
       <workItem from="1605229632439" duration="15782000" />
       <workItem from="1605543655220" duration="98608000" />
-      <workItem from="1606272932190" duration="31932000" />
+      <workItem from="1606272932190" duration="40086000" />
+      <workItem from="1606961976404" duration="646000" />
+      <workItem from="1607136019144" duration="3947000" />
+      <workItem from="1607452332855" duration="12693000" />
+      <workItem from="1607566233594" duration="8262000" />
+      <workItem from="1607652315978" duration="8954000" />
+      <workItem from="1607662092544" duration="6764000" />
+      <workItem from="1607735187439" duration="8694000" />
     </task>
     <task id="LOCAL-00001" summary="Desactivar e activar usuarios, se agrego el correo de la empresa">
       <created>1604034542990</created>
@@ -445,7 +452,91 @@
       <option name="project" value="LOCAL" />
       <updated>1606451533439</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Guardar clientes y otras corecciones">
+      <created>1606720970262</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1606720970262</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Añadiendo Consulta, para extraer edad segun cedula">
+      <created>1606884625154</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1606884625154</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Crud Completo, clientes">
+      <created>1606886048763</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1606886048763</updated>
+    </task>
+    <task id="LOCAL-00034" summary="inicio session">
+      <created>1606962055637</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1606962055638</updated>
+    </task>
+    <task id="LOCAL-00035" summary="inicio session">
+      <created>1606962110948</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1606962110948</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Validando que el cliente tengo un usuario (Correo Asociado)">
+      <created>1607139241938</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1607139241938</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Vista, cotizacion cliente">
+      <created>1607472818013</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1607472818013</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Cambios en Catalogo Productos">
+      <created>1607571894742</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1607571894742</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Cambios en Catalogo Productos">
+      <created>1607572193142</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1607572193142</updated>
+    </task>
+    <task id="LOCAL-00040" summary="avances proceso de cotizacion">
+      <created>1607575260725</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1607575260725</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Select 2 (Cotizaciones)">
+      <created>1607661744735</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1607661744735</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Prueba (Generando pdf)">
+      <created>1607668832511</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1607668832512</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,15 +567,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Desactivar e activar usuarios, se agrego el correo de la empresa" />
-    <MESSAGE value="Modificando envio de correo" />
-    <MESSAGE value="Guardando usuario con codigo de pais" />
-    <MESSAGE value="Subiendo archivos (intl-tel-input)" />
-    <MESSAGE value="Menu Inicial (Administrador)" />
-    <MESSAGE value="eliminando href" />
-    <MESSAGE value="TERMINANDO CATALOGO USUARIOS" />
-    <MESSAGE value="Catalogo Tipo Transporte" />
-    <MESSAGE value="Template empleado" />
     <MESSAGE value="Layout cambio" />
     <MESSAGE value="Avances template Vendedor" />
     <MESSAGE value="Validando cedula" />
@@ -500,18 +582,28 @@
     <MESSAGE value="Trabajando en vista producto(Usuario)" />
     <MESSAGE value="Pantalla de CLiente" />
     <MESSAGE value="Estructurando menu para CLiente" />
-    <option name="LAST_COMMIT_MESSAGE" value="Estructurando menu para CLiente" />
+    <MESSAGE value="Guardar clientes y otras corecciones" />
+    <MESSAGE value="Añadiendo Consulta, para extraer edad segun cedula" />
+    <MESSAGE value="Crud Completo, clientes" />
+    <MESSAGE value="inicio session" />
+    <MESSAGE value="Validando que el cliente tengo un usuario (Correo Asociado)" />
+    <MESSAGE value="Vista, cotizacion cliente" />
+    <MESSAGE value="Cambios en Catalogo Productos" />
+    <MESSAGE value="avances proceso de cotizacion" />
+    <MESSAGE value="Select 2 (Cotizaciones)" />
+    <MESSAGE value="Prueba (Generando pdf)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prueba (Generando pdf)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606719148548">
+    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1607467947643">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1606719148548" />
-    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768@0.0.1366.768" timestamp="1605711910535" />
-    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1606448630346">
+    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1606885061905" />
+    <state x="413" y="139" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768@0.0.1366.768" timestamp="1607467947643" />
+    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1607664219421">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605241753469" />
+    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1607664219421" />
     <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1606448630346" />
     <state x="517" y="303" key="NewPhpFileDialog" timestamp="1604872195956">
       <screen x="0" y="0" width="1366" height="768" />
@@ -525,15 +617,15 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="530" y="292" width="611" height="184" key="VCS.ChangelistChooser/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604034617117" />
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1606279044614">
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2" timestamp="1607668926306">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1606279044614" />
+    <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1607668926306" />
     <state x="275" y="113" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1605826162436" />
-    <state x="92" y="92" width="1182" height="583" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1606448933775">
+    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607662795398">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1605596650283" />
+    <state x="92" y="92" width="1182" height="584" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1607662795398" />
     <state x="92" y="92" width="1182" height="583" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.768@0.0.1366.768" timestamp="1606448933775" />
     <state x="501" y="298" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604250826589">
       <screen x="0" y="0" width="1366" height="768" />
@@ -544,14 +636,14 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="234" y="31" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.768@0.0.1366.768" timestamp="1605719550543" />
-    <state x="339" y="175" key="run.anything.popup" timestamp="1605805796784">
+    <state x="339" y="175" key="run.anything.popup" timestamp="1607468806148">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="339" y="175" key="run.anything.popup/0.0.1366.768/1366.0.1366.768@0.0.1366.768" timestamp="1604554294865" />
-    <state x="339" y="175" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1605805796784" />
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1605893965995">
+    <state x="339" y="175" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1607468806148" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1607473960174">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1605893965995" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1607473960174" />
   </component>
 </project>

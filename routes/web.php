@@ -59,7 +59,7 @@ Route::post('/vendedor/getAll', 'VendedorController@getVendedores')->name('getAl
 Route::post('/vendedor/guardar', 'VendedorController@guardar')->name('guardar');
 Route::post('/vendedor/datos', 'VendedorController@getDatosVendedor')->name('vendedor');
 Route::post('/vendedor/eliminar', 'VendedorController@eliminar')->name('eliminar');
-Route::get('/generate-pdf','VendedorController@download'); /** Codigo de prueba */
+
 
 //Rutas Producto
 Route::post('/producto/getAll', 'ProductoController@getProducto')->name('getAll');
@@ -92,3 +92,6 @@ Route::post('/transporte/getAll', 'CotizacionController@getTransporte')->name('g
 Route::post('/mercancia/getAll', 'CotizacionController@getTipoMercancia')->name('getAll');
 Route::post('/modoTransporte/getAll', 'CotizacionController@getModoTransporte')->name('getAll');
 
+
+//Rutas Reportes
+Route::get('/vendedores','VendedorController@download')->name('LDCI'); /** Codigo de prueba */
