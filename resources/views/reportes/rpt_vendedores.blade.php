@@ -4,14 +4,10 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <title >LOGISTICA DE CARGA INTERMODAL</title>
     <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-        table {
-            width: 100%;
-        }
+
         @page {
             margin: 0cm 0cm;
         }
@@ -64,26 +60,34 @@
 <main>
     <h3>Listado de Vendedores</h3>
     <br>
-    <table id="tblVendedores" class="table table-striped table-hover table-responsive cell-border">
+    <table id="tblVendedores" class="table table-responsive table-hover">
         <thead>
         <tr>
             <th>No</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
+            <th>Nombre</th>
+            <th>Sexo</th>
             <th>Identificacion</th>
+            <th>Edad</th>
             <th>Correo</th>
-            <th>Telefono</th>
-            <th>Tipo</th>
+            <th>Telefono 1</th>
+            <th>Telefono 2</th>
             <th>Direccion</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <div class="text-success">Prueba</div>
-            </td>
-        </tr>
-
+        @foreach($vendedores as $vendedor)
+            <tr>
+                <td> {{$vendedor->no}}</td>
+                <td> {{$vendedor->nombre}}</td>
+                <td> {{$vendedor->sexo}}</td>
+                <td> {{$vendedor->cedula}}</td>
+                <td> {{$vendedor->edad}}</td>
+                <td> {{$vendedor->correo}}</td>
+                <td> {{$vendedor->telefono_1}}</td>
+                <td> {{$vendedor->telefono_2}}</td>
+                <td> {{$vendedor->direccion}}</td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 </main>

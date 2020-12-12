@@ -98,13 +98,12 @@ class VendedorController extends Controller
         /** Valida que este logueado un usuario administrador */
         if ($tipo_usuario==1)
         {
+            $datos= (new VendedorModel)->getDatosVendedores();
             $data = [
-                'title' => 'First PDF for Coding Driver',
-                'heading' => 'LOGISTICA DE CARGA INTERMODAL',
-                'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
+                'vendedores' => $datos
             ];
 
-            return PDF::loadView('reportes.rpt_vendedores', $data)
+            return PDF::loadView('reportes.rpt_vendedores',$data)
                 ->setPaper('a4', 'landscape')
                 ->stream('archivo.pdf');
         }else
@@ -113,6 +112,7 @@ class VendedorController extends Controller
         }
 
     }
+
 
 
 }

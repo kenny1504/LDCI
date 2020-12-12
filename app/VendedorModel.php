@@ -124,6 +124,22 @@ class VendedorModel extends Model
         return $query;
     }
 
+    /** funcion para cargar tabla en reporte vendedores */
+    public function getDatosVendedores()
+    {
+
+        $query = new static;
+        $query = DB::select("select row_number() OVER (ORDER BY p.id_persona) AS no, (nombre ||' '|| apellido1 ||' '|| coalesce(apellido2,'') ) as nombre,
+                cedula,sexo, case when (SUBSTRING(cedula FROM 9 FOR 2)) :: integer>40 then
+                       ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+1900)-(select extract(year from now())))*(-1)
+                        else ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+2000)-(select extract(year from now())))*(-1)
+                       end as edad,telefono_1,coalesce(telefono_2 ::varchar,' ') as telefono_2,direccion,correo
+                from ldci.tb_vendedor v
+                join ldci.tb_persona p on v.id_persona=p.id_persona where v.estado=1");
+
+        return $query;
+    }
+
     /** Funcion para actualizar un vendedor */
     public function actualizar($id_empleado,$nombres,$apellido1,$apellido2,$cedula,$direccion,$departamento,$telefono_1,$telefono_2,$nomb_notifica,$estado_civil,$telefono_not,$edad,$correo,$sexo,$id_session)
     {

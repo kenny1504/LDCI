@@ -64,12 +64,20 @@
                   <li class="nav-item"><a href="catalogos.tipoModoTransporte" class="optionMenu nav-link">Modo Transporte</a></li>
               </ul>
               @if($tipo==1)
-              <a href="/vendedores" target="_blank" class=" br-menu-link">
+              <a href="" class="br-menu-link">
                   <div class="br-menu-item">
                       <i class="menu-item-icon icon ion-archive tx-20"></i>
                       <span  class=" menu-item-label">Reportes</span>
+                      <i class="menu-item-arrow fa fa-angle-down"></i>
                   </div><!-- menu-item -->
               </a>
+                  <ul class="br-menu-sub nav flex-column">
+                      <li class="nav-item"><a href="/vendedores" target="_blank" class="nav-link">Vendedores</a></li>
+                      <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
+                      <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
+                      <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
+                      <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
+                  </ul>
               @endif
       @else
           <a href="catalogos.productoUsuario"  class="optionMenu br-menu-link">
