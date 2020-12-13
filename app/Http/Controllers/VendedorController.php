@@ -90,7 +90,7 @@ class VendedorController extends Controller
 
     }
 
-    /** Codigo de prueba */
+    /** Funcion para generar reporte total de vendedores*/
     public function download()
     {
         $tipo_usuario = session('idUsuario');

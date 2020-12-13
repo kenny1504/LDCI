@@ -35,7 +35,27 @@
         background-color:#009be1;
         opacity: 70%;
     }
+
+    /* Make the tag position relative to the figure */
+    .figure.tag {
+        position: relative;
+        z-index: 999;
+    }
+    /* set the base styles all tags should use */
+    .figure.tag::before {
+        position: absolute;
+        top: 10%;
+        display: block;
+        color: white;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+    }
+
 </style>
+
+
+
+
 
 <script src="{{asset("LDCI/js/productoUsuario.js")}}" ></script>
 

@@ -34,8 +34,6 @@
       <link rel="stylesheet" href="{{asset("LDCI/Core/demo.css")}}">
       <link rel="stylesheet" href="{{asset("LDCI/Core/avilon.css")}}">
       <link rel="stylesheet" href="{{asset("LDCI/Core/dropzone.min.css")}}">
-
-
   </head>
   <body>
      <!--Inicio Header -->

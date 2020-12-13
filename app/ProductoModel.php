@@ -181,7 +181,7 @@ class ProductoModel extends Model
     function  getProductoUsuario()
     {
         $query = new static;
-        $query = DB::select('select id_producto from ldci.tb_producto where estado=1 and tipo=1 and existencia!=0');
+        $query = DB::select('select id_producto,precio from ldci.tb_producto where estado=1 and tipo=1 and existencia!=0');
 
         return $query;
     }

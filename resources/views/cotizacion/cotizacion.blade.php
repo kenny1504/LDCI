@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery.steps/jquery.steps.css")}}" xmlns="">
 
+<style>
+    .wizard > .content > .body {
+        position: relative!important;
+    }
+</style>
 <script>
     showLoad(true);
 </script>

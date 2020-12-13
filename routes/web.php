@@ -94,4 +94,4 @@ Route::post('/modoTransporte/getAll', 'CotizacionController@getModoTransporte')-
 
 
 //Rutas Reportes
-Route::get('/vendedores','VendedorController@download')->name('LDCI'); /** Codigo de prueba */
+Route::get('/vendedores','VendedorController@download')->name('LDCI');
