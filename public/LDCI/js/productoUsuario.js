@@ -46,6 +46,7 @@ $(document).ready(function () {
                             "    </a>\n" +
                             "</div>"
 
+                        /** Añadiendo precio a etiqueta*/
                         carou+="<style>\n" +
                             "    .figure.tag-sale.figure"+id_producto+"::before{\n" +
                             "        content: \"C$"+precio+"\";\n" +
