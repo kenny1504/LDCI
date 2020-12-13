@@ -37,12 +37,17 @@
               <li class="nav-item"><a href="" class="nav-link">Ver Facturas</a></li>
               <li class="nav-item"><a href="" class="nav-link">Generar factura</a></li>
             </ul>
-            <a href="cotizacion.cotizacion" class="optionMenu br-menu-link">
+            <a href="" class="br-menu-link">
               <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-clipboard tx-24"></i>
                 <span class="menu-item-label">Cotizaciones</span>
+                  <i class="menu-item-arrow fa fa-angle-down"></i>
               </div><!-- menu-item -->
             </a><!-- br-menu-link -->
+              <ul class="br-menu-sub nav flex-column">
+                  <li class="nav-item"><a href="cotizacion.cotizacion" class="optionMenu nav-link">Agregar</a></li>
+                  <li class="nav-item"><a href="" class=" nav-link">Ver</a></li>
+              </ul>
             <a href="rastreo.rastreo" class="optionMenu br-menu-link">
               <div class="br-menu-item">
                 <i  class="menu-item-icon icon ion-location tx-20"></i>

@@ -59,14 +59,15 @@
         <div class="row form-group">
             <div class="col-lg-12">
                 <div class="col-lg-12">
-                    <div id="detallesSanitario" class="table-responsive">
+                    <div id="detallesCarga" class="table-responsive">
                         <br>
                         <table class="table table-hover table-striped table-sm"
-                               id="tblDetalle">
+                               id="tblDetalleCarga">
                             <thead>
                             <tr>
                                 <th class=" text-center" width="5%">UNIDADES</th>
-                                <th class=" text-center" width="30%">TIPO MERCANCIA</th>
+                                <th class=" text-center" width="5%">NUEVO</th>
+                                <th class=" text-center" width="25%">TIPO MERCANCIA</th>
                                 <th class=" text-center" width="30%">TRANSPORTE</th>
                                 <th class=" text-center" width="30%">DESCRIPCION</th>
                                 <th class=" text-center" width="10%">ACCIÓN</th>
@@ -75,15 +76,25 @@
                             <tbody>
                             <tr class="fila-base">
                                 <td width="5%" class="text-center">
-                                    <input maxlength="8" onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad" onblur="calcularTotal(this)" id="txtCantidad"class="cantidad text-center form-control input-sm">
+                                    <input required onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad"  id="txtCantidad"class="cantidad text-center form-control input-sm">
                                 </td>
-                                <td width="30%" class="text-center">
-                                    <select title="Seleccione" class="form-control input-sm" id="cmb_tipo_mercancia" data-live-search="true">
+                                <td width="5%" class="text-center">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="switch">
+                                                <input style="display: none" id="ckTipo" type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="25%" class="text-center">
+                                    <select required title="Seleccione" class="form-control input-sm" id="cmb_tipo_mercancia" data-live-search="true">
                                         <option selected disabled value=""> Seleccione</option>
                                     </select>
                                 </td>
                                 <td width="30%" class="text-center">
-                                    <select title="Seleccione " class="form-control input-sm" id="cmb_modo_transporte" data-live-search="true">
+                                    <select required title="Seleccione " class="form-control input-sm" id="cmb_modo_transporte" data-live-search="true">
                                         <option selected disabled value=""> Seleccione</option>
                                     </select>
                                 </td>
@@ -92,14 +103,16 @@
                                 </td>
 
                                 <td width="10%" class="text-center">
-                                    <button class="btn btn-danger eliminarFila"
-                                            title="Eliminar registro"
-                                            id="btnEliminarFila">
-                                        <i class=" fa fa-trash"></i></button>
-                                    <button class="btn btn-primary"
-                                            data-confirm="" id="btnAdicionarFila"
-                                            title="Adicionar registro">
-                                        <i class=" fa fa-plus"></i></button>
+                                    <div class="pull-right row form-group">
+                                        <button class="btn btn-danger eliminarFila"
+                                                title="Eliminar registro"
+                                                id="btnEliminarFila">
+                                            <i class=" fa fa-trash"></i></button>
+                                        <button class="btn btn-primary"
+                                                data-confirm="" id="btnAdicionarFilaC"
+                                                title="Adicionar registro">
+                                            <i class=" fa fa-plus"></i></button>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
@@ -111,11 +124,59 @@
     </section>
     <h3>Servicios adicionales</h3>
     <section>
-        <p>The next and previous buttons help you to navigate through your content.</p>
-    </section>
-    <h3>Informacion Contacto</h3>
-    <section>
-        <p>The next and previous buttons help you to navigate through your content.</p>
+        <div class="row form-group">
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div id="detallesServicios" class="table-responsive">
+                        <br>
+                        <table class="table table-hover table-striped table-sm"
+                               id="tblDetalleServicios">
+                            <thead>
+                            <tr>
+                                <th class=" text-center" width="90%">SERVICIO ADICIONAL</th>
+                                <th class=" text-center" width="10%">ACCIÓN</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="fila-base">
+                                <td width="90%" class="text-center">
+                                    <select  title="Seleccione" class="form-control input-sm" id="cmb_servicio" data-live-search="true">
+                                        <option selected disabled value=""> Seleccione</option>
+                                    </select>
+                                </td>
+
+                                <td width="10%" class="text-center">
+                                    <div class="pull-right row form-group">
+                                        <button class="btn btn-danger eliminarFila"
+                                                title="Eliminar registro"
+                                                id="btnEliminarFila">
+                                            <i class=" fa fa-trash"></i></button>
+                                        <button class="btn btn-primary"
+                                                data-confirm="" id="btnAdicionarFilaS"
+                                                title="Adicionar registro">
+                                            <i class=" fa fa-plus"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label >Nota adicional</label>
+                        <textarea class="form-control" id="txt_descripcion_Epoca" name="txt_descripcion_Epoca">
+                            </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="text-success text-primary align-top"><h5>Al guardar,Esta cotizacion posee un periodo de 24 horas para ser contestada </h5></div>
     </section>
 </div>
 

@@ -38,4 +38,12 @@ class CotizacionModel extends Model
         $query = DB::select('select id_tipo_mercancia,nombre from ldci.tb_tipo_mercancia where estado=1');
         return $query;
     }
+
+    /** Funcion que recupera todos los servicios*/
+    function getServicios()
+    {
+        $query = new static;
+        $query = DB::select('select id_producto,nombre from ldci.tb_producto where tipo=2 and estado=1');
+        return $query;
+    }
 }

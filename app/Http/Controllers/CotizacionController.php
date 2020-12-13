@@ -35,4 +35,11 @@ class CotizacionController extends Controller
         return response()->json($datos);
     }
 
+    /** Funcion que recupera todos los servicios*/
+    public function getServicios()
+    {
+        $datos= (new CotizacionModel)->getServicios();
+        return response()->json($datos);
+    }
+
 }
