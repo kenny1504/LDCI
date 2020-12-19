@@ -103,9 +103,8 @@ class VendedorController extends Controller
                 'vendedores' => $datos
             ];
 
-            return PDF::loadView('reportes.rpt_vendedores',$data)
-                ->setPaper('a4', 'landscape')
-                ->stream('archivo.pdf');
+            $pdf= PDF::loadView('reportes.rpt_vendedores',$data)->setPaper('a4', 'landscape');
+             echo utf8_encode(($pdf->stream('archivo.pdf')));
         }else
         {
             return view('inicio');

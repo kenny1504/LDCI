@@ -56,7 +56,7 @@ class TipoTransporteModel extends Model
     public function existe($nombre)
     {
         $query = new static;
-        $query = DB::select('select * from ldci.tb_tipo_transporte where upper(nombre)=upper(?)', [$nombre]);
+        $query = DB::select('select * from ldci.tb_tipo_transporte where upper(nombre)=upper(?) and estado=1' , [$nombre]);
         if(empty($query))
             return false;
         else

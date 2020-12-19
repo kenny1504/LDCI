@@ -148,5 +148,9 @@
     <script src="{{asset("LDCI/Core/core.js")}}" ></script>
     <script src="{{asset("LDCI/Core/dropzone.min.js")}}" ></script>
 
+     @if($tipo==1)
+         <script src="{{asset("LDCI/js/reportes.js")}}" ></script>
+     @endif
+
   </body>
 </html>
