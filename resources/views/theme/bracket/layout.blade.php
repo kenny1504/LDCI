@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/Ionicons/css/ionicons.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/perfect-scrollbar/css/perfect-scrollbar.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.css")}}"  >
-    <link rel="stylesheet" href="{{asset("assets/bracket/lib/rickshaw/rickshaw.min.css")}}"  >
     <link rel="stylesheet" href="{{asset("assets/bracket/lib/select2/css/select2.min.css")}}"  >
 
     <!-- Core DATABLE -->
@@ -26,7 +25,6 @@
     <link rel="stylesheet" href="{{asset("LDCI/Core/bootstrap.scss")}}"  >
 
      <!-- Core CSS -->
-     <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.default.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
 
@@ -141,13 +139,10 @@
     <script src="{{asset("assets/bracket/lib/jquery-ui/jquery-ui.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/jquery-switchbutton/jquery.switchButton.js")}}" ></script>
     <script src="{{asset("assets/bracket/lib/peity/jquery.peity.js")}}" ></script>
-    <script src="{{asset("assets/bracket/lib/jquery.sparkline.bower/jquery.sparkline.min.js")}}" ></script>
-    <script src="{{asset("assets/bracket/lib/d3/d3.js")}}" ></script>
-     <script src="{{asset("assets/bracket/lib/select2/js/select2.min.js")}}" ></script>
+    <script src="{{asset("assets/bracket/lib/select2/js/select2.min.js")}}" ></script>
 
 
     <script src="{{asset("assets/bracket/js/bracket.js")}}" ></script>
-    <script src="{{asset("assets/bracket/js/ResizeSensor.js")}}" ></script>
 
     <!-- js Core-->
     <script src="{{asset("LDCI/Core/jquery.mask.js")}}" ></script>
