@@ -34,6 +34,17 @@
       <link rel="stylesheet" href="{{asset("LDCI/Core/demo.css")}}">
       <link rel="stylesheet" href="{{asset("LDCI/Core/avilon.css")}}">
       <link rel="stylesheet" href="{{asset("LDCI/Core/dropzone.min.css")}}">
+
+      <style>
+          @media (min-width: 576px)
+          {
+              .br-sideleft {
+                  z-index: 2000!important;
+              }
+          }
+
+      </style>
+
   </head>
   <body>
      <!--Inicio Header -->
