@@ -39,7 +39,7 @@
     /* Make the tag position relative to the figure */
     .figure.tag {
         position: relative;
-        z-index: 999;
+        z-index: 1;
     }
     /* set the base styles all tags should use */
     .figure.tag::before {

@@ -741,4 +741,9 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
     }
 
 
+  function  cambiar_imagen()
+  {
+
+  }
+
 

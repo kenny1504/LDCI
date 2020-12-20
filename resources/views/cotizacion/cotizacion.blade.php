@@ -9,7 +9,7 @@
     showLoad(true);
 </script>
 
-<div id="wizard">
+<div id="wizard" class="step-equal-width">
     <h3>Informacion General</h3>
     <section>
         <p>Informacion de cotizacion</p>

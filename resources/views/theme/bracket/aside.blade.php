@@ -1,6 +1,6 @@
 <!-- ########## START: ASIDE ########## -->
 <div class="br-logo"><a href="/"><span>[</span>LDCI<span>]</span></a></div>
-<div style="z-index: 1000!important" class="br-sideleft overflow-y-auto ps ps--theme_default ps--active-x ps--active-y">
+<div style="z-index: 2!important" class="br-sideleft overflow-y-auto ps ps--theme_default ps--active-x ps--active-y">
   <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
   <div class="br-sideleft-menu">@csrf
 
@@ -77,7 +77,7 @@
                   </div><!-- menu-item -->
               </a>
                   <ul class="br-menu-sub nav flex-column">
-                      <li class="nav-item"><a onclick="rpt_vendedores()" class="nav-link">Vendedores</a></li>
+                      <li class="nav-item"><a href="" onclick="rpt_vendedores()" class="nav-link">Vendedores</a></li>
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
