@@ -57,6 +57,8 @@
     <img id="logo" src="images/Logo-Intermodal.png">
     <h2>LOGISTICA DE CARGA INTERMODAL</h2>
     <h5>BAC LAS PALMAS 70 MTS AL OESTE, MANAGUA, NICARAGUA</h5>
+    <h5> +(505) 2220 7707 / +1 (347) 298 6449</h5>
+
 </header>
 
 <main>
@@ -100,8 +102,9 @@
             if ( isset($pdf) ) {
                 $pdf->page_script('
                     $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
-                    $pdf->text(270, 560, "Pagina $PAGE_NUM de $PAGE_COUNT", $font, 10);
+                    $pdf->text(320, 560, "Pagina $PAGE_NUM de $PAGE_COUNT", $font, 10);
                     $pdf->text(50, 560, date("d-m-Y H:i:s"), $font, 10);
+                    $pdf->text(620, 560, "https://ldci.cargologisticsintermodal.com", $font, 10);
                 ');
             }
 

@@ -77,7 +77,7 @@
                   </div><!-- menu-item -->
               </a>
                   <ul class="br-menu-sub nav flex-column">
-                      <li class="nav-item"><a href="" onclick="rpt_vendedores()" class="nav-link">Vendedores</a></li>
+                      <li class="nav-item"><a style="color: #adb5bd" onclick="rpt_vendedores()" class="nav-link">Vendedores</a></li>
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>

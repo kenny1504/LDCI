@@ -741,9 +741,13 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
     }
 
 
-  function  cambiar_imagen()
-  {
+    /** Funcion para agregar fila */
+    $(document).off("change", "#cmb_sexo").on("change", "#cmb_sexo" , function () {
 
-  }
+        if (this.value=='F')
+             $('#imgsexo').prop('src','LDCI/img/userF.png');
+        else
+             $('#imgsexo').prop('src','LDCI/img/userM.png');
+    });
 
 

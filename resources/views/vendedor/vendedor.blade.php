@@ -28,9 +28,7 @@
                         </div>
                     </div>
                     <div class="col-md-2 ">
-                        <img id="hombre" class="img-responsive" width="100px"
-                             src="LDCI/img/userM.png" alt="">
-                        <img id="mujer" class="hidden img-responsive" width="100px"
+                        <img id="imgsexo" class="img-responsive" width="100px"
                              src="LDCI/img/userM.png" alt="">
                     </div>
                     <div class="col-md-4">

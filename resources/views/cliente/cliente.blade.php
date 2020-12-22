@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-2">
                                 <label >Cliente Juridico</label>
                                 <div class="form-group">
                                     <label class="switch">
@@ -34,11 +34,20 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <label >Extranjero</label>
+                                <div class="form-group">
+                                    <label class="switch">
+                                        <input onchange="" id="ckExtranjero" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2 ">
-                        <img class="img-responsive" width="100px"
-                             src="LDCI/img/80652.JPG" alt="">
+                        <img id="imgsexo" class="img-responsive" width="100px"
+                             src="LDCI/img/userM.png" alt="">
                     </div>
 
                         <div hidden class="juridico col-md-8">

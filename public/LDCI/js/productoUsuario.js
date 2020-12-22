@@ -2,6 +2,7 @@
 $(document).ready(function () {
 
     showLoad(true);
+
     /** Recupera id de productos */
     $.ajax({
         type: 'POST',
