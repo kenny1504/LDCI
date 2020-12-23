@@ -57,7 +57,7 @@
     <img id="logo" src="images/Logo-Intermodal.png">
     <h2>LOGISTICA DE CARGA INTERMODAL</h2>
     <h5>BAC LAS PALMAS 70 MTS AL OESTE, MANAGUA, NICARAGUA</h5>
-    <h5> +(505) 2220 7707 / +1 (347) 298 6449</h5>
+    <h6>Telefonos +(505) 2220 7707 / +1 (347) 298 6449</h6>
 
 </header>
 

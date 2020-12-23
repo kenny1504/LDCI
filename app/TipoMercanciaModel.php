@@ -29,6 +29,7 @@ class TipoMercanciaModel extends Model
         return SSP::complex($_POST,$db,$table, $primaryKey, $columns);
 
     }
+
     /** Metodo para guardar un nuevo registro de tipo mercancia*/
     public function guardarTipoMercancia($id_TipoMercancia,$nombre,$id_session)
     {
@@ -53,7 +54,7 @@ class TipoMercanciaModel extends Model
     public function existe($nombre)
     {
         $query = new static;
-        $query = DB::select('select * from ldci.tb_tipo_mercancia where upper(nombre)=upper(?)', [$nombre]);
+        $query = DB::select('select * from ldci.tb_tipo_mercancia where upper(nombre)=upper(?) and estado=1', [$nombre]);
         if(empty($query))
             return false;
         else

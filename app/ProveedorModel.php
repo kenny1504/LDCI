@@ -30,12 +30,14 @@ class ProveedorModel extends Model
         );
         return SSP::complex($_POST, $db, $table, $primaryKey, $columns);
     }
+
     public function getPaises()
     {
         $query = new static;
         $query = DB::select('select id_pais, nombre from public.tb_paises order by nombre asc');
         return $query;
     }
+
     /** Funcion para guardar un proveedor */
     public function guardar($nombre, $correo, $direccion, $pais, $pagina_web, $telefono_1, $telefono_2, $iso, $iso2, $id_session)
     {
@@ -69,6 +71,7 @@ class ProveedorModel extends Model
                                         where  id_proveedor=? and estado=1', [$id_proveedor]);
         return $query;
     }
+
     /** Metodo para validar si existe un registro de cedula */
     public function existe($correo, $id_proveedor)
     {
@@ -84,6 +87,7 @@ class ProveedorModel extends Model
         else
             return true;
     }
+
     /** Funcion para actualizar un proveedor */
     public function actualizar($id_proveedor, $nombre, $correo, $direccion, $pais, $pagina_web, $telefono_1, $telefono_2, $iso, $iso2, $id_session)
     {
@@ -110,6 +114,7 @@ class ProveedorModel extends Model
             ]);
         }
     }
+
     /** Funcion para eliminar(deshabilitar) un proveedor */
     public function eliminar($id_proveedor, $id_session)
     {

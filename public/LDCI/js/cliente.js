@@ -313,6 +313,7 @@ var tblClientes=null;
                 $('#txt_apellido2').val(data[0].apellido2);
                 $('#txt_edad').val(data[0].edad);
                 $('#cmb_sexo').val(data[0].sexo.trim());
+                $('#cmb_sexo').change();
                 $('#txt_cedula').val(data[0].cedula);
                 $('#txt_direccion').val(data[0].direccion);
                 $('#cmb_Departamento').val(data[0].id_departamento);

@@ -208,6 +208,7 @@ var tblVendedores = null;
                 $('#txt_edad').val(data[0].edad);
                 $('#txt_correo').val(data[0].correo);
                 $('#cmb_sexo').val(data[0].sexo);
+                $('#cmb_sexo').change();
 
             },
             error: function(err){
