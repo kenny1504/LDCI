@@ -25,7 +25,8 @@
     <link rel="stylesheet" href="{{asset("LDCI/Core/bootstrap.scss")}}"  >
 
      <!-- Core CSS -->
-     <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
+      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.default.css")}}"  >
+      <link rel="stylesheet" href="{{asset("LDCI/Core/alertify.core.css")}}"  >
      <link rel="stylesheet" href="{{asset("LDCI/Core/jquery-ui.min.css")}}"  >
 
       <link rel="stylesheet" href="{{asset("LDCI/Core/intlTelInput.css")}}"  >

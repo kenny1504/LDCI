@@ -33,6 +33,7 @@ class InicioController extends Controller
        $user= $request->user;
        /** Llama metodo del modelo Usuario */
         $query = (new UsuarioModel)->GetUsuario($password,$user);
+
         if(!empty($query))
          {
             if($query[0]->confirmado==true)
@@ -59,6 +60,7 @@ class InicioController extends Controller
          /** elimina las varibles de session */
         session()->forget('idUsuario');
         session()->forget('nombreUsuario');
+        session()->forget('tipoUsuario');
 
         return redirect('/');
     }

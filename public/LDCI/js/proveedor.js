@@ -8,7 +8,7 @@ var input = document.querySelector("#txt_telefono_1");
     dropdownContainer: document.body,
     formatOnDisplay: false,
     geoIpLookup: function(callback) {
-    $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
         var countryCode = (resp && resp.country) ? resp.country : "";
         callback(countryCode);
     });
@@ -30,7 +30,7 @@ var input = document.querySelector("#txt_telefono_1");
         dropdownContainer: document.body,
         formatOnDisplay: false,
         geoIpLookup: function(callback) {
-            $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
                 var countryCode = (resp && resp.country) ? resp.country : "";
                 callback(countryCode);
             });

@@ -25,7 +25,7 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
             dropdownContainer: document.body,
             formatOnDisplay: false,
             geoIpLookup: function(callback) {
-                $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
                     var countryCode = (resp && resp.country) ? resp.country : "";
                     callback(countryCode);
                 });
@@ -40,7 +40,6 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
         });
 
     })
-
 
     /**
         Mostrar mensaje cuando la ejecucion sea correcta

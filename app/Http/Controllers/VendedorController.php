@@ -93,7 +93,7 @@ class VendedorController extends Controller
     /** Funcion para generar reporte total de vendedores*/
     public function download()
     {
-        $tipo_usuario = session('idUsuario');
+        $tipo_usuario = session('tipoUsuario');
 
         /** Valida que este logueado un usuario administrador */
         if ($tipo_usuario==1)

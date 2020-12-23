@@ -8,7 +8,7 @@ var tblClientes=null;
     dropdownContainer: document.body,
     formatOnDisplay: false,
     geoIpLookup: function(callback) {
-    $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+    $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
     var countryCode = (resp && resp.country) ? resp.country : "";
     callback(countryCode);
     });
@@ -30,7 +30,7 @@ var tblClientes=null;
         dropdownContainer: document.body,
         formatOnDisplay: false,
         geoIpLookup: function(callback) {
-            $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
                 var countryCode = (resp && resp.country) ? resp.country : "";
                 callback(countryCode);
             });
