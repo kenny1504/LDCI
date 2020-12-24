@@ -4,6 +4,11 @@
       <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
       <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
     </div><!-- br-header-left -->
+     <div class="br-header-right">
+         <nav class="nav">
+             <span class="logged-name hidden-md-down">Tasa de cambio: {{$tasa_cambio}}</span>
+         </nav>
+     </div>
     <div class="br-header-right">
       <nav class="nav">
         <div class="dropdown">

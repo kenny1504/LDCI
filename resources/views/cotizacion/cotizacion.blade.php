@@ -176,7 +176,7 @@
             </div>
         </div>
         <br><br>
-        <div class="text-success text-primary align-top"><h5>Al guardar,Esta cotizacion posee un periodo de 24 horas para ser contestada </h5></div>
+        <div class="text-success text-primary align-top"><h6>Al guardar,Esta cotizacion posee un periodo aproximado de 48 horas para ser contestada </h6></div>
     </section>
 </div>
 

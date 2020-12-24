@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\UsuarioModel;
 use Mail;
+use SoapClient;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\http\Requests;
@@ -17,11 +18,27 @@ class InicioController extends Controller
 
     public function index()
     {
+
+
+
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
         $tipoUsuario = session('tipoUsuario'); /** recupera nombre del usuario en session */
 
           if(!empty($nombreUsuario))
-          return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario);
+          {
+              /** servicio tASA DE CAMBIO "Banco de Nicaragua" */
+              $servicio = "https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx?WSDL"; //url del servicio
+              $parametros = array(); //parametros de la llamada
+              $parametros['Dia'] = date("d");
+              $parametros['Mes'] = date("m");
+              $parametros['Ano'] = date("Y");
+              $client = new SoapClient($servicio, $parametros);
+              $result = $client->RecuperaTC_Dia($parametros); //llamamos al método que nos interesa con los parámetros
+
+            $tasa_cambio=$result->RecuperaTC_DiaResult; //Capturamos respuesta
+
+          return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario)->with('tasa_cambio', $tasa_cambio);
+          }
          else
            return view('inicio');
     }
