@@ -268,7 +268,6 @@
 
             let tblDetalleCarga = JSON.stringify(DATA1);
 
-
             /** Se recuperan datos de tabla servicios adicionales*/
             var DATA2 = [];
             var TABLA2 = $("#tblDetalleServicios tbody > tr");
@@ -319,7 +318,7 @@
                             alertSuccess(data.mensaje);
                             setTimeout(function(){
                                 window.location.href='/';
-                            }, 200);
+                            }, 100);
                         }
                     },
                     error: function (err) {

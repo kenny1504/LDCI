@@ -109,9 +109,18 @@ class CotizacionModel extends Model
                     return collect([
                         'mensaje' => 'Cotizacion guardada con exito',
                         'error' => false,
+                        'cotizacion'=>$query_encabezado[0]->id_cotizacion
                     ]);
             }
         }
+    }
+
+    /** Funcion para recuperar correos de administradores */
+    function correos()
+    {
+        $query = new static;
+        $query = DB::select("select trim(correo) as correo from ldci.tb_usuario where estado=1 and confirmado=true and tipo=1");
+        return $query;
     }
 
 }

@@ -59,19 +59,24 @@ class CotizacionController extends Controller
 
         if (!json_decode($guardar)->error)
         {
-            $data['confirmation_code']='nada';
-            $data['name']=$nombreUsuario;
+            $administradores=(new CotizacionModel)->correos();
 
-            /**  Inicio funcion para enviar correo  */
-            $subject ="Nueva Cotizacion"; /** Asunto del Correo */
-            $for ='kennysaenz31@gmail.com';/** correo que recibira el mensaje */
+            foreach ($administradores as $admin)
+            {
+                $data['No_cotizacion']=json_decode($guardar)->cotizacion;
+                $data['name']=$nombreUsuario;
 
-            Mail::send('cotizacion.mailNuevaCotizacion',$data,function($msj) use($subject,$for){
-                // Correo  y  Nombre que Aparecera
-                $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
-                $msj->subject($subject);
-                $msj->to($for);
-            });
+                /**  Inicio funcion para enviar correo  */
+                $subject ="Nueva Cotizacion"; /** Asunto del Correo */
+                $for =$admin->correo;/** correo que recibira el mensaje */
+
+                Mail::send('cotizacion.mailNuevaCotizacion',$data,function($msj) use($subject,$for){
+                    // Correo  y  Nombre que Aparecera
+                    $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+            }
         }
         return $guardar;
 
