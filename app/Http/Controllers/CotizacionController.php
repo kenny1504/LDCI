@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Mail;
 use App\CotizacionModel;
 use Illuminate\Http\Request;
 
@@ -40,6 +40,41 @@ class CotizacionController extends Controller
     {
         $datos= (new CotizacionModel)->getServicios();
         return response()->json($datos);
+    }
+
+    public function  guardarCotizacion(Request $request)
+    {
+
+        $tblDetalleCarga= json_decode($request->tblDetalleCarga);
+        $tblDetalleServicios=json_decode($request->tblDetalleServicios);
+        $tipo_transporte=$request->tipo_transporte;
+        $fecha=$request->fecha;
+        $destino=$request->destino;
+        $origen=$request->origen;
+        $nota_adicional=$request->nota_adicional;
+        $id_session = session('idUsuario');
+        $nombreUsuario = session('nombreUsuario');
+
+        $guardar=(new CotizacionModel)->guardarCotizacion($tblDetalleCarga,$tblDetalleServicios,$tipo_transporte,$fecha,$destino,$origen,$nota_adicional,$id_session);
+
+        if (!json_decode($guardar)->error)
+        {
+            $data['confirmation_code']='nada';
+            $data['name']=$nombreUsuario;
+
+            /**  Inicio funcion para enviar correo  */
+            $subject ="Nueva Cotizacion"; /** Asunto del Correo */
+            $for ='kennysaenz31@gmail.com';/** correo que recibira el mensaje */
+
+            Mail::send('cotizacion.mailNuevaCotizacion',$data,function($msj) use($subject,$for){
+                // Correo  y  Nombre que Aparecera
+                $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+        }
+        return $guardar;
+
     }
 
 }

@@ -24,27 +24,35 @@ class InicioController extends Controller
 
           if(!empty($nombreUsuario))
           {
-              /** servicio tASA DE CAMBIO "Banco de Nicaragua" */
-              $context = stream_context_create([
-                  'ssl' => [
-                      // set some SSL/TLS specific options
-                      'verify_peer' => false,
-                      'verify_peer_name' => false,
-                      'allow_self_signed' => true
-                  ]
-              ]);
+              if($tipoUsuario!=3)
+              {
+                  /** servicio tASA DE CAMBIO "Banco de Nicaragua" */
+                  $context = stream_context_create([
+                      'ssl' => [
+                          // set some SSL/TLS specific options
+                          'verify_peer' => false,
+                          'verify_peer_name' => false,
+                          'allow_self_signed' => true
+                      ]
+                  ]);
 
-              $servicio = "https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx?WSDL"; //url del servicio
-              $parametros = ["trace" => 1,"exceptions" => true, "stream_context" => $context];
-              $parametros['Dia'] = date("d");
-              $parametros['Mes'] = date("m");
-              $parametros['Ano'] = date("Y");
-              $client = new SoapClient($servicio, $parametros);
-              $result = $client->RecuperaTC_Dia($parametros); //llamamos al método que nos interesa con los parámetros
+                  $servicio = "https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx?WSDL"; //url del servicio
+                  $parametros = ["trace" => 1,"exceptions" => true, "stream_context" => $context];
+                  $parametros['Dia'] = date("d");
+                  $parametros['Mes'] = date("m");
+                  $parametros['Ano'] = date("Y");
+                  $client = new SoapClient($servicio, $parametros);
+                  $result = $client->RecuperaTC_Dia($parametros); //llamamos al método que nos interesa con los parámetros
 
-              $tasa_cambio=$result->RecuperaTC_DiaResult; //Capturamos respuesta
+                  $tasa_cambio=$result->RecuperaTC_DiaResult; //Capturamos respuesta
 
-          return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario)->with('tasa_cambio', $tasa_cambio);
+                  return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario)->with('tasa_cambio', $tasa_cambio);
+
+              }
+              else
+                  return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario);
+
+
           }
          else
            return view('inicio');

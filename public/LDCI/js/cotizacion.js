@@ -181,10 +181,9 @@
 
         });
 
-        /** Busca botton finish y añade evento para guardar cotizacion */
+        /** Busca botton finish y añade evento guardar*/
         var finish = $( "#wizard" ).find(".actions a[href$='#finish']")
         finish.on("click",guardar)
-
 
     });
 
@@ -229,5 +228,108 @@
 
     function guardar()
     {
-        alertSuccess("prueba");
+        alertConfirm("¿Está seguro que desea guardar?", function (e) {
+
+            var guardar=true;
+            /** Se recuperan datos de tabla Detalles de carga */
+            var DATA1 = [];
+            var TABLA1 = $("#tblDetalleCarga tbody > tr");
+
+            /*Obtención de datos de la tabla dinámica*/
+            TABLA1.each(function (e) {
+
+                let estado=false;
+                let Cantidad = $(this).find("input[id*='txtCantidad']").val();
+                let ckEstado = $(this).find("input[id*='ckEstado']");
+                if (ckEstado[0].checked == true)
+                    estado=true;
+
+                let id_tipo_mercancia = $(this).find("select[id*='cmb_tipo_mercancia']").val();
+                let id_modo_transporte = $(this).find("select[id*='cmb_modo_transporte']").val();
+                let observacion = $(this).find("textarea[id*='txt_observacion']").val();
+
+                if (Cantidad !== "" && id_tipo_mercancia !== "" && id_modo_transporte) {
+                    item = {};
+                    item ["Cantidad"] =parseInt(Cantidad);
+                    item ["estado"] = estado;
+                    item ["id_tipo_mercancia"] = parseInt(id_tipo_mercancia);
+                    item ["id_modo_transporte"] = parseInt(id_modo_transporte);
+                    item ["observacion"] = observacion;
+                    DATA1.push(item);
+                }
+                else
+                {
+                    guardar=false;
+                    $('#wizard-t-1').click();
+                    alertError("¡Por favor completar campos de la informacion de Carga!");
+                }
+
+            });
+
+            let tblDetalleCarga = JSON.stringify(DATA1);
+
+
+            /** Se recuperan datos de tabla servicios adicionales*/
+            var DATA2 = [];
+            var TABLA2 = $("#tblDetalleServicios tbody > tr");
+
+            /*Obtención de datos de la tabla dinámica*/
+            TABLA2.each(function (e) {
+
+                let id_servicio = $(this).find("select[id*='cmb_servicio']").val();
+
+                    item = {};
+                    item["id_servicio"] =parseInt(id_servicio);
+                    DATA2.push(item);
+            });
+
+            let tblDetalleServicios = JSON.stringify(DATA2);
+
+            if (guardar==true) {
+
+                var _token = $('input[name=_token]').val();
+                var tipo_transporte = $('#cmb_tipo_transporte').val();
+                var fecha = $('#txt_fecha').val();
+                var destino = $('#cmb_destino').val();
+                var origen = $('#cmb_origen').val();
+                var nota_adicional = $('#txt_nota_adicional').val();
+
+                showLoad(true);
+                $.ajax({
+                    type: 'POST',
+                    url: '/guardarCotizacion', //llamada a la ruta
+                    data: {
+                        _token:_token,
+                        tblDetalleCarga:tblDetalleCarga,
+                        tblDetalleServicios:tblDetalleServicios,
+                        tipo_transporte:tipo_transporte,
+                        fecha:fecha,
+                        destino:destino,
+                        origen:origen,
+                        nota_adicional:nota_adicional
+                    },
+                    success: function (data) {
+
+                        showLoad(false);
+                        if (data.error) {
+                            alertError(data.mensaje);
+                        }
+                        else
+                        {
+                            alertSuccess(data.mensaje);
+                            setTimeout(function(){
+                                window.location.href='/';
+                            }, 200);
+                        }
+                    },
+                    error: function (err) {
+                        alertError(err.responseText);
+                        showLoad(false);
+                    }
+
+                });
+
+            }
+        });
+
     }
