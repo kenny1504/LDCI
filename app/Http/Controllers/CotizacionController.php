@@ -82,4 +82,11 @@ class CotizacionController extends Controller
 
     }
 
+    /** funcion que recupera cotizaciones para llenar tabla */
+    public function getCotizaciones()
+    {
+        $datos= (new CotizacionModel)->getCotizaciones();
+        return response()->json($datos);
+    }
+
 }

@@ -93,6 +93,7 @@ Route::post('/mercancia/getAll', 'CotizacionController@getTipoMercancia')->name(
 Route::post('/modoTransporte/getAll', 'CotizacionController@getModoTransporte')->name('getAll');
 Route::post('/servicios/getAll', 'CotizacionController@getServicios')->name('getAll');
 Route::post('/guardarCotizacion', 'CotizacionController@guardarCotizacion')->name('guardar');
+Route::post('/cotizaciones/getAll', 'CotizacionController@getCotizaciones')->name('getAll');
 
 
 //Rutas Reportes
