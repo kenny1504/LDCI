@@ -125,19 +125,97 @@ class CotizacionModel extends Model
     }
 
     /** Funcion para cargar tabla cotizaciones*/
-    public function getCotizaciones()
+    public function getCotizaciones($estado,$tipoUsuario,$id_session)
     {
-        $table = "(select co.id_cotizacion, t.nombre as
+        if ($tipoUsuario==1)
+        {
+            if($estado!=0){
+                $table = "(select co.id_cotizacion, t.nombre as
+                        transporte,c1.ciudad ||','||c1.pais as destino,
+                        c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
+                        co.fecha_grabacion
+                        from ldci.tb_cotizacion co
+                        join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
+                        join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
+                        join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
+                        join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                        where co.estado=$estado
+                        order by co.fecha_grabacion desc) as tb ";
+
+            }else
+            {
+
+                $table = "(select co.id_cotizacion, t.nombre as
                         transporte,c1.ciudad ||','||c1.pais as destino,
                         c2.ciudad ||','|| c2.pais as origen,
                         to_char(co.fecha,'DD/MM/YYYY')as fecha,
-                        co.estado,us.usuario
+                        co.estado,us.usuario,co.fecha_grabacion
                     from ldci.tb_cotizacion co
                     join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
                     join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
                     join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
                     join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
                     order by co.fecha_grabacion desc) as tb ";
+            }
+        }
+        else
+        {
+            if($estado!=0) {
+                $table = "(select distinct t1.id_cotizacion,t1.transporte,t1.destino,
+                            t1.origen,t1.fecha,t1.estado,t1.usuario
+                            from(select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
+                            c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
+                            co.fecha_grabacion
+                            from ldci.tb_cotizacion co
+                            join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
+                            join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
+                            join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
+                            join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                            where co.estado=$estado and co.usuario_grabacion=$id_session
+                            union all
+                            select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
+                            c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
+                                   co.fecha_grabacion
+                            from ldci.tb_cotizacion co
+                            join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
+                            join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
+                            join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
+                            join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                            join ldci.tb_vendedor_cotizacion vc on co.id_cotizacion=vc.id_cotizacion
+                            join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
+                            where co.estado=$estado and vc.id_usuario=$id_session  and us1.tipo=2
+                            order by  fecha_grabacion desc ) as t1) as tb ";
+
+            }else{
+                $table = "(select distinct t1.id_cotizacion,t1.transporte,t1.destino,
+                            t1.origen,t1.fecha,t1.estado,t1.usuario
+                            from(select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
+                            c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
+                            co.fecha_grabacion
+                            from ldci.tb_cotizacion co
+                            join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
+                            join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
+                            join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
+                            join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                            where co.usuario_grabacion=$id_session
+                            union all
+                            select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
+                            c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
+                                   co.fecha_grabacion
+                            from ldci.tb_cotizacion co
+                            join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
+                            join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
+                            join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
+                            join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                            join ldci.tb_vendedor_cotizacion vc on co.id_cotizacion=vc.id_cotizacion
+                            join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
+                            where vc.id_usuario=$id_session and us1.tipo=2
+                            order by  fecha_grabacion desc ) as t1) as tb ";
+
+            }
+
+        }
+
 
         $primaryKey = 'id_cotizacion';
         $columns = [
@@ -160,5 +238,46 @@ class CotizacionModel extends Model
         return SSP::complex($_POST,$db,$table, $primaryKey, $columns);
 
     }
+
+    /** Funcion que recupera todos los usuarios tipo vendedor*/
+    function getVendedores()
+    {
+        $query = new static;
+        $query = DB::select("select  id_usuario,usuario from ldci.tb_usuario where estado=1 and confirmado=true and tipo=2");
+        return $query;
+    }
+
+    /** Funcion que recupera todos de un usuario vendedor*/
+    function getVendedor($id_vendedor)
+    {
+        $query = new static;
+        $query = DB::select("select * from ldci.tb_usuario where id_usuario=$id_vendedor");
+        return $query;
+    }
+
+    /** Funcion que asigna cotizacion a vendedor */
+    function setcotizacion($id_vendedor,$id_cotizacion,$id_session)
+    {
+
+        $query = new static;
+        $query = DB::insert('INSERT INTO ldci.tb_vendedor_cotizacion(
+            id_cotizacion, id_usuario, usuario_grabacion, fecha_grabacion)
+            VALUES (?, ?, ?, now())', [$id_cotizacion,$id_vendedor,$id_session]);
+
+        if ($query)
+        {
+            return collect([
+                'mensaje' => 'Cotizacion Asignada Correctamente',
+                'error' => false
+            ]);
+        }
+        else{
+            return collect([
+                'mensaje' => 'Ocurrio un error al asignar vendendor',
+                'error' => true
+            ]);
+        }
+    }
+
 
 }

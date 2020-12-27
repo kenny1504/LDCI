@@ -89,4 +89,46 @@ class CotizacionController extends Controller
         return response()->json($datos);
     }
 
+    /** Funcion que recupera todos los usuarios tipo vendedor*/
+    public function getVendedores()
+    {
+        $datos= (new CotizacionModel)->getVendedores();
+        return response()->json($datos);
+    }
+
+    /** Funcion que asigna cotizacion a vendedor */
+    public  function setcotizacion(Request $request)
+    {
+
+        $id_vendedor=$request->id_vendedor;
+        $id_cotizacion=$request->id_cotizacion;
+        $id_session = session('idUsuario');
+
+        /** Recuepera datos del vendedor*/
+        $vendedor=(new CotizacionModel)->getVendedor($id_vendedor);
+
+        $guardar=(new CotizacionModel)->setcotizacion($id_vendedor,$id_cotizacion,$id_session);
+
+
+        if (!json_decode($guardar)->error)
+        {
+
+                $data['name']=$vendedor[0]->usuario;
+                $data['No_cotizacion']=$id_cotizacion;
+
+                /**  Inicio funcion para enviar correo  */
+                $subject ="Nueva Cotizacion"; /** Asunto del Correo */
+                $for =$vendedor[0]->correo;/** correo que recibira el mensaje */
+
+                Mail::send('cotizacion.mailAsignaCotizacion',$data,function($msj) use($subject,$for){
+                    // Correo  y  Nombre que Aparecera
+                    $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+        }
+        return $guardar;
+
+    }
+
 }

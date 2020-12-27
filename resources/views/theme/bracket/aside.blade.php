@@ -37,6 +37,16 @@
               <li class="nav-item"><a href="" class="nav-link">Ver Facturas</a></li>
               <li class="nav-item"><a href="" class="nav-link">Generar factura</a></li>
             </ul>
+              <a href="" class="br-menu-link">
+                  <div class="br-menu-item">
+                      <i class="menu-item-icon fa fa-tags tx-24"></i>
+                      <span class="menu-item-label">Entradas</span>
+                      <i class="menu-item-arrow fa fa-angle-down"></i>
+                  </div><!-- menu-item -->
+              </a><!-- br-menu-link -->
+              <ul class="br-menu-sub nav flex-column">
+                  <li class="nav-item"><a href="" class="nav-link">Agregar</a></li>
+              </ul>
             <a href="" class="br-menu-link">
               <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-clipboard tx-24"></i>
@@ -101,8 +111,13 @@
               <div class="br-menu-item">
                   <i class="menu-item-icon icon ion-clipboard tx-24"></i>
                   <span class="menu-item-label">Cotizaciones</span>
+                  <i class="menu-item-arrow fa fa-angle-down"></i>
               </div><!-- menu-item -->
           </a><!-- br-menu-link -->
+          <ul class="br-menu-sub nav flex-column">
+              <li class="nav-item"><a href="cotizacion.cotizacion" class="optionMenu nav-link">Agregar</a></li>
+              <li class="nav-item"><a href="cotizacion.verCotizacion" class="optionMenu nav-link">Ver</a></li>
+          </ul>
           <a href="" class="br-menu-link">
               <div class="br-menu-item">
                   <i class="menu-item-icon icon ion-document-text tx-24"></i>
@@ -119,3 +134,7 @@
   <br>
 </div><!-- br-sideleft -->
 <!-- ########## END: ASIDE ########## -->
+
+<script>
+    let tipoUsuario={{$tipo}}
+</script>

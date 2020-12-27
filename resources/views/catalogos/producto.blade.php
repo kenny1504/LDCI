@@ -1,15 +1,5 @@
 
 <style>
-    .label {
-        color: white;
-        padding: 8px;
-    }
-
-    .success {background-color: #4CAF50;} /* Green */
-    .info {background-color: #2196F3;} /* Blue */
-    .warning {background-color: #ff9800;} /* Orange */
-    .danger {background-color: #f44336;} /* Red */
-    .other {background-color: #e7e7e7; color: black;} /* Gray */
 
     .punteado{
         border-style: dotted;
