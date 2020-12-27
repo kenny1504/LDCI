@@ -38,7 +38,7 @@
                                 <label >Extranjero</label>
                                 <div class="form-group">
                                     <label class="switch">
-                                        <input onchange="" id="ckExtranjero" type="checkbox">
+                                        <input onchange="clienteExtranjero()" id="ckExtranjero" type="checkbox">
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -115,8 +115,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="txt_cedula">Cédula Nacional</label>
-                            <input placeholder="001-000000-0000A" onblur="verificar_cedula(this)" type="text" name="txt_cedula"  id="txt_cedula" class="form-control input-md">
+                            <label id="textotest" for="txt_cedula">Cédula Nacional</label>
+                            <input placeholder="001-000000-0000A" onblur="verificar_cedula(this)" type="text" name="txt_cedula"  id="txt_cedula" class="extranjero form-control input-md">
                         </div>
                     </div>
                 </div>

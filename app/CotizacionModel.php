@@ -48,6 +48,19 @@ class CotizacionModel extends Model
         return $query;
     }
 
+    function getDatosCotizacion() // prueba para probar tabla en pdf
+    {
+        $query = new static;
+        $query = DB::select("select row_number() OVER (ORDER BY id_producto) AS no, nombre as nombre_producto,
+        case tipo when 1
+        then 'Producto'
+        else 'Servicio' end as tipo, existencia,
+    '$' || precio as precio, descripcion
+    from ldci.tb_producto where estado=1");
+
+        return $query;
+    }
+  
     function  guardarCotizacion($tblDetalleCarga,$tblDetalleServicios,$tipo_transporte,$fecha,$destino,$origen,$nota_adicional,$id_session)
     {
         DB::beginTransaction();
