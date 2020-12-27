@@ -83,9 +83,14 @@ class CotizacionController extends Controller
     }
 
     /** funcion que recupera cotizaciones para llenar tabla */
-    public function getCotizaciones()
+    public function getCotizaciones(Request $request)
     {
-        $datos= (new CotizacionModel)->getCotizaciones();
+
+        $estado=$request->estado;
+        $tipoUsuario = session('tipoUsuario');
+        $id_session = session('idUsuario');
+
+        $datos= (new CotizacionModel)->getCotizaciones($estado,$tipoUsuario,$id_session);
         return response()->json($datos);
     }
 
