@@ -60,7 +60,7 @@ class CotizacionModel extends Model
 
         return $query;
     }
-  
+
     function  guardarCotizacion($tblDetalleCarga,$tblDetalleServicios,$tipo_transporte,$fecha,$destino,$origen,$nota_adicional,$id_session)
     {
         DB::beginTransaction();
@@ -146,12 +146,14 @@ class CotizacionModel extends Model
                 $table = "(select co.id_cotizacion, t.nombre as
                         transporte,c1.ciudad ||','||c1.pais as destino,
                         c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
-                        co.fecha_grabacion
+                        co.fecha_grabacion,us1.usuario as asignada
                         from ldci.tb_cotizacion co
                         join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
                         join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
                         join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
                         join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                        left join ldci.tb_vendedor_cotizacion vc on vc.id_cotizacion=co.id_cotizacion
+                        left join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
                         where co.estado=$estado
                         order by co.fecha_grabacion desc) as tb ";
 
@@ -162,12 +164,15 @@ class CotizacionModel extends Model
                         transporte,c1.ciudad ||','||c1.pais as destino,
                         c2.ciudad ||','|| c2.pais as origen,
                         to_char(co.fecha,'DD/MM/YYYY')as fecha,
-                        co.estado,us.usuario,co.fecha_grabacion
+                        co.estado,us.usuario,co.fecha_grabacion,
+                        us1.usuario as asignada
                     from ldci.tb_cotizacion co
                     join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
                     join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
                     join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
                     join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                    left join ldci.tb_vendedor_cotizacion vc on vc.id_cotizacion=co.id_cotizacion
+                    left join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
                     order by co.fecha_grabacion desc) as tb ";
             }
         }
@@ -175,20 +180,22 @@ class CotizacionModel extends Model
         {
             if($estado!=0) {
                 $table = "(select distinct t1.id_cotizacion,t1.transporte,t1.destino,
-                            t1.origen,t1.fecha,t1.estado,t1.usuario
+                            t1.origen,t1.fecha,t1.estado,t1.usuario,t1.asignada
                             from(select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
                             c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
-                            co.fecha_grabacion
+                            co.fecha_grabacion,us1.usuario as asignada
                             from ldci.tb_cotizacion co
                             join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
                             join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
                             join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
                             join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
+                            left join ldci.tb_vendedor_cotizacion vc on vc.id_cotizacion=co.id_cotizacion
+                            left join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
                             where co.estado=$estado and co.usuario_grabacion=$id_session
                             union all
                             select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
                             c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
-                                   co.fecha_grabacion
+                                   co.fecha_grabacion,us2.usuario as asignada
                             from ldci.tb_cotizacion co
                             join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
                             join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
@@ -196,25 +203,29 @@ class CotizacionModel extends Model
                             join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
                             join ldci.tb_vendedor_cotizacion vc on co.id_cotizacion=vc.id_cotizacion
                             join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
+                            left join ldci.tb_vendedor_cotizacion vc1 on vc1.id_cotizacion=co.id_cotizacion
+                            left join ldci.tb_usuario us2 on us2.id_usuario=vc1.id_usuario
                             where co.estado=$estado and vc.id_usuario=$id_session  and us1.tipo=2
                             order by  fecha_grabacion desc ) as t1) as tb ";
 
             }else{
                 $table = "(select distinct t1.id_cotizacion,t1.transporte,t1.destino,
-                            t1.origen,t1.fecha,t1.estado,t1.usuario
+                            t1.origen,t1.fecha,t1.estado,t1.usuario,t1.asignada
                             from(select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
                             c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
-                            co.fecha_grabacion
+                            co.fecha_grabacion,us1.usuario as asignada
                             from ldci.tb_cotizacion co
                             join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
                             join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
                             join ldci.tb_tipo_transporte t on t.id_tipo_transporte=co.id_tipo_transporte
                             join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
-                            where co.usuario_grabacion=$id_session
+                            left join ldci.tb_vendedor_cotizacion vc on vc.id_cotizacion=co.id_cotizacion
+                            left join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
+                            where  co.usuario_grabacion=$id_session
                             union all
                             select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
                             c2.ciudad ||','|| c2.pais as origen,co.fecha :: date,co.estado,us.usuario,
-                                   co.fecha_grabacion
+                                   co.fecha_grabacion,us2.usuario as asignada
                             from ldci.tb_cotizacion co
                             join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
                             join ldci.vw_ciudades c2 on co.id_ciudad_origen=c2.id_ciudad
@@ -222,7 +233,9 @@ class CotizacionModel extends Model
                             join ldci.tb_usuario us on us.id_usuario=co.usuario_grabacion
                             join ldci.tb_vendedor_cotizacion vc on co.id_cotizacion=vc.id_cotizacion
                             join ldci.tb_usuario us1 on us1.id_usuario=vc.id_usuario
-                            where vc.id_usuario=$id_session and us1.tipo=2
+                            left join ldci.tb_vendedor_cotizacion vc1 on vc1.id_cotizacion=co.id_cotizacion
+                            left join ldci.tb_usuario us2 on us2.id_usuario=vc1.id_usuario
+                            where  vc.id_usuario=$id_session  and us1.tipo=2
                             order by  fecha_grabacion desc ) as t1) as tb ";
 
             }
@@ -239,6 +252,7 @@ class CotizacionModel extends Model
             ['db' => 'fecha', 'dt' => 4],
             ['db' => 'estado', 'dt' => 5],
             ['db' => 'usuario', 'dt' => 6],
+            ['db' => 'asignada', 'dt' => 7],
         ];
 
         /*** Config DB */
@@ -269,28 +283,59 @@ class CotizacionModel extends Model
     }
 
     /** Funcion que asigna cotizacion a vendedor */
-    function setcotizacion($id_vendedor,$id_cotizacion,$id_session)
+    function setcotizacion($id_vendedor,$id_cotizacion,$asignada,$id_session)
     {
 
-        $query = new static;
-        $query = DB::insert('INSERT INTO ldci.tb_vendedor_cotizacion(
+        if ($asignada==true)
+        {
+            $query = new static;
+            $query = DB::insert('UPDATE ldci.tb_vendedor_cotizacion
+            SET id_usuario=?,  usuario_modificacion=?, fecha_modificacion=now()
+            WHERE id_cotizacion=?', [$id_vendedor,$id_session,$id_cotizacion]);
+
+            if ($query)
+            {
+                return collect([
+                    'mensaje' => 'Asignada Actualizada Correctamente',
+                    'error' => false
+                ]);
+            }
+            else{
+                return collect([
+                    'mensaje' => 'Ocurrio un error al actualizar asignacion',
+                    'error' => true
+                ]);
+            }
+        }
+        else
+        {
+            $query = new static;
+            $query = DB::insert('INSERT INTO ldci.tb_vendedor_cotizacion(
             id_cotizacion, id_usuario, usuario_grabacion, fecha_grabacion)
             VALUES (?, ?, ?, now())', [$id_cotizacion,$id_vendedor,$id_session]);
 
-        if ($query)
-        {
-            return collect([
-                'mensaje' => 'Cotizacion Asignada Correctamente',
-                'error' => false
-            ]);
-        }
-        else{
-            return collect([
-                'mensaje' => 'Ocurrio un error al asignar vendendor',
-                'error' => true
-            ]);
+            if ($query)
+            {
+                return collect([
+                    'mensaje' => 'Cotizacion Asignada Correctamente',
+                    'error' => false
+                ]);
+            }
+            else{
+                return collect([
+                    'mensaje' => 'Ocurrio un error al asignar vendendor',
+                    'error' => true
+                ]);
+            }
         }
     }
 
+    /** Funcion para buscar si existe una asigancion a una cotizacion*/
+    function getAsignacion($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::select("select id_usuario from ldci.tb_vendedor_cotizacion where id_cotizacion=$id_cotizacion");
+        return $query;
+    }
 
 }

@@ -1,5 +1,7 @@
 var tblCotizaciones = null;
 var id_cotizacion=null;
+var asignada=null;
+var id_usuario_asignado=null;
 
 
     $(document).ready(function () {
@@ -104,6 +106,39 @@ var id_cotizacion=null;
 
                 $('#selecVendedor').append(datos);
                 $("#ModalAsignarVendedor").modal("show"); //Abre Modal
+
+
+                /** Verifica que si existe una asignacion */
+                $.ajax({
+                    type: 'POST',
+                    url: '/Asignacion', //llamada a la ruta
+                    data: {
+                        _token:_token,
+                        id_cotizacion:id_cotizacion
+                    },
+                    success: function (data) {
+                        if (Object.entries(data).length==0)
+                        {
+                            id_usuario_asignado=null;
+                            asignada=false;
+                        }
+                        else
+                        {
+                            alertSuccess("Eata cotizacion ya posee un vendedor asignado")
+                            $('#selecVendedor').val(data[0].id_usuario);
+                            id_usuario_asignado=data[0].id_usuario;
+                            $('#selecVendedor').change()
+                            asignada=true;
+                        }
+
+                    },
+                    error: function (err) {
+                        alertError(err.responseText);
+                        showLoad(false);
+                    }
+
+                });
+
                 showLoad(false);
 
             },
@@ -125,41 +160,49 @@ var id_cotizacion=null;
         var id_vendedor= $('#selecVendedor').val();
         var _token= $('input[name=_token]').val();
 
-        if (id_vendedor!=" " && id_vendedor!=null )
+        if ( id_vendedor!=null && id_usuario_asignado==id_vendedor)
         {
-            alertConfirm("¿Está seguro que desea asignar?", function (e) {
+            $("#ModalAsignarVendedor").modal("hide"); //cierra Modal
+        }
+        else
+        {
+            if (id_vendedor!=" " && id_vendedor!=null )
+            {
+                alertConfirm("¿Está seguro que desea asignar?", function (e) {
 
-                showLoad(true);
-                $.ajax({
-                    type: 'POST',
-                    url: '/Asignarvendedor', //llamada a la ruta
-                    data: {
-                        _token:_token,
-                        id_vendedor:id_vendedor,
-                        id_cotizacion:id_cotizacion
-                    },
-                    success: function (data) {
+                    showLoad(true);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Asignarvendedor', //llamada a la ruta
+                        data: {
+                            _token:_token,
+                            id_vendedor:id_vendedor,
+                            id_cotizacion:id_cotizacion,
+                            asignada:asignada
+                        },
+                        success: function (data) {
 
-                        showLoad(false);
-                        if (data.error) {
-                            alertError(data.mensaje);
+                            showLoad(false);
+                            if (data.error) {
+                                alertError(data.mensaje);
+                            }
+                            else
+                            {
+                                alertSuccess(data.mensaje);
+                                $("#ModalAsignarVendedor").modal("hide"); //cierra Modal
+                            }
+                        },
+                        error: function (err) {
+                            alertError(err.responseText);
+                            showLoad(false);
                         }
-                        else
-                        {
-                            alertSuccess(data.mensaje);
-                            $("#ModalAsignarVendedor").modal("hide"); //cierra Modal
-                        }
-                    },
-                    error: function (err) {
-                        alertError(err.responseText);
-                        showLoad(false);
-                    }
+
+                    });
 
                 });
-
-            });
+            }
+            else
+                alertError("Favor seleccione un vendedor");
         }
-       else
-           alertError("Favor seleccione un vendedor");
 
     }

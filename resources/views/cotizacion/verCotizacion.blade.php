@@ -31,7 +31,8 @@
                                     <th>Origen</th>
                                     <th>Fecha</th>
                                     <th>Estado</th>
-                                    <th>Usuario</th>
+                                    <th>Creada</th>
+                                    <th>Vendedor</th>
                                     <th>Acciones</th>
                                 </tr>
                                 </thead>

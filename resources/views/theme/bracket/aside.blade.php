@@ -36,6 +36,7 @@
             <ul class="br-menu-sub nav flex-column">
               <li class="nav-item"><a href="" class="nav-link">Ver Facturas</a></li>
               <li class="nav-item"><a href="" class="nav-link">Generar factura</a></li>
+              <li class="nav-item"><a href="" class="nav-link">Crear factura</a></li>
             </ul>
               <a href="" class="br-menu-link">
                   <div class="br-menu-item">
@@ -57,6 +58,7 @@
               <ul class="br-menu-sub nav flex-column">
                   <li class="nav-item"><a href="cotizacion.cotizacion" class="optionMenu nav-link">Agregar</a></li>
                   <li class="nav-item"><a href="cotizacion.verCotizacion" class="optionMenu nav-link">Ver</a></li>
+                  <li class="nav-item"><a href=" " class="optionMenu nav-link">Seguimiento</a></li>
               </ul>
             <a href="rastreo.rastreo" class="optionMenu br-menu-link">
               <div class="br-menu-item">

@@ -105,12 +105,12 @@
                                 <td width="10%" class="text-center">
                                     <div class="pull-right row form-group">
                                         <button class="btn btn-danger eliminarFila"
-                                                title="Eliminar registro"
+                                                title="Eliminar Carga"
                                                 id="btnEliminarFila">
                                             <i class=" fa fa-trash"></i></button>
                                         <button class="btn btn-primary"
                                                 data-confirm="" id="btnAdicionarFilaC"
-                                                title="Adicionar registro">
+                                                title="Añadir Carga">
                                             <i class=" fa fa-plus"></i></button>
                                     </div>
                                 </td>
@@ -133,7 +133,7 @@
                                id="tblDetalleServicios">
                             <thead>
                             <tr>
-                                <th class=" text-center" width="90%">SERVICIO ADICIONAL</th>
+                                <th class=" text-center" width="90%">SERVICIO</th>
                                 <th class=" text-center" width="10%">ACCIÓN</th>
                             </tr>
                             </thead>
@@ -148,12 +148,12 @@
                                 <td width="10%" class="text-center">
                                     <div class="pull-right row form-group">
                                         <button class="btn btn-danger eliminarFila"
-                                                title="Eliminar registro"
+                                                title="Eliminar servicio"
                                                 id="btnEliminarFila">
                                             <i class=" fa fa-trash"></i></button>
                                         <button class="btn btn-primary"
                                                 data-confirm="" id="btnAdicionarFilaS"
-                                                title="Adicionar registro">
+                                                title="Añadir servicio">
                                             <i class=" fa fa-plus"></i></button>
                                     </div>
                                 </td>

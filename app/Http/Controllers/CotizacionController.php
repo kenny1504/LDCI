@@ -107,12 +107,13 @@ class CotizacionController extends Controller
 
         $id_vendedor=$request->id_vendedor;
         $id_cotizacion=$request->id_cotizacion;
+        $asignada=$request->asignada;
         $id_session = session('idUsuario');
 
         /** Recuepera datos del vendedor*/
         $vendedor=(new CotizacionModel)->getVendedor($id_vendedor);
 
-        $guardar=(new CotizacionModel)->setcotizacion($id_vendedor,$id_cotizacion,$id_session);
+        $guardar=(new CotizacionModel)->setcotizacion($id_vendedor,$id_cotizacion,$asignada,$id_session);
 
 
         if (!json_decode($guardar)->error)
@@ -134,6 +135,14 @@ class CotizacionController extends Controller
         }
         return $guardar;
 
+    }
+
+    /** Funcion para buscar si existe una asigancion a una cotizacion*/
+    public function getAsignacion(Request $request)
+    {
+        $id_cotizacion=$request->id_cotizacion;
+        $datos= (new CotizacionModel)->getAsignacion($id_cotizacion);
+        return response()->json($datos);
     }
 
 }

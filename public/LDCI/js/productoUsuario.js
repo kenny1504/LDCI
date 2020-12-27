@@ -50,7 +50,7 @@ $(document).ready(function () {
                         /** Añadiendo precio a etiqueta*/
                         carou+="<style>\n" +
                             "    .figure.tag-sale.figure"+id_producto+"::before{\n" +
-                            "        content: \"C$"+precio+"\";\n" +
+                            "        content: \"$"+precio+"\";\n" +
                             "        background: #00d95a;\n" +
                             "    }\n" +
                             "</style>"
