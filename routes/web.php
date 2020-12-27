@@ -95,4 +95,7 @@ Route::post('/servicios/getAll', 'CotizacionController@getServicios')->name('get
 
 
 //Rutas Reportes
-Route::post('/vendedores','VendedorController@download')->name('LDCI');
+Route::post('/vendedores', 'ReporteController@downloadVendedores')->name('LDCI');
+Route::post('/clientes', 'ReporteController@downloadClientes')->name('LDCI');
+Route::post('/productos', 'ReporteController@downloadProductos')->name('LDCI');
+Route::post('/cotizaciones', 'ReporteController@downloadCotizacion')->name('LDCI');
