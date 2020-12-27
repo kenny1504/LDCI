@@ -47,7 +47,7 @@ var tblClientes=null;
 
     $(document).ready(function () {
 
-            $('#txt_cedula').mask('000-000000-0000S');
+        $('#txt_cedula').mask('000-000000-0000S');
             var _token= $('input[name=_token]').val();
             showLoad(true);
 
@@ -85,9 +85,9 @@ var tblClientes=null;
         var checkbox=document.getElementById('ckTipo');
 
         if (checkbox.checked == true)
-          $('.juridico').removeAttr('hidden');
-      else
-          $('.juridico').attr("hidden",true);
+            $('.juridico').removeAttr('hidden');
+        else
+            $('.juridico').attr("hidden",true);
     }
 
 
@@ -114,12 +114,13 @@ var tblClientes=null;
         var iso=select.getSelectedCountryData().iso2;
         var tipo=null;
         var guardar=false;
+        var extranjero=null;
 
         if (apellido2!="")
             apellido2:apellido2.trim().toUpperCase()
 
         var checkbox=document.getElementById('ckTipo');
-
+        var checkbox1=document.getElementById('ckExtranjero');
         if (checkbox.checked == true)
         {
             if (nombres!="" && ruc!="" && nombre_Empresa!="" && giro_Negocio!="" && telefono_1!=""  && apellido1!="" && cedula!="" && direccion!="" && departamento!="" && correo!="" && telefono_2!="" && sexo!="" && sexo!=null)
@@ -128,7 +129,7 @@ var tblClientes=null;
                 giro_Negocio=giro_Negocio.trim().toUpperCase()
                 tipo=2;
             }
-         }
+        }
         else
         {
             if (nombres!="" && apellido1!="" && cedula!="" && direccion!="" && departamento!="" && correo!="" && telefono_2!="" && sexo!="" && sexo!=null)
@@ -137,7 +138,10 @@ var tblClientes=null;
                 tipo=1;
             }
         }
-
+        if(checkbox1.checked == true)//mandar si es extranjero o no
+            extranjero=1
+        else
+            extranjero=0
         if (guardar==true)
         {
             alertConfirm("¿Está seguro que desea guardar?", function (e) {
@@ -163,6 +167,7 @@ var tblClientes=null;
                         correo:correo.trim(),
                         sexo:sexo.trim(),
                         tipo:tipo,
+                        extranjero:extranjero,
                         iso2:iso2,
                         iso:iso
                     },
@@ -223,7 +228,7 @@ var tblClientes=null;
                 data: null,
                 orderable: false,
                 defaultContent: '<button class="btn btn-info" onclick="selectCliente(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
-              }]
+            }]
         });
     }
 
@@ -289,8 +294,9 @@ var tblClientes=null;
             success: function (data) {
 
                 $('#ckTipo').click();
+                $('#ckExtranjero').click();
                 var Tipo =   document.getElementById('ckTipo');
-
+                var ciudadania =   document.getElementById('ckExtranjero');
                 /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
                 if (data[0].tipo==2)
                 {
@@ -301,6 +307,17 @@ var tblClientes=null;
                 {
                     if (Tipo.checked == true)
                         $('#ckTipo').click();
+                }
+
+                if(data[0].extranjero==true)
+                {
+                    if(ciudadania.checked == false)
+                        $('#ckExtranjero').click();
+                }
+                else
+                {
+                    if(ciudadania.checked == true)
+                        $('#ckExtranjero').click();
                 }
 
                 $('#id_cliente').val(cliente.id_cliente);
@@ -338,6 +355,9 @@ var tblClientes=null;
     function resetForm() {
 
         var Tipo =   document.getElementById('ckTipo');
+        var Tipo_Nac =   document.getElementById('ckExtranjero');
+        if(Tipo_Nac.checked == true)
+        $('#ckExtranjero').click();
         if (Tipo.checked == true)
             $('#ckTipo').click();
 
@@ -389,4 +409,25 @@ var tblClientes=null;
         }
 
 
+    }
+
+    function clienteExtranjero()
+    {
+        var checkbox=document.getElementById('ckExtranjero');
+        if(checkbox.checked == true)
+        {
+            $('.extranjero').removeAttr('onblur');
+            document.getElementById('textotest').innerText="Numero de Identificacion"
+            $('#txt_cedula').unmask();//deshabilidar mascara
+            $('.extranjero').attr('maxlength','20');//establecer una longitud global para identificaciones, no nacionales
+            $('.extranjero').removeAttr('placeholder');
+        }
+        else
+        {
+            document.getElementById('textotest').innerText="Cédula Nacional"
+            $('.extranjero').attr('onblur','verificar_cedula(this)');
+            $('#txt_cedula').mask('000-000000-0000S');
+            $('#txt_cedula').focus();//poner foco en el campo cedula, por si pasa de extranjero a nacional, y validar cedula.
+            $('.extranjero').attr('placeholder','001-000000-0000A');
+        }
     }
