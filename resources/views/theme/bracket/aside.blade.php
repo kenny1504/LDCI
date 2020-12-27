@@ -46,7 +46,7 @@
             </a><!-- br-menu-link -->
               <ul class="br-menu-sub nav flex-column">
                   <li class="nav-item"><a href="cotizacion.cotizacion" class="optionMenu nav-link">Agregar</a></li>
-                  <li class="nav-item"><a href="" class=" nav-link">Ver</a></li>
+                  <li class="nav-item"><a href="cotizacion.verCotizacion" class="optionMenu nav-link">Ver</a></li>
               </ul>
             <a href="rastreo.rastreo" class="optionMenu br-menu-link">
               <div class="br-menu-item">

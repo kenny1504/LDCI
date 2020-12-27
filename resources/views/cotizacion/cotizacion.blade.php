@@ -76,13 +76,13 @@
                             <tbody>
                             <tr class="fila-base">
                                 <td width="5%" class="text-center">
-                                    <input required onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad"  id="txtCantidad"class="cantidad text-center form-control input-sm">
+                                    <input required onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad"  id="txtCantidad" class="cantidad text-center form-control input-sm">
                                 </td>
                                 <td width="5%" class="text-center">
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="switch">
-                                                <input style="display: none" id="ckTipo" type="checkbox">
+                                                <input style="display: none" id="ckEstado" name="ckEstado" type="checkbox">
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -169,7 +169,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label >Nota adicional</label>
-                        <textarea class="form-control" id="txt_descripcion_Epoca" name="txt_descripcion_Epoca">
+                        <textarea class="form-control" id="txt_nota_adicional" name="txt_nota_adicional">
                             </textarea>
                     </div>
                 </div>

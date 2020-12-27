@@ -32,7 +32,7 @@
                                 <tr>
                                     <td width="32px"></td>
                                     <td style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:24px;color:#ffffff;line-height:1.25">
-                                        Restablecer Contraseña-LDCI
+                                        Restablecer Contraseña LDCI
                                     </td>
                                     <td width="32px"></td>
                                 </tr>
@@ -70,7 +70,7 @@
                                             </a>
                                         </p>
                                         <p style="color: #000">Dispone de 24 horas para realizar el cambio de contraseña, de lo contrario su cuenta sera inactivada por un determinado tiempo.</p>
-                                        <p style="color: #000">Gracias por confiar en nuestros ervicios.</p>
+                                        <p style="color: #000">Gracias por confiar en nuestros servicios.</p>
                                         <p style="color: #000">Atentamente,</p>
                                             <p style="color: #000">El equipo de LDCI</p>
                                         </td>
@@ -90,11 +90,11 @@
                                         <table style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:10px;color:#666666;line-height:18px;padding-bottom:10px">
                                             <tbody>
                                                 <tr>
-                                                    <td>Este correo electrónico no puede recibir respuestas. Para obtener más información, accede a nuestro sitio
+                                                    <td>Este correo electrónico no puede recibir respuestas. Para obtener más información, accede a nuestro al sitio
                                                         <a href="https://cargologisticsintermodal.com/" style="text-decoration:none;color:#4d90fe" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://support.google.com/accounts/troubleshooter/2402620?ref_topic%3D2364467&amp;source=gmail&amp;ust=1602993676511000&amp;usg=AFQjCNHtHmFe4PLZr2anGgUxMPXjF36QXw">
                                                             LOGISTICA DE CARGA INTERMODAL
                                                         </a>.
-                                                        <br>Copyright - 2020. LDCI. All Rights Reserved.
+                                                        <br>Copyright - {{date("yy")}}. LDCI. All Rights Reserved.
                                                     </td>
                                                 </tr>
                                             </tbody>

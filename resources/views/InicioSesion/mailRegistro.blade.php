@@ -86,11 +86,11 @@
                                         <table style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:10px;color:#666666;line-height:18px;padding-bottom:10px">
                                             <tbody>
                                                 <tr>
-                                                    <td>Este correo electrónico no puede recibir respuestas. Para obtener más información, accede sitio 
+                                                    <td>Este correo electrónico no puede recibir respuestas. Para obtener más información, accede sitio
                                                         <a href="https://cargologisticsintermodal.com/" style="text-decoration:none;color:#4d90fe" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://support.google.com/accounts/troubleshooter/2402620?ref_topic%3D2364467&amp;source=gmail&amp;ust=1602993676511000&amp;usg=AFQjCNHtHmFe4PLZr2anGgUxMPXjF36QXw">
                                                             LOGISTICA DE CARGA INTERMODAL
                                                         </a>.
-                                                        <br>Copyright - 2020. LDCI. All Rights Reserved.
+                                                        <br>Copyright - {{date("yy")}}. LDCI. All Rights Reserved.
                                                     </td>
                                                 </tr>
                                             </tbody>
