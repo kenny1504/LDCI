@@ -66,7 +66,7 @@
         </header>
 
         <main>
-            <h3>Listado de Productos y Servicios</h3>
+            <h4>Listado de Productos y Servicios</h4>
             <br>
             <table id="tblProductos" class="table table-responsive table-hover">
                 <thead>
