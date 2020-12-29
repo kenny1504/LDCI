@@ -77,18 +77,21 @@
             });
     }
 
-    function rpt_cotizaciones()
+    function rpt_cotizacion(datos)
     {
-
         showLoad(true);
+        var dt = tblCotizaciones.row($(datos).parents('tr')).data();
+            id_cotizacion=dt[0];
+
         var _token= $('input[name=_token]').val();
 
             $.ajax({
                 type:"post",
-                url: '/cotizaciones', //llamada a la ruta
+                url: '/cotizaciones/datos', //llamada a la ruta
                 global:false,
                 data:{
-                    _token:_token
+                    _token:_token,
+                    id_cotizacion: id_cotizacion
                 }
             })
             .done(function(data,textstatus,jqXHR )

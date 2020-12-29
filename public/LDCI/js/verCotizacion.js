@@ -50,7 +50,7 @@ var id_usuario_asignado=null;
                         if (json[5]!=-1)
                         {
                             return  '<i title="Asignar vendedor" class=" btn btn-success fa fa-user" onclick="setvendedor(this)">Asignar</i>'+
-                                '<i title="Imprimir" class=" btn btn-info fa  fa-file-pdf-o" onclick="">PDF</i>'
+                                '<i title="Imprimir" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_cotizacion(this)">PDF</i>'
                         }else
                         {
                             return  '<i title="Imprimir" class=" btn btn-info fa  fa-file-pdf-o" onclick="">PDF</i>'

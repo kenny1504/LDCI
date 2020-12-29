@@ -220,16 +220,17 @@
         </header>
 
         <main>
+            @foreach($Informacion as $informacion)
             <table class="table table-borde_1 tbl_tamano">
                 <tr>
                     <th class="alinear" COLSPAN=2>Cotización</th>
                     <tr>
                         <th>Numero</th>
-                        <td></td>
+                        <td>{{$informacion->numero_cotizacion}}</td>
                     </tr>
                     <tr>
                         <th>Fecha</th>
-                        <td></td>
+                        <td>{{$informacion->fecha}}</td>
                     </tr>
                     <tr>
                         <th>Página</th>
@@ -242,16 +243,16 @@
             <h4 class=" titulo">Enviar a:</h4>
             <table class="table-borde_4 table-responsive tbl_tamano_4">
                 <tr>
-                    <th class="ancho_celda_2 th_2 alinear_3"></th>
+                    <th class="ancho_celda_2 th_2 alinear_3">{{$informacion->nombre}}</th>
                 </tr>
                 <tr>
-                    <th class="ancho_celda_2 th_2 alinear_3"></th>
+                    <th class="ancho_celda_2 th_2 alinear_3">{{$informacion->direccion}}</th>
                 </tr>
                 <tr>
-                    <th class="ancho_celda_2 th_2 alinear_3"></th>
+                    <th class="ancho_celda_2 th_2 alinear_3">CT: {{$informacion->representante}}</th>
                 </tr>
                 <tr>
-                    <th class="ancho_celda_2 th_2 alinear_3"></th>
+                    <th class="ancho_celda_2 th_2 alinear_3">Telf: {{$informacion->telefono}}</th>
                 </tr>
             </table>
 
@@ -259,13 +260,13 @@
             <h4 class="alinear_3 espacio">Presentado a:</h4>
             <table class="table-borde_4 table-responsive tbl_tamano_3">
                 <tr>
-                    <th class="ancho_celda th_1 alinear_3"></th>
+                    <th class="ancho_celda th_1 alinear_3">{{$informacion->nombre}}</th>
                 </tr>
                 <tr>
-                    <th class="ancho_celda th_1 alinear_3"></th>
+                    <th class="ancho_celda th_1 alinear_3">{{$informacion->direccion}}</th>
                 </tr>
                 <tr>
-                    <th class="ancho_celda th_1 alinear_3"></th>
+                    <th class="ancho_celda th_1 alinear_3">CT: {{$informacion->direccion}}</th>
                 </tr>
             </table>
 
@@ -280,8 +281,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="ancho_celda"></td>
-                        <td></td>
+                        <td class="ancho_celda">{{$informacion->codigo_cliente}}</td>
+                        <td>{{$informacion->ruc}}</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -304,6 +305,7 @@
                     </tr>
                 </tbody>
             </table>
+            @endforeach
 
             <div class="div_borde alto_detalle mg">
                 <table class="ancho_tabla table-borde_2   ">
@@ -323,19 +325,21 @@
                         </tr>
                     </thead>
                     <tbody >
+                        @foreach($Detalle as $detalle)
                         <tr >
                                 <td class="ancho_celda"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td> </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$detalle->codigo}}</td>
+                                <td>{{$detalle->detalle_cotizacion}}</td>
+                                <td>{{$detalle->bodg}}</td>
+                                <td>{{$detalle->cantidad}}</td>
+                                <td>{{$detalle->unid}}</td>
+                                <td>{{$detalle->precio}}</td>
+                                <td>{{$detalle->dto}}</td>
+                                <td>{{$detalle->imp}}</td>
+                                <td>{{$detalle->imp_monto}}</td>
+                                <td>{{$detalle->importe}}</td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
