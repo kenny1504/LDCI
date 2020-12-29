@@ -59,7 +59,7 @@
         </header>
 
         <main>
-            <h3>Listado de Clientes</h3>
+            <h4>Listado de Clientes</h4>
             <br>
             <table id="tblClientes" class="table table-responsive table-hover">
                 <thead>
@@ -69,7 +69,7 @@
                         <th>Identificación</th>
                         <th>Tipo</th>
                         <th>Ciudadanía</th>
-                        <th>Teléfono Empresarial</th>
+                        <th>Teléfono Empresa</th>
                         <th>Teléfono Contacto</th>
                         <th>Giro del Negocio</th>
                         <th>Correo</th>

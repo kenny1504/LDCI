@@ -34,15 +34,15 @@
                 margin-top: 2%;
                 height: 110%;
                 width: 15%;
-                left: 50px;
+                left: 90px;
                 z-index: -1;
             }
             td{
                 font-size:11px !important;
-                padding: 1 !important;
+                padding: 1px !important;
             }
             .td-table{
-                height: 300;padding: 34;
+                height: 300px;padding: 34px;
             }
             .td-1{
                 width: 10%;
@@ -58,31 +58,31 @@
             }
             th{
                 font-size: 11px !important;
-                padding: 1 !important;
+                padding: 1px !important;
             }
             .th_ancho_grande{
                 font-size: 11px !important;
-                padding: 1 !important;
+                padding: 1px !important;
                 height: 8.9%;
                 width: 5px;
             }
             .th_ancho_pequeno{
                 font-size: 11px !important;
-                padding: 1 !important;
+                padding: 1px !important;
                 height: 2.75%;
                 width: 5px;
             }
             .th_1{
                 font-size: 13px !important;
-                padding: 4 !important;
+                padding: 4px !important;
             }
             .th_2{
                 font-size: 13px !important;
-                padding: 1.3 !important;
-                padding-left: 3;
+                padding: 1.3px !important;
+                padding-left: 3px;
             }
             .mg{
-                margin: -1;
+                margin: -1px;
             }
             .table-borde_1{
                 border: 1px solid rgb(0, 0, 0);
@@ -174,7 +174,7 @@
             .tamano_fuente_2{
                 font-size:14px !important;
                 font-style: italic !important;
-                margin-left: 4 !important;
+                margin-left: 4px !important;
             }
             .tamano_fuente_3{
                 font-size:13px !important;
@@ -214,7 +214,7 @@
     <body>
         <header>
             <img id="logo" src="images/Logo-Intermodal.png">
-            <h2>LOGISTICA DE CARGA INTERMODAL</h2>
+            <h3>LOGISTICA DE CARGA INTERMODAL</h3>
             <h5>BAC LAS PALMAS 70 MTS AL OESTE, MANAGUA, NICARAGUA</h5>
             <h6>Telefonos +(505) 2220 7707 / +1 (347) 298 6449</h6>
         </header>
@@ -222,7 +222,7 @@
         <main>
             @foreach($Informacion as $informacion)
             <table class="table table-borde_1 tbl_tamano">
-                <tr>
+               <tr>
                     <th class="alinear" COLSPAN=2>Cotización</th>
                     <tr>
                         <th>Numero</th>
@@ -236,7 +236,7 @@
                         <th>Página</th>
                         <td></td>
                     </tr>
-                </tr>
+               </tr>
             </table>
             <br>
 
