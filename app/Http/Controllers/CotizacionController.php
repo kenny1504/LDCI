@@ -110,7 +110,7 @@ class CotizacionController extends Controller
         $asignada=$request->asignada;
         $id_session = session('idUsuario');
 
-        /** Recupera datos del vendedor*/
+        /** Recuepera datos del vendedor*/
         $vendedor=(new CotizacionModel)->getVendedor($id_vendedor);
 
         $guardar=(new CotizacionModel)->setcotizacion($id_vendedor,$id_cotizacion,$asignada,$id_session);

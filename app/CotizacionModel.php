@@ -286,7 +286,7 @@ class CotizacionModel extends Model
     function setcotizacion($id_vendedor,$id_cotizacion,$asignada,$id_session)
     {
 
-        if ($asignada=="true")
+        if ($asignada==true)
         {
             $query = new static;
             $query = DB::insert('UPDATE ldci.tb_vendedor_cotizacion
@@ -296,7 +296,7 @@ class CotizacionModel extends Model
             if ($query)
             {
                 return collect([
-                    'mensaje' => 'Asignacion Actualizada Correctamente',
+                    'mensaje' => 'Asignada Actualizada Correctamente',
                     'error' => false
                 ]);
             }

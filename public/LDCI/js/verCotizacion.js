@@ -189,7 +189,6 @@ var id_usuario_asignado=null;
                             else
                             {
                                 alertSuccess(data.mensaje);
-                                tblCotizaciones.ajax.reload();
                                 $("#ModalAsignarVendedor").modal("hide"); //cierra Modal
                             }
                         },
