@@ -189,12 +189,12 @@ class ProductoModel extends Model
     {
 
         $query = new static;
-        $query = DB::select("select row_number() OVER (ORDER BY id_producto) AS no, nombre as nombre_producto,
-        case tipo when 1
-        then 'Producto'
-        else 'Servicio' end as tipo, existencia,
-    '$' || precio as precio, descripcion
-    from ldci.tb_producto where estado=1");
+        $query = DB::select("select ROW_NUMBER() OVER( ORDER BY tipo DESC) AS no, nombre as nombre_producto,
+            case tipo when 1
+            then 'Producto'
+            else 'Servicio' end as tipo,
+            existencia,'$'|| precio as precio, descripcion
+            from ldci.tb_producto where estado = 1");
 
         return $query;
     }

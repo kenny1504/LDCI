@@ -100,7 +100,7 @@ class ClienteModel extends Model
             $query_cliente = DB::select('INSERT INTO ldci.tb_cliente(
             id_persona, nombre_empresa, giro_negocio, ruc, tipo, extranjero,
              usuario_grabacion, fecha_grabacion)
-            VALUES (?, ?, ?, ?, ?, ?, now())', [$query_persona[0]->id_persona, $nombre_Empresa, $giro_Negocio, $ruc, $tipo, $extranjero, $id_session]);
+            VALUES (?, ?, ?, ?, ?, ?,?, now())', [$query_persona[0]->id_persona, $nombre_Empresa, $giro_Negocio, $ruc, $tipo, $extranjero, $id_session]);
 
             if (empty($query_cliente)) {
                 DB::rollBack();

@@ -63,10 +63,10 @@ var tblClientes=null;
                     $('#cmb_Departamento').empty();
 
                     var datos = '<option selected disabled value ="">Seleccione</option>';
+                    datos+='<option value="0">'+ 'Otro' +'</option>';
                     data.forEach(element => {
                         datos += '<option  value="' + element.id_ciudad + '">' + element.nombre + '</option>';
                     });
-
                     $('#cmb_Departamento').append(datos);
                     showLoad(false);
                 },
