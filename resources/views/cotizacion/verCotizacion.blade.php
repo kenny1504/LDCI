@@ -45,8 +45,7 @@
     </div>
 </div>
 
-
-    <div id="ModalAsignarVendedor" class="modal fade" role="document" >
+<div id="ModalAsignarVendedor" class="modal fade" role="document" >
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
@@ -90,7 +89,6 @@
             </div>
         </div>
     </div>
-
 
 <!-- js -->
 <script src="{{asset("LDCI/js/verCotizacion.js")}}" ></script>

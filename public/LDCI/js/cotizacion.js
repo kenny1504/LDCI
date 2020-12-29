@@ -187,7 +187,6 @@
 
     });
 
-
     /** Funcion para agregar fila */
     $(document).off("click", "#btnAdicionarFilaC").on("click", "#btnAdicionarFilaC", function () {
 

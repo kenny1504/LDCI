@@ -4,6 +4,11 @@
     .wizard > .content > .body {
         position: relative!important;
     }
+
+     textarea {
+         resize: none;
+     }
+
 </style>
 <script>
     showLoad(true);
