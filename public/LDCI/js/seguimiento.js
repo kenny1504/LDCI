@@ -4,7 +4,9 @@ var id_cotizacion=null;
 
 $(document).ready(function () {
 
+    showLoad(true);
     var _token= $('input[name=_token]').val();
+
     /** recupera tipos de transporte*/
     $.ajax({
         type: 'POST',
