@@ -257,8 +257,7 @@ class CotizacionModel extends Model
     function setcotizacion($id_vendedor, $id_cotizacion, $asignada, $id_session)
     {
 
-        if ($asignada=="true")
-        {
+        if ($asignada == "true") {
             $query = new static;
             $query = DB::insert('UPDATE ldci.tb_vendedor_cotizacion
             SET id_usuario=?,  usuario_modificacion=?, fecha_modificacion=now()
@@ -304,55 +303,43 @@ class CotizacionModel extends Model
     }
 
 
-
+    /** Funcion para obtener la informacion de la cotizacion */
     function getDatosCotizacion($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("SELECT cl.id_cliente as codigo_cliente,
-		CASE cl.tipo WHEN 1
-		THEN p.cedula
-		ELSE cl.ruc END AS RUC,
-		to_char (c.fecha,'DD-MM-YYYY') as fecha,
+        $query = DB::select("SELECT c.id_cotizacion AS n_cotizacion,u.id_usuario,u.usuario AS usuario_crea,
+		TO_CHAR (c.fecha,'DD-MM-YYYY') AS fecha,
+		TO_CHAR (c.fecha_grabacion,'DD-MM-YYYY') as fecha_creacion,
 		c.id_cotizacion AS Numero_cotizacion,
-		CASE cl.tipo WHEN 1
-        THEN p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
-        ELSE cl.nombre_empresa END AS nombre,
-		p.direccion,
-		CASE cl.tipo WHEN 2 THEN p.iso
-		ELSE p.iso_2 END AS iso,
-		CASE cl.tipo WHEN 2 THEN p.telefono_1
-		ELSE p.telefono_2 END AS Telefono,
-		CASE cl.tipo WHEN 2
-		THEN p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'') END AS representante,
-		CASE cl.tipo WHEN 1 THEN 'Natural'
-		ELSE 'Juridico' END AS tipo
-		FROM ldci.tb_cotizacion AS c JOIN
-		ldci.tb_usuario AS u ON u.id_usuario=c.usuario_grabacion
-		JOIN ldci.tb_persona AS p ON p.correo=u.correo
-		JOIN ldci.tb_cliente AS cl ON p.id_persona=cl.id_persona
+		u.telefono,u.iso2,tt.nombre AS t_transporte,
+		co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino
+		FROM ldci.tb_cotizacion AS c
+		JOIN ldci.tb_usuario AS u ON u.id_usuario=c.usuario_grabacion
+		JOIN ldci.tb_tipo_transporte AS tt ON c.id_tipo_transporte=tt.id_tipo_transporte
+		JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
+		JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
 		WHERE c.id_cotizacion = $id_cotizacion");
 
         return $query;
     }
 
+    /**Funcion para mostrar detalle de cotizacion */
     function getDetalleCotizacion($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("SELECT
-		co.id_ciudad as codigo,
-		'ORIGEN:'|| ' '|| co.ciudad ||'/'|| co.pais as detalle_cotizacion,
-		'' as Bodg,'' as cantidad,'' as Unid,'' as precio,'' as dto,
-		'' as imp,		'' as imp_monto,'' as importe
-		FROM ldci.tb_cotizacion as ct
-		JOIN ldci.vw_ciudades as co on co.id_ciudad=ct.id_ciudad_origen
-		WHERE ct.id_cotizacion=$id_cotizacion
+        $query = DB::select("Select tm.id_tipo_mercancia as codigo, tm.nombre AS carga,dc.cantidad, mt.nombre AS transporte,
+		TO_CHAR(dc.precio,'99.99') as precio
+		FROM ldci.tb_cotizacion AS c
+		JOIN ldci.tb_detalle_cotizacion AS dc ON dc.id_cotizacion=c.id_cotizacion
+		JOIN ldci.tb_tipo_mercancia AS tm ON dc.id_tipo_mercancia=tm.id_tipo_mercancia
+		JOIN ldci.tb_tipo_modo_transporte AS mt ON mt.id_tipo_modo_transporte= dc.id_tipo_modo_transporte
+		WHERE c.id_cotizacion=6
 		UNION
-		SELECT
-		cd.id_ciudad,
-		'DESTINO:'|| ' '|| cd.ciudad ||'/'|| cd.pais,'','','','','','','',''
-		FROM ldci.tb_cotizacion as ct
-		JOIN ldci.vw_ciudades as cd on cd.id_ciudad=ct.id_ciudad_destino
-		WHERE ct.id_cotizacion=$id_cotizacion;");
+		SELECT p.id_producto, p.nombre, null , ' ',TO_CHAR(cd.precio,'99.99') as precio
+		from ldci.tb_cotizacion as c
+		JOIN ldci.tb_detalle_cotizacion AS cd ON c.id_cotizacion = cd.id_cotizacion
+		JOIN ldci.tb_producto AS p on p.id_producto = cd.id_producto
+		WHERE c.id_cotizacion = $id_cotizacion;");
 
         return $query;
     }

@@ -29,6 +29,7 @@ class ReporteController extends Controller
             return view('inicio');
         }
     }
+
     /** Funcion para generar reporte de productos*/
     public function downloadProductos()
     {
@@ -47,6 +48,7 @@ class ReporteController extends Controller
             return view('inicio');
         }
     }
+
     /** Funcion para generar reporte total de clientes*/
     public function downloadClientes()
     {
@@ -65,6 +67,7 @@ class ReporteController extends Controller
             return view('inicio');
         }
     }
+
     /** Funcion para generar reporte cotizacion*/
     public function downloadCotizacion(Request $request)
     {
@@ -82,7 +85,7 @@ class ReporteController extends Controller
                 'Detalle' => $detalle
             ];
 
-            $pdf = PDF::loadView('reportes.rpt_cotizacion', $data, $detalle)->setPaper('a4'); //prueba para mandar datos a tabla de pdf
+            $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4'); //prueba para mandar datos a tabla de pdf
             echo utf8_encode(($pdf->stream('archivo.pdf')));
         } else {
             return view('inicio');
