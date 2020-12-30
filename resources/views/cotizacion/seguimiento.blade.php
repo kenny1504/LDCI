@@ -36,8 +36,12 @@
                                         <label for="cmb_estado">Estado</label>
                                         <select name="cmb_estado" id="cmb_estado"  class="form-control input-md">
                                             <option selected disabled value="">Seleccione</option>
-                                            <option value="-1">Rechazada</option>
-                                            <option value="1">Nueva</option>
+                                            <option  value="-1">Rechazada</option>
+                                            <option  value="1">Nueva</option>
+                                            <option  value="2">Revisada</option>
+                                            <option  value="3">Aprobada</option>
+                                            <option  value="4">Tramite</option>
+                                            <option  value="5">Impresa</option>
                                         </select>
                                     </div>
                                 </div>
@@ -138,7 +142,7 @@
                                             <textarea id="txt_observacion" class="form-control"></textarea>
                                         </td>
                                         <td width="5%" class="text-center">
-                                            <input required onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad"  id="txtCantidad" class="cantidad text-center form-control input-sm">
+                                            <input required onkeypress="return soloNumeros(event,txtprecio);"  type="text" name="txtprecio"  id="txtprecio" class="cantidad text-center form-control input-sm">
                                         </td>
                                         <td width="10%" class="text-center">
                                             <div class="pull-right row form-group">
@@ -185,7 +189,7 @@
                                                 </select>
                                             </td>
                                             <td width="10%" class="text-center">
-                                                <input required onkeypress="return soloNumeros(event,txtCantidad);"  type="text" name="txtCantidad"  id="txtCantidad" class="cantidad text-center form-control input-sm">
+                                                <input required onkeypress="return soloNumeros(event,txtPrecioServicio);"  type="text" name="txtPrecioServicio"  id="txtPrecioServicio" class="cantidad text-center form-control input-sm">
                                             </td>
                                             <td width="10%" class="text-center">
                                                 <div class="pull-right row form-group">

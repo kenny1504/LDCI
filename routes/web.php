@@ -97,6 +97,9 @@ Route::post('/cotizaciones/getAll', 'CotizacionController@getCotizaciones')->nam
 Route::post('/vendedores/getAll', 'CotizacionController@getVendedores')->name('getVendedores');
 Route::post('/Asignarvendedor', 'CotizacionController@setcotizacion')->name('setcotizacion');
 Route::post('/Asignacion', 'CotizacionController@getAsignacion')->name('Asignacion');
+Route::post('/getEncabezado/cotizacion', 'CotizacionController@getEncabezado')->name('Cotizacion');
+Route::post('/getDetalleCarga/cotizacion', 'CotizacionController@getDetalleCarga')->name('Cotizacion');
+Route::post('/getDetalleServicio/cotizacion', 'CotizacionController@getDetalleServicio')->name('Cotizacion');
 
 
 //Rutas Reportes
