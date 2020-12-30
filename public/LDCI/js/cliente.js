@@ -121,6 +121,26 @@ var tblClientes=null;
 
         var checkbox=document.getElementById('ckTipo');
         var checkbox1=document.getElementById('ckExtranjero');
+        var save;
+        var t;
+        if(checkbox1.checked==false)
+        {
+            t = validar_cedula(cedula);
+            if(t==false)
+            save=false;
+            else
+            save=true;
+        }
+        else if(checkbox1.checked==true)
+        {
+            clienteExtranjero();
+            save=true;
+        }
+
+
+
+
+
         if (checkbox.checked == true)
         {
             if (nombres!="" && ruc!="" && nombre_Empresa!="" && giro_Negocio!="" && telefono_1!=""  && apellido1!="" && cedula!="" && direccion!="" && departamento!="" && correo!="" && telefono_2!="" && sexo!="" && sexo!=null)
@@ -142,7 +162,7 @@ var tblClientes=null;
             extranjero=1
         else
             extranjero=0
-        if (guardar==true)
+        if (guardar==true && save)
         {
             alertConfirm("¿Está seguro que desea guardar?", function (e) {
                 showLoad(true);
@@ -182,6 +202,7 @@ var tblClientes=null;
                             alertSuccess(data.mensaje);
                             tblClientes.ajax.reload();
                             resetForm();
+                            clienteExtranjero();
                         }
                     },
                     error: function (err) {
@@ -192,6 +213,8 @@ var tblClientes=null;
                 });
             });
         }
+        else if(!save)
+            alertError("Verificar Cédula Naciona;");
         else
             alertError("Favor completar todos los campos");
 
@@ -363,6 +386,7 @@ var tblClientes=null;
 
         $('#btnEliminarCliente').attr("disabled", "FALSE");
         $('#ckTipo').removeAttr('checked');
+        $('#ckExtranjero').removeAttr('checked');
         $("#id_cliente,#txt_nombreEmpresa,#txt_giroNegocio,#txt_ruc,#txt_nombres").val("");
         $("#txt_telefono_1,#txt_apellido1,#apellido2,#txt_apellido2,#txt_edad").val("");
         $("#cmb_sexo,#txt_cedula,#txt_direccion,#cmb_Departamento,#txt_correo,#txt_telefono_2").val("");
@@ -419,15 +443,16 @@ var tblClientes=null;
             $('.extranjero').removeAttr('onblur');
             document.getElementById('textotest').innerText="Numero de Identificacion"
             $('#txt_cedula').unmask();//deshabilidar mascara
+            $('.extranjero').attr('minlength','3');
             $('.extranjero').attr('maxlength','20');//establecer una longitud global para identificaciones, no nacionales
             $('.extranjero').removeAttr('placeholder');
         }
         else
         {
             document.getElementById('textotest').innerText="Cédula Nacional"
-            $('.extranjero').attr('onblur','verificar_cedula(this)');
+
             $('#txt_cedula').mask('000-000000-0000S');
-            $('#txt_cedula').focus();//poner foco en el campo cedula, por si pasa de extranjero a nacional, y validar cedula.
+            $('.extranjero').attr('onblur','verificar_cedula(this)');
             $('.extranjero').attr('placeholder','001-000000-0000A');
         }
     }
