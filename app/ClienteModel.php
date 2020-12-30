@@ -203,7 +203,7 @@ class ClienteModel extends Model
 
         $query = new static;
         $query = DB::select('select  usuario,p.correo from ldci.tb_usuario u
-                            left join ldci.tb_persona p on p.correo=u.correo
+                            left join ldci.tb_persona p on p.correo=u.correo and p.estado=1
                             left join ldci.tb_cliente c on c.id_persona=p.id_persona
                             where u.correo=? and u.tipo=3', [$correo]);
 

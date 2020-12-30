@@ -48,57 +48,6 @@ class CotizacionModel extends Model
         return $query;
     }
 
-    function getDatosCotizacion($id_cotizacion)
-    {
-        $query = new static;
-        $query = DB::select("SELECT cl.id_cliente as codigo_cliente,
-		CASE cl.tipo WHEN 1
-		THEN p.cedula
-		ELSE cl.ruc END AS RUC,
-		to_char (c.fecha,'DD-MM-YYYY') as fecha,
-		c.id_cotizacion AS Numero_cotizacion,
-		CASE cl.tipo WHEN 1
-        THEN p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
-        ELSE cl.nombre_empresa END AS nombre,
-		p.direccion,
-		CASE cl.tipo WHEN 2 THEN p.iso
-		ELSE p.iso_2 END AS iso,
-		CASE cl.tipo WHEN 2 THEN p.telefono_1
-		ELSE p.telefono_2 END AS Telefono,
-		CASE cl.tipo WHEN 2
-		THEN p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'') END AS representante,
-		CASE cl.tipo WHEN 1 THEN 'Natural'
-		ELSE 'Juridico' END AS tipo
-		FROM ldci.tb_cotizacion AS c JOIN
-		ldci.tb_usuario AS u ON u.id_usuario=c.usuario_grabacion
-		JOIN ldci.tb_persona AS p ON p.correo=u.correo
-		JOIN ldci.tb_cliente AS cl ON p.id_persona=cl.id_persona
-		WHERE c.id_cotizacion = $id_cotizacion");
-
-        return $query;
-    }
-    function getDetalleCotizacion($id_cotizacion)
-    {
-        $query = new static;
-        $query = DB::select("SELECT
-		co.id_ciudad as codigo,
-		'ORIGEN:'|| ' '|| co.ciudad ||'/'|| co.pais as detalle_cotizacion,
-		'' as Bodg,'' as cantidad,'' as Unid,'' as precio,'' as dto,
-		'' as imp,		'' as imp_monto,'' as importe
-		FROM ldci.tb_cotizacion as ct
-		JOIN ldci.vw_ciudades as co on co.id_ciudad=ct.id_ciudad_origen
-		WHERE ct.id_cotizacion=$id_cotizacion
-		UNION
-		SELECT
-		cd.id_ciudad,
-		'DESTINO:'|| ' '|| cd.ciudad ||'/'|| cd.pais,'','','','','','','',''
-		FROM ldci.tb_cotizacion as ct
-		JOIN ldci.vw_ciudades as cd on cd.id_ciudad=ct.id_ciudad_destino
-		WHERE ct.id_cotizacion=$id_cotizacion;");
-
-        return $query;
-    }
-
     function  guardarCotizacion($tblDetalleCarga, $tblDetalleServicios, $tipo_transporte, $fecha, $destino, $origen, $nota_adicional, $id_session)
     {
         DB::beginTransaction();
@@ -351,6 +300,60 @@ class CotizacionModel extends Model
     {
         $query = new static;
         $query = DB::select("select id_usuario from ldci.tb_vendedor_cotizacion where id_cotizacion=$id_cotizacion");
+        return $query;
+    }
+
+
+
+    function getDatosCotizacion($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::select("SELECT cl.id_cliente as codigo_cliente,
+		CASE cl.tipo WHEN 1
+		THEN p.cedula
+		ELSE cl.ruc END AS RUC,
+		to_char (c.fecha,'DD-MM-YYYY') as fecha,
+		c.id_cotizacion AS Numero_cotizacion,
+		CASE cl.tipo WHEN 1
+        THEN p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
+        ELSE cl.nombre_empresa END AS nombre,
+		p.direccion,
+		CASE cl.tipo WHEN 2 THEN p.iso
+		ELSE p.iso_2 END AS iso,
+		CASE cl.tipo WHEN 2 THEN p.telefono_1
+		ELSE p.telefono_2 END AS Telefono,
+		CASE cl.tipo WHEN 2
+		THEN p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'') END AS representante,
+		CASE cl.tipo WHEN 1 THEN 'Natural'
+		ELSE 'Juridico' END AS tipo
+		FROM ldci.tb_cotizacion AS c JOIN
+		ldci.tb_usuario AS u ON u.id_usuario=c.usuario_grabacion
+		JOIN ldci.tb_persona AS p ON p.correo=u.correo
+		JOIN ldci.tb_cliente AS cl ON p.id_persona=cl.id_persona
+		WHERE c.id_cotizacion = $id_cotizacion");
+
+        return $query;
+    }
+
+    function getDetalleCotizacion($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::select("SELECT
+		co.id_ciudad as codigo,
+		'ORIGEN:'|| ' '|| co.ciudad ||'/'|| co.pais as detalle_cotizacion,
+		'' as Bodg,'' as cantidad,'' as Unid,'' as precio,'' as dto,
+		'' as imp,		'' as imp_monto,'' as importe
+		FROM ldci.tb_cotizacion as ct
+		JOIN ldci.vw_ciudades as co on co.id_ciudad=ct.id_ciudad_origen
+		WHERE ct.id_cotizacion=$id_cotizacion
+		UNION
+		SELECT
+		cd.id_ciudad,
+		'DESTINO:'|| ' '|| cd.ciudad ||'/'|| cd.pais,'','','','','','','',''
+		FROM ldci.tb_cotizacion as ct
+		JOIN ldci.vw_ciudades as cd on cd.id_ciudad=ct.id_ciudad_destino
+		WHERE ct.id_cotizacion=$id_cotizacion;");
+
         return $query;
     }
 }
