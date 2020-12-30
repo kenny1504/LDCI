@@ -48,6 +48,7 @@ class CotizacionModel extends Model
         return $query;
     }
 
+
     function  guardarCotizacion($tblDetalleCarga, $tblDetalleServicios, $tipo_transporte, $fecha, $destino, $origen, $nota_adicional, $id_session)
     {
         DB::beginTransaction();
@@ -303,7 +304,40 @@ class CotizacionModel extends Model
         return $query;
     }
 
+    /** Funcion que recupera encabezado de cotizacion*/
+    function getEncabezado($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::select("select c.id_cotizacion,c1.ciudad ||' '||c1.pais as origen,c.nota,
+                                   c2.ciudad ||' '||c2.pais as destino,c.estado,us.usuario as grabacion
+                                   ,us1.usuario vendedor,to_char(c.fecha,'DD/MM/YYYY')as fecha,c.id_tipo_transporte
+                            from ldci.tb_cotizacion c
+                            join ldci.vw_ciudades c1 on c.id_ciudad_origen=c1.id_ciudad
+                            join ldci.vw_ciudades c2 on c.id_ciudad_destino=c2.id_ciudad
+                            join ldci.tb_usuario us on c.usuario_grabacion=us.id_usuario
+                            left join ldci.tb_vendedor_cotizacion  vc on vc.id_cotizacion=c.id_cotizacion
+                            left join ldci.tb_usuario us1 on vc.id_usuario=us1.id_usuario
+                            where c.id_cotizacion=$id_cotizacion");
+        return $query;
+    }
 
+    /** Funcion que recupera detalles de carga*/
+    function getDetalleCarga($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::select("select cantidad,id_tipo_modo_transporte,id_tipo_mercancia,descripcion,nuevo
+                                    from  ldci.tb_detalle_cotizacion where id_cotizacion=$id_cotizacion and id_producto is null");
+        return $query;
+    }
+
+    /** Funcion que recupera detalles servicio*/
+    function getDetalleServicio($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::select("select id_producto
+                            from  ldci.tb_detalle_cotizacion where id_cotizacion=$id_cotizacion and id_producto is not null");
+        return $query;
+    }
 
     function getDatosCotizacion($id_cotizacion)
     {

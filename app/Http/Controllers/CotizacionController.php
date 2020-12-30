@@ -145,4 +145,28 @@ class CotizacionController extends Controller
         return response()->json($datos);
     }
 
+    /** Funcion que recupera encabezado de cotizacion*/
+    public function getEncabezado(Request $request)
+    {
+        $id_cotizacion=$request->id_cotizacion;
+        $datos= (new CotizacionModel)->getEncabezado($id_cotizacion);
+        return response()->json($datos);
+    }
+
+    /** Funcion que recupera detalles de carga*/
+    public function getDetalleCarga(Request $request)
+    {
+        $id_cotizacion=$request->id_cotizacion;
+        $datos= (new CotizacionModel)->getDetalleCarga($id_cotizacion);
+        return response()->json($datos);
+    }
+
+    /** Funcion que recupera detalles servicio*/
+    public function getDetalleServicio(Request $request)
+    {
+        $id_cotizacion=$request->id_cotizacion;
+        $datos= (new CotizacionModel)->getDetalleServicio($id_cotizacion);
+        return response()->json($datos);
+    }
+
 }

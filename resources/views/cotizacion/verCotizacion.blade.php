@@ -13,6 +13,10 @@
                         <option selected value="0">Todos</option>
                         <option value="-1">Rechazada</option>
                         <option value="1">Nueva</option>
+                        <option value="2">Revisada</option>
+                        <option value="3">Aprobada</option>
+                        <option value="4">Tramite</option>
+                        <option value="5">Impresa</option>
                     </select>
                 </div>
             </div>
