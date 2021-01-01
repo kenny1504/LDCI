@@ -26,7 +26,7 @@ var tblTipoMercancia = null;
                     targets: -1,
                     data: null,
                     orderable: false,
-                    defaultContent: '<i class="btn btn-info fa fa-edit" onclick="selectTipoMercancia(this)"></i>'
+                    defaultContent: '<i class="btn btn-info fa fa-edit" title="Selecciona el registro" onclick="selectTipoMercancia(this)"></i>'
                 }
             ]
         });

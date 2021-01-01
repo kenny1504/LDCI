@@ -29,7 +29,7 @@
             <button onclick="eliminar()" disabled class="btn btn-danger btn-sm" id="btnEliminarTipoMercancia">
                 <i class="fa fa-trash-o"> </i> Eliminar
             </button>
-            <a onclick="resetForm()" class="btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
+            <a title="Limpiar formulario" onclick="resetForm()" class="btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>
 </div>

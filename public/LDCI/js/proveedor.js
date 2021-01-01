@@ -1,6 +1,6 @@
 var tblProveedores = null;
 
-var input = document.querySelector("#txt_telefono_1");
+    var input = document.querySelector("#txt_telefono_1");
     select_1 = window.intlTelInput(input, {
     allowDropdown: true,
     autoHideDialCode: false,
@@ -94,7 +94,7 @@ var input = document.querySelector("#txt_telefono_1");
                 targets: -1,
                 data: null,
                 orderable: false,
-                defaultContent: '<button class="btn btn-info" onclick="selectProveedor(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
+                defaultContent: '<button class="btn btn-info" title="Selecciona el registro" onclick="selectProveedor(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
             }
         ]
         });
@@ -159,6 +159,7 @@ var input = document.querySelector("#txt_telefono_1");
             alertError("Favor completar todos los campos");
 
     }
+
     /**Deshabilitar un proveedor */
     function eliminar()
     {
@@ -238,6 +239,7 @@ var input = document.querySelector("#txt_telefono_1");
             }
         });
     }
+
     /** Limpia el formulario */
     function resetForm() {
 

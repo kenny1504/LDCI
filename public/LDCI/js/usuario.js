@@ -56,14 +56,14 @@ var select2=null;
                         render: function (json) {
                             $Estado =json[4];
                             if ($Estado!="Confirmar")
-                            return '<div class="form-group">'
+                            return '<div title="Estado de correo" class="form-group">'
                                      +'<label class="switch">'
                                         +'<input disabled type="checkbox">'
                                         +'<span class="slider round"></span>'
                                      +'</label>'
                                    +'</div>';
                             else
-                            return '<div class="form-group">'
+                            return '<div title="Estado de correo" class="form-group">'
                                         +'<label class="switch">'
                                         +'<input disabled checked type="checkbox">'
                                         +'<span class="slider round"></span>'
@@ -78,14 +78,14 @@ var select2=null;
                         render: function (json) {
                             $Estado =json[9];
                             if ($Estado!="Activo")
-                            return '<div class="form-group">'
+                            return '<div title="Cambiar estado de usuario" class="form-group">'
                                      +'<label class="switch">'
                                         +'<input class="cambiar" type="checkbox">'
                                         +'<span class="slider round"></span>'
                                      +'</label>'
                                    +'</div>';
                             else
-                            return '<div class="form-group">'
+                            return '<div title="Cambiar estado de usuario" class="form-group">'
                                         +'<label class="switch">'
                                         +'<input class="cambiar" checked type="checkbox">'
                                         +'<span class="slider round"></span>'
@@ -97,7 +97,7 @@ var select2=null;
                     targets: -1,
                     data: null,
                     orderable: false,
-                    defaultContent: '<i class="btn btn-info fa fa-edit" onclick="selectUsuario(this)"></i>'
+                    defaultContent: '<i class="btn btn-info fa fa-edit" title="Selecciona el registro" onclick="selectUsuario(this)"></i>'
                    }
                 ]
             });

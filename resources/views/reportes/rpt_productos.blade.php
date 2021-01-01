@@ -39,11 +39,11 @@
             }
             td{
                 font-size:12px !important;
-                padding: 1 !important;
+                padding: 1px !important;
             }
             th{
                 font-size:12px !important;
-                padding: 1 !important;
+                padding: 1px !important;
             }
             footer {
                 position: fixed;
@@ -53,6 +53,9 @@
                 height: 2cm;
                 color: white;
                 text-align: center;
+            }
+            td{
+                color: #717D7E ;
             }
         </style>
     </head>

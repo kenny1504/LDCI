@@ -90,7 +90,7 @@
                     <button disabled onclick="eliminar()" class="btn btn-danger" id="btnEliminarProveedor">
                         <i class="fa fa-trash-o"> </i> Eliminar
                     </button>
-                    <button onclick="resetForm()" class="btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
+                    <button title="Limpiar formulario" onclick="resetForm()" class="btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
                     <br><br>
                 </div>
             </div>

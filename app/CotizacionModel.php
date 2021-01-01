@@ -307,8 +307,8 @@ class CotizacionModel extends Model
     function getEncabezado($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("select c.id_cotizacion,c1.ciudad ||' '||c1.pais as origen,c.nota,
-                                   c2.ciudad ||' '||c2.pais as destino,c.estado,us.usuario as grabacion
+        $query = DB::select("select c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,c.nota,
+                                   c2.ciudad ||'/'||c2.pais as destino,c.estado,us.usuario as grabacion
                                    ,us1.usuario vendedor,to_char(c.fecha,'DD/MM/YYYY')as fecha,c.id_tipo_transporte
                             from ldci.tb_cotizacion c
                             join ldci.vw_ciudades c1 on c.id_ciudad_origen=c1.id_ciudad

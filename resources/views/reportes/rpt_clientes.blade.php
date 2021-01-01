@@ -47,6 +47,9 @@
                 color: white;
                 text-align: center;
             }
+            td{
+                color: #717D7E ;
+            }
         </style>
     </head>
 

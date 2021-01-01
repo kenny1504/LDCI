@@ -63,10 +63,10 @@
             <button onclick="guardar()" class="btn btn-success btn-sm" id="btnGuardarUsuario">
                 <i class="fa fa-save"> </i> Guardar
             </button>
-            <button onclick="ressetpassword()" disabled class="btn btn-teal btn-sm" id="btnResetUser">
+            <button title="Restaurar contraseña de usuario" onclick="ressetpassword()" disabled class="btn btn-teal btn-sm" id="btnResetUser">
                 <i class="fa fa-reply"> </i> Restaurar contraseña
             </button>
-            <a onclick="resetForm()" class="btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
+            <a title="Limpiar formulario" onclick="resetForm()" class="btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>
 </div>

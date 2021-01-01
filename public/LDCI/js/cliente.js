@@ -250,7 +250,7 @@ var tblClientes=null;
                 targets: -1,
                 data: null,
                 orderable: false,
-                defaultContent: '<button class="btn btn-info" onclick="selectCliente(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
+                defaultContent: '<button class="btn btn-info" title="Selecciona el registro" onclick="selectCliente(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
             }]
         });
     }

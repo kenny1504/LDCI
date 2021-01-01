@@ -19,7 +19,7 @@
                                     <div class="input-group">
                                         <input disabled type="text" id="id_empleado" name="id_empleado" class="form-control input-md">
                                         <span class="input-group-btn">
-                                            <button onclick="listarVendedores()" class="btn btn-default" data-toggle="modal" data-target="#ModalVendedores"
+                                            <button title="Buscar Empleado" onclick="listarVendedores()" class="btn btn-default" data-toggle="modal" data-target="#ModalVendedores"
                                                     id="btnBuscarEmpleado" type="button"><i class="fa fa-search"></i></button>
                                         </span>
                                     </div>
@@ -152,7 +152,7 @@
                     <button disabled onclick="eliminar()" class="btn btn-danger" id="btnEliminarEmpleado">
                         <i class="fa fa-trash-o"> </i> Eliminar
                     </button>
-                    <button onclick="resetForm()" class="btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
+                    <button title="Limpiar formulario" onclick="resetForm()" class="btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
                    <br><br>
                 </div>
             </div>

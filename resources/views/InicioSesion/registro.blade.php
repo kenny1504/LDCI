@@ -17,7 +17,7 @@
         <div class="form-group">
           <input type="password" id="txt_pass" requireds class="form-control" placeholder="Ingrese Contraseña">
         </div><!-- form-group -->
-        <button onclick="registrarUsuario();" class="btn btn-info btn-block">Registrarse</button>
+        <button title="Guardar registro" onclick="registrarUsuario();" class="btn btn-info btn-block">Registrarse</button>
       </div><!-- login-wrapper -->
     </div><!-- d-flex -->
 

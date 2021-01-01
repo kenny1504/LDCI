@@ -54,10 +54,6 @@
 
 </style>
 
-
-
-
-
 <script src="{{asset("LDCI/js/productoUsuario.js")}}" ></script>
 
 

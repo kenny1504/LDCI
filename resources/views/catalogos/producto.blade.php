@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-5">
                         <label >Servicio</label>
-                        <div class="form-group">
+                        <div title="Dar check si es un servicio" class="form-group">
                             <label class="switch">
                                 <input name="cktipo" id="cktipo" type="checkbox">
                                 <span class="slider round"></span>
@@ -85,7 +85,7 @@
             <button onclick="eliminar()" disabled class="btn btn-danger btn-sm" id="btnEliminarProducto">
                 <i class="fa fa-trash-o"> </i> Eliminar
             </button>
-            <a href="catalogos.producto" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
+            <a href="catalogos.producto" title="Limpiar formulario" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>
 </div>

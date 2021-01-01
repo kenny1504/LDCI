@@ -112,7 +112,7 @@ var img=null;
                     targets: -1,
                     data: null,
                     orderable: false,
-                    defaultContent: '<i class="btn btn-info fa fa-edit" onclick="selectProducto(this)"></i>'
+                    defaultContent: '<i class="btn btn-info fa fa-edit" title="Selecciona el registro" onclick="selectProducto(this)"></i>'
                 }
             ]
         });

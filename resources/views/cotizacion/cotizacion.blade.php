@@ -24,14 +24,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">Origen <span class="tx-danger">*</span></label>
-                            <select title="Seleccione"  name="cmb_destino"  id="cmb_destino" class=" form-control input-md" required>
+                            <select title="Seleccione destino"  name="cmb_destino"  id="cmb_destino" class=" form-control input-md" required>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">Destino <span class="tx-danger">*</span></label>
-                            <select title="Seleccione"  name="cmb_origen"  id="cmb_origen" class=" form-control input-md" required>
+                            <select title="Seleccione origen"  name="cmb_origen"  id="cmb_origen" class=" form-control input-md" required>
                             </select>
                         </div>
                     </div>
@@ -45,14 +45,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">Tipo transporte <span class="tx-danger">*</span></label>
-                            <select name="cmb_tipo_transporte"  id="cmb_tipo_transporte" class="form-control input-md" required>
+                            <select title="Selecciona el transporte" name="cmb_tipo_transporte"  id="cmb_tipo_transporte" class="form-control input-md" required>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">fecha <span class="tx-danger">*</span></label>
-                            <input  type="date" id="txt_fecha" name="txt_fecha" class="form-control input-md" required>
+                            <input title="Ingrese fecha de envio"  type="date" id="txt_fecha" name="txt_fecha" class="form-control input-md" required>
                         </div>
                     </div>
                 </div>
