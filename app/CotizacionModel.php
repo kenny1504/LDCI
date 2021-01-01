@@ -362,19 +362,28 @@ class CotizacionModel extends Model
     function getDetalleCotizacion($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("Select tm.id_tipo_mercancia as codigo, tm.nombre AS carga,dc.cantidad, mt.nombre AS transporte,
-		TO_CHAR(dc.precio,'99.99') as precio
-		FROM ldci.tb_cotizacion AS c
-		JOIN ldci.tb_detalle_cotizacion AS dc ON dc.id_cotizacion=c.id_cotizacion
-		JOIN ldci.tb_tipo_mercancia AS tm ON dc.id_tipo_mercancia=tm.id_tipo_mercancia
-		JOIN ldci.tb_tipo_modo_transporte AS mt ON mt.id_tipo_modo_transporte= dc.id_tipo_modo_transporte
-		WHERE c.id_cotizacion=6
-		UNION
-		SELECT p.id_producto, p.nombre, null , ' ',TO_CHAR(cd.precio,'99.99') as precio
-		from ldci.tb_cotizacion as c
-		JOIN ldci.tb_detalle_cotizacion AS cd ON c.id_cotizacion = cd.id_cotizacion
-		JOIN ldci.tb_producto AS p on p.id_producto = cd.id_producto
-		WHERE c.id_cotizacion = $id_cotizacion;");
+        $query = DB::select("select row_number() OVER (ORDER BY t.id_detalle_cotizacion) as no,t.codigo,t.carga,t.cantidad,
+        t.transporte,t.precio,t.Dto,t.descripcion
+        from (Select dc.id_detalle_cotizacion, tm.id_tipo_mercancia as codigo,
+            tm.nombre AS carga,dc.cantidad,
+            mt.nombre AS transporte,
+            CASE WHEN dc.precio IS NULL THEN 0
+            ELSE dc.precio END AS precio, '' as Dto, dc.descripcion
+            FROM ldci.tb_cotizacion AS c
+            JOIN ldci.tb_detalle_cotizacion AS dc ON dc.id_cotizacion=c.id_cotizacion
+            JOIN ldci.tb_tipo_mercancia AS tm ON dc.id_tipo_mercancia=tm.id_tipo_mercancia
+            JOIN ldci.tb_tipo_modo_transporte AS mt ON mt.id_tipo_modo_transporte= dc.id_tipo_modo_transporte
+            WHERE c.id_cotizacion=$id_cotizacion
+            UNION
+            SELECT cd.id_detalle_cotizacion, p.id_producto, p.nombre, null , ' ',
+            CASE WHEN cd.precio IS NULL THEN 0
+            ELSE cd.precio
+            END AS TotalRecaudacion,'',''
+            from ldci.tb_cotizacion as c
+            JOIN ldci.tb_detalle_cotizacion AS cd ON c.id_cotizacion = cd.id_cotizacion
+            JOIN ldci.tb_producto AS p on p.id_producto = cd.id_producto
+            WHERE c.id_cotizacion = $id_cotizacion
+        )as t");
 
         return $query;
     }
