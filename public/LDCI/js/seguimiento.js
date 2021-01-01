@@ -209,6 +209,20 @@ $(document).ready(function () {
             success: function (data) {
 
                 $('#cmb_estado').val(data[0].estado);
+
+                if(data[0].estado==-1)
+                {
+                    $("#tblDetalleServicios ").find("input,button,textarea,select").attr("disabled", "disabled");
+                    $("#tblDetalleCarga ").find("input,button,textarea,select").attr("disabled", "disabled");
+                    $("#btnGuardar ").attr("disabled", "disabled");
+                }
+                else
+                {
+                    $("#tblDetalleServicios ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
+                    $("#tblDetalleCarga ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
+                    $("#btnGuardar ").removeAttr("disabled", "disabled");
+                }
+
                 $('#id_cotizacion').val(id_cotizacion);
                 $('#txt_usuario').val(data[0].grabacion);
                 $('#txt_vendedor').val(data[0].vendedor);
