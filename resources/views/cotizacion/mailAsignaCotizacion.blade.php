@@ -32,7 +32,7 @@
                     <div>Te hemos enviado este correo electrónico para comunicarte de informacion relevanten en los servicios de <span class="il">LDCI</span>.
                     </div>
                     <div style="direction:ltr">
-                        © {{date("yy")}} <span class="il">Logistica de Carga Intermodal</span> LDCI,
+                        © {{date("Y")}} <span class="il">Logistica de Carga Intermodal</span> LDCI,
                         <a class="m_-2854206347872120885afal" style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;color:rgba(0,0,0,0.54);font-size:11px;line-height:18px;padding-top:12px;text-align:center">
                             Bac Las Palmas 70 Mts al Oeste, Managua, Nic
                         </a>

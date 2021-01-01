@@ -345,7 +345,7 @@ class CotizacionModel extends Model
         $query = DB::select("SELECT c.id_cotizacion AS n_cotizacion,u.id_usuario,u.usuario AS usuario_crea,
 		TO_CHAR (c.fecha,'DD-MM-YYYY') AS fecha,
 		TO_CHAR (c.fecha_grabacion,'DD-MM-YYYY') as fecha_creacion,
-		c.id_cotizacion AS Numero_cotizacion,
+		c.id_cotizacion AS Numero_cotizacion,c.nota,
 		u.telefono,u.iso2,tt.nombre AS t_transporte,
 		co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino
 		FROM ldci.tb_cotizacion AS c

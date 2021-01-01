@@ -71,11 +71,8 @@ class ReporteController extends Controller
     /** Funcion para generar reporte cotizacion*/
     public function downloadCotizacion(Request $request)
     {
-        $tipo_usuario = session('tipoUsuario');
         $id_cotizacion = $request->id_cotizacion;
 
-        /** Valida que este logueado un usuario administrador */
-        if ($tipo_usuario == 1) {
             $datos = (new CotizacionModel)->getDatosCotizacion($id_cotizacion);
             $detalle = (new CotizacionModel)->getDetalleCotizacion($id_cotizacion);
             $data = [
@@ -87,8 +84,6 @@ class ReporteController extends Controller
 
             $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4'); //prueba para mandar datos a tabla de pdf
             echo utf8_encode(($pdf->stream('archivo.pdf')));
-        } else {
-            return view('inicio');
-        }
+
     }
 }

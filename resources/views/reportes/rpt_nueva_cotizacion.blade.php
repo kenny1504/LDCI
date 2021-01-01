@@ -60,17 +60,6 @@
                 height: 8.9%;
                 width: 5px;
             }
-            .th_ancho_pequeno{
-                font-size: 11px !important;
-                padding: 1px !important;
-                height: 2.75%;
-                width: 5px;
-            }
-
-
-            .mg{
-                margin: -1px;
-            }
             .mg1{
                 margin-top: 10px;
             }
@@ -91,10 +80,6 @@
                 border-color: #717D7E;
                 background-color: #F2F3F4;
                 padding: 5px 0px;
-                border-radius: 5px 5px 10px 10px;
-            }
-            .div_borde_2{
-                background-color: #F2F3F4;
                 border-radius: 5px 5px 10px 10px;
             }
             .table-borde_3 {
@@ -171,16 +156,9 @@
             .ancho_celda{
                 height: 1.7%;
             }
-            .largo_celda
-            {
-                width: 35.4%;
-            }
             .largo_celda_2
             {
                 width: 50%;
-            }
-            .ancho_celda_2{
-                height: 1.75%;
             }
             .ancho_tabla{
                 width: 100% !important;
@@ -290,12 +268,8 @@
 
                 <table class="table-borde_4 table-responsive tbl_tamano_5">
                     <tr>
-                        <th class="text_color_c alinear_3 th_ancho_grande tamano_fuente_2" valign="top">Aviso:</th>
-                        <td class="text_color alinear_3 tamano_fuente_3"  valign="top"></td>
-                    </tr>
-                    <tr>
-                        <th class="text_color_c alinear_3 th_ancho_pequeno tamano_fuente_2">Firma:</th>
-                        <td class="text_color alinear_3 tamano_fuente_3"></td>
+                        <th class="text_color_c alinear_3 th_ancho_grande tamano_fuente_2" valign="top">Nota Adicional:</th>
+                        <td class="text_color alinear_3 tamano_fuente_3"  valign="top"> {{$informacion->nota}}</td>
                     </tr>
                 </table>
 
@@ -303,23 +277,19 @@
 
                 <table class=" table-borde_3 table-responsive tbl_tamano_2">
                     <tr>
+                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1 "></th>
+                        <td class="text_color ancho_columna alinear_2 tamano_fuente_1"></td>
+                    </tr>
+                    <tr>
                         <th class="text_color_c alinear_2 ancho_celda tamano_fuente_1">Subtotal</th>
                         <td class="text_color ancho_columna alinear_2 tamano_fuente_1"></td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1 ">Descuento Parcial</th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
-                    </tr>
-                    <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1">Descuento Global</th>
+                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1 ">Descuento</th>
                         <td class="text_color alinear_2 tamano_fuente_1"></td>
                     </tr>
                     <tr>
                         <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1">Miscelaneos</th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
-                    </tr>
-                    <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1">Impuesto</th>
                         <td class="text_color alinear_2 tamano_fuente_1"></td>
                     </tr>
                     <tr>

@@ -41,7 +41,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="cmb_estado">Estado</label>
-                                        <select name="cmb_estado" id="cmb_estado"  class="form-control input-md">
+                                        <select onchange="changeestado()" name="cmb_estado" id="cmb_estado"  class="form-control input-md">
                                             <option selected disabled value="">Seleccione</option>
                                             <option  value="-1">Rechazada</option>
                                             <option  value="1">Nueva</option>
@@ -234,124 +234,126 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                                <br><br>
-                                <h5 >
-                                    <legend class="text-primary">Informacion de Contacto</legend>
-                                </h5>
-                            </div>
-                        <div class="col-md-6">
+                        <div hidden id="InfoContacto">
                             <div class="col-md-12">
-                                <h6 >
-                                    <legend class="text-info">Remitente</legend>
-                                </h6>
-                            </div>
-                            <div class="row">
+                                    <br><br>
+                                    <h5 >
+                                        <legend class="text-primary">Informacion de Contacto</legend>
+                                    </h5>
+                                </div>
+                            <div class="col-md-6">
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Nombres</label>
-                                        <div class="input-group">
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                            <span class="input-group-btn">
-                                                    <button title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#"
-                                                            id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
-                                                </span>
+                                    <h6 >
+                                        <legend class="text-info">Remitente</legend>
+                                    </h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Nombres</label>
+                                            <div class="input-group">
+                                                <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                                <span class="input-group-btn">
+                                                        <button title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#"
+                                                                id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Apellido 1</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Apellido 2</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Telefono</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Correo</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label >Direccion</label>
+                                        <textarea class="form-control" id="txt_descripcion" name="txt_descripcion">
+                                    </textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Apellido 1</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Apellido 2</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Telefono</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Correo</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
+                            <div class="col-md-6">
                                 <div class="col-md-12">
-                                    <label >Direccion</label>
-                                    <textarea class="form-control" id="txt_descripcion" name="txt_descripcion">
-                                </textarea>
+                                    <h6 >
+                                        <legend class="text-info">Consignatario</legend>
+                                    </h6>
                                 </div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Nombres</label>
+                                            <div class="input-group">
+                                                <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                                <span class="input-group-btn">
+                                                        <button title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#"
+                                                                id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Apellido 1</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Apellido 2</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Telefono</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="txt_nombres">Correo</label>
+                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label >Direccion</label>
+                                        <textarea class="form-control" id="txt_descripcion" name="txt_descripcion">
+                                    </textarea>
+                                    </div>
+                                </div>
+                           </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="col-md-12">
-                                <h6 >
-                                    <legend class="text-info">Consignatario</legend>
-                                </h6>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Nombres</label>
-                                        <div class="input-group">
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                            <span class="input-group-btn">
-                                                    <button title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#"
-                                                            id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
-                                                </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Apellido 1</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Apellido 2</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Telefono</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="txt_nombres">Correo</label>
-                                        <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label >Direccion</label>
-                                    <textarea class="form-control" id="txt_descripcion" name="txt_descripcion">
-                                </textarea>
-                                </div>
-                            </div>
-                       </div>
                     </div>
                 </div>
                 <div class="box-footer text-center">

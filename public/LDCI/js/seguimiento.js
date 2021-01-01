@@ -370,3 +370,15 @@ $(document).ready(function () {
         $('#tblDetalleCarga tr').closest('.otrasFilas').remove();
 
     }
+
+    /**  Funcion para mostrar informacion segun sea el esatao de la cotizacion  */
+    function changeestado()
+    {
+       let estado=$('#cmb_estado').val();
+
+        if (estado>2)
+        {
+
+        }
+
+    }
