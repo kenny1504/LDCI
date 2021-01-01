@@ -41,9 +41,6 @@
                 font-size:11px !important;
                 padding: 1px !important;
             }
-            .td-table{
-                height: 300px;padding: 34px;
-            }
             .td-1{
                 width: 9%;
             }
@@ -69,15 +66,8 @@
                 height: 2.75%;
                 width: 5px;
             }
-            .th_1{
-                font-size: 13px !important;
-                padding: 4px !important;
-            }
-            .th_2{
-                font-size: 13px !important;
-                padding: 1.3px !important;
-                padding-left: 3px;
-            }
+
+
             .mg{
                 margin: -1px;
             }
@@ -130,7 +120,6 @@
 
                 width: 23%;
                 position: absolute;
-                margin-top: 0%;
                 right: 15px;
                 z-index: -1;
             }
@@ -157,12 +146,6 @@
                 margin-top: 1%;
                 margin-left: -1px;
             }
-            .titulo{
-                position: absolute;
-                margin-top: 5.96%;
-                right: 298px;
-                z-index: -1;
-            }
             .alinear{
                 text-align: center;
             }
@@ -185,19 +168,16 @@
                 font-size:13px !important;
                 font-style: italic !important;
             }
-            .position_text{
-                margin: 0%;
-                padding: 0;
-            }
-            .espacio{
-                padding-top: 1% !important;
-            }
             .ancho_celda{
                 height: 1.7%;
             }
             .largo_celda
             {
                 width: 35.4%;
+            }
+            .largo_celda_2
+            {
+                width: 50%;
             }
             .ancho_celda_2{
                 height: 1.75%;
@@ -232,28 +212,21 @@
 
         <main>
             @foreach($Informacion as $informacion)
-            <table class=" table-borde_1 tbl_tamano">
-                <tr>
-                    <th class="tamano_fuente_1 alinear text_color_c" COLSPAN=2>Cotización</th>
+            <table class="tbl_tamano">
                     <tr>
-                        <th class="tamano_fuente_1 text_color_c alinear_2">Numero:</th>
-                        <td class="tamano_fuente_1 text_color">{{$informacion->n_cotizacion}}</td>
+                        <th class="tamano_fuente_1 text_color_c largo_celda_2">N° Cotización:</th>
+                        <td class="tamano_fuente_1 text_color ">{{$informacion->n_cotizacion}}</td>
                     </tr>
                     <tr>
-                        <th class="tamano_fuente_1 text_color_c alinear_2">Fecha:</th>
-                        <td class="tamano_fuente_1 text_color">{{$informacion->fecha_creacion}}</td>
+                        <th class="tamano_fuente_1 text_color_c">Fecha:</th>
+                        <td class="tamano_fuente_1 text_color ">{{$informacion->fecha_creacion}}</td>
                     </tr>
-                </tr>
             </table>
             <br>
 
-            <table class="table-borde_1 table-responsive tbl_tamano_4">
+            <table class="table-responsive tbl_tamano_4">
                 <tr>
-                    <th class="tamano_fuente_1 text_color_c td-3 alinear_2">Tipo Transporte:</th>
-                    <td class="tamano_fuente_1 text_color">{{$informacion->t_transporte}}</td>
-                </tr>
-                <tr>
-                    <th class="tamano_fuente_1 text_color_c td-3 alinear_2">Origen:</th>
+                    <th class="tamano_fuente_1 text_color_c td-3 alinear_2 td-3 ">Origen:</th>
                     <td class="tamano_fuente_1 text_color">{{$informacion->c_origen}}</td>
                 </tr>
                 <tr>
@@ -262,11 +235,7 @@
                 </tr>
         </table>
             <h3 class="text_color_c">Cotización</h3>
-            <table class="table-borde_1 table-responsive tbl_tamano_3 mg1">
-                    <tr>
-                        <th class="tamano_fuente_1 text_color_c td-3 alinear_2">Código Usuario:</th>
-                        <td class="tamano_fuente_1 text_color">{{$informacion->id_usuario}}</td>
-                    </tr>
+            <table class="table-responsive tbl_tamano_3 mg1">
                     <tr>
                         <th class="tamano_fuente_1 text_color_c td-3 alinear_2">Usuario:</th>
                         <td class="tamano_fuente_1 text_color">{{$informacion->usuario_crea}}</td>
@@ -274,6 +243,10 @@
                     <tr>
                         <th class="tamano_fuente_1 text_color_c td-3 alinear_2">Fecha de Envio:</th>
                         <td class="tamano_fuente_1 text_color">{{$informacion->fecha}}</td>
+                    </tr>
+                    <tr>
+                        <th class="tamano_fuente_1 text_color_c alinear_2">Transporte:</th>
+                        <td class="tamano_fuente_1 text_color">{{$informacion->t_transporte}}</td>
                     </tr>
             </table>
             @endforeach
@@ -286,11 +259,11 @@
                             <th class="alinear ancho_celda text_color_c">Itm</th>
                             <th class="alinear td-1 text_color_c">Cod. Prod</th>
                             <th class="th-2 text_color_c">Carga y Servicio</th>
+                            <th class="text_color_c">Descripción</th>
                             <th class="alinear text_color_c">Cantidad</th>
-                            <th class="th-2 text_color_c">Transporte</th>
+                            <th class="th-2 text_color_c">Modo Transporte</th>
                             <th class="text_color_c">Precio</th>
                             <th class="text_color_c">Dto.%</th>
-                            <th class="text_color_c">Imp.%</th>
                             <th class="text_color_c">Imp.Monto</th>
                             <th class="text_color_c">Importe</th>
                         </tr>
@@ -298,14 +271,14 @@
                     <tbody >
                         @foreach ($Detalle as $detalle)
                         <tr >
-                                <td class="text_color ancho_celda alinear"></td>
+                                <td class="text_color ancho_celda alinear">{{$detalle->no}}</td>
                                 <td class="text_color alinear">{{$detalle->codigo}}</td>
                                 <td class="text_color">{{$detalle->carga}}</td>
+                                <td class="text_color">{{$detalle->descripcion}}</td>
                                 <td class="text_color alinear">{{$detalle->cantidad}}</td>
                                 <td class="text_color">{{$detalle->transporte}}</td>
-                                <td class="text_color">{{$detalle->precio}}</td>
-                                <td class="text_color"></td>
-                                <td class="text_color"></td>
+                                <td class="text_color alinear">{{$detalle->precio}}</td>
+                                <td class="text_color">{{$detalle->dto}}</td>
                                 <td class="text_color"></td>
                                 <td class="text_color"></td>
                         </tr>
@@ -318,7 +291,7 @@
                 <table class="table-borde_4 table-responsive tbl_tamano_5">
                     <tr>
                         <th class="text_color_c alinear_3 th_ancho_grande tamano_fuente_2" valign="top">Aviso:</th>
-                        <td class="text_color alinear_3 tamano_fuente_3"  valign="top"> esto es importante</td>
+                        <td class="text_color alinear_3 tamano_fuente_3"  valign="top"></td>
                     </tr>
                     <tr>
                         <th class="text_color_c alinear_3 th_ancho_pequeno tamano_fuente_2">Firma:</th>
