@@ -1,114 +1,192 @@
 var tblCotizaciones = null;
+var tblClientes=null;
+var tblProveedores = null;
 var id_cotizacion=null;
+var id_remitente=null;
+var id_consignatario=null;
+var id_proveedor=null;
+var Total=0;
+var SubTotal=0;
+var Iva=0;
 
 
-$(document).ready(function () {
 
-    showLoad(true);
-    var _token= $('input[name=_token]').val();
-
-    /** recupera tipos de transporte*/
-    $.ajax({
-        type: 'POST',
-        url: '/transporte/getAll', //llamada a la ruta
-        data: {
-            _token:_token
-        },
-        success: function (data) {
-
-            $('#cmb_transporte').empty();
-
-            var datos = '<option selected disabled value ="">Seleccione</option>';
-            data.forEach(element => {
-                datos += '<option  value="' + element.id_tipo_transporte + '">' + element.nombre + '</option>';
+    var input = document.querySelector("#txt_telefonoRemitente");
+    selectR = window.intlTelInput(input, {
+        allowDropdown: true,
+        autoHideDialCode: false,
+        autoPlaceholder: "off",
+        dropdownContainer: document.body,
+        formatOnDisplay: false,
+        geoIpLookup: function(callback) {
+            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                callback(countryCode);
             });
-
-            $('#cmb_transporte').append(datos);
         },
-        error: function (err) {
-            alertError(err.responseText);
-            showLoad(false);
-        }
+        hiddenInput: "full_number",
+        initialCountry: "auto",
+        nationalMode: false,
+        placeholderNumberType: "MOBILE",
+        separateDialCode: true,
+        setNumber:351,
+        utilsScript: "LDCI/Core/utils.js",
+    });
+
+    var input = document.querySelector("#txt_telefonoConsignatario");
+    selectC = window.intlTelInput(input, {
+        allowDropdown: true,
+        autoHideDialCode: false,
+        autoPlaceholder: "off",
+        dropdownContainer: document.body,
+        formatOnDisplay: false,
+        geoIpLookup: function(callback) {
+            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                callback(countryCode);
+            });
+        },
+        hiddenInput: "full_number",
+        initialCountry: "auto",
+        nationalMode: false,
+        placeholderNumberType: "MOBILE",
+        separateDialCode: true,
+        setNumber:351,
+        utilsScript: "LDCI/Core/utils.js",
+    });
+
+    var input = document.querySelector("#txt_telefonoProveedor");
+    selectP = window.intlTelInput(input, {
+        allowDropdown: true,
+        autoHideDialCode: false,
+        autoPlaceholder: "off",
+        dropdownContainer: document.body,
+        formatOnDisplay: false,
+        geoIpLookup: function(callback) {
+            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                callback(countryCode);
+            });
+        },
+        hiddenInput: "full_number",
+        initialCountry: "auto",
+        nationalMode: false,
+        placeholderNumberType: "MOBILE",
+        separateDialCode: true,
+        setNumber:351,
+        utilsScript: "LDCI/Core/utils.js",
+    });
+
+    $(document).ready(function () {
+
+        showLoad(true);
+        var _token= $('input[name=_token]').val();
+
+        /** recupera tipos de transporte*/
+        $.ajax({
+            type: 'POST',
+            url: '/transporte/getAll', //llamada a la ruta
+            data: {
+                _token:_token
+            },
+            success: function (data) {
+
+                $('#cmb_transporte').empty();
+
+                var datos = '<option selected disabled value ="">Seleccione</option>';
+                data.forEach(element => {
+                    datos += '<option  value="' + element.id_tipo_transporte + '">' + element.nombre + '</option>';
+                });
+
+                $('#cmb_transporte').append(datos);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
+
+        /** recupera tipos de mercancias*/
+        $.ajax({
+            type: 'POST',
+            url: '/mercancia/getAll', //llamada a la ruta
+            data: {
+                _token:_token
+            },
+            success: function (data) {
+
+                $('#cmb_tipo_mercancia').empty();
+
+                var datos = '<option selected disabled value ="">Seleccione</option>';
+                data.forEach(element => {
+                    datos += '<option  value="' + element.id_tipo_mercancia + '">' + element.nombre + '</option>';
+                });
+
+                $('#cmb_tipo_mercancia').append(datos);
+                showLoad(false);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
+
+        /** recupera modo transporte*/
+        $.ajax({
+            type: 'POST',
+            url: '/modoTransporte/getAll', //llamada a la ruta
+            data: {
+                _token:_token
+            },
+            success: function (data) {
+
+                $('#cmb_modo_transporte').empty();
+
+                var datos = '<option selected disabled value ="">Seleccione</option>';
+                data.forEach(element => {
+                    datos += '<option  value="' + element.id_tipo_modo_transporte + '">' + element.nombre + '</option>';
+                });
+
+                $('#cmb_modo_transporte').append(datos);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
+
+        /** recupera servicios*/
+        $.ajax({
+            type: 'POST',
+            url: '/servicios/getAll', //llamada a la ruta
+            data: {
+                _token:_token
+            },
+            success: function (data) {
+
+
+                    $('#cmb_servicio').empty();
+
+                    var datos = '<option selected disabled value ="">Seleccione</option>';
+                    data.forEach(element => {
+                        datos += '<option  value="' + element.id_producto + '">' + element.nombre + '</option>';
+                    });
+
+                    $('#cmb_servicio').append(datos);
+
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
 
     });
 
-    /** recupera tipos de mercancias*/
-    $.ajax({
-        type: 'POST',
-        url: '/mercancia/getAll', //llamada a la ruta
-        data: {
-            _token:_token
-        },
-        success: function (data) {
-
-            $('#cmb_tipo_mercancia').empty();
-
-            var datos = '<option selected disabled value ="">Seleccione</option>';
-            data.forEach(element => {
-                datos += '<option  value="' + element.id_tipo_mercancia + '">' + element.nombre + '</option>';
-            });
-
-            $('#cmb_tipo_mercancia').append(datos);
-            showLoad(false);
-        },
-        error: function (err) {
-            alertError(err.responseText);
-            showLoad(false);
-        }
-
-    });
-
-    /** recupera modo transporte*/
-    $.ajax({
-        type: 'POST',
-        url: '/modoTransporte/getAll', //llamada a la ruta
-        data: {
-            _token:_token
-        },
-        success: function (data) {
-
-            $('#cmb_modo_transporte').empty();
-
-            var datos = '<option selected disabled value ="">Seleccione</option>';
-            data.forEach(element => {
-                datos += '<option  value="' + element.id_tipo_modo_transporte + '">' + element.nombre + '</option>';
-            });
-
-            $('#cmb_modo_transporte').append(datos);
-        },
-        error: function (err) {
-            alertError(err.responseText);
-            showLoad(false);
-        }
-
-    });
-
-    /** recupera servicios*/
-    $.ajax({
-        type: 'POST',
-        url: '/servicios/getAll', //llamada a la ruta
-        data: {
-            _token:_token
-        },
-        success: function (data) {
-
-            $('#cmb_servicio').empty();
-
-            var datos = '<option selected disabled value ="">Seleccione</option>';
-            data.forEach(element => {
-                datos += '<option  value="' + element.id_producto + '">' + element.nombre + '</option>';
-            });
-
-            $('#cmb_servicio').append(datos);
-        },
-        error: function (err) {
-            alertError(err.responseText);
-            showLoad(false);
-        }
-
-    });
-
-});
 
     /** Funcion que lista las cotizaciones hechas */
     function listarCotizaciones() {
@@ -169,6 +247,26 @@ $(document).ready(function () {
 
         var numeroFilas = $("#tblDetalleCarga tr").length;
         if (numeroFilas > 2) {
+
+            /************ Funcion para calcular presupuesto si es eliminado una fila ************* */
+
+            let  valor=$(this).closest('tr').find("input[id*='txtprecioCargar']").val();
+
+            if (valor!="" && valor!=undefined )
+              valor=parseFloat( valor= valor.replace(/,/g, ""));
+            else
+              valor=0
+
+            SubTotal=SubTotal-valor
+            Iva=SubTotal*0.15
+            Total=SubTotal+Iva
+
+            $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+            $('#txt_iva').text(number_format(Iva, 2, ".", ","));
+            $('#txt_total').text(number_format(Total, 2, ".", ","));
+
+            /*********************************  *****************  **********************************/
+
             $(this).closest('tr').remove();
         } else {
             alertError("¡Esta fila no puede ser eliminada!");
@@ -181,6 +279,26 @@ $(document).ready(function () {
 
         var numeroFilas = $("#tblDetalleServicios tr").length;
         if (numeroFilas > 2) {
+
+            /************ Funcion para calcular presupuesto si es eliminado una fila ************* */
+
+            let  valor=$(this).closest('tr').find("input[id*='txtPrecioServicio']").val();
+
+            if (valor!="" && valor!=undefined )
+                valor=parseFloat( valor= valor.replace(/,/g, ""));
+            else
+                valor=0
+
+            SubTotal=SubTotal-valor
+            Iva=SubTotal*0.15
+            Total=SubTotal+Iva
+
+            $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+            $('#txt_iva').text(number_format(Iva, 2, ".", ","));
+            $('#txt_total').text(number_format(Total, 2, ".", ","));
+
+            /*********************************  *****************  **********************************/
+
             $(this).closest('tr').remove();
         } else {
             alertError("¡Esta fila no puede ser eliminada!");
@@ -209,6 +327,7 @@ $(document).ready(function () {
             success: function (data) {
 
                 $('#cmb_estado').val(data[0].estado);
+                $('#cmb_estado').change();
 
                 if(data[0].estado==-1)
                 {
@@ -249,7 +368,7 @@ $(document).ready(function () {
                 id_cotizacion:id_cotizacion,
             },
             success: function (response) {
-                response.forEach(cargarDetalleCarga);
+                   response.forEach(cargarDetalleCarga);
             },
             error: function (err) {
                 alertError(err.responseText);
@@ -302,7 +421,8 @@ $(document).ready(function () {
             $("#cmb_tipo_mercancia").val(item['id_tipo_mercancia']);
             $("#cmb_modo_transporte").val(item['id_tipo_modo_transporte']);
             $("#txt_observacion").val(item['descripcion']);
-
+            $("#txtprecioCargar").val(item['precio']);
+            $("#txtprecioCargar").change();
 
         } else {
             adicionarFilaCarga();
@@ -329,6 +449,10 @@ $(document).ready(function () {
                 if ($(this).attr("id") == "txt_observacion") {
                     $(this).val(item['descripcion']);
                 }
+                if ($(this).attr("id") == "txtprecioCargar") {
+                    $(this).val(item['precio']);
+                    $(this).change();
+                }
 
             });
         }
@@ -344,6 +468,8 @@ $(document).ready(function () {
         if (0 == index) {
 
             $("#cmb_servicio").val(item['id_producto']);
+            $("#txtPrecioServicio").val(item['precio']);
+            $("#txtPrecioServicio").change();
 
         } else {
             adicionarFilaServicio();
@@ -351,6 +477,10 @@ $(document).ready(function () {
 
                 if ($(this).attr("id") == "cmb_servicio") {
                     $(this).val(item['id_producto']);
+                }
+                if ($(this).attr("id") == "txtPrecioServicio") {
+                    $(this).val(item['precio']);
+                    $(this).change();
                 }
 
             });
@@ -364,7 +494,13 @@ $(document).ready(function () {
 
     function limpiartablas()
     {
-        $("#txtCantidad,#cmb_tipo_mercancia,#cmb_modo_transporte,#txt_observacion,#cmb_servicio").val("");
+        /** Limpia todos los inputs*/
+        $('input[type="text"]').val('');
+        $('input[type="tel"]').val('');
+        $('textarea').val('');
+
+        $('select').val(""); /** Limpia todos select */
+        $('#txt_subtotal,#txt_iva,#txt_total').text("0.00");
         /** Elimina todas las filas de tabla dinamica menos la primera */
         $('#tblDetalleServicios tr').closest('.otrasFilas').remove();
         $('#tblDetalleCarga tr').closest('.otrasFilas').remove();
@@ -377,8 +513,275 @@ $(document).ready(function () {
        let estado=$('#cmb_estado').val();
 
         if (estado>2)
-        {
+            $('.InfoContacto').removeAttr('hidden');
+        else
+            $('.InfoContacto').attr("hidden",true);
 
+    }
+
+    /** Funcion para calcular, total,iva,y subtotal */
+    function  calcularPresupuesto(input)
+    {
+        let calcular=false;
+         debugger;
+        /** Verifica que existan valores seccionados*/
+        if (input.id=="txtPrecioServicio")
+        {
+           let servicio= $(input).parents('tr').find("select[id*='cmb_servicio']").val();
+            if (servicio==null)
+            {
+                $(input).val("");
+                alertError("favor primero seleccione un servicio");
+            }
+            else
+                calcular=true;
+        }
+        else
+        {
+           let transporte= $(input).parents('tr').find("select[id*='cmb_modo_transporte']").val();
+           let mercancia= $(input).parents('tr').find("select[id*='cmb_tipo_mercancia']").val();
+           let cantidad = $(input).parents('tr').find("input[id*='txtCantidad']").val();
+            if (transporte==null || mercancia==null || cantidad=="")
+            {
+                $(input).val("");
+                alertError("favor primero completar campos, detalles de la carga");
+            }
+            else
+                calcular=true;
+        }
+
+
+
+        if (calcular==true)
+        {
+            var oldvalue=  input.oldValue /** Captura el anterior valor del input */
+            var valor= input.value;/** Captura el nuevo valor del input*/
+
+            if (valor!="" && valor!=undefined )
+                valor=parseFloat( valor= valor.replace(/,/g, ""));
+            else
+                valor=0
+
+            if (oldvalue!="" && oldvalue!=undefined )
+                oldvalue=parseFloat( oldvalue= oldvalue.replace(/,/g, ""));
+            else
+                oldvalue=0
+
+            SubTotal=SubTotal-oldvalue
+            SubTotal+=valor
+            Iva=SubTotal*0.15
+            Total=SubTotal+Iva
+
+            $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+            $('#txt_iva').text(number_format(Iva, 2, ".", ","));
+            $('#txt_total').text(number_format(Total, 2, ".", ","));
         }
 
     }
+
+    function  listarClientesRemitente()
+    {
+        var _token= $('input[name=_token]').val();
+        $("#tblClientes").DataTable().destroy();
+
+        tblClientes = setDataTable("#tblClientes", {
+            ajax: {
+                type: 'POST',
+                url: '/cliente/getAll', //llamada a la ruta
+                data: {
+                    _token:_token
+                },
+            },
+            columnDefs: [
+                {
+                    targets: 5,
+                    data: null,
+                    orderable: false,
+                    render: function (json) {
+                        if (json[5] == 1)
+                            return '<span data-toggle="tooltip" data-state="1" class="btnStatus btn btn-xs btn-block btn-primary">Natural</span>';
+                        if (json[5] == 2)
+                            return '<span data-toggle="tooltip" data-state="1" class="btnStatus btn btn-xs btn-block btn-success">Juridico</span>';
+                    }
+                },
+                {
+                    targets: -1,
+                    data: null,
+                    orderable: false,
+                    defaultContent: '<button class="btn btn-info" title="Selecciona el  registro" onclick="selectClienteRemitente(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
+                }]
+        });
+    }
+
+    /** Selecciona el cliente  y carga valores en formulario */
+    function selectClienteRemitente(datos) {
+
+        showLoad(true);
+
+        var _token = $('input[name=_token]').val();
+        var dt = tblClientes.row($(datos).parents('tr')).data();
+        id_cliente=dt[0];
+
+        $.ajax({
+            type: 'POST',
+            url: '/cliente/datos', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_cliente:id_cliente,
+            },
+            success: function (data) {
+
+                id_remitente=id_cliente;
+                $('#txt_nombresRemitente').val(data[0].nombre);
+                $('#txt_telefonoRemitente').val(data[0].telefono_2);
+                $('#txt_apellido1Remitente').val(data[0].apellido1);
+                $('#txt_apellido2Remitente').val(data[0].apellido2);
+                $('#txt_direccionRemitente').val(data[0].direccion);
+                $('#txt_CorreoRemitente').val(data[0].correo);
+                selectR.setCountry(data[0].iso_2);
+
+                showLoad(false);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
+
+    }
+
+    function  listarClientesConsignatario()
+    {
+        var _token= $('input[name=_token]').val();
+        $("#tblClientes").DataTable().destroy();
+
+        tblClientes = setDataTable("#tblClientes", {
+            ajax: {
+                type: 'POST',
+                url: '/cliente/getAll', //llamada a la ruta
+                data: {
+                    _token:_token
+                },
+            },
+            columnDefs: [
+                {
+                    targets: 5,
+                    data: null,
+                    orderable: false,
+                    render: function (json) {
+                        if (json[5] == 1)
+                            return '<span data-toggle="tooltip" data-state="1" class="btnStatus btn btn-xs btn-block btn-primary">Natural</span>';
+                        if (json[5] == 2)
+                            return '<span data-toggle="tooltip" data-state="1" class="btnStatus btn btn-xs btn-block btn-success">Juridico</span>';
+                    }
+                },
+                {
+                    targets: -1,
+                    data: null,
+                    orderable: false,
+                    defaultContent: '<button class="btn btn-info" title="Selecciona el  registro" onclick="selectClienteConsignatario(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
+                }]
+        });
+    }
+
+
+    /** Selecciona el cliente  y carga valores en formulario */
+    function selectClienteConsignatario(datos) {
+
+        showLoad(true);
+
+        var _token = $('input[name=_token]').val();
+        var dt = tblClientes.row($(datos).parents('tr')).data();
+        id_cliente=dt[0];
+
+        $.ajax({
+            type: 'POST',
+            url: '/cliente/datos', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_cliente:id_cliente,
+            },
+            success: function (data) {
+
+                id_consignatario=data[0].id_persona;
+                $('#txt_nombresConsignatario').val(data[0].nombre);
+                $('#txt_telefonoConsignatario').val(data[0].telefono_2);
+                $('#txt_apellido1Consignatario').val(data[0].apellido1);
+                $('#txt_apellido2Consignatario').val(data[0].apellido2);
+                $('#txt_direccionConsignatario').val(data[0].direccion);
+                $('#txt_correoConsignatario').val(data[0].correo);
+                selectC.setCountry(data[0].iso_2);
+
+                showLoad(false);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
+
+    }
+
+    function  listarProveedores()
+    {
+        var _token= $('input[name=_token]').val();
+        $("#tblProveedores").DataTable().destroy();
+
+        tblProveedores = setDataTable("#tblProveedores", {
+            ajax: {
+                type: 'POST',
+                url: '/proveedor/getAll', //llamada a la ruta
+                data: {
+                    _token:_token
+                },
+            },
+            columnDefs:
+                [
+                    {
+                        targets: -1,
+                        data: null,
+                        orderable: false,
+                        defaultContent: '<button class="btn btn-info" title="Selecciona el registro" onclick="selectProveedor(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
+                    }
+                ]
+        });
+    }
+
+    /** Selecciona el proveedor y carga valores en formulario */
+    function selectProveedor(datos) {
+
+        showLoad(true);
+        var _token = $('input[name=_token]').val();
+        var dt = tblProveedores.row($(datos).parents('tr')).data();
+        id_proveedor=dt[0];
+
+        $.ajax({
+            type:'POST',
+            url: '/proveedor/datos',
+            data:{
+                _token:_token,
+                id_proveedor:id_proveedor
+            },
+            success: function(data){
+                showLoad(false);
+
+                $('#txt_id_proveedor').val(id_proveedor);
+                $('#txt_nombresProveedor').val(data[0].nombre);
+                $('#txt_correoProveedor').val(data[0].correo);
+                $('#txt_telefonoProveedor').val(data[0].telefono_1);
+                selectP.setCountry(data[0].iso);
+            },
+            error: function(err){
+                alertError(err.responseText);
+                showLoad(false);
+            }
+        });
+    }
+
+    function GuardarSeguimiento()
+    {
+      alertSuccess("En Construccion");
+    }
+

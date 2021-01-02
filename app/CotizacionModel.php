@@ -307,7 +307,7 @@ class CotizacionModel extends Model
     function getEncabezado($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("select c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,c.nota,
+        $query = DB::select("select c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,upper(c.nota) as nota,
                                    c2.ciudad ||'/'||c2.pais as destino,c.estado,us.usuario as grabacion
                                    ,us1.usuario vendedor,to_char(c.fecha,'DD/MM/YYYY')as fecha,c.id_tipo_transporte
                             from ldci.tb_cotizacion c
@@ -324,7 +324,7 @@ class CotizacionModel extends Model
     function getDetalleCarga($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("select cantidad,id_tipo_modo_transporte,id_tipo_mercancia,descripcion,nuevo
+        $query = DB::select("select cantidad,id_tipo_modo_transporte,id_tipo_mercancia,upper(descripcion) as descripcion,nuevo,precio
                                     from  ldci.tb_detalle_cotizacion where id_cotizacion=$id_cotizacion and id_producto is null");
         return $query;
     }
@@ -333,7 +333,7 @@ class CotizacionModel extends Model
     function getDetalleServicio($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("select id_producto
+        $query = DB::select("select id_producto,precio
                             from  ldci.tb_detalle_cotizacion where id_cotizacion=$id_cotizacion and id_producto is not null");
         return $query;
     }
@@ -345,7 +345,7 @@ class CotizacionModel extends Model
         $query = DB::select("SELECT c.id_cotizacion AS n_cotizacion,u.id_usuario,u.usuario AS usuario_crea,
 		TO_CHAR (c.fecha,'DD-MM-YYYY') AS fecha,
 		TO_CHAR (c.fecha_grabacion,'DD-MM-YYYY') as fecha_creacion,
-		c.id_cotizacion AS Numero_cotizacion,c.nota,
+		c.id_cotizacion AS Numero_cotizacion,upper(c.nota) as nota,
 		u.telefono,u.iso2,tt.nombre AS t_transporte,
 		co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino
 		FROM ldci.tb_cotizacion AS c
@@ -363,7 +363,7 @@ class CotizacionModel extends Model
     {
         $query = new static;
         $query = DB::select("select row_number() OVER (ORDER BY t.id_detalle_cotizacion) as no,t.codigo,t.carga,t.cantidad,
-        t.transporte,t.precio,t.Dto,t.descripcion
+        t.transporte,t.precio,t.Dto,upper(descripcion) as descripcion
         from (Select dc.id_detalle_cotizacion, tm.id_tipo_mercancia as codigo,
             tm.nombre AS carga,dc.cantidad,
             mt.nombre AS transporte,

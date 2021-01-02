@@ -135,7 +135,7 @@
                 text-align: center;
             }
             .alinear_2{
-                text-align: right;
+                text-align: left;
             }
             .alinear_3{
                 text-align: left;
@@ -201,10 +201,9 @@
                     </tr>
             </table>
             <br>
-
             <table class="table-responsive tbl_tamano_4">
                 <tr>
-                    <th class="tamano_fuente_1 text_color_c td-3 alinear_2 td-3 ">Origen:</th>
+                    <th class="tamano_fuente_1 text_color_c td-3 alinear_2">Origen:</th>
                     <td class="tamano_fuente_1 text_color">{{$informacion->c_origen}}</td>
                 </tr>
                 <tr>
@@ -229,9 +228,8 @@
             </table>
             @endforeach
 
-
-            <div class="div_borde alto_detalle mg1 sombra">
-                <table class="ancho_tabla table-borde_2   ">
+            <div class="div_borde alto_detalle mg1">
+                <table class="ancho_tabla table-borde_2">
                     <thead>
                         <tr>
                             <th class="alinear ancho_celda text_color_c">Itm</th>

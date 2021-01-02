@@ -50,7 +50,7 @@ class ClienteModel extends Model
     {
 
         $query = new static;
-        $query = DB::select('select p.nombre,p.apellido1,p.apellido2,p.cedula,p.correo,p.id_departamento,
+        $query = DB::select('select p.id_persona, p.nombre,p.apellido1,p.apellido2,p.cedula,p.correo,p.id_departamento,
                                        p.iso,p.iso_2,p.sexo,p.direccion,p.telefono_1,p.telefono_2,c.ruc,c.nombre_empresa
                                        ,c.giro_negocio,c.tipo,c.extranjero,
                                        ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+1900)-(select extract(year from now())))*(-1) as edad

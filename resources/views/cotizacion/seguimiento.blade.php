@@ -9,6 +9,18 @@
            background-color:#337ab7;
            text-align: center
          }
+       .punteado{
+           border-style: dotted;
+           border-width: 1px;
+           border-color: #660033;
+           font-family: verdana, arial;
+           font-size: 10pt;
+       }
+       .precio{
+           margin: 0 0 0px 0!important;
+           padding: 0!important;
+           margin-top: 3%!important;
+       }
    </style>
 
     <div class="col-md-11 col-md-offset-2">
@@ -55,8 +67,8 @@
                             </div>
                         </div>
                         <div class="col-md-2 ">
-                            <img id="imgsexo" class="img-responsive" width="100px"
-                                 src="LDCI/img/Logo-Intermodal.png" alt="">
+                            <img  class="img-responsive" width="100px"
+                                 src="LDCI/img/Logo-Intermodal.png" alt="LDCI">
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -72,7 +84,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="txt_fecha">Fecha</label>
+                                <label for="txt_fecha">Fecha Envio</label>
                                 <input readonly type="text" name="txt_fecha"  id="txt_fecha" class="form-control input-md">
                             </div>
                         </div>
@@ -115,7 +127,7 @@
                                         <th class=" text-center" width="25%">TIPO MERCANCIA</th>
                                         <th class=" text-center" width="25%">TRANSPORTE</th>
                                         <th class=" text-center" width="25%">DESCRIPCION</th>
-                                        <th class=" text-center" width="10%">PRECIO</th>
+                                        <th class=" text-center" width="10%">PRECIO $</th>
                                         <th class=" text-center" width="10%">ACCIÓN</th>
                                     </tr>
                                     </thead>
@@ -148,7 +160,7 @@
                                             <textarea id="txt_observacion" class="form-control"></textarea>
                                         </td>
                                         <td width="5%" class="text-center">
-                                            <input required onkeypress="return soloNumeros(event,txtprecio);"  type="text" name="txtprecio"  id="txtprecio" class="cantidad text-center form-control input-sm">
+                                            <input title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtprecioCargar);"  type="text" name="txtprecioCargar"  id="txtprecioCargar" class="cantidad text-center form-control input-sm">
                                         </td>
                                         <td width="10%" class="text-center">
                                             <div class="pull-right row form-group">
@@ -183,7 +195,7 @@
                                         <thead>
                                         <tr>
                                             <th class=" text-center" width="80%">SERVICIO</th>
-                                            <th class=" text-center" width="10%">PRECIO</th>
+                                            <th class=" text-center" width="10%">PRECIO $</th>
                                             <th class=" text-center" width="10%">ACCIÓN</th>
                                         </tr>
                                         </thead>
@@ -195,7 +207,7 @@
                                                 </select>
                                             </td>
                                             <td width="10%" class="text-center">
-                                                <input required onkeypress="return soloNumeros(event,txtPrecioServicio);"  type="text" name="txtPrecioServicio"  id="txtPrecioServicio" class="cantidad text-center form-control input-sm">
+                                                <input title="Ingrese precio" onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtPrecioServicio);"  type="text" name="txtPrecioServicio"  id="txtPrecioServicio" class="cantidad text-center form-control input-sm">
                                             </td>
                                             <td width="10%" class="text-center">
                                                 <div class="pull-right row form-group">
@@ -226,22 +238,37 @@
                         </div>
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
+                                    <br>
                                     <label >Descripcion</label>
-                                    <textarea class="form-control" id="txt_descripcion" name="txt_descripcion">
+                                    <textarea style="height: 70%;" class="form-control" id="txt_descripcion" name="txt_descripcion">
                                 </textarea>
+                                </div>
+                                <div class=" col-md-4">
+                                    <br>
+                                    <table class="punteado" width=80%  style="text-align: center; margin-top: 3%">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <h6 class="precio">SubTotal: $<label id="txt_subtotal">0.00</label></h6>
+                                                <h6 class="precio">Iva: $<label id="txt_iva" >0.00</label></h6>
+                                                <h6 class="precio">Total: $<label id="txt_total">0.00</label></h6>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
 
-                        <div hidden id="InfoContacto">
-                            <div class="col-md-12">
+                        <!-- Datos ocultos-->
+                        <div hidden class="InfoContacto col-md-12">
                                     <br><br>
                                     <h5 >
                                         <legend class="text-primary">Informacion de Contacto</legend>
                                     </h5>
                                 </div>
-                            <div class="col-md-6">
+                        <div hidden class="InfoContacto col-md-6">
                                 <div class="col-md-12">
                                     <h6 >
                                         <legend class="text-info">Remitente</legend>
@@ -250,11 +277,11 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Nombres</label>
+                                            <label for="txt_nombresRemitente">Nombres</label>
                                             <div class="input-group">
-                                                <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                                <input  type="text" id="txt_nombresRemitente" name="txt_nombresRemitente" class="form-control input-md">
                                                 <span class="input-group-btn">
-                                                        <button title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#"
+                                                        <button onclick="listarClientesRemitente()"  title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#ModalClientes"
                                                                 id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
                                                     </span>
                                             </div>
@@ -264,40 +291,40 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Apellido 1</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_apellido1Remitente">Apellido 1</label>
+                                            <input  type="text" id="txt_apellido1Remitente" name="txt_apellido1Remitente" class="form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Apellido 2</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_apellido2Remitente">Apellido 2</label>
+                                            <input  type="text" id="txt_apellido2Remitente" name="txt_apellido2Remitente" class="form-control input-md">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Telefono</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_telefonoRemitente">Telefono</label>
+                                            <input onkeypress="return soloNumeros(event,txt_telefonoRemitente);"   type="tel" id="txt_telefonoRemitente" name="txt_telefonoRemitente" class="form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Correo</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_CorreoRemitente">Correo</label>
+                                            <input  type="text" id="txt_CorreoRemitente" name="txt_CorreoRemitente" class="form-control input-md">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label >Direccion</label>
-                                        <textarea class="form-control" id="txt_descripcion" name="txt_descripcion">
+                                        <textarea class="form-control" id="txt_direccionRemitente" name="txt_direccionRemitente">
                                     </textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        <div hidden class="InfoContacto col-md-6">
                                 <div class="col-md-12">
                                     <h6 >
                                         <legend class="text-info">Consignatario</legend>
@@ -308,9 +335,9 @@
                                         <div class="form-group">
                                             <label for="txt_nombres">Nombres</label>
                                             <div class="input-group">
-                                                <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                                <input  type="text" id="txt_nombresConsignatario" name="txt_nombresConsignatario" class="form-control input-md">
                                                 <span class="input-group-btn">
-                                                        <button title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#"
+                                                        <button onclick="listarClientesConsignatario()" title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#ModalClientes"
                                                                 id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
                                                     </span>
                                             </div>
@@ -320,46 +347,95 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Apellido 1</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_apellido1Consignatario">Apellido 1</label>
+                                            <input  type="text" id="txt_apellido1Consignatario" name="txt_apellido1Consignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Apellido 2</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_apellido2Consignatario">Apellido 2</label>
+                                            <input  type="text" id="txt_apellido2Consignatario" name="txt_apellido2Consignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Telefono</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_telefonoConsignatario">Telefono</label>
+                                            <input  onkeypress="return soloNumeros(event,txt_telefonoConsignatario);" type="tel" id="txt_telefonoConsignatario" name="txt_telefonoConsignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="txt_nombres">Correo</label>
-                                            <input disabled type="text" id="txt_nombres" name="txt_nombres" class="form-control input-md">
+                                            <label for="txt_correoConsignatario">Correo</label>
+                                            <input  type="text" id="txt_correoConsignatario" name="txt_correoConsignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label >Direccion</label>
-                                        <textarea class="form-control" id="txt_descripcion" name="txt_descripcion">
+                                        <textarea class="form-control" id="txt_direccionConsignatario" name="txt_direccionConsignatario">
                                     </textarea>
                                     </div>
                                 </div>
                            </div>
+
+                        <div hidden class="InfoContacto col-md-12">
+                            <br><br>
+                            <h5 >
+                                <legend class="text-primary">Informacion de Proveedor</legend>
+                            </h5>
                         </div>
+                        <div hidden class="InfoContacto col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="txt_nombresRemitente">Proveedor</label>
+                                        <div  class="input-group">
+                                            <input disabled type="text" id="txt_id_proveedor" name="txt_id_proveedor" class="form-control input-md">
+                                            <span class="input-group-btn">
+                                                        <button  onclick="listarProveedores()" title="Buscar Proveedor" onclick="" class="btn btn-default" data-toggle="modal" data-target="#ModalProveedores"
+                                                                id="btnBuscarProveedor" type="button"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="txt_nombresProveedor">Nombre</label>
+                                        <input disabled type="text" id="txt_nombresProveedor" name="txt_nombresProveedor" class="form-control input-md">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_correoProveedor">Correo</label>
+                                        <input disabled type="text" id="txt_correoProveedor" name="txt_correoProveedor" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_telefonoProveedor">Telefono</label>
+                                        <input  disabled type="tel" id="txt_telefonoProveedor" name="txt_telefonoProveedor" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_fecha_llegada">Fecha llegada</label>
+                                        <input  type="date" id="txt_fecha_llegada" name="txt_fecha_llegada" class="form-control input-md">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="box-footer text-center">
                     <div class="col-md-12">
-                        <button title="Guardar cotizacion" onclick="guardar()" class="btn btn-success" id="btnGuardar"><i class="fa fa-save"> </i> Guardar</button>
-                        <button title="Imprimir cotizacion" onclick="Generar('pdf')" class="btn btn-info" id="btnimprimir"><i class="fa fa-print"> </i>imprimir</button>
+                        <button disabled title="Guardar cotizacion" onclick="GuardarSeguimiento()" class="btn btn-success" id="btnGuardar"><i class="fa fa-save"> </i> Guardar</button>
+                        <button title="Imprimir cotizacion" onclick="" class="btn btn-info" id="btnimprimir"><i class="fa fa-print"> </i>imprimir</button>
                         <button title="Limpiar formulario" href="cotizacion.seguimiento" class="optionMenu btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
                         <br><br>
                     </div>
@@ -407,6 +483,86 @@
             </div>
         </div>
     </div>
+
+    <div id="ModalClientes" class="modal fade" role="document" >
+       <div class="modal-dialog modal-lg">
+           <!-- Modal content-->
+           <div class="modal-content">
+               <div class="modal-header" style="align-self: flex-end;" >
+                   <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">×</span>
+                   </a>
+               </div>
+               <div class="modal-body">
+                   <div class="box box-success">
+                       <div class="box-heading text-success">
+                           <div class="row"></div>
+                           <h4 align="center">Busqueda de Registro</h4>
+                       </div>
+                       <div class="box-body">
+                           <div  class="table-responsive">
+                               <table id="tblClientes" class="table table-striped table-bordered">
+                                   <thead>
+                                   <tr>
+                                       <th>No</th>
+                                       <th>Nombre</th>
+                                       <th>Identificacion</th>
+                                       <th>Correo</th>
+                                       <th>Telefono</th>
+                                       <th>Tipo</th>
+                                       <th>Seleccione</th>
+                                   </tr>
+                                   </thead>
+                                   <tbody>
+
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+
+    <div id="ModalProveedores" class="modal fade" role="document" >
+       <div class="modal-dialog modal-lg">
+           <!-- Modal content-->
+           <div class="modal-content">
+               <div class="modal-header" style="align-self: flex-end;" >
+                   <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">×</span>
+                   </a>
+               </div>
+               <div class="modal-body">
+                   <div class="box box-success">
+                       <div class="box-heading text-success">
+                           <div class="row"></div>
+                           <h4 align="center">Busqueda de Registro</h4>
+                       </div>
+                       <div class="box-body">
+                           <div  class="table-responsive">
+                               <table id="tblProveedores" class="table table-striped table-bordered">
+                                   <thead>
+                                   <tr>
+                                       <th>No</th>
+                                       <th>Nombre</th>
+                                       <th>Correo</th>
+                                       <th>Telefono</th>
+                                       <th>Seleccione</th>
+                                   </tr>
+                                   </thead>
+                                   <tbody>
+
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
 
 <!-- js -->
 <script src="{{asset("LDCI/js/seguimiento.js")}}" ></script>
