@@ -34,10 +34,19 @@ var id_usuario_asignado=null;
                     orderable: false,
                     render: function (json) {
                         $estado =json[5];
-                        if ($estado==1)
-                            return '<span class="label info">Nueva</span>';
                         if ($estado==-1)
                             return '<span class="label danger">Rechazada</span>';
+                        if ($estado==1)
+                            return '<span class="label info">Nueva</span>';
+                        if ($estado==2)
+                            return '<span class="label warning">Revisada</span>';
+                        if ($estado==3)
+                            return '<span class="label success">Aprobada</span>';
+                        if ($estado==4)
+                            return '<span class="label primary">Tramite</span>';
+                        if ($estado==5)
+                            return '<span class="label default">Impresa</span>';
+
                     }
                 },
                 {

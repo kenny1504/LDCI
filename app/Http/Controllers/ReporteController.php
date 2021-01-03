@@ -73,6 +73,8 @@ class ReporteController extends Controller
     {
         $id_cotizacion = $request->id_cotizacion;
 
+
+
             $datos = (new CotizacionModel)->getDatosCotizacion($id_cotizacion);
             $detalle = (new CotizacionModel)->getDetalleCotizacion($id_cotizacion);
             $data = [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Mail;
 use App\CotizacionModel;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CotizacionController extends Controller
 {
@@ -168,5 +169,62 @@ class CotizacionController extends Controller
         $datos= (new CotizacionModel)->getDetalleServicio($id_cotizacion);
         return response()->json($datos);
     }
+
+    public  function ActualizarCotizacion(Request $request)
+    {
+
+        $tblDetalleCarga= json_decode($request->tblDetalleCarga);
+        $tblDetalleServicios=json_decode($request->tblDetalleServicios);
+        $descripcion=$request->descripcion;
+        $estado=$request->estado;
+        $id_cotizacion=$request->id_cotizacion;
+        $correo=$request->correo;
+        $total=$request->total;
+        $iva=$request->iva;
+        $id_session = session('idUsuario');
+
+          (new CotizacionModel)->deleteDetalle($id_cotizacion); /** Elimina Detalle de cotizacion*/
+        $guardar=(new CotizacionModel)->actualizarCotizacion($tblDetalleCarga,$tblDetalleServicios,$descripcion,$estado,$id_cotizacion,$total,$iva,$id_session);
+
+        /** Envia Cotizacion al correo proporsionado */
+        if ($correo!="" || $correo!=null)
+        {
+            /** Datos de la cotizacion */
+            $datos = (new CotizacionModel)->getDatosCotizacion($id_cotizacion);
+            $detalle = (new CotizacionModel)->getDetalleCotizacion($id_cotizacion);
+            $data = ['Informacion' => $datos];
+            $detalle = ['Detalle' => $detalle ];
+
+            $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4');
+
+            $dataEmail['No_cotizacion']=$id_cotizacion;
+
+            /**  Inicio funcion para enviar correo  */
+            $subject ="Cotizacion"; /** Asunto del Correo */
+            $for =$correo;/** correo que recibira el mensaje */
+
+            Mail::send('cotizacion.mailRespuestaCotizacion',$dataEmail,function($msj) use($subject,$for,$pdf){
+                // Correo  y  Nombre que Aparecera
+                $msj->from("system@cargologisticsintermodal.com","LOGISTICA DE CARGA INTERMODAL");
+                $msj->subject($subject);
+                $msj->to($for);
+                $msj->attachData($pdf->output(), 'Cotizacion.pdf');
+            });
+
+        }
+        return $guardar;
+    }
+
+    public function  RechazarCotizacion (Request $request)
+    {
+        $id_cotizacion=$request->id_cotizacion;
+        $descripcion=$request->descripcion;
+        $id_session = session('idUsuario');
+
+        $actualizar=(new CotizacionModel)->RechazarCotizacion($id_cotizacion,$descripcion,$id_session);
+
+        return $actualizar;
+    }
+
 
 }

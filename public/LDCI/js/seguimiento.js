@@ -1,4 +1,5 @@
 var tblCotizaciones = null;
+var Estado=null;
 var tblClientes=null;
 var tblProveedores = null;
 var id_cotizacion=null;
@@ -8,7 +9,6 @@ var id_proveedor=null;
 var Total=0;
 var SubTotal=0;
 var Iva=0;
-
 
 
     var input = document.querySelector("#txt_telefonoRemitente");
@@ -211,10 +211,18 @@ var Iva=0;
                     orderable: false,
                     render: function (json) {
                         $estado =json[5];
-                        if ($estado==1)
-                            return '<span class="label info">Nueva</span>';
                         if ($estado==-1)
                             return '<span class="label danger">Rechazada</span>';
+                        if ($estado==1)
+                            return '<span class="label info">Nueva</span>';
+                        if ($estado==2)
+                            return '<span class="label warning">Revisada</span>';
+                        if ($estado==3)
+                            return '<span class="label success">Aprobada</span>';
+                        if ($estado==4)
+                            return '<span class="label primary">Tramite</span>';
+                        if ($estado==5)
+                            return '<span class="label default">Impresa</span>';
                     }
                 },
                 {
@@ -326,20 +334,23 @@ var Iva=0;
             },
             success: function (data) {
 
+                Estado=data[0].estado;
                 $('#cmb_estado').val(data[0].estado);
                 $('#cmb_estado').change();
 
-                if(data[0].estado==-1)
-                {
-                    $("#tblDetalleServicios ").find("input,button,textarea,select").attr("disabled", "disabled");
-                    $("#tblDetalleCarga ").find("input,button,textarea,select").attr("disabled", "disabled");
-                    $("#btnGuardar ").attr("disabled", "disabled");
-                }
-                else
+
+                /** Solo se puede editar informacion de cargar y servicio cuando esten en estado NUEVA o REVISADA  */
+                if(Estado==1 || Estado==2)
                 {
                     $("#tblDetalleServicios ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
                     $("#tblDetalleCarga ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
                     $("#btnGuardar ").removeAttr("disabled", "disabled");
+                }
+                else
+                {
+                    $("#tblDetalleServicios ").find("input,button,textarea,select").attr("disabled", "disabled");
+                    $("#tblDetalleCarga ").find("input,button,textarea,select").attr("disabled", "disabled");
+                    $("#btnGuardar ").attr("disabled", "disabled");
                 }
 
                 $('#id_cotizacion').val(id_cotizacion);
@@ -350,6 +361,9 @@ var Iva=0;
                 $('#txt_origen').val(data[0].origen);
                 $('#cmb_transporte').val(data[0].id_tipo_transporte);
                 $('#txt_nota_adicional').val(data[0].nota);
+                $('#txt_descripcion').val(data[0].descripcion);
+                $('#txt_enviarCorreo').val(data[0].correo);
+
 
             },
             error: function (err) {
@@ -523,11 +537,10 @@ var Iva=0;
     function  calcularPresupuesto(input)
     {
         let calcular=false;
-         debugger;
         /** Verifica que existan valores seccionados*/
         if (input.id=="txtPrecioServicio")
         {
-           let servicio= $(input).parents('tr').find("select[id*='cmb_servicio']").val();
+            let servicio= $(input).parents('tr').find("select[id*='cmb_servicio']").val();
             if (servicio==null)
             {
                 $(input).val("");
@@ -558,7 +571,7 @@ var Iva=0;
             var valor= input.value;/** Captura el nuevo valor del input*/
 
             if (valor!="" && valor!=undefined )
-                valor=parseFloat( valor= valor.replace(/,/g, ""));
+                valor=parseFloat( valor= valor.replace(/,/g, "")); /**Formate numero */
             else
                 valor=0
 
@@ -780,8 +793,199 @@ var Iva=0;
         });
     }
 
+    /** Funcion para validar estado de la cotizacion  */
     function GuardarSeguimiento()
     {
-      alertSuccess("En Construccion");
+        /**
+         * Funcion para validar que una cotizacion sea guardada en el orden correcto
+         * No se puede guardar una cotizacion de un estado 1 a estado 3 sin pasar por
+         * el estado anterior
+         */
+
+        let estado=$('#cmb_estado').val();
+        let estadonext=Estado+1
+
+        if (estado!=-1)
+        {
+            if (estadonext==estado)
+                   guardar()
+             else
+                   alertError("No es posible guardar cotizacion al estado seleccionado");
+        }
+        else
+            guardar()
+
     }
 
+    function guardar()
+    {
+        alertConfirm("¿Está seguro que desea guardar?", function (e) {
+
+            var _token = $('input[name=_token]').val();
+            let estado=$('#cmb_estado').val();
+
+            /** Solo si esta en estado NUEVA o REVISADA se puede editar Cotizacion */
+            if(estado==2) {
+
+                $("#ModalEnviarCorreo").modal("show"); //Abre Modal
+
+                /** Funcion para agregar fila */
+                $(document).off("click", ".guardar").on("click", ".guardar", function ()
+                {
+
+                    var guardar=true;
+                    /** Se recuperan datos de tabla Detalles de carga */
+                    var DATA1 = [];
+                    var TABLA1 = $("#tblDetalleCarga tbody > tr");
+
+                    /*Obtención de datos de la tabla dinámica*/
+                    TABLA1.each(function (e) {
+
+                        let estado=false;
+                        let Cantidad = $(this).find("input[id*='txtCantidad']").val();
+                        let ckEstado = $(this).find("input[id*='ckEstado']");
+                        if (ckEstado[0].checked == true)
+                            estado=true;
+
+                        let id_tipo_mercancia = $(this).find("select[id*='cmb_tipo_mercancia']").val();
+                        let id_modo_transporte = $(this).find("select[id*='cmb_modo_transporte']").val();
+                        let observacion = $(this).find("textarea[id*='txt_observacion']").val();
+                        let precio = $(this).find("input[id*='txtprecioCargar']").val();
+
+                        if (Cantidad !== "" && id_tipo_mercancia !== "" && id_modo_transporte && precio!== "") {
+                            item = {};
+                            item ["Cantidad"] =parseInt(Cantidad);
+                            item ["estado"] = estado;
+                            item ["id_tipo_mercancia"] = parseInt(id_tipo_mercancia);
+                            item ["id_modo_transporte"] = parseInt(id_modo_transporte);
+                            item ["observacion"] = observacion;
+                            precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
+                            item ["precio"] = precio;
+                            DATA1.push(item);
+                        }
+                        else
+                        {
+                            guardar=false; $(this).focus();
+                            alertError("¡Por favor completar datos de la informacion de Carga!");
+                        }
+
+                    });
+
+                    let tblDetalleCarga = JSON.stringify(DATA1);
+
+                    /** Se recuperan datos de tabla servicios adicionales*/
+                    var DATA2 = [];
+                    var TABLA2 = $("#tblDetalleServicios tbody > tr");
+
+                    /*Obtención de datos de la tabla dinámica*/
+                    TABLA2.each(function (e) {
+
+                        let id_servicio = $(this).find("select[id*='cmb_servicio']").val();
+                        let precio = $(this).find("input[id*='txtPrecioServicio']").val();
+                        if (id_servicio!="" && id_servicio!=null &&  precio!="")
+                        {
+                            item = {};
+                            item["id_servicio"] =parseInt(id_servicio);
+                            precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
+                            item["precio"] =precio;
+                            DATA2.push(item);
+                        }
+                        else
+                        {
+                            guardar=false; $(this).focus();
+                            alertError("¡Por favor completar datos de servicio!");
+                        }
+
+
+                    });
+
+                    let tblDetalleServicios = JSON.stringify(DATA2);
+
+                    if (guardar==true)
+                      {
+
+                            var descripcion = $('#txt_descripcion').val();
+                            var correo =$('#txt_enviarCorreo').val();
+
+                            showLoad(true);
+                            $.ajax({
+                                type: 'POST',
+                                url: '/actualizarCotizacion', //llamada a la ruta
+                                data: {
+                                    _token: _token,
+                                    tblDetalleCarga: tblDetalleCarga,
+                                    tblDetalleServicios: tblDetalleServicios,
+                                    descripcion: descripcion,
+                                    estado: estado,
+                                    id_cotizacion: id_cotizacion,
+                                    correo:correo,
+                                    total:Total,
+                                    iva:Iva
+                                },
+                                success: function (data) {
+
+                                    showLoad(false);
+                                    if (data.error) {
+                                        alertError(data.mensaje);
+                                    } else {
+                                        alertSuccess(data.mensaje);
+                                    }
+                                },
+                                error: function (err) {
+                                    alertError(err.responseText);
+                                    showLoad(false);
+                                }
+
+                            });
+                      }
+                });
+
+            }
+            else
+            {
+                /** Rechazar una cotizacion */
+                if (estado==-1)
+                {
+                    var descripcion = $('#txt_descripcion').val();
+                    showLoad(true);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/rechazarCotizacion', //llamada a la ruta
+                        data: {
+                            _token: _token,
+                            id_cotizacion: id_cotizacion,
+                            descripcion:descripcion
+                        },
+                        success: function (data) {
+
+                            showLoad(false);
+                            if (data.error) {
+                                alertError(data.mensaje);
+                            } else {
+                                alertSuccess(data.mensaje);
+                                $("#btnGuardar ").attr("disabled", "disabled");
+                            }
+                        },
+                        error: function (err) {
+                            alertError(err.responseText);
+                            showLoad(false);
+                        }
+
+                    });
+
+                }
+                else /** Guardar flete Estado "Aprobada" */
+                {
+
+                }
+            }
+
+        });
+    }
+
+
+    function EnviarCorreo()
+    {
+        $('#txt_enviarCorreo').val("");
+    }

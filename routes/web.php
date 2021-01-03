@@ -100,6 +100,8 @@ Route::post('/Asignacion', 'CotizacionController@getAsignacion')->name('Asignaci
 Route::post('/getEncabezado/cotizacion', 'CotizacionController@getEncabezado')->name('Cotizacion');
 Route::post('/getDetalleCarga/cotizacion', 'CotizacionController@getDetalleCarga')->name('Cotizacion');
 Route::post('/getDetalleServicio/cotizacion', 'CotizacionController@getDetalleServicio')->name('Cotizacion');
+Route::post('/actualizarCotizacion', 'CotizacionController@ActualizarCotizacion')->name('Actualizar');
+Route::post('/rechazarCotizacion', 'CotizacionController@RechazarCotizacion')->name('Rechazar');
 
 
 //Rutas Reportes

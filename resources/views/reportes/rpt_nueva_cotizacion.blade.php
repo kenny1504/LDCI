@@ -234,14 +234,14 @@
                         <tr>
                             <th class="alinear ancho_celda text_color_c">Itm</th>
                             <th class="alinear td-1 text_color_c">Cod. Prod</th>
-                            <th class="th-2 text_color_c">Carga y Servicio</th>
-                            <th class="text_color_c">Descripción</th>
+                            <th class="th-2 text_color_c alinear">Carga y Servicio</th>
+                            <th class="text_color_c alinear">Descripción</th>
                             <th class="alinear text_color_c">Cantidad</th>
-                            <th class="th-2 text_color_c">Modo Transporte</th>
-                            <th class="text_color_c">Precio</th>
-                            <th class="text_color_c">Dto.%</th>
-                            <th class="text_color_c">Imp.Monto</th>
-                            <th class="text_color_c">Importe</th>
+                            <th class="th-2 text_color_c alinear">Modo Transporte</th>
+                            <th class="text_color_c alinear">Precio</th>
+                            <th class="text_color_c alinear">Dto.%</th>
+                            <th class="text_color_c alinear">Imp.Monto</th>
+                            <th class="text_color_c alinear">Importe</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -254,9 +254,9 @@
                                 <td class="text_color alinear">{{$detalle->cantidad}}</td>
                                 <td class="text_color">{{$detalle->transporte}}</td>
                                 <td class="text_color alinear">{{$detalle->precio}}</td>
-                                <td class="text_color">{{$detalle->dto}}</td>
-                                <td class="text_color"></td>
-                                <td class="text_color"></td>
+                                <td class="text_color alinear">{{$detalle->dto}}</td>
+                                <td class="text_color alinear">{{$detalle->iva}}</td>
+                                <td class="text_color alinear">{{$detalle->total}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -280,19 +280,19 @@
                     </tr>
                     <tr>
                         <th class="text_color_c alinear_2 ancho_celda tamano_fuente_1">Subtotal</th>
-                        <td class="text_color ancho_columna alinear_2 tamano_fuente_1"></td>
+                        <td class="text_color ancho_columna  tamano_fuente_1 alinear">$ {{$informacion->subtotal}}</td>
                     </tr>
                     <tr>
                         <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1 ">Descuento</th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
+                        <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->descuento}}</td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1">Miscelaneos</th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
+                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1">Iva</th>
+                        <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->iva}}</td>
                     </tr>
                     <tr>
                         <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1"><strong>TOTAL</strong></th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
+                        <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->total}}</td>
                     </tr>
                 </table>
         </main>

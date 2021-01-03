@@ -103,7 +103,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="cmb_transporte">Transporte</label>
-                                <select name="cmb_transporte" id="cmb_transporte"  class="form-control input-md">
+                                <select disabled name="cmb_transporte" id="cmb_transporte"  class="form-control input-md">
                                     <option selected disabled value="">Seleccione</option>
                                 </select>
                             </div>
@@ -556,6 +556,51 @@
 
                                    </tbody>
                                </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <div id="ModalEnviarCorreo" class="modal fade" role="document" >
+       <div class="modal-dialog modal-lg">
+           <!-- Modal content-->
+           <div class="modal-content">
+               <div class="modal-header" style="align-self: flex-end;" >
+                   <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">×</span>
+                   </a>
+               </div>
+               <div class="modal-body">
+                   <div style="width: 730px" class="box box-success">
+                       <div class="box-heading text-success">
+                           <div class="row"></div>
+                           <h4 align="center">¿Desea enviar por correo la cotizacion?</h4>
+                       </div>
+                       <div class="box-body">
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group text-center">
+                                       <label >Correo</label>
+                                       <div class="col-md-12">
+                                           <input type="text" id="txt_enviarCorreo" name="txt_enviarCorreo" class="text-center form-control input-md">
+                                       </div>
+                                       <label class="text-info">Tambien puede modificar esta direccion de correo</label>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-4">
+                               </div>
+                               <div class="col-md-7">
+                                   <div class="row">
+                                       <div class="col-md-4"><button type="button" class="guardar btn btn-success "  class="close" data-dismiss="modal"  ><i class="fa fa-check"> </i> Si</button></div>
+                                       <div class="col-md-4"><button type="button" class="guardar btn btn-danger " class="close" data-dismiss="modal" onclick="EnviarCorreo()"  ><i class="fa fa-close"> </i>NO</button></div>
+                                   </div>
+                               </div>
+                               <br><br><br><br>
                            </div>
                        </div>
                    </div>

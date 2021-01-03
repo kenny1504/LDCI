@@ -48,7 +48,6 @@ class CotizacionModel extends Model
         return $query;
     }
 
-
     function  guardarCotizacion($tblDetalleCarga, $tblDetalleServicios, $tipo_transporte, $fecha, $destino, $origen, $nota_adicional, $id_session)
     {
         DB::beginTransaction();
@@ -95,7 +94,7 @@ class CotizacionModel extends Model
                         $transaccionOk = false;
                         DB::rollBack();
                         return collect([
-                            'mensaje' => 'Hubo un error al guardar servicios adicionales',
+                            'mensaje' => 'Hubo un error al guardar servicios',
                             'error' => true
                         ]);
                     }
@@ -307,8 +306,8 @@ class CotizacionModel extends Model
     function getEncabezado($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("select c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,upper(c.nota) as nota,
-                                   c2.ciudad ||'/'||c2.pais as destino,c.estado,us.usuario as grabacion
+        $query = DB::select("select c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,upper(c.nota) as nota,upper(c.descripcion) as descripcion,
+                                   c2.ciudad ||'/'||c2.pais as destino,c.estado,us.usuario as grabacion,us.correo
                                    ,us1.usuario vendedor,to_char(c.fecha,'DD/MM/YYYY')as fecha,c.id_tipo_transporte
                             from ldci.tb_cotizacion c
                             join ldci.vw_ciudades c1 on c.id_ciudad_origen=c1.id_ciudad
@@ -347,7 +346,10 @@ class CotizacionModel extends Model
 		TO_CHAR (c.fecha_grabacion,'DD-MM-YYYY') as fecha_creacion,
 		c.id_cotizacion AS Numero_cotizacion,upper(c.nota) as nota,
 		u.telefono,u.iso2,tt.nombre AS t_transporte,
-		co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino
+		co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino,
+        to_char(coalesce(c.iva,0),'9,999,999.99') as iva ,
+        to_char(coalesce(c.monto_total,0),'9,999,999.99') as total,
+        to_char(coalesce((c.monto_total-c.iva),0),'9,999,999.99') as subtotal,0 as descuento
 		FROM ldci.tb_cotizacion AS c
 		JOIN ldci.tb_usuario AS u ON u.id_usuario=c.usuario_grabacion
 		JOIN ldci.tb_tipo_transporte AS tt ON c.id_tipo_transporte=tt.id_tipo_transporte
@@ -363,12 +365,12 @@ class CotizacionModel extends Model
     {
         $query = new static;
         $query = DB::select("select row_number() OVER (ORDER BY t.id_detalle_cotizacion) as no,t.codigo,t.carga,t.cantidad,
-        t.transporte,t.precio,t.Dto,upper(descripcion) as descripcion
+       t.iva,t.total,t.transporte,t.precio,t.Dto,upper(descripcion) as descripcion
         from (Select dc.id_detalle_cotizacion, tm.id_tipo_mercancia as codigo,
             tm.nombre AS carga,dc.cantidad,
             mt.nombre AS transporte,
-            CASE WHEN dc.precio IS NULL THEN 0
-            ELSE dc.precio END AS precio, '' as Dto, dc.descripcion
+            coalesce(dc.precio,0) AS precio,coalesce((dc.precio*0.15),0) as iva,
+            coalesce(((coalesce((dc.precio*0.15),0)+(coalesce(dc.precio,0)))),0)total ,0 as Dto, dc.descripcion
             FROM ldci.tb_cotizacion AS c
             JOIN ldci.tb_detalle_cotizacion AS dc ON dc.id_cotizacion=c.id_cotizacion
             JOIN ldci.tb_tipo_mercancia AS tm ON dc.id_tipo_mercancia=tm.id_tipo_mercancia
@@ -376,15 +378,103 @@ class CotizacionModel extends Model
             WHERE c.id_cotizacion=$id_cotizacion
             UNION
             SELECT cd.id_detalle_cotizacion, p.id_producto, p.nombre, null , ' ',
-            CASE WHEN cd.precio IS NULL THEN 0
-            ELSE cd.precio
-            END AS TotalRecaudacion,'',''
+            coalesce(cd.precio,0) AS precio,coalesce((cd.precio*0.15),0) as iva,
+            coalesce(((coalesce((cd.precio*0.15),0)+(coalesce(cd.precio,0)))),0)total,0 as Dto ,'' as descripcion
             from ldci.tb_cotizacion as c
             JOIN ldci.tb_detalle_cotizacion AS cd ON c.id_cotizacion = cd.id_cotizacion
             JOIN ldci.tb_producto AS p on p.id_producto = cd.id_producto
-            WHERE c.id_cotizacion = $id_cotizacion
-        )as t");
+            WHERE c.id_cotizacion = $id_cotizacion)as t");
 
         return $query;
     }
+
+    /** Elimina detalle de cotizacion */
+    function deleteDetalle($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::delete("DELETE FROM ldci.tb_detalle_cotizacion
+                                    WHERE id_cotizacion=$id_cotizacion");
+    }
+
+    function  actualizarCotizacion($tblDetalleCarga,$tblDetalleServicios,$descripcion,$estado,$id_cotizacion,$total,$iva,$id_session)
+    {
+        DB::beginTransaction();
+        $transaccionOk = true;
+        $query_encabezado = new static;
+        $query_encabezado = DB::update ('UPDATE ldci.tb_cotizacion
+                            SET  estado=?, descripcion=?, iva=?, monto_total=?,
+                                usuario_modificacion=?, fecha_modificacion=now()
+                            WHERE id_cotizacion=?', [$estado, $descripcion,$iva, $total, $id_session,$id_cotizacion]);
+
+
+        if (empty($query_encabezado)) {
+            DB::rollBack();
+            return collect([
+                'mensaje' => 'Hubo un error al actualizar cotizacion',
+                'error' => true
+            ]);
+        } else {
+
+            foreach ($tblDetalleCarga as $carga) {
+                $query_detalle = new static;
+                $query_detalle = DB::insert('INSERT INTO ldci.tb_detalle_cotizacion(
+                descripcion, cantidad, nuevo, id_cotizacion,precio,
+                id_tipo_mercancia, id_tipo_modo_transporte,  usuario_grabacion, fecha_grabacion)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, now())', [$carga->observacion, $carga->Cantidad, $carga->estado, $id_cotizacion,$carga->precio, $carga->id_tipo_mercancia, $carga->id_modo_transporte, $id_session]);
+                if (!$query_detalle) {
+                    $transaccionOk = false;
+                    DB::rollBack();
+                    return collect([
+                        'mensaje' => 'Hubo un error al actualizar detalle de carga',
+                        'error' => true
+                    ]);
+                }
+            }
+
+            if ($transaccionOk) {
+                foreach ($tblDetalleServicios as $servicio) {
+
+                    $query_detalle = new static;
+                    $query_detalle = DB::insert('INSERT INTO ldci.tb_detalle_cotizacion(
+                     id_cotizacion, id_producto,precio,  usuario_grabacion, fecha_grabacion)
+                    VALUES (?, ?, ?, ?, now())', [$id_cotizacion, $servicio->id_servicio,$servicio->precio, $id_session]);
+
+                    if (!$query_detalle) {
+                        $transaccionOk = false;
+                        DB::rollBack();
+                        return collect([
+                            'mensaje' => 'Hubo un error al actualizar servicios',
+                            'error' => true
+                        ]);
+                    }
+                }
+                DB::commit();
+                return collect([
+                    'mensaje' => 'Cotizacion actualizada con exito',
+                    'error' => false
+                ]);
+            }
+        }
+    }
+
+    function RechazarCotizacion ($id_cotizacion,$descripcion,$id_session)
+    {
+        $query = new static;
+        $query = DB::UPDATE ('UPDATE ldci.tb_cotizacion
+            SET  estado=-1, descripcion=?,usuario_modificacion=?, fecha_modificacion=now()
+            WHERE id_cotizacion=?;', [$descripcion, $id_session, $id_cotizacion]);
+
+        if ($query) {
+            return collect([
+                'mensaje' => 'Cotizacion Actualizada Correctamente',
+                'error' => false
+            ]);
+        } else {
+            return collect([
+                'mensaje' => 'Ocurrio un error al actualizar Cotizacion',
+                'error' => true
+            ]);
+        }
+    }
+
 }
