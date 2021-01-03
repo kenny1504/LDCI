@@ -435,7 +435,7 @@
                 <div class="box-footer text-center">
                     <div class="col-md-12">
                         <button disabled title="Guardar cotizacion" onclick="GuardarSeguimiento()" class="btn btn-success" id="btnGuardar"><i class="fa fa-save"> </i> Guardar</button>
-                        <button title="Imprimir cotizacion" onclick="" class="btn btn-info" id="btnimprimir"><i class="fa fa-print"> </i>imprimir</button>
+                        <button disabled title="Imprimir cotizacion" onclick="rpt_cotizacion()" class="btn btn-info" id="btnimprimir"><i class="fa fa-print"> </i>imprimir</button>
                         <button title="Limpiar formulario" href="cotizacion.seguimiento" class="optionMenu btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
                         <br><br>
                     </div>
