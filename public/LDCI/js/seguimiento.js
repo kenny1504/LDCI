@@ -416,7 +416,7 @@ var Iva=0;
 
         if (0 == index) {
 
-          debugger;
+
             $("#txtCantidad").val(item['cantidad']);
             var estado =   document.getElementById('ckEstado');
             /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
@@ -508,8 +508,14 @@ var Iva=0;
 
     function limpiartablas()
     {
+         Total=0;
+         SubTotal=0;
+         Iva=0;
         /** Limpia todos los inputs*/
         $('input[type="text"]').val('');
+        $('input[type="text"]').focus();
+
+
         $('input[type="tel"]').val('');
         $('textarea').val('');
 
