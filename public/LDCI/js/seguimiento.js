@@ -416,7 +416,7 @@ var Iva=0;
 
         if (0 == index) {
 
-
+          debugger;
             $("#txtCantidad").val(item['cantidad']);
             var estado =   document.getElementById('ckEstado');
             /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
@@ -487,7 +487,7 @@ var Iva=0;
 
         } else {
             adicionarFilaServicio();
-            $("#tblDetalleServicios tbody tr:eq(" + index + ")").find("select").each(function () {
+            $("#tblDetalleServicios tbody tr:eq(" + index + ")").find("select,input").each(function () {
 
                 if ($(this).attr("id") == "cmb_servicio") {
                     $(this).val(item['id_producto']);
