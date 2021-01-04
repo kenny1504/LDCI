@@ -188,5 +188,4 @@
 
 <!-- js -->
 <script src="{{asset("assets/bracket/lib/jquery.steps/jquery.steps.js")}}" ></script>
-<script src="{{asset("assets/bracket/lib/parsleyjs/parsley.js")}}" ></script>
 <script src="{{asset("LDCI/js/cotizacion.js")}}" ></script>

@@ -26,7 +26,7 @@
                     <br><br>
 
                     Gracias por su interés y esperamos verlo en la web, donde podemos abordar rápidamente sus necesidades
-                    y requisitos especiales o llamar a los numeros Nicaragua +(505) 2220 7707, Costa Rica +(506) 7088 2518,USA +1 (347) 298 6449.
+                    y requisitos especiales o tambien llamando a los numeros Nicaragua +(505) 2220 7707, Costa Rica +(506) 7088 2518,USA +1 (347) 298 6449.
                     <br><br>
                 </div>
             </div>

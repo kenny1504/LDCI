@@ -101,8 +101,13 @@ Route::post('/getEncabezado/cotizacion', 'CotizacionController@getEncabezado')->
 Route::post('/getDetalleCarga/cotizacion', 'CotizacionController@getDetalleCarga')->name('Cotizacion');
 Route::post('/getDetalleServicio/cotizacion', 'CotizacionController@getDetalleServicio')->name('Cotizacion');
 Route::post('/actualizarCotizacion', 'CotizacionController@ActualizarCotizacion')->name('Actualizar');
-Route::post('/rechazarCotizacion', 'CotizacionController@RechazarCotizacion')->name('Rechazar');
+Route::post('/EstadoCotizacion', 'CotizacionController@RechazarCotizacion')->name('Estado');
 
+//Rutas flete
+Route::post('/guardarFlete', 'FleteController@guardarFlete')->name('Guardar');
+Route::post('/getFlete', 'FleteController@getFlete')->name('Flete');
+Route::post('/getConsignatario', 'FleteController@getConsignatario')->name('Consignatario');
+Route::post('/setEstado', 'FleteController@cambiarEstadoFlete')->name('Estado');
 
 //Rutas Reportes
 Route::post('/vendedores', 'ReporteController@downloadVendedores')->name('LDCI');

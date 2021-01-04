@@ -60,7 +60,7 @@
                                             <option  value="2">Revisada</option>
                                             <option  value="3">Aprobada</option>
                                             <option  value="4">Tramite</option>
-                                            <option  value="5">Impresa</option>
+                                            <option disabled  value="5">Impresa</option>
                                         </select>
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@
                                         <div class="form-group">
                                             <label for="txt_nombresRemitente">Nombres</label>
                                             <div class="input-group">
-                                                <input  type="text" id="txt_nombresRemitente" name="txt_nombresRemitente" class="form-control input-md">
+                                                <input readonly  type="text" id="txt_nombresRemitente" name="txt_nombresRemitente" class=" form-control input-md">
                                                 <span class="input-group-btn">
                                                         <button onclick="listarClientesRemitente()"  title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#ModalClientes"
                                                                 id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
@@ -292,13 +292,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_apellido1Remitente">Apellido 1</label>
-                                            <input  type="text" id="txt_apellido1Remitente" name="txt_apellido1Remitente" class="form-control input-md">
+                                            <input readonly type="text" id="txt_apellido1Remitente" name="txt_apellido1Remitente" class=" form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_apellido2Remitente">Apellido 2</label>
-                                            <input  type="text" id="txt_apellido2Remitente" name="txt_apellido2Remitente" class="form-control input-md">
+                                            <input readonly type="text" id="txt_apellido2Remitente" name="txt_apellido2Remitente" class=" form-control input-md">
                                         </div>
                                     </div>
                                 </div>
@@ -306,20 +306,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_telefonoRemitente">Telefono</label>
-                                            <input onkeypress="return soloNumeros(event,txt_telefonoRemitente);"   type="tel" id="txt_telefonoRemitente" name="txt_telefonoRemitente" class="form-control input-md">
+                                            <input readonly onkeypress="return soloNumeros(event,txt_telefonoRemitente);"   type="tel" id="txt_telefonoRemitente" name="txt_telefonoRemitente" class="disabled form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_CorreoRemitente">Correo</label>
-                                            <input  type="text" id="txt_CorreoRemitente" name="txt_CorreoRemitente" class="form-control input-md">
+                                            <input readonly type="text" id="txt_CorreoRemitente" name="txt_CorreoRemitente" class=" form-control input-md">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label >Direccion</label>
-                                        <textarea class="form-control" id="txt_direccionRemitente" name="txt_direccionRemitente">
+                                        <textarea readonly class="disabled form-control" id="txt_direccionRemitente" name="txt_direccionRemitente">
                                     </textarea>
                                     </div>
                                 </div>
@@ -335,7 +335,7 @@
                                         <div class="form-group">
                                             <label for="txt_nombres">Nombres</label>
                                             <div class="input-group">
-                                                <input  type="text" id="txt_nombresConsignatario" name="txt_nombresConsignatario" class="form-control input-md">
+                                                <input required  type="text" id="txt_nombresConsignatario" name="txt_nombresConsignatario" class="form-control input-md">
                                                 <span class="input-group-btn">
                                                         <button onclick="listarClientesConsignatario()" title="Buscar cliente" onclick="" class="btn btn-default" data-toggle="modal" data-target="#ModalClientes"
                                                                 id="btnBuscarCliente" type="button"><i class="fa fa-search"></i></button>
@@ -348,13 +348,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_apellido1Consignatario">Apellido 1</label>
-                                            <input  type="text" id="txt_apellido1Consignatario" name="txt_apellido1Consignatario" class="form-control input-md">
+                                            <input required  type="text" id="txt_apellido1Consignatario" name="txt_apellido1Consignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_apellido2Consignatario">Apellido 2</label>
-                                            <input  type="text" id="txt_apellido2Consignatario" name="txt_apellido2Consignatario" class="form-control input-md">
+                                            <input required type="text" id="txt_apellido2Consignatario" name="txt_apellido2Consignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                 </div>
@@ -362,20 +362,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_telefonoConsignatario">Telefono</label>
-                                            <input  onkeypress="return soloNumeros(event,txt_telefonoConsignatario);" type="tel" id="txt_telefonoConsignatario" name="txt_telefonoConsignatario" class="form-control input-md">
+                                            <input required onkeypress="return soloNumeros(event,txt_telefonoConsignatario);" type="tel" id="txt_telefonoConsignatario" name="txt_telefonoConsignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="txt_correoConsignatario">Correo</label>
-                                            <input  type="text" id="txt_correoConsignatario" name="txt_correoConsignatario" class="form-control input-md">
+                                            <input required type="text" id="txt_correoConsignatario" name="txt_correoConsignatario" class="form-control input-md">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label >Direccion</label>
-                                        <textarea class="form-control" id="txt_direccionConsignatario" name="txt_direccionConsignatario">
+                                        <textarea required class="form-control" id="txt_direccionConsignatario" name="txt_direccionConsignatario">
                                     </textarea>
                                     </div>
                                 </div>
@@ -424,7 +424,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_fecha_llegada">Fecha llegada</label>
-                                        <input  type="date" id="txt_fecha_llegada" name="txt_fecha_llegada" class="form-control input-md">
+                                        <input required  type="date" id="txt_fecha_llegada" name="txt_fecha_llegada" class="form-control input-md">
                                     </div>
                                 </div>
                             </div>
@@ -436,7 +436,7 @@
                     <div class="col-md-12">
                         <button disabled title="Guardar cotizacion" onclick="GuardarSeguimiento()" class="btn btn-success" id="btnGuardar"><i class="fa fa-save"> </i> Guardar</button>
                         <button disabled title="Imprimir cotizacion" onclick="rpt_cotizacion()" class="btn btn-info" id="btnimprimir"><i class="fa fa-print"> </i>imprimir</button>
-                        <button title="Limpiar formulario" href="cotizacion.seguimiento" class="optionMenu btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
+                        <button title="Limpiar formulario" href="cotizacion.seguimiento" id="btnRefresh" class="optionMenu btn btn-warning" ><i class="fa fa-recycle"></i> Limpiar</button>
                         <br><br>
                     </div>
                 </div>

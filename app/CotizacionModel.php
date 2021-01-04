@@ -457,12 +457,12 @@ class CotizacionModel extends Model
         }
     }
 
-    function RechazarCotizacion ($id_cotizacion,$descripcion,$id_session)
+    function CambiarEstadoCotizacion ($id_cotizacion,$descripcion,$estado,$id_session)
     {
         $query = new static;
         $query = DB::UPDATE ('UPDATE ldci.tb_cotizacion
-            SET  estado=-1, descripcion=?,usuario_modificacion=?, fecha_modificacion=now()
-            WHERE id_cotizacion=?;', [$descripcion, $id_session, $id_cotizacion]);
+            SET  estado=?, descripcion=?,usuario_modificacion=?, fecha_modificacion=now()
+            WHERE id_cotizacion=?;', [$estado,$descripcion, $id_session, $id_cotizacion]);
 
         if ($query) {
             return collect([

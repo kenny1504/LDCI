@@ -335,22 +335,28 @@ var Iva=0;
             success: function (data) {
 
                 Estado=data[0].estado;
+                if(Estado>2)
+                    CargarDatosFlete()
+
                 $('#cmb_estado').val(data[0].estado);
                 $('#cmb_estado').change();
                 $("#btnimprimir ").removeAttr("disabled", "disabled");
+
+                if(Estado!=-1)
+                    $("#btnGuardar ").removeAttr("disabled", "disabled");
+                else
+                    $("#btnGuardar ").attr("disabled", "disabled");
 
                 /** Solo se puede editar informacion de cargar y servicio cuando esten en estado NUEVA o REVISADA  */
                 if(Estado==1 || Estado==2)
                 {
                     $("#tblDetalleServicios ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
                     $("#tblDetalleCarga ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
-                    $("#btnGuardar ").removeAttr("disabled", "disabled");
                 }
                 else
                 {
                     $("#tblDetalleServicios ").find("input,button,textarea,select").attr("disabled", "disabled");
                     $("#tblDetalleCarga ").find("input,button,textarea,select").attr("disabled", "disabled");
-                    $("#btnGuardar ").attr("disabled", "disabled");
                 }
 
                 $('#id_cotizacion').val(id_cotizacion);
@@ -435,6 +441,9 @@ var Iva=0;
             $("#cmb_tipo_mercancia").val(item['id_tipo_mercancia']);
             $("#cmb_modo_transporte").val(item['id_tipo_modo_transporte']);
             $("#txt_observacion").val(item['descripcion']);
+            /**Asigna 0 al valor anterior del input */
+            var elem = document.getElementById('txtprecioCargar');
+            elem.oldValue=0
             $("#txtprecioCargar").val(item['precio']);
             $("#txtprecioCargar").change();
 
@@ -482,6 +491,9 @@ var Iva=0;
         if (0 == index) {
 
             $("#cmb_servicio").val(item['id_producto']);
+             /** Asigna 0 al valor anterior del input */
+            var elem = document.getElementById('txtPrecioServicio');
+            elem.oldValue=0
             $("#txtPrecioServicio").val(item['precio']);
             $("#txtPrecioServicio").change();
 
@@ -511,6 +523,9 @@ var Iva=0;
          Total=0;
          SubTotal=0;
          Iva=0;
+        id_remitente=null;
+        id_consignatario=null;
+        id_proveedor=null;
         /** Limpia todos los inputs*/
         $('input[type="text"]').val('');
         $('input[type="text"]').focus();
@@ -518,6 +533,7 @@ var Iva=0;
 
         $('input[type="tel"]').val('');
         $('textarea').val('');
+        $('#txt_fecha_llegada').val('');
 
         $('select').val(""); /** Limpia todos select */
         $('#txt_subtotal,#txt_iva,#txt_total').text("0.00");
@@ -527,7 +543,7 @@ var Iva=0;
 
     }
 
-    /**  Funcion para mostrar informacion segun sea el esatao de la cotizacion  */
+    /**  Funcion para mostrar informacion segun sea el estado de la cotizacion  */
     function changeestado()
     {
        let estado=$('#cmb_estado').val();
@@ -542,6 +558,7 @@ var Iva=0;
     /** Funcion para calcular, total,iva,y subtotal */
     function  calcularPresupuesto(input)
     {
+
         let calcular=false;
         /** Verifica que existan valores seccionados*/
         if (input.id=="txtPrecioServicio")
@@ -632,15 +649,20 @@ var Iva=0;
         });
     }
 
+
     /** Selecciona el cliente  y carga valores en formulario */
     function selectClienteRemitente(datos) {
 
-        showLoad(true);
-
-        var _token = $('input[name=_token]').val();
         var dt = tblClientes.row($(datos).parents('tr')).data();
         id_cliente=dt[0];
+        remitente(id_cliente)
 
+    }
+
+    function remitente(id_cliente)
+    {
+        showLoad(true);
+        var _token = $('input[name=_token]').val();
         $.ajax({
             type: 'POST',
             url: '/cliente/datos', //llamada a la ruta
@@ -708,12 +730,16 @@ var Iva=0;
     /** Selecciona el cliente  y carga valores en formulario */
     function selectClienteConsignatario(datos) {
 
-        showLoad(true);
-
-        var _token = $('input[name=_token]').val();
         var dt = tblClientes.row($(datos).parents('tr')).data();
         id_cliente=dt[0];
 
+        Consignatario(id_cliente)
+    }
+
+    function Consignatario(id_cliente)
+    {
+        showLoad(true);
+        var _token = $('input[name=_token]').val();
         $.ajax({
             type: 'POST',
             url: '/cliente/datos', //llamada a la ruta
@@ -740,8 +766,8 @@ var Iva=0;
             }
 
         });
-
     }
+
 
     function  listarProveedores()
     {
@@ -771,11 +797,15 @@ var Iva=0;
     /** Selecciona el proveedor y carga valores en formulario */
     function selectProveedor(datos) {
 
-        showLoad(true);
-        var _token = $('input[name=_token]').val();
         var dt = tblProveedores.row($(datos).parents('tr')).data();
         id_proveedor=dt[0];
+        proveedor(id_proveedor)
+    }
 
+    function proveedor(id_proveedor)
+    {
+        showLoad(true);
+        var _token = $('input[name=_token]').val();
         $.ajax({
             type:'POST',
             url: '/proveedor/datos',
@@ -811,7 +841,7 @@ var Iva=0;
         let estado=$('#cmb_estado').val();
         let estadonext=Estado+1
 
-        if (estado!=-1)
+        if (estado!=-1 && estado!=2)
         {
             if (estadonext==estado)
                    guardar()
@@ -823,6 +853,7 @@ var Iva=0;
 
     }
 
+    /** Guarda Cotizacion */
     function guardar()
     {
         alertConfirm("¿Está seguro que desea guardar?", function (e) {
@@ -957,11 +988,12 @@ var Iva=0;
 
                     $.ajax({
                         type: 'POST',
-                        url: '/rechazarCotizacion', //llamada a la ruta
+                        url: '/EstadoCotizacion', //llamada a la ruta
                         data: {
                             _token: _token,
                             id_cotizacion: id_cotizacion,
-                            descripcion:descripcion
+                            descripcion:descripcion,
+                            estado:estado
                         },
                         success: function (data) {
 
@@ -983,7 +1015,7 @@ var Iva=0;
                 }
                 else /** Guardar flete Estado "Aprobada" */
                 {
-
+                    guardarFlete();
                 }
             }
 
@@ -991,9 +1023,200 @@ var Iva=0;
     }
 
 
+    /** Guarda flete (Estado 3-5) */
+    function guardarFlete()
+    {
+        let estado=$('#cmb_estado').val();
+        var _token = $('input[name=_token]').val();
+
+        if (estado==3)
+        {
+            let guardar=true;
+            var fecha_llegada=$('#txt_fecha_llegada').val();
+            var fecha_llegadaVAL=$('#txt_fecha_llegada').parsley();
+            var fecha=$('#txt_fecha').val();
+
+            /** Datos remitente */
+            var nombresConsignatario=$('#txt_nombresConsignatario').val();
+            var apellido1Consignatario=$('#txt_apellido1Consignatario').val();
+            var apellido2Consignatario=$('#txt_apellido2Consignatario').val();
+            var telefonoConsignatario=$('#txt_telefonoConsignatario').val()
+            var iso2=selectC.getSelectedCountryData().iso2;
+            var correoConsignatario=$('#txt_correoConsignatario').val();
+            var direccionConsignatario=$('#txt_direccionConsignatario').val();
+            /** Validando INPUTS */
+            var nombresConsignatarioVAL=$('#txt_nombresConsignatario').parsley();
+            var apellido1ConsignatarioVAL=$('#txt_apellido1Consignatario').parsley();
+            var telefonoConsignatarioVAL=$('#txt_telefonoConsignatario').parsley();
+            var correoConsignatarioVAL=$('#txt_correoConsignatario').parsley();
+            var direccionConsignatarioVAL=$('#txt_direccionConsignatario').parsley();
+
+            if (id_remitente!=null && id_proveedor!=null && fecha_llegada!="" && fecha!="")
+            {
+
+                /** Verifica que exista un consignatario */
+                if (id_consignatario==null)
+                {
+                    if (nombresConsignatarioVAL.isValid() && apellido1ConsignatarioVAL.isValid()  && telefonoConsignatarioVAL.isValid() && correoConsignatarioVAL.isValid() && direccionConsignatarioVAL.isValid()  )
+                        guardar=true;
+                    else
+                    {
+                        nombresConsignatarioVAL.validate();
+                        apellido1ConsignatarioVAL.validate();
+                        telefonoConsignatarioVAL.validate();
+                        correoConsignatarioVAL.validate();
+                        direccionConsignatarioVAL.validate();
+                        alertError("Favor completar Datos de consignatario")
+                        guardar=false;
+                    }
+
+                }
+
+                if (guardar==true)
+                    {
+
+                      showLoad(true);
+                         $.ajax({
+                            type: 'POST',
+                            url: '/guardarFlete', //llamada a la ruta
+                            data: {
+                                _token: _token,
+                                id_cotizacion: id_cotizacion,
+                                id_remitente:id_remitente,
+                                id_consignatario:id_consignatario,
+                                id_proveedor:id_proveedor,
+                                fecha:fecha,
+                                fecha_llegada:fecha_llegada,
+                                nombresConsignatario:nombresConsignatario.trim(),
+                                apellido1Consignatario:apellido1Consignatario.trim(),
+                                apellido2Consignatario:apellido2Consignatario,
+                                telefonoConsignatario:telefonoConsignatario,
+                                iso2:iso2,
+                                correoConsignatario:correoConsignatario,
+                                direccionConsignatario:direccionConsignatario.trim(),
+                                estado:estado
+                            },
+                            success: function (data) {
+
+                                showLoad(false);
+                                if (data.error) {
+                                    alertError(data.mensaje);
+                                } else {
+                                    alertSuccess(data.mensaje);
+                                    $('#btnRefresh').click();
+                                }
+                            },
+                            error: function (err) {
+                                alertError(err.responseText);
+                                showLoad(false);
+                            }
+
+                        });
+                    }
+
+            }
+            else
+            {
+                if (fecha_llegadaVAL.isValid())
+                    console.clear();
+                else /** Valida que se agrege una fecha de llegada */
+                    fecha_llegadaVAL.validate();
+
+                alertError("Favor completar campos");
+            }
+
+        }
+        else {
+
+            showLoad(true);
+            $.ajax({
+                type: 'POST',
+                url: '/setEstado', //llamada a la ruta
+                data: {
+                    _token: _token,
+                    id_cotizacion: id_cotizacion,
+                    estado:estado
+                },
+                success: function (data) {
+
+                    showLoad(false);
+                    if (data.error) {
+                        alertError(data.mensaje);
+                    } else {
+                        alertSuccess(data.mensaje);
+                        $('#btnRefresh').click();
+                    }
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        }
+    }
+
     function EnviarCorreo()
     {
         $('#txt_enviarCorreo').val("");
+    }
+
+
+    function CargarDatosFlete()
+    {
+        showLoad(true);
+        var _token= $('input[name=_token]').val();
+
+        /** Recupera encabezado*/
+        $.ajax({
+            type: 'POST',
+            url: '/getFlete', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_cotizacion:id_cotizacion,
+            },
+            success: function (data) {
+
+                $('#txt_fecha_llegada').val(data[0].fecha_entrega);
+                remitente(data[0].id_cliente)
+                proveedor(data[0].id_proveedor)
+
+                /** Recupera datos de consignatario */
+                $.ajax({
+                    type: 'POST',
+                    url: '/getConsignatario', //llamada a la ruta
+                    data: {
+                        _token:_token,
+                        id_consignatario:data[0].id_consignatario,
+                    },
+                    success: function (datos) {
+
+                        $('#txt_nombresConsignatario').val(datos[0].nombre);
+                        $('#txt_apellido1Consignatario').val(datos[0].apellido1);
+                        $('#txt_apellido2Consignatario').val(datos[0].apellido2);
+                        $('#txt_telefonoConsignatario').val(datos[0].telefono_2)
+                        selectC.setCountry(datos[0].iso_2);
+                        $('#txt_correoConsignatario').val(datos[0].correo);
+                        $('#txt_direccionConsignatario').val(datos[0].direccion);
+
+                        showLoad(false);
+
+                    },
+                    error: function (err) {
+                        alertError(err.responseText);
+                        showLoad(false);
+                    }
+
+                });
+
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
+
     }
 
     /** Funcion que genera reporte */

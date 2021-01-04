@@ -219,9 +219,10 @@ class CotizacionController extends Controller
     {
         $id_cotizacion=$request->id_cotizacion;
         $descripcion=$request->descripcion;
+        $estado=$request->estado;
         $id_session = session('idUsuario');
 
-        $actualizar=(new CotizacionModel)->RechazarCotizacion($id_cotizacion,$descripcion,$id_session);
+        $actualizar=(new CotizacionModel)->CambiarEstadoCotizacion($id_cotizacion,$descripcion,$estado,$id_session);
 
         return $actualizar;
     }

@@ -155,6 +155,7 @@
     <script src="{{asset("LDCI/Core/intlTelInput.js")}}" ></script>
     <script src="{{asset("LDCI/Core/core.js")}}" ></script>
     <script src="{{asset("LDCI/Core/dropzone.min.js")}}" ></script>
+    <script src="{{asset("assets/bracket/lib/parsleyjs/parsley.js")}}" ></script>
 
      @if($tipo==1)
          <script src="{{asset("LDCI/js/reportes.js")}}" ></script>
