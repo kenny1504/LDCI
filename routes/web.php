@@ -107,3 +107,13 @@ Route::post('/vendedores', 'ReporteController@downloadVendedores')->name('LDCI')
 Route::post('/clientes', 'ReporteController@downloadClientes')->name('LDCI');
 Route::post('/productos', 'ReporteController@downloadProductos')->name('LDCI');
 Route::post('/cotizaciones/datos', 'ReporteController@downloadCotizacion')->name('LDCI');
+
+//Rutas Entradas
+Route::post('/proveedores/getAll', 'EntradaController@getProveedores')->name('LDCI');
+Route::post('/productos/getAll', 'EntradaController@getProductos')->name('LDCI');
+Route::post('/guardarEntrada', 'EntradaController@guardarEntrada')->name('LDCI');
+Route::post('/entrada/getAll', 'EntradaController@getEntradas')->name('getAll');
+Route::post('/informacion/entrada', 'EntradaController@informacionEntrada')->name('infEntrada');
+Route::post('/getDetalleEntrada/entrada', 'EntradaController@getDetalleEntrada')->name('detalleEntrada');
+Route::post('/entrada/anular', 'EntradaController@anularEntrada')->name('anularEntrada');
+Route::post('/entrada/producto/guardar', 'EntradaController@guardarProductoEntrada')->name('guardarProductoEntrada');
