@@ -46,7 +46,7 @@
                   </div><!-- menu-item -->
               </a><!-- br-menu-link -->
               <ul class="br-menu-sub nav flex-column">
-                  <li class="nav-item"><a href="" class="nav-link">Agregar</a></li>
+                  <li class="nav-item"><a href="entrada.entrada" class="optionMenu nav-link">Agregar</a></li>
               </ul>
             <a href="" class="br-menu-link">
               <div class="br-menu-item">
