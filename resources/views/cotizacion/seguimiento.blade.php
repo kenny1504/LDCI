@@ -444,7 +444,7 @@
         </div>
     </div>
 
-    <div id="ModalCotizaciones" class="modal fade" role="document" >
+   <div id="ModalCotizaciones" class="modal fade" role="document" >
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
@@ -484,7 +484,7 @@
         </div>
     </div>
 
-    <div id="ModalClientes" class="modal fade" role="document" >
+   <div id="ModalClientes" class="modal fade" role="document" >
        <div class="modal-dialog modal-lg">
            <!-- Modal content-->
            <div class="modal-content">
@@ -525,7 +525,7 @@
        </div>
    </div>
 
-    <div id="ModalProveedores" class="modal fade" role="document" >
+   <div id="ModalProveedores" class="modal fade" role="document" >
        <div class="modal-dialog modal-lg">
            <!-- Modal content-->
            <div class="modal-content">

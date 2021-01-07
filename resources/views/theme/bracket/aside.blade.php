@@ -35,7 +35,7 @@
             </a><!-- br-menu-link -->
             <ul class="br-menu-sub nav flex-column">
               <li class="nav-item"><a href="" class="nav-link">Ver Facturas</a></li>
-              <li class="nav-item"><a href="" class="nav-link">Generar factura</a></li>
+              <li class="nav-item"><a href="factura.generarFactura" class="optionMenu nav-link">Generar factura</a></li>
               <li class="nav-item"><a href="" class="nav-link">Crear factura</a></li>
             </ul>
               <a href="" class="br-menu-link">

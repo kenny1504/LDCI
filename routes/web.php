@@ -124,3 +124,7 @@ Route::post('/informacion/entrada', 'EntradaController@informacionEntrada')->nam
 Route::post('/getDetalleEntrada/entrada', 'EntradaController@getDetalleEntrada')->name('detalleEntrada');
 Route::post('/entrada/anular', 'EntradaController@anularEntrada')->name('anularEntrada');
 Route::post('/entrada/producto/guardar', 'EntradaController@guardarProductoEntrada')->name('guardarProductoEntrada');
+
+
+//Rutas Factura
+Route::post('/factura/cotizaciones', 'FacturaController@getCotizaciones')->name('getAll');
