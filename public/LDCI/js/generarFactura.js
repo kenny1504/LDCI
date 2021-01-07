@@ -70,3 +70,8 @@ $(document).ready(function () {
         });
 
     }
+
+    function generarFactura()
+    {
+        alertSuccess("EN CNSTRUCCION");
+    }
