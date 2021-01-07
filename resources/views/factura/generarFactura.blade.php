@@ -193,7 +193,7 @@
             </div>
         </div>
         <div class="box-footer text-center">
-            <button title="Generar Factura" onclick="GuardarEntrada()" class="btn btn-info btn-sm" id="btnGuardarEntrada"><i class="fa fa-print"> </i> Generar</button>
+            <button title="Generar Factura" onclick="generarFactura()" class="btn btn-info btn-sm" id="btnGuardarEntrada"><i class="fa fa-print"> </i> Generar</button>
             <a href="factura.generarFactura" title="Limpiar formulario" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>
