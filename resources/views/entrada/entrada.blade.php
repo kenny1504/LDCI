@@ -5,6 +5,13 @@
     background-color:#337ab7;
     text-align: center;
     }
+    .punteado{
+        border-style: dotted;
+        border-width: 1px;
+        border-color: #660033;
+        font-family: verdana, arial;
+        font-size: 10pt;
+    }
 </style>
 
 <div class="col-md-12">
@@ -229,14 +236,5 @@
         </div>
     </div>
 
-<style>
-    .punteado{
-        border-style: dotted;
-        border-width: 1px;
-        border-color: #660033;
-        font-family: verdana, arial;
-        font-size: 10pt;
-    }
-</style>
 
 <script src="{{asset("LDCI/js/entrada.js")}}"></script>
