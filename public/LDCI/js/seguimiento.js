@@ -864,82 +864,90 @@ var Iva=0;
             /** Solo si esta en estado NUEVA o REVISADA se puede editar Cotizacion */
             if(estado==2) {
 
-                $("#ModalEnviarCorreo").modal("show"); //Abre Modal
 
-                /** Funcion para agregar fila */
-                $(document).off("click", ".guardar").on("click", ".guardar", function ()
+                if (Estado>estado)
                 {
+                    alertError("No es posible guardar cotizacion al estado seleccionado");
 
-                    var guardar=true;
-                    /** Se recuperan datos de tabla Detalles de carga */
-                    var DATA1 = [];
-                    var TABLA1 = $("#tblDetalleCarga tbody > tr");
+                }
+                else {
 
-                    /*Obtención de datos de la tabla dinámica*/
-                    TABLA1.each(function (e) {
+                    $("#ModalEnviarCorreo").modal("show"); //Abre Modal
 
-                        let estado=false;
-                        let Cantidad = $(this).find("input[id*='txtCantidad']").val();
-                        let ckEstado = $(this).find("input[id*='ckEstado']");
-                        if (ckEstado[0].checked == true)
-                            estado=true;
+                    /** Funcion para agregar fila */
+                    $(document).off("click", ".guardar").on("click", ".guardar", function ()
+                    {
 
-                        let id_tipo_mercancia = $(this).find("select[id*='cmb_tipo_mercancia']").val();
-                        let id_modo_transporte = $(this).find("select[id*='cmb_modo_transporte']").val();
-                        let observacion = $(this).find("textarea[id*='txt_observacion']").val();
-                        let precio = $(this).find("input[id*='txtprecioCargar']").val();
+                        var guardar=true;
+                        /** Se recuperan datos de tabla Detalles de carga */
+                        var DATA1 = [];
+                        var TABLA1 = $("#tblDetalleCarga tbody > tr");
 
-                        if (Cantidad !== "" && id_tipo_mercancia !== "" && id_modo_transporte && precio!== "") {
-                            item = {};
-                            item ["Cantidad"] =parseInt(Cantidad);
-                            item ["estado"] = estado;
-                            item ["id_tipo_mercancia"] = parseInt(id_tipo_mercancia);
-                            item ["id_modo_transporte"] = parseInt(id_modo_transporte);
-                            item ["observacion"] = observacion;
-                            precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
-                            item ["precio"] = precio;
-                            DATA1.push(item);
-                        }
-                        else
-                        {
-                            guardar=false; $(this).focus();
-                            alertError("¡Por favor completar datos de la informacion de Carga!");
-                        }
+                        /*Obtención de datos de la tabla dinámica*/
+                        TABLA1.each(function (e) {
 
-                    });
+                            let estado=false;
+                            let Cantidad = $(this).find("input[id*='txtCantidad']").val();
+                            let ckEstado = $(this).find("input[id*='ckEstado']");
+                            if (ckEstado[0].checked == true)
+                                estado=true;
 
-                    let tblDetalleCarga = JSON.stringify(DATA1);
+                            let id_tipo_mercancia = $(this).find("select[id*='cmb_tipo_mercancia']").val();
+                            let id_modo_transporte = $(this).find("select[id*='cmb_modo_transporte']").val();
+                            let observacion = $(this).find("textarea[id*='txt_observacion']").val();
+                            let precio = $(this).find("input[id*='txtprecioCargar']").val();
 
-                    /** Se recuperan datos de tabla servicios adicionales*/
-                    var DATA2 = [];
-                    var TABLA2 = $("#tblDetalleServicios tbody > tr");
+                            if (Cantidad !== "" && id_tipo_mercancia !== "" && id_modo_transporte && precio!== "") {
+                                item = {};
+                                item ["Cantidad"] =parseInt(Cantidad);
+                                item ["estado"] = estado;
+                                item ["id_tipo_mercancia"] = parseInt(id_tipo_mercancia);
+                                item ["id_modo_transporte"] = parseInt(id_modo_transporte);
+                                item ["observacion"] = observacion;
+                                precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
+                                item ["precio"] = precio;
+                                DATA1.push(item);
+                            }
+                            else
+                            {
+                                guardar=false; $(this).focus();
+                                alertError("¡Por favor completar datos de la informacion de Carga!");
+                            }
 
-                    /*Obtención de datos de la tabla dinámica*/
-                    TABLA2.each(function (e) {
+                        });
 
-                        let id_servicio = $(this).find("select[id*='cmb_servicio']").val();
-                        let precio = $(this).find("input[id*='txtPrecioServicio']").val();
-                        if (id_servicio!="" && id_servicio!=null &&  precio!="")
-                        {
-                            item = {};
-                            item["id_servicio"] =parseInt(id_servicio);
-                            precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
+                        let tblDetalleCarga = JSON.stringify(DATA1);
+
+                        /** Se recuperan datos de tabla servicios adicionales*/
+                        var DATA2 = [];
+                        var TABLA2 = $("#tblDetalleServicios tbody > tr");
+
+                        /*Obtención de datos de la tabla dinámica*/
+                        TABLA2.each(function (e) {
+
+                            let id_servicio = $(this).find("select[id*='cmb_servicio']").val();
+                            let precio = $(this).find("input[id*='txtPrecioServicio']").val();
+                            if (id_servicio!="" && id_servicio!=null &&  precio!="")
+                            {
+                                item = {};
+                                item["id_servicio"] =parseInt(id_servicio);
+                                precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
                             item["precio"] =precio;
-                            DATA2.push(item);
-                        }
-                        else
+                                DATA2.push(item);
+                            }
+                            else
+                            {
+                                guardar=false; $(this).focus();
+                                alertError("¡Por favor completar datos de servicio!");
+                            }
+
+
+                        });
+
+                        let tblDetalleServicios = JSON.stringify(DATA2);
+
+                        if (guardar==true)
                         {
-                            guardar=false; $(this).focus();
-                            alertError("¡Por favor completar datos de servicio!");
-                        }
-
-
-                    });
-
-                    let tblDetalleServicios = JSON.stringify(DATA2);
-
-                    if (guardar==true)
-                      {
 
                             var descripcion = $('#txt_descripcion').val();
                             var correo =$('#txt_enviarCorreo').val();
@@ -974,8 +982,9 @@ var Iva=0;
                                 }
 
                             });
-                      }
-                });
+                        }
+                    });
+                }
 
             }
             else
