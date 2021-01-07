@@ -167,6 +167,7 @@ var Total_Entrada=0;
 
             });
             let tblEntrada = JSON.stringify(DATA1);
+
         if (guardar==true) {
 
             var _token = $('input[name=_token]').val();
@@ -175,7 +176,7 @@ var Total_Entrada=0;
 
                 if(fecha!="" && proveedor!=null)
                 {
-                        showLoad(true);
+                    showLoad(true);
                     $.ajax({
                         type: 'POST',
                         url: '/guardarEntrada', //llamada a la ruta
@@ -268,7 +269,7 @@ var Total_Entrada=0;
                 id_entrada:id_entrada,
             },
             success: function (data) {
-                debugger;
+
                 $('#fecha_entrada').val(data[0].f_entrada);
                 $('#id_Entrada').val(id_entrada);
                 $('#cmb_Proveedor').val(data[0].id_proveedor);

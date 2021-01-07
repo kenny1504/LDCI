@@ -87,7 +87,7 @@ class EntradaModel extends Model
             if ($guardarOk) {
                 foreach ($tblDetalleEntrada as $existencia) {
                     $query_update_p = new static;
-                    $query_update_p = DB::insert('UPDATE ldci.tb_producto SET existencia=existencia+? WHERE id_producto=?', [$existencia->Cantidad, $existencia->id_producto]);
+                    $query_update_p = DB::update('UPDATE ldci.tb_producto SET existencia=existencia+? WHERE id_producto=?', [$existencia->Cantidad, $existencia->id_producto]);
 
                     if (!$query_update_p) {
                         $guardarOk = false;

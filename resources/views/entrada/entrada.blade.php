@@ -68,11 +68,6 @@
                                             <th class=" text-center" width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th COLSPAN=5 class="text-center"><h6 class="precio">Total Entrada: $<label id="txt_totalEntrada">0.00</label></h6></th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr class="fila-base">
                                             <td width="5%" class="text-center">
@@ -101,6 +96,11 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th COLSPAN=5 class="text-center"><br><br><h6 class="precio">Total Entrada: $<label id="txt_totalEntrada">0.00</label></h6></th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -164,58 +164,59 @@
     <div class="modal-dialog modal-lg ">
         <!-- Modal content-->
         <div class="modal-content ">
-            <div class="modal-header" style="align-self: flex-end;" >
-                <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </a>
-            </div>
-            <div class="modal-body ">
-                <div class="box box-success">
-                    <div class="box-heading text-info">
-                        <div class="row"></div>
-                        <h5 class="text-center"><legend> Nuevo Producto</legend></h5>
-                    </div>
-                    <div class="box-body ">
-                        <form  method="post" action="{{route('guardarProductoEntrada')}}" accept-charset="utf-8"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label for="txt_nombre_p_entrada">Nombre</label>
-                                        <input name="txt_nombre_p_entrada" id="txt_nombre_p_entrada" class="form-control input-sm" type="text" maxlength="50">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="txt_precio_p_entrada">Precio</label>
-                                        <input onkeypress="return soloNumeros(event,txt_precio);" name="txt_precio_p_entrada" id="txt_precio_p_entrada"  class="form-control input-sm">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="txt_descripcion_p_entrada">Descripcion</label>
-                                        <textarea class="form-control input-sm" id="txt_descripcion_p_entrada" name="txt_descripcion_p_entrada" > </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="punteado" width=100%>
-                                        <tr>
-                                            <td>
-                                                    <div class="text-center dz-default dz-message">
-                                                    <span > Arrastre aqui imagen</span>
-                                                    </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                <div class="modal-header" style="align-self: flex-end;" >
+                    <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+                <div class="modal-body ">
+                     <div class="box box-success">
+                        <div class="box-heading text-info">
+                            <div class="row"></div>
+                            <h5 class="text-center"><legend> Nuevo Producto</legend></h5>
                         </div>
-                    </div>
-                    <div class="box-footer text-center">
+                        <div class="box-body ">
+                            <form  method="post" action="{{route('guardarProductoEntrada')}}" accept-charset="utf-8"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="txt_nombre_p_entrada">Nombre</label>
+                                            <input name="txt_nombre_p_entrada" id="txt_nombre_p_entrada" class="form-control input-sm" type="text" maxlength="50">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="txt_precio_p_entrada">Precio</label>
+                                            <input onkeypress="return soloNumeros(event,txt_precio);" name="txt_precio_p_entrada" id="txt_precio_p_entrada"  class="form-control input-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="txt_descripcion_p_entrada">Descripcion</label>
+                                            <textarea class="form-control input-sm" id="txt_descripcion_p_entrada" name="txt_descripcion_p_entrada" > </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="punteado" width=100%>
+                                            <tr>
+                                                <td>
+                                                        <div class="text-center dz-default dz-message">
+                                                        <span > Arrastre aqui imagen</span>
+                                                        </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                     </div>
+                     <div class="box-footer text-center">
                         <button type="submit" class="btn btn-success btn-sm" id="btnGuardarProductoEntrada">
                             <i class="fa fa-save"> </i> Guardar
                         </button>
@@ -223,11 +224,10 @@
                             <i class="fa fa-close"> </i> Cerrar
                         </button>
                     </div>
-                </div>
-            </div>
+              </div>
+         </div>
         </div>
     </div>
-</div>
 
 <style>
     .punteado{
