@@ -794,4 +794,47 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
 
   }
 
+    /** Funcion para validar Contraseña Segura */
+    function validar_clave(input)
+    {
+          var  contrasenna=input.value
+        if(contrasenna.length >= 8)
+        {
+            var mayuscula = false;
+            var minuscula = false;
+            var numero = false;
+            var caracter_raro = false;
 
+            for(var i = 0;i<contrasenna.length;i++)
+            {
+                if(contrasenna.charCodeAt(i) >= 65 && contrasenna.charCodeAt(i) <= 90)
+                {
+                    mayuscula = true;
+                }
+                else if(contrasenna.charCodeAt(i) >= 97 && contrasenna.charCodeAt(i) <= 122)
+                {
+                    minuscula = true;
+                }
+                else if(contrasenna.charCodeAt(i) >= 48 && contrasenna.charCodeAt(i) <= 57)
+                {
+                    numero = true;
+                }
+                else
+                {
+                    caracter_raro = true;
+                }
+            }
+            if(mayuscula == true && minuscula == true && caracter_raro == true && numero == true)
+            {
+                return true;
+            }
+            else
+            {
+                alertError("La contraseña debe posser al menos una letra Mayuscula, letras minusculas , un numero y un caractrer especial")
+                input.value=" ";
+            }
+        }
+        else
+             alertError("La contraseña debe posser al menos 8 caracteres")
+             input.value=" ";
+    }

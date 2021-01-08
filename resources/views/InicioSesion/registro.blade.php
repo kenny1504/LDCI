@@ -15,7 +15,7 @@
              <input id="phone"  onkeypress="return soloNumeros(event,phone);" name="phone" class="form-control" maxlength="25" type="tel">
           </div><!-- form-group -->
         <div class="form-group">
-          <input type="password" id="txt_pass" requireds class="form-control" placeholder="Ingrese Contraseña">
+          <input type="password" onchange="validar_clave(this)" id="txt_pass" requireds class="form-control" placeholder="Ingrese Contraseña">
         </div><!-- form-group -->
         <button title="Guardar registro" onclick="registrarUsuario();" class="btn btn-info btn-block">Registrarse</button>
       </div><!-- login-wrapper -->

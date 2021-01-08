@@ -19,7 +19,7 @@
                                 <input id="pass_now" type="password" class="form-control" placeholder="Ingrese Actual Contraseña">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="pass_new" type="password" class="form-control" placeholder="Ingrese Nueva Contraseña (Opcional)">
+                                <input id="pass_new" onchange="validar_clave(this)" type="password" class="form-control" placeholder="Ingrese Nueva Contraseña (Opcional)">
                               </div><!-- form-group -->
                               <div class="form-group">
                                 <input id="pass_new_confirm" type="password" class="form-control" placeholder="Confirmar contraseña nueva (Opcional)">
