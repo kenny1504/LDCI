@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\UsuarioModel;
+use App\TasaCambioModel;
 use Mail;
 use SoapClient;
 use Illuminate\Support\Str;
@@ -21,30 +22,46 @@ class InicioController extends Controller
 
         $nombreUsuario = session('nombreUsuario'); /** recupera nombre del usuario en session */
         $tipoUsuario = session('tipoUsuario'); /** recupera el tipo de usuario en session */
+        $id_session = session('idUsuario');
 
           if(!empty($nombreUsuario))
           {
               if($tipoUsuario!=3)
               {
-                  /** servicio tASA DE CAMBIO "Banco de Nicaragua" */
-                  $context = stream_context_create([
-                      'ssl' => [
-                          // set some SSL/TLS specific options
-                          'verify_peer' => false,
-                          'verify_peer_name' => false,
-                          'allow_self_signed' => true
-                      ]
-                  ]);
+                  /** Consulta si ya existe la tasa de cambio(Dia) guardada */
+                  $cambio = (new TasaCambioModel)->getTasacambio();
 
-                  $servicio = "https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx?WSDL"; //url del servicio
-                  $parametros = ["trace" => 1,"exceptions" => true, "stream_context" => $context];
-                  $parametros['Dia'] = date("d");
-                  $parametros['Mes'] = date("m");
-                  $parametros['Ano'] = date("Y");
-                  $client = new SoapClient($servicio, $parametros);
-                  $result = $client->RecuperaTC_Dia($parametros); //llamamos al método que nos interesa con los parámetros
+                  if(!empty($cambio))
+                  {
+                      $tasa_cambio=$cambio[0]->monto;
+                  }
+                  else
+                  {
 
-                  $tasa_cambio=$result->RecuperaTC_DiaResult; //Capturamos respuesta
+                      /** servicio tASA DE CAMBIO "Banco de Nicaragua" */
+                      $context = stream_context_create([
+                          'ssl' => [
+                              // set some SSL/TLS specific options
+                              'verify_peer' => false,
+                              'verify_peer_name' => false,
+                              'allow_self_signed' => true
+                          ]
+                      ]);
+
+                      $servicio = "https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx?WSDL"; //url del servicio
+                      $parametros = ["trace" => 1,"exceptions" => true, "stream_context" => $context];
+                      $parametros['Dia'] = date("d");
+                      $parametros['Mes'] = date("m");
+                      $parametros['Ano'] = date("Y");
+                      $client = new SoapClient($servicio, $parametros);
+                      $result = $client->RecuperaTC_Dia($parametros); //llamamos al método que nos interesa con los parámetros
+
+                      $tasa_cambio=$result->RecuperaTC_DiaResult; //Capturamos respuesta
+
+                      $cambio_now = (new TasaCambioModel)->setTasacambio($tasa_cambio,$id_session);
+                      $tasa_cambio=$cambio_now[0]->monto;
+
+                  }
 
                   return view('theme.bracket.layout')->with('nombre', $nombreUsuario)->with('tipo', $tipoUsuario)->with('tasa_cambio', $tasa_cambio);
 
