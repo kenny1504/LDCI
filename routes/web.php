@@ -128,3 +128,4 @@ Route::post('/entrada/producto/guardar', 'EntradaController@guardarProductoEntra
 
 //Rutas Factura
 Route::post('/factura/cotizaciones', 'FacturaController@getCotizaciones')->name('getAll');
+Route::post('/factura/EncabezadoCotizaciones', 'FacturaController@getEncabezadoCotizacion')->name('getEncabezado');

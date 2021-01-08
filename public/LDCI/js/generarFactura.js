@@ -1,4 +1,8 @@
 var tblCotizaciones = null;
+var Total=0;
+var TotalCordoba=0;
+var SubTotal=0;
+var Iva=0;
 
 $(document).ready(function () {
 
@@ -71,7 +75,50 @@ $(document).ready(function () {
 
     }
 
-    function generarFactura()
+
+    /** funcion para cargar datos de cotizacion */
+    function selectCotizacion(datos)
     {
-        alertSuccess("EN CNSTRUCCION");
+
+        showLoad(true);
+        var _token= $('input[name=_token]').val();
+        var dt = tblCotizaciones.row($(datos).parents('tr')).data();
+        id_cotizacion=dt[0];
+
+        /** Recupera encabezado*/
+        $.ajax({
+            type: 'POST',
+            url: '/factura/EncabezadoCotizaciones', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_cotizacion:id_cotizacion,
+            },
+            success: function (data) {
+
+                Total=data[0].total
+                Total=parseFloat( Total= Total.replace(/,/g, ""));
+                SubTotal=data[0].subtotal
+                SubTotal=parseFloat( SubTotal= SubTotal.replace(/,/g, ""));
+                Iva=data[0].iva
+
+                $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+                $('#txt_iva').text(number_format(Iva, 2, ".", ","));
+                $('#txt_total').text(number_format(Total, 2, ".", ","));
+                Iva==parseFloat( Iva= Iva.replace(/,/g, ""));
+                $('#id_cotizacion').val(id_cotizacion);
+                $('#txt_nombreCliente').val(data[0].cliente);
+                $('#txt_fecha').val(data[0].fecha);
+                $('#txt_destino').val(data[0].destino);
+                $('#txt_origen').val(data[0].origen);
+                $('#cmb_transporte').val(data[0].id_tipo_transporte);
+                showLoad(false);
+
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+
+        });
+
     }

@@ -152,7 +152,7 @@
                                                 <textarea id="txt_observacion" class="form-control"></textarea>
                                             </td>
                                             <td width="20%" class="text-center">
-                                                <input title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtprecioCargar);"  type="text" name="txtprecioCargar"  id="txtprecioCargar" class="cantidad text-center form-control input-sm">
+                                                <input title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtmonto);"  type="text" name="txtmonto"  id="txtmonto" class="cantidad text-center form-control input-sm">
                                             </td>
                                             <td width="10%" class="text-center">
                                                 <div class="pull-right row form-group">
@@ -179,10 +179,10 @@
                                     <td>
                                         <br><br>
                                         <h6 class="precio">SubTotal: $<label id="txt_subtotal">0.00</label></h6>
+                                        <h6 class="precio">Descuento: $<label id="txt_descuento" >0.00</label></h6>
                                         <h6 class="precio">Iva: $<label id="txt_iva" >0.00</label></h6>
-                                        <h6 class="precio">Descuento: $<label id="txt_iva" >0.00</label></h6>
                                         <h6 class="precio">Total Dollar: $<label id="txt_total">0.00</label></h6>
-                                        <h6 class="precio">Total Cordoba: C$<label id="txt_total">0.00</label></h6>
+                                        <h6 class="precio">Total Cordoba: C$<label id="txt_total_corboba">0.00</label></h6>
                                     </td>
                                 </tr>
                                 </tbody>

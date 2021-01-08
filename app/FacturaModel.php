@@ -4,6 +4,7 @@ namespace App;
 
 use App\ssp\SSP;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class FacturaModel extends Model
 {
@@ -80,5 +81,27 @@ class FacturaModel extends Model
         );
         return SSP::complex($_POST, $db, $table, $primaryKey, $columns);
     }
+
+    /** Funcion que recupera encabezado de cotizacion*/
+    function getEncabezado($id_cotizacion)
+    {
+        $query = new static;
+        $query = DB::select("select c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,
+                           c2.ciudad ||'/'||c2.pais as destino,
+                           p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+                           to_char(c.fecha,'DD/MM/YYYY')as fecha,c.id_tipo_transporte,
+                           to_char(coalesce(c.iva,0),'9,999,999.99') as iva ,
+                            to_char(coalesce(c.monto_total,0),'9,999,999.99') as total,
+                            to_char(coalesce((c.monto_total-c.iva),0),'9,999,999.99') as subtotal,0 as descuento
+                            from ldci.tb_cotizacion c
+                            join ldci.vw_ciudades c1 on c.id_ciudad_origen=c1.id_ciudad
+                            join ldci.vw_ciudades c2 on c.id_ciudad_destino=c2.id_ciudad
+                            join ldci.tb_flete f on f.id_cotizacion=c.id_cotizacion
+                            join ldci.tb_cliente cl on cl.id_cliente=f.id_cliente
+                            join ldci.tb_persona p1 on p1.id_persona=cl.id_persona
+                            where c.id_cotizacion=$id_cotizacion");
+        return $query;
+    }
+
 
 }

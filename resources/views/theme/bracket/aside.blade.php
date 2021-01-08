@@ -96,6 +96,12 @@
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
                   </ul>
               @endif
+              <a href="{{asset("LDCI/Manual_de_Usuario_LDCI.pdf")}}" target="_blank" class="br-menu-link">
+                  <div class="br-menu-item">
+                      <i  class="menu-item-icon icon ion-help tx-20"></i>
+                      <span class="menu-item-label">Help</span>
+                  </div><!-- menu-item -->
+              </a>
       @else
           <a href="catalogos.productoUsuario"  class="optionMenu br-menu-link">
               <div class="br-menu-item">

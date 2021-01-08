@@ -17,4 +17,12 @@ class FacturaController extends Controller
         return response()->json($datos);
     }
 
+    /** Funcion que recupera encabezado de cotizacion*/
+    public function getEncabezadoCotizacion(Request $request)
+    {
+        $id_cotizacion=$request->id_cotizacion;
+        $datos= (new FacturaModel)->getEncabezado($id_cotizacion);
+        return response()->json($datos);
+    }
+
 }
