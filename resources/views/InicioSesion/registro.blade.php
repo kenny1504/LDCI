@@ -9,7 +9,7 @@
           <input type="text" id="txt_usuario" required class="form-control" placeholder="Ingrese Usuario">
         </div><!-- form-group -->
           <div class="form-group">
-            <input type="email" id="txt_correo" required class="form-control" placeholder="Ingrese Correo">
+            <input type="email" onchange="CorreoVerify(this)" id="txt_correo" required class="form-control" placeholder="Ingrese Correo">
           </div><!-- form-group -->
           <div class="form-group">
              <input id="phone"  onkeypress="return soloNumeros(event,phone);" name="phone" class="form-control" maxlength="25" type="tel">

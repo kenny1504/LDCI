@@ -41,7 +41,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="txt_correo">Correo</label>
-                            <input name="txt_correo" id="txt_correo" class="form-control input-sm" type="email" maxlength="40">
+                            <input onchange="CorreoVerify(this)" name="txt_correo" id="txt_correo" class="form-control input-sm" type="email" maxlength="40">
                         </div>
                     </div>
                 </div>

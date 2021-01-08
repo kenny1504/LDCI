@@ -772,4 +772,26 @@ var select=null; /** Variable pára guardar inicializacion de select flag (count
     return amount_parts.join('.');
 }
 
+   /** Funcion para Validar Correo Y evitar rebotes en servidor de Correo*/
+   function CorreoVerify(input)
+   {
+
+       /** Validacion Utilizando api mailboxlayer */
+      var correo=input.value;
+
+      $.get( "https://apilayer.net/api/check", { email: correo, access_key : "0f19511937cbc3c4b9ee95205e91641d" } )
+          .done(function( data ) {
+
+              if (data.format_valid==true && data.mx_found==true && data.smtp_check==true  )
+                  alertSuccess( "Correo Valido");
+              else
+              {
+                  alertError( "Correo No Valido");
+                  input.value=" ";
+              }
+              console.log(data);
+          });
+
+  }
+
 
