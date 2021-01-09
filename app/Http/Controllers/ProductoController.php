@@ -134,7 +134,7 @@ class ProductoController extends Controller
             ]);
         } else {
             return collect([
-                'mensaje' => 'Hubo un error al elimina producto!',
+                'mensaje' => 'El registro no puede ser Eliminado',
                 'error' => true,
             ]);
         }

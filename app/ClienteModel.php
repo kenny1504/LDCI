@@ -167,12 +167,21 @@ class ClienteModel extends Model
         $query_vendedor = new static;
         $query_vendedor = DB::update('UPDATE ldci.tb_cliente
                         SET  estado=-1, usuario_modificacion=?, fecha_modificacion=now()
-                        WHERE id_cliente=?', [$id_session, $id_cliente]);
+                        WHERE id_cliente=? AND
+                        NOT EXISTS (SELECT f.id_cliente FROM ldci.tb_flete AS f
+                        WHERE f.id_cliente=?) AND
+                        NOT EXISTS (SELECT c.id_cliente FROM ldci.tb_credito AS c
+                        WHERE c.id_cliente=?) AND
+                        NOT EXISTS (SELECT c.id_cliente FROM ldci.tb_usuario AS u
+                        JOIN ldci.tb_persona AS p ON p.correo=u.correo
+                        JOIN ldci.tb_cliente AS c ON c.id_persona=p.id_persona
+                        JOIN ldci.tb_cotizacion AS co ON co.usuario_grabacion=u.id_usuario
+                        WHERE c.id_cliente=?)', [$id_session, $id_cliente, $id_cliente, $id_cliente, $id_cliente]);
 
         if (!$query_vendedor) {
             DB::rollBack();
             return collect([
-                'mensaje' => 'Hubo un error al eliminar cliente ',
+                'mensaje' => 'El cliente no se puede ser Eliminado',
                 'error' => true,
             ]);
         } else {
@@ -229,9 +238,9 @@ class ClienteModel extends Model
         else 'Nacional' end as Ciudadania,
         case c.tipo when 2
         then p.telefono_1 end as Telefono_Empresarial,
-    telefono_2 as telefono_contacto,giro_negocio,correo
-    from ldci.tb_cliente c
-    join ldci.tb_persona p on c.id_persona=p.id_persona where c.estado=1");
+        telefono_2 as telefono_contacto,giro_negocio,correo
+        from ldci.tb_cliente c
+        join ldci.tb_persona p on c.id_persona=p.id_persona where c.estado=1");
 
         return $query;
     }

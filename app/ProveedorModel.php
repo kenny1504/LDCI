@@ -123,12 +123,16 @@ class ProveedorModel extends Model
         $query_proveedor = new static;
         $query_proveedor = DB::update('UPDATE ldci.tb_proveedor
                         SET  estado=-1, usuario_modificacion=?, fecha_modificacion=now()
-                        WHERE id_proveedor=?', [$id_session, $id_proveedor]);
+                        WHERE id_proveedor=? AND
+                        NOT EXISTS (SELECT e.id_proveedor FROM ldci.tb_entrada AS e
+                        WHERE e.id_proveedor=?) AND
+                        NOT EXISTS (SELECT f.id_proveedor FROM ldci.tb_flete AS f
+                        WHERE f.id_proveedor=?)', [$id_session, $id_proveedor, $id_proveedor, $id_proveedor]);
 
         if (!$query_proveedor) {
             DB::rollBack();
             return collect([
-                'mensaje' => 'Hubo un error al eliminar el proveedor ',
+                'mensaje' => 'El proveedor no puede ser Eliminado ',
                 'error' => true,
             ]);
         } else {
