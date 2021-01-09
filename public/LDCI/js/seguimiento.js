@@ -546,12 +546,16 @@ var Iva=0;
     /**  Funcion para mostrar informacion segun sea el estado de la cotizacion  */
     function changeestado()
     {
+
        let estado=$('#cmb_estado').val();
 
         if (estado>2)
             $('.InfoContacto').removeAttr('hidden');
         else
             $('.InfoContacto').attr("hidden",true);
+
+        if (Estado==5)
+            $('.InfoContacto').removeAttr('hidden');
 
     }
 

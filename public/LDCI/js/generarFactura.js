@@ -14,6 +14,7 @@ $(document).ready(function () {
 
     var _token= $('input[name=_token]').val();
     showLoad(true);
+
     /** recupera tipos de transporte*/
     $.ajax({
         type: 'POST',
@@ -103,8 +104,10 @@ $(document).ready(function () {
 
                 limpiartablas();
 
+                /** Busca codigos de pais en arreglo de objeto */
                 codCliente=allCountries.find( paises => paises.iso2 === data[0].telcliente );
                 codConsig=allCountries.find( paises => paises.iso2 === data[0].telconsignatario );
+
                 id_flete=data[0].id_flete;
                 Total=data[0].total;
                 Total=parseFloat( Total= Total.replace(/,/g, ""));
@@ -386,14 +389,12 @@ $(document).ready(function () {
                                             showLoad(false);
                                             $('#btnlimpiar').click();
                                         });
-
                                 }
                             },
                             error: function (err) {
                                 alertError(err.responseText);
                                 showLoad(false);
                             }
-
                         });
                     }
                 }
@@ -407,5 +408,40 @@ $(document).ready(function () {
                 }
             }
         });
+
+    }
+
+
+    function  validarNoFactura(input)
+    {
+        var _token= $('input[name=_token]').val();
+        var codigoFactura=input.value;
+
+
+        if (codigoFactura!="")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/getNoFactura', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    codigoFactura:codigoFactura
+                },
+                success: function (data) {
+
+                    if (Object.entries(data).length!=0)
+                    {
+                        alertError("Ya existe una factura con el numero proporsionado, emitida el "+data[0].fecha_emision);
+                        input.value="";
+                    }
+                    showLoad(false);
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        }
 
     }

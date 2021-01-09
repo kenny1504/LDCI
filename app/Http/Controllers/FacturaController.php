@@ -51,4 +51,22 @@ class FacturaController extends Controller
 
     }
 
+    public function validaNoFactura(Request $request)
+    {
+        $codigoFactura=$request->codigoFactura;
+        $datos= (new FacturaModel)->getNoFactura($codigoFactura);
+        return response()->json($datos);
+
+    }
+
+    /** funcion que recupera registros de factura para llenar tabla */
+    public function getFacturas()
+    {
+        $tipoUsuario = session('tipoUsuario');
+        $id_session = session('idUsuario');
+
+        $datos= (new FacturaModel)->getFacturas($tipoUsuario,$id_session);
+        return response()->json($datos);
+    }
+
 }

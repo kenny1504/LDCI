@@ -37,7 +37,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="txt_codigoFactura">No.Factura</label>
-                                <input required name="txt_codigoFactura" id="txt_codigoFactura"  class="form-control input-sm">
+                                <input onchange="validarNoFactura(this)" required name="txt_codigoFactura" id="txt_codigoFactura"  class="form-control input-sm">
                             </div>
                         </div>
                         <div class="col-md-8">

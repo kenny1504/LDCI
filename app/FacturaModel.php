@@ -163,8 +163,8 @@ class FacturaModel extends Model
             JOIN ldci.tb_producto AS p on p.id_producto = cd.id_producto
             WHERE c.id_cotizacion = $id_cotizacion
             UNION
-            select ca.id_cargo_aplicado as no,ca.id_cargo_aplicado,ca.descricion,null,null,ca.monto,null
-            ,null,null,null
+            select ca.id_cargo_aplicado as no,ca.id_cargo_aplicado,'MICELANEO' ,null,null,ca.monto,0
+            ,ca.monto,0,upper(ca.descricion) as descripcion
             from ldci.tb_cargo_aplicado ca
             join ldci.tb_factura fa on fa.id_factura=ca.id_factura
             join ldci.tb_flete f on f.id_flete=fa.id_flete
@@ -218,5 +218,98 @@ class FacturaModel extends Model
         }
     }
 
+    /** Funcion que recupera codigo de fcatura si existe una*/
+    function getNoFactura($codigoFactura)
+    {
+        $query = new static;
+        $query = DB::select("select * from ldci.tb_factura where codigo='$codigoFactura'");
+        return $query;
+    }
+
+    /** Funcion para cargar tabla facturas*/
+    public function getFacturas($tipoUsuario,$id_session)
+    {
+
+        if ($tipoUsuario != 3) {
+
+            $table = "(SELECT   fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+            TO_CHAR (fa.fecha_emision,'DD-MM-YYYY') as fecha_factura,tt.nombre AS t_transporte,
+            co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino,
+            p1.iso_2 as isocl,p2.iso_2 as isoconsig
+            FROM ldci.tb_cotizacion AS c
+            join ldci.tb_flete f on c.id_cotizacion=f.id_cotizacion
+            join ldci.tb_factura fa on f.id_flete=fa.id_flete
+            JOIN ldci.tb_cliente cl on f.id_cliente=cl.id_cliente
+            join ldci.tb_persona p1 on p1.id_persona=cl.id_persona
+            join ldci.tb_persona p2 on p2.id_persona=f.id_consignatario
+            JOIN ldci.tb_tipo_transporte AS tt ON c.id_tipo_transporte=tt.id_tipo_transporte
+            JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
+            JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
+                union
+                  select f.codigo,null,
+               case when fc.comun=true then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
+               else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
+               null,null,null,null,null
+              from ldci.tb_factura f
+              join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
+              join ldci.tb_detalle_factura df on fc.id_factura_cliente=df.id_factura_cliente
+              left  JOIN ldci.tb_cliente cl on fc.id_cliente=cl.id_cliente
+              left	JOIN ldci.tb_persona p1 on p1.id_persona=cl.id_persona) as tb ";
+
+        }
+        else{
+
+            $table = "(SELECT  fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+            TO_CHAR (fa.fecha_emision,'DD-MM-YYYY') as fecha_factura,tt.nombre AS t_transporte,
+            co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino,
+            p1.iso_2 as isocl,p2.iso_2 as isoconsig
+            FROM ldci.tb_cotizacion AS c
+            join ldci.tb_flete f on c.id_cotizacion=f.id_cotizacion
+            join ldci.tb_factura fa on f.id_flete=fa.id_flete
+            JOIN ldci.tb_cliente cl on f.id_cliente=cl.id_cliente
+            join ldci.tb_persona p1 on p1.id_persona=cl.id_persona
+            join ldci.tb_persona p2 on p2.id_persona=f.id_consignatario
+            JOIN ldci.tb_tipo_transporte AS tt ON c.id_tipo_transporte=tt.id_tipo_transporte
+            JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
+            JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
+            join ldci.tb_usuario u on p1.correo=u.correo where u.id_usuario=$id_session
+            union
+              select f.codigo,null,
+               case when fc.comun=true then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
+               else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
+               null,null,null,null,null
+              from ldci.tb_factura f
+              join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
+              join ldci.tb_detalle_factura df on fc.id_factura_cliente=df.id_factura_cliente
+              left  JOIN ldci.tb_cliente cl on fc.id_cliente=cl.id_cliente
+              left	JOIN ldci.tb_persona p1 on p1.id_persona=cl.id_persona
+              left join  ldci.tb_usuario u on p1.correo=u.correo where u.id_usuario=$id_session) as tb ";
+
+        }
+
+
+
+        $primaryKey = 'factura';
+        $columns = [
+            ['db' => 'factura', 'dt' => 0],
+            ['db' => 'id_cotizacion', 'dt' => 1],
+            ['db' => 't_transporte', 'dt' => 2],
+            ['db' => 'c_destino', 'dt' => 3],
+            ['db' => 'c_origen', 'dt' => 4],
+            ['db' => 'fecha_factura', 'dt' => 5],
+            ['db' => 'cliente', 'dt' => 6],
+            ['db' => 'isocl', 'dt' => 7],
+            ['db' => 'isoconsig', 'dt' => 8]
+        ];
+
+        /*** Config DB */
+        $db = array(
+            'host' => $_ENV['DB_HOST'],
+            'db' => $_ENV['DB_DATABASE'],
+            'user' => $_ENV['DB_USERNAME'],
+            'pass' => $_ENV['DB_PASSWORD']
+        );
+        return SSP::complex($_POST, $db, $table, $primaryKey, $columns);
+    }
 
 }
