@@ -80,4 +80,13 @@ class VendedorController extends Controller
         $datos = (new VendedorModel)->getDatosVendedor($id_vendedor);
         return response()->json($datos);
     }
+
+    /** Funcion para validar correo vendedor */
+    public function validacorreo(Request $request)
+    {
+        $correo = $request->correo;
+
+        $datos = (new VendedorModel)->correo($correo);
+        return response()->json($datos);
+    }
 }

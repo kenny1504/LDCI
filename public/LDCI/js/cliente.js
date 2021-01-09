@@ -361,7 +361,8 @@ var tblClientes=null;
                 $('#txt_telefono_2').val(data[0].telefono_2);
                 select2.setCountry(data[0].iso_2);
                 select.setCountry(data[0].iso);
-
+                $('.correo_validar').removeAttr('onblur');
+                $('.correo_validar').attr('onchange','CorreoVerify(this)');
                 showLoad(false);
             },
             error: function (err) {
@@ -390,6 +391,8 @@ var tblClientes=null;
         $("#id_cliente,#txt_nombreEmpresa,#txt_giroNegocio,#txt_ruc,#txt_nombres").val("");
         $("#txt_telefono_1,#txt_apellido1,#apellido2,#txt_apellido2,#txt_edad").val("");
         $("#cmb_sexo,#txt_cedula,#txt_direccion,#cmb_Departamento,#txt_correo,#txt_telefono_2").val("");
+        $('.correo_validar').attr('onblur','valida_usuario()');
+        $('.correo_validar').removeAttr('onchange');
 
     }
 

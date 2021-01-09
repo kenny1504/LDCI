@@ -42,7 +42,7 @@ class ClienteController extends Controller
                 $guardar = (new ClienteModel)->guardar($giro_Negocio, $nombre_Empresa, $ruc, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $edad, $correo, $sexo, $tipo, $id_session, $iso2, $iso, $extranjero);
                 return $guardar;
             } else {
-                $guardar = (new ClienteModel)->actualizar($id_cliente, $giro_Negocio, $nombre_Empresa, $ruc, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $sexo, $tipo, $id_session, $iso2, $iso, $extranjero);
+                $guardar = (new ClienteModel)->actualizar($id_cliente, $giro_Negocio, $nombre_Empresa, $ruc, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $correo, $sexo, $tipo, $id_session, $iso2, $iso, $extranjero);
                 return $guardar;
             }
         } else

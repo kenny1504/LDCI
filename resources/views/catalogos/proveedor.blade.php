@@ -115,20 +115,22 @@
                             <h4 align="center">Busqueda de Registro</h4>
                         </div>
                         <div class="box-body">
-                            <table id="tblProveedores" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nombre</th>
-                                        <th>Correo</th>
-                                        <th>Telefono</th>
-                                        <th>Seleccione</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <div class="table-responsive" >
+                                <table id="tblProveedores" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nombre</th>
+                                            <th>Correo</th>
+                                            <th>Telefono</th>
+                                            <th>Seleccione</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
