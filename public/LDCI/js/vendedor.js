@@ -209,6 +209,8 @@ var tblVendedores = null;
                 $('#txt_correo').val(data[0].correo);
                 $('#cmb_sexo').val(data[0].sexo);
                 $('#cmb_sexo').change();
+                $('.correo_validar').removeAttr('onblur');
+                $('.correo_validar').attr('onchange','CorreoVerify(this)');
 
             },
             error: function(err){
@@ -224,6 +226,46 @@ var tblVendedores = null;
 
         $("#txt_correo,#txt_edad,#id_empleado,#txt_nombres,#txt_apellido1,#txt_apellido2,#txt_cedula,#txt_direccion,#cmb_Departamento,#txt_telefono_1,#txt_telefono_2,#txt_nomb_notifica,#cmb_estado_civil,#txt_telefono_not").val("");
         $('#btnEliminarEmpleado').attr("disabled", "FALSE");
+        $('.correo_validar').attr('onblur','valida_usuario()');
+        $('.correo_validar').removeAttr('onchange');
+    }
+
+    /** Funcion para validar correo, que coincida con el usuario */
+    function valida_usuario()
+    {
+        var _token= $('input[name=_token]').val();
+        var correo= $('#txt_correo').val();
+
+        if (correo!="")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/vendedor/correo', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    correo:correo
+                },
+                success: function (data) {
+
+                    if (Object.entries(data).length==0)
+                    {
+                        alertError("No existe ningun usuario con este correo asociado");
+                        $('#txt_correo').val("");
+                    }else if (data[0].correo!=null)
+                    {
+                        alertError("Ya existe un usuario con este correo asociado");
+                        $('#txt_correo').val("");
+                    }
+                    else
+                        alertSuccess("Usuario:"+data[0].usuario);
+                    showLoad(false);
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+            });
+        }
     }
 
 

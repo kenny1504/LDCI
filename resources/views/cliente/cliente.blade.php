@@ -142,7 +142,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="txt_correo">Correo</label>
-                            <input onblur="valida_usuario()" type="text" id="txt_correo" name="txt_correo" class="form-control input-md">
+                            <input onblur="valida_usuario()" type="text" id="txt_correo" name="txt_correo" class="form-control input-md correo_validar">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -186,22 +186,24 @@
                         <h4 align="center">Busqueda de Registro</h4>
                     </div>
                     <div class="box-body">
-                        <table id="tblClientes" class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nombre</th>
-                                <th>Identificacion</th>
-                                <th>Correo</th>
-                                <th>Telefono</th>
-                                <th>Tipo</th>
-                                <th>Seleccione</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <div class="table-responsive" >
+                            <table id="tblClientes" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nombre</th>
+                                    <th>Identificacion</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Tipo</th>
+                                    <th>Seleccione</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

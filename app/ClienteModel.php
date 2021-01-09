@@ -119,8 +119,18 @@ class ClienteModel extends Model
     }
 
     /** Funcion para actualizar un cliente */
-    public function actualizar($id_cliente, $giro_Negocio, $nombre_Empresa, $ruc, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $sexo, $tipo, $id_session, $iso2, $iso, $extranjero)
+    public function actualizar($id_cliente, $giro_Negocio, $nombre_Empresa, $ruc, $nombres, $apellido1, $apellido2, $cedula, $direccion, $departamento, $telefono_1, $telefono_2, $correo, $sexo, $tipo, $id_session, $iso2, $iso, $extranjero)
     {
+        if ($correo != null) {
+            $query_correo = new static;
+            $query_correo = DB::select('SELECT p.correo from ldci.tb_persona as p
+                                JOIN ldci.tb_cliente AS c ON c.id_persona=p.id_persona
+                                WHERE c.id_cliente= ?', [$id_cliente]);
+            $query_update = new static;
+            $query_update = DB::update('UPDATE ldci.tb_usuario
+                        SET correo=?
+                        WHERE correo=?', [$correo, $query_correo[0]->correo]);
+        }
         DB::beginTransaction();
 
         $query_cliente = new static;
@@ -138,10 +148,10 @@ class ClienteModel extends Model
         } else {
             $query_persona = new static;
             $query_persona = DB::update('UPDATE  ldci.tb_persona p
-            SET nombre=?, apellido1=?, apellido2=?, direccion=?,
+            SET nombre=?, apellido1=?, apellido2=?, direccion=?, correo=?,
             id_departamento=?, telefono_1=?, telefono_2=?,iso=?,iso_2=?,
             cedula=?, sexo=?,usuario_modificacion=?, fecha_modificacion=now()
-            WHERE id_persona=(select id_persona from ldci.tb_cliente where id_cliente=? limit 1)', [$nombres, $apellido1, $apellido2, $direccion, $departamento, $telefono_1, $telefono_2, $iso, $iso2, $cedula, $sexo, $id_session, $id_cliente]);
+            WHERE id_persona=(select id_persona from ldci.tb_cliente where id_cliente=? limit 1)', [$nombres, $apellido1, $apellido2, $direccion, $correo, $departamento, $telefono_1, $telefono_2, $iso, $iso2, $cedula, $sexo, $id_session, $id_cliente]);
 
             if (!$query_persona) {
                 DB::rollBack();

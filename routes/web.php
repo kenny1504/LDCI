@@ -59,7 +59,7 @@ Route::post('/vendedor/getAll', 'VendedorController@getVendedores')->name('getAl
 Route::post('/vendedor/guardar', 'VendedorController@guardar')->name('guardar');
 Route::post('/vendedor/datos', 'VendedorController@getDatosVendedor')->name('vendedor');
 Route::post('/vendedor/eliminar', 'VendedorController@eliminar')->name('eliminar');
-
+Route::post('/vendedor/correo', 'VendedorController@validacorreo')->name('validar');
 
 //Rutas Producto
 Route::post('/producto/getAll', 'ProductoController@getProducto')->name('getAll');
