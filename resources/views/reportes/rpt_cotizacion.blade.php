@@ -373,7 +373,7 @@
                     <td class=" alinear_2 tamano_fuente_1"></td>
                 </tr>
                 <tr>
-                    <th class="ancho_celda alinear_2"><strong>TOTAL</strong></th>
+                    <th class="ancho_celda alinear_2"><strong>Total</strong></th>
                     <td class=" alinear_2 tamano_fuente_1"></td>
                 </tr>
             </table>

@@ -7,7 +7,7 @@
      @if($tipo!=3)
      <div class="br-header-right">
          <nav class="nav">
-             <span class="logged-name hidden-md-down">Tasa de cambio: {{$tasa_cambio}}</span>
+             <span class="logged-name hidden-md-down">Tasa de cambio: <label id="lbl_tasa_cambio">{{$tasa_cambio}}</label></span>
          </nav>
      </div>
      @endif

@@ -89,7 +89,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="cmb_descuento">Descuento</label>
-                                <select onchange="" name="cmb_descuento" id="cmb_descuento"  class="form-control input-md">
+                                <select onchange="changeDescuento(this)" name="cmb_descuento" id="cmb_descuento"  class="form-control input-md">
                                     <option selected disabled value="">Seleccione</option>
                                     <option  value="0.5">5 %</option>
                                     <option  value="0.10">10 %</option>
@@ -137,7 +137,7 @@
                                 <div id="detallesCarga" class="table-responsive">
                                     <br>
                                     <table class="table table-hover table-striped table-sm"
-                                           id="tblDetalleCarga">
+                                           id="tblDetalleCargos">
                                         <thead>
                                         <tr>
                                             <th class=" text-center" width="70%">Descripcion</th>
@@ -168,6 +168,11 @@
                                             </td>
                                         </tr>
                                         </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th COLSPAN=5 class="text-center"><br><br><h6 class="precio">Total : $<label id="txt_totalMice">0.00</label></h6></th>
+                                        </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -178,6 +183,7 @@
                                 <tr>
                                     <td>
                                         <br><br>
+                                        <h6 class="precio">Micelaneos: $<label id="txt_subtotal">0.00</label></h6>
                                         <h6 class="precio">SubTotal: $<label id="txt_subtotal">0.00</label></h6>
                                         <h6 class="precio">Descuento: $<label id="txt_descuento" >0.00</label></h6>
                                         <h6 class="precio">Iva: $<label id="txt_iva" >0.00</label></h6>

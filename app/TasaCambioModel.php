@@ -28,7 +28,7 @@ class TasaCambioModel extends Model
         else
         {
             $query = new static;
-            $query = DB::select("select monto from ldci.tb_tasa_cambio order by id_tasa_cambio desc");
+            $query = DB::select("select monto from ldci.tb_tasa_cambio order by id_tasa_cambio desc limit 1");
             return $query;
         }
 

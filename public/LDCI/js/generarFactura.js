@@ -2,6 +2,7 @@ var tblCotizaciones = null;
 var Total=0;
 var TotalCordoba=0;
 var SubTotal=0;
+var Descuento=0;
 var Iva=0;
 
 $(document).ready(function () {
@@ -100,10 +101,13 @@ $(document).ready(function () {
                 SubTotal=data[0].subtotal
                 SubTotal=parseFloat( SubTotal= SubTotal.replace(/,/g, ""));
                 Iva=data[0].iva
+                var tasa_cambio=$('#lbl_tasa_cambio').text();
+                TotalCordoba=Total*tasa_cambio
 
                 $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
                 $('#txt_iva').text(number_format(Iva, 2, ".", ","));
                 $('#txt_total').text(number_format(Total, 2, ".", ","));
+                $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
                 Iva==parseFloat( Iva= Iva.replace(/,/g, ""));
                 $('#id_cotizacion').val(id_cotizacion);
                 $('#txt_nombreCliente').val(data[0].cliente);
@@ -122,3 +126,57 @@ $(document).ready(function () {
         });
 
     }
+
+    function  changeDescuento(select)
+    {
+         var descuento= select.value
+         var tasa_cambio=$('#lbl_tasa_cambio').text();
+
+        tasa_cambio=parseFloat(tasa_cambio);
+        Descuento=SubTotal*parseFloat(descuento);
+        Total=Total-Descuento
+        TotalCordoba=Total*tasa_cambio
+
+        $('#txt_descuento').text(number_format(Descuento, 2, ".", ","));
+        $('#txt_total').text(number_format(Total, 2, ".", ","));
+        $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
+    }
+
+    /** Funcion para agregar fila */
+    $(document).off("click", "#btnAdicionarFila").on("click", "#btnAdicionarFila", function () {
+
+        $("#tblDetalleCargos tbody tr:eq(0)").clone().addClass("otrasFilas").removeClass("fila-base").appendTo("#tblDetalleCargos tbody").find("input, select,textarea").val("");
+
+    });
+
+    /** Funcion para eliminar fila */
+    $("#tblDetalleCargos").on('click', '.eliminarFila', function () {
+
+        var numeroFilas = $("#tblDetalleCargos tr").length;
+        if (numeroFilas > 2) {
+
+            /************ Funcion para calcular presupuesto si es eliminado una fila ************* */
+
+            let  valor=$(this).closest('tr').find("input[id*='txtprecioCargar']").val();
+
+            if (valor!="" && valor!=undefined )
+                valor=parseFloat( valor= valor.replace(/,/g, ""));
+            else
+                valor=0
+
+            SubTotal=SubTotal-valor
+            Iva=SubTotal*0.15
+            Total=SubTotal+Iva
+
+            $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+            $('#txt_iva').text(number_format(Iva, 2, ".", ","));
+            $('#txt_total').text(number_format(Total, 2, ".", ","));
+
+            /*********************************  *****************  **********************************/
+
+            $(this).closest('tr').remove();
+        } else {
+            alertError("¡Esta fila no puede ser eliminada!");
+        }
+
+    });

@@ -291,7 +291,7 @@
                         <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->iva}}</td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1"><strong>TOTAL</strong></th>
+                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1"><strong>Total</strong></th>
                         <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->total}}</td>
                     </tr>
                 </table>
