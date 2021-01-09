@@ -91,6 +91,7 @@
                                 <label for="cmb_descuento">Descuento</label>
                                 <select onchange="changeDescuento(this)" name="cmb_descuento" id="cmb_descuento"  class="form-control input-md">
                                     <option selected disabled value="">Seleccione</option>
+                                    <option  value="0">Ninguno</option>
                                     <option  value="0.5">5 %</option>
                                     <option  value="0.10">10 %</option>
                                     <option  value="0.20">20 %</option>
@@ -149,7 +150,7 @@
                                         <tr class="fila-base">
 
                                             <td width="70%" class="text-center">
-                                                <textarea id="txt_observacion" class="form-control"></textarea>
+                                                <textarea id="txt_descripcion" class="form-control"></textarea>
                                             </td>
                                             <td width="20%" class="text-center">
                                                 <input title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtmonto);"  type="text" name="txtmonto"  id="txtmonto" class="cantidad text-center form-control input-sm">
@@ -157,12 +158,12 @@
                                             <td width="10%" class="text-center">
                                                 <div class="pull-right row form-group">
                                                     <button class="btn btn-danger eliminarFila"
-                                                            title="Eliminar Carga"
+                                                            title="Eliminar Cargo"
                                                             id="btnEliminarFila">
                                                         <i class=" fa fa-trash"></i></button>
                                                     <button class="btn btn-primary"
-                                                            data-confirm="" id="btnAdicionarFilaC"
-                                                            title="Añadir Carga">
+                                                            data-confirm="" id="btnAdicionarFila"
+                                                            title="Añadir Cargo">
                                                         <i class=" fa fa-plus"></i></button>
                                                 </div>
                                             </td>
@@ -183,7 +184,7 @@
                                 <tr>
                                     <td>
                                         <br><br>
-                                        <h6 class="precio">Micelaneos: $<label id="txt_subtotal">0.00</label></h6>
+                                        <h6 class="precio">Micelaneos: $<label id="txt_micelaneos">0.00</label></h6>
                                         <h6 class="precio">SubTotal: $<label id="txt_subtotal">0.00</label></h6>
                                         <h6 class="precio">Descuento: $<label id="txt_descuento" >0.00</label></h6>
                                         <h6 class="precio">Iva: $<label id="txt_iva" >0.00</label></h6>

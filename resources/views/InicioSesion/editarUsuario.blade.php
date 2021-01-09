@@ -28,7 +28,7 @@
                                   <input id="phone" onkeypress="return soloNumeros(event,phone);" name="phone" class="form-control" maxlength="25" type="tel">
                               </div><!-- form-group -->
                               <div class="form-group">
-                                <input id="correo"  type="email" class="form-control" placeholder="Correo Electronico">
+                                <input id="correo" onchange="CorreoVerify(this)" type="email" class="form-control" placeholder="Correo Electronico">
                               </div><!-- form-group -->
                               <div class="form-group tx-12">Al hacer clic en el botón Guardar a continuación, acepta nuestra política de privacidad y los términos de uso</div>
                               <a id="btnGuardar" onclick="guardarUsuario()" class="btn btn-info btn-block text-white">Guardar</a>

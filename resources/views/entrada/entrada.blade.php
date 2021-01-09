@@ -97,6 +97,7 @@
                                                     id="btnEliminarFila">
                                                     <i class=" fa fa-trash"></i></button>
                                                 <button class="btn btn-primary deshabilitar"
+                                                <button class="btn btn-primary deshabilitar"
                                                     data-confirm="" id="btnAgregarFila"
                                                     title="Añadir Entrada">
                                                     <i class=" fa fa-plus"></i></button>
