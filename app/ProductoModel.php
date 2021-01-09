@@ -63,7 +63,7 @@ class ProductoModel extends Model
                                 WHERE id_producto=? RETURNING id_producto", [$nombre, $precio, $descripcion, $existencia, $tipo, $id_session, $id_Producto]);
         } else {
             $query = DB::select("INSERT INTO ldci.tb_producto(
-                                 nombre, precio, descripcion,tipo,
+                                nombre, precio, descripcion,tipo,
                                 existencia, usuario_grabacion,fecha_grabacion)
                                 VALUES (?, ?, ?, ?, ?,?, now()) RETURNING id_producto", [$nombre, $precio, $descripcion, $tipo, $existencia, $id_session]);
         }
@@ -156,7 +156,13 @@ class ProductoModel extends Model
         $query = new static;
         $query = DB::UPDATE('UPDATE ldci.tb_producto
                     SET estado=-1, usuario_modificacion=?, fecha_modificacion=now()
-                    WHERE id_producto=?', [$id_session, $id_Producto]);
+                    WHERE id_producto=? AND
+                    NOT EXISTS (SELECT dc.id_producto FROM ldci.tb_detalle_cotizacion AS dc
+                    WHERE dc.id_producto=?) AND
+                    NOT EXISTS (SELECT de.id_producto FROM ldci.tb_detalle_entrada AS de
+                    WHERE de.id_producto=?) AND
+                    NOT EXISTS (SELECT df.id_producto FROM ldci.tb_detalle_factura AS df
+                    WHERE df.id_producto=?)', [$id_session, $id_Producto, $id_Producto, $id_Producto, $id_Producto]);
 
         return $query;
     }

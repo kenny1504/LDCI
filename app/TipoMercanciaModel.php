@@ -21,32 +21,29 @@ class TipoMercanciaModel extends Model
 
         /*** Config DB */
         $db = array(
-            'host' =>$_ENV['DB_HOST'],
-            'db' =>$_ENV['DB_DATABASE'],
-            'user' =>$_ENV['DB_USERNAME'],
-            'pass' =>$_ENV['DB_PASSWORD']
+            'host' => $_ENV['DB_HOST'],
+            'db' => $_ENV['DB_DATABASE'],
+            'user' => $_ENV['DB_USERNAME'],
+            'pass' => $_ENV['DB_PASSWORD']
         );
-        return SSP::complex($_POST,$db,$table, $primaryKey, $columns);
-
+        return SSP::complex($_POST, $db, $table, $primaryKey, $columns);
     }
 
     /** Metodo para guardar un nuevo registro de tipo mercancia*/
-    public function guardarTipoMercancia($id_TipoMercancia,$nombre,$id_session)
+    public function guardarTipoMercancia($id_TipoMercancia, $nombre, $id_session)
     {
         $query = new static;
 
         if (!empty($id_TipoMercancia)) // si existe un id, actualiza
         {
-            $query= DB::UPDATE("UPDATE ldci.tb_tipo_mercancia
+            $query = DB::UPDATE("UPDATE ldci.tb_tipo_mercancia
                                     SET nombre=?, usuario_modificacion=?, fecha_modificacion=now()
-                                    WHERE id_tipo_mercancia=?",[$nombre,$id_session,$id_TipoMercancia]);
+                                    WHERE id_tipo_mercancia=?", [$nombre, $id_session, $id_TipoMercancia]);
+        } else {
+            $query = DB::insert("INSERT INTO ldci.tb_tipo_mercancia(
+                                nombre, usuario_grabacion, fecha_grabacion)
+                                VALUES ( ?, ?, now())", [$nombre, $id_session]);
         }
-         else
-         {
-             $query= DB::insert("INSERT INTO ldci.tb_tipo_mercancia(
-                                 nombre, usuario_grabacion, fecha_grabacion)
-                                VALUES ( ?, ?, now())",[$nombre,$id_session]);
-         }
         return $query;
     }
 
@@ -55,19 +52,21 @@ class TipoMercanciaModel extends Model
     {
         $query = new static;
         $query = DB::select('select * from ldci.tb_tipo_mercancia where upper(nombre)=upper(?) and estado=1', [$nombre]);
-        if(empty($query))
+        if (empty($query))
             return false;
         else
             return true;
     }
 
     /** Metodo para eliminar registro */
-    public function eliminar($id_TipoMercancia,$id_session)
+    public function eliminar($id_TipoMercancia, $id_session)
     {
         $query = new static;
         $query = DB::UPDATE('UPDATE ldci.tb_tipo_mercancia
                                 SET estado=-1, usuario_modificacion=?, fecha_modificacion=now()
-                                WHERE id_tipo_mercancia=?', [$id_session,$id_TipoMercancia]);
+                                WHERE id_tipo_mercancia=? AND
+                                NOT EXISTS (SELECT dc.id_tipo_mercancia FROM ldci.tb_detalle_cotizacion AS dc
+                                WHERE dc.id_tipo_mercancia=?)', [$id_session, $id_TipoMercancia, $id_TipoMercancia]);
 
         return $query;
     }

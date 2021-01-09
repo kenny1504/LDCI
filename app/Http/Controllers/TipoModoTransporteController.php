@@ -13,41 +13,36 @@ class TipoModoTransporteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-   /** Funcion que recupera todos los registro de tipo modo transporte*/
-   public function getTipoModoTransporte()
-   {
-       $datos= (new TipoModoTransporteModel)->getTipoModoTransporte();
-       return response()->json($datos);
-
-   }
+    /** Funcion que recupera todos los registro de tipo modo transporte*/
+    public function getTipoModoTransporte()
+    {
+        $datos = (new TipoModoTransporteModel)->getTipoModoTransporte();
+        return response()->json($datos);
+    }
 
     /** Metodo para guardar o actualizar un tipo modo transporte */
     public function guardar(Request $request)
     {
         /** Recupera parametros enviados por ajax */
-        $id_TipoModoTransporte= $request->id_TipoModoTransporte;
-        $nombre=$request->nombre;
+        $id_TipoModoTransporte = $request->id_TipoModoTransporte;
+        $nombre = $request->nombre;
         $id_session = session('idUsuario');
 
-                $existe=(new TipoModoTransporteModel)->existe($nombre);
+        $existe = (new TipoModoTransporteModel)->existe($nombre);
 
-        if(!$existe)
-        {
-            $guardar=(new TipoModoTransporteModel)->guardarTipoModoTransporte($id_TipoModoTransporte,strtoupper($nombre),$id_session);
-            if (!empty($guardar))
-            {
+        if (!$existe) {
+            $guardar = (new TipoModoTransporteModel)->guardarTipoModoTransporte($id_TipoModoTransporte, strtoupper($nombre), $id_session);
+            if (!empty($guardar)) {
                 return collect([
                     'mensaje' => 'Registro guardado exitosamente!',
                     'error' => false
                 ]);
-            }
-            else
+            } else
                 return collect([
                     'mensaje' => 'Error al guardar registro',
                     'error' => true,
                 ]);
-        }
-        else
+        } else
             return collect([
                 'mensaje' => 'El Modo Transporte ya existe',
                 'error' => true,
@@ -61,7 +56,7 @@ class TipoModoTransporteController extends Controller
         $id_TipoModoTransporte = $request->id_TipoModoTransporte;
         $id_session = session('idUsuario');
 
-        $guardar = (new TipoModoTransporteModel)->eliminar($id_TipoModoTransporte,$id_session);
+        $guardar = (new TipoModoTransporteModel)->eliminar($id_TipoModoTransporte, $id_session);
         if (!empty($guardar)) {
             return collect([
                 'mensaje' => 'Registro eliminado exitosamente!',
@@ -69,7 +64,7 @@ class TipoModoTransporteController extends Controller
             ]);
         } else
             return collect([
-                'mensaje' => 'Error al eliminar registro',
+                'mensaje' => 'El modo transporte no puede ser Eliminado',
                 'error' => true,
             ]);
     }

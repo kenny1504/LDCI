@@ -14,38 +14,33 @@ class TipoMercanciaController extends Controller
      */
     public function getTipoMercancia()
     {
-        $datos= (new TipoMercanciaModel)->getTipoMercancia();
+        $datos = (new TipoMercanciaModel)->getTipoMercancia();
         return response()->json($datos);
-
     }
 
     /** Metodo para guardar o actualizar un tipo de mercancia */
     public function guardar(Request $request)
     {
         /** Recupera parametros enviados por ajax */
-        $id_TipoMercancia= $request->id_TipoMercancia;
-        $nombre=$request->nombre;
+        $id_TipoMercancia = $request->id_TipoMercancia;
+        $nombre = $request->nombre;
         $id_session = session('idUsuario');
 
-                $existe=(new TipoMercanciaModel)->existe($nombre);
+        $existe = (new TipoMercanciaModel)->existe($nombre);
 
-        if(!$existe)
-        {
-            $guardar=(new TipoMercanciaModel)->guardarTipoMercancia($id_TipoMercancia,strtoupper($nombre),$id_session);
-            if (!empty($guardar))
-            {
+        if (!$existe) {
+            $guardar = (new TipoMercanciaModel)->guardarTipoMercancia($id_TipoMercancia, strtoupper($nombre), $id_session);
+            if (!empty($guardar)) {
                 return collect([
                     'mensaje' => 'Registro guardado exitosamente!',
                     'error' => false
                 ]);
-            }
-            else
+            } else
                 return collect([
                     'mensaje' => 'Error al guardar registro',
                     'error' => true,
                 ]);
-        }
-        else
+        } else
             return collect([
                 'mensaje' => 'El Tipo de Mercancia ya existe',
                 'error' => true,
@@ -59,7 +54,7 @@ class TipoMercanciaController extends Controller
         $id_TipoMercancia = $request->id_TipoMercancia;
         $id_session = session('idUsuario');
 
-        $guardar = (new TipoMercanciaModel)->eliminar($id_TipoMercancia,$id_session);
+        $guardar = (new TipoMercanciaModel)->eliminar($id_TipoMercancia, $id_session);
         if (!empty($guardar)) {
             return collect([
                 'mensaje' => 'Registro eliminado exitosamente!',
@@ -67,7 +62,7 @@ class TipoMercanciaController extends Controller
             ]);
         } else
             return collect([
-                'mensaje' => 'Error al eliminar registro',
+                'mensaje' => 'El tipo mercancia no puede ser borrado',
                 'error' => true,
             ]);
     }
