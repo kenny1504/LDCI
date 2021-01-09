@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\VendedorModel;
 use App\ProductoModel;
 use App\ClienteModel;
+use App\FacturaModel;
 use App\CotizacionModel;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -73,8 +74,6 @@ class ReporteController extends Controller
     {
         $id_cotizacion = $request->id_cotizacion;
 
-
-
             $datos = (new CotizacionModel)->getDatosCotizacion($id_cotizacion);
             $detalle = (new CotizacionModel)->getDetalleCotizacion($id_cotizacion);
             $data = [
@@ -86,6 +85,29 @@ class ReporteController extends Controller
 
             $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4'); //prueba para mandar datos a tabla de pdf
             echo utf8_encode(($pdf->stream('archivo.pdf')));
+
+    }
+
+    /** Funcion para generar factura de una cotizacion*/
+    public function downloadFacturaCotizacion(Request $request)
+    {
+        $id_cotizacion = $request->id_cotizacion;
+        $codConsig = $request->codConsig;
+        $codCliente = $request->codCliente;
+
+        $datos = (new FacturaModel)->getDatosFacturaCotizacion($id_cotizacion);
+        $detalle = (new FacturaModel)->getDetalleCotizacion($id_cotizacion);
+
+        $data = [
+            'Informacion' => $datos,
+            'Detalle' => $detalle,
+            'Consig' => $codConsig,
+            'codCliente' => $codCliente,
+        ];
+
+
+        $pdf = PDF::loadView('reportes.rpt_factura', $data)->setPaper('a4'); //prueba para mandar datos a tabla de pdf
+        echo utf8_encode(($pdf->stream('archivo.pdf')));
 
     }
 }

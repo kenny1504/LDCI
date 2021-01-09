@@ -99,7 +99,7 @@
                 width: 23%;
                 position: absolute;
                 right: 15px;
-                margin-top: -34%
+                margin-top: -34%;
                 z-index: -1;
             }
             .tbl_tamano_2{
@@ -177,7 +177,7 @@
             }
             .alto_detalle{
                 width: 100%;
-                height: 55%;
+                height: 50%;
                 min-height: 64%;
             }
             .text_color{
@@ -204,46 +204,47 @@
         </header>
 
         <main>
+            @foreach($Informacion as $informacion)
             <h3 class="text_color_c">Factura</h3>
             <table class="tbl_tamano">
                     <tr>
                         <th class="tamano_fuente_1 text_color_c largo_celda_2">N° Factura:</th>
-                        <td class="tamano_fuente_1 text_color "></td>
+                        <td class="tamano_fuente_1 text_color ">{{$informacion->codigo}} </td>
                     </tr>
                     <tr>
                         <th class="tamano_fuente_1 text_color_c">Fecha:</th>
-                        <td class="tamano_fuente_1 text_color "></td>
+                        <td class="tamano_fuente_1 text_color ">{{$informacion->fecha_factura}}</td>
                     </tr>
             </table>
             <h4 class=" text_color_c loc_remitente">Consignatario:</h4>
             <table class="table-responsive tbl_tamano_6A table-borde_6">
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2"></th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">{{$informacion->consignatario}}</th>
                 </tr>
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2">Dir:</th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">Dir: {{$informacion->direccionc}}</th>
                 </tr>
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2">Tel: </th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">Tel: +{{$Consig}} {{$informacion->telefonoc}}</th>
                 </tr>
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2">Correo: </th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">Correo: {{$informacion->correoc}}</th>
                 </tr>
             </table>
 
             <h4 class="text-left text_color_c" style="margin-top: 5%">Remitente:</h4>
             <table class="table-responsive tbl_tamano_6 table-borde_6">
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2"></th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">{{$informacion->cliente}}</th>
                 </tr>
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2">Dir:</th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">Dir: {{$informacion->direccioncl}}</th>
                 </tr>
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2">Tel: </th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">Tel: +{{$codCliente}} {{$informacion->telefonocl}} </th>
                 </tr>
                 <tr>
-                    <th class="tamano_fuente_1 text_color ancho_celda_2">Correo: </th>
+                    <th class="tamano_fuente_1 text_color ancho_celda_2">Correo: {{$informacion->correocl}}</th>
                 </tr>
             </table>
             <h4 class=" text_color_c " style="margin-top: 0%">Informacion</h4>
@@ -253,37 +254,33 @@
                         <th class="text_color_c largo_celda_info">Origen</th>
                         <th class="text_color_c largo_celda_info">Destino</th>
                         <th class="text_color_c " style="width: 15%">Transporte</th>
-                        <th class="text_color_c " style="width: 17%">Terminos</th>
                         <th class="text_color_c " style="width: 11%">Fecha de Envio</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="text_color ancho_celda"></th>
-                        <th class="text_color"></th>
-                        <th class="text_color"></th>
-                        <th class="text_color"></th>
-                        <th class="text_color"></th>
+                        <th class="text_color ancho_celda">{{$informacion->c_origen}}</th>
+                        <th class="text_color ancho_celda">{{$informacion->c_destino}}</th>
+                        <th class="text_color">{{$informacion->t_transporte}}</th>
+                        <th class="text_color">{{$informacion->fecha_envio}}</th>
                     </tr>
                 </tbody>
             </table>
             <table class="table-responsive ancho_tabla table-borde_6">
                 <thead>
                     <tr>
-                        <th class="text_color_c largo_celda_info">Proveedor</th>
-                        <th class="text_color_c largo_celda_info">Correo Proveedor</th>
-                        <th class="text_color_c ancho_celda " style="width: 15%">Vendedor</th>
-                        <th class="text_color_c " style="width: 17%">Moneda</th>
+                        <th class="text_color_c largo_celda_info">Terminos</th>
+                        <th class="text_color_c largo_celda_info " style="width: 15%">Vendedor</th>
+                        <th class="text_color_c " style="width: 15%">Moneda</th>
                         <th class="text_color_c " style="width: 11%">Fecha llegada</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <th class="text_color ancho_celda">{{$informacion->terminos}}</th>
                         <th class="text_color ancho_celda"></th>
-                        <th class="text_color"></th>
-                        <th class="text_color"></th>
-                        <th class="text_color"></th>
-                        <th class="text_color"></th>
+                        <th class="text_color">{{$informacion->moneda}}</th>
+                        <th class="text_color">{{$informacion->fecha_entrega}}</th>
                     </tr>
                 </tbody>
             </table>
@@ -295,29 +292,31 @@
                         <tr>
                             <th class="alinear ancho_celda text_color_c">Itm</th>
                             <th class="alinear td-1 text_color_c">Cod. Prod</th>
-                            <th class="th-2 text_color_c">Carga y Servicio</th>
-                            <th class="text_color_c">Descripción</th>
+                            <th class="th-2 text_color_c alinear">Carga y Servicio</th>
+                            <th class="text_color_c alinear">Descripción</th>
                             <th class="alinear text_color_c">Cantidad</th>
-                            <th class="th-2 text_color_c">Modo Transporte</th>
-                            <th class="text_color_c">Precio</th>
-                            <th class="text_color_c">Dto.%</th>
-                            <th class="text_color_c">Imp.Monto</th>
-                            <th class="text_color_c">Importe</th>
+                            <th class="th-2 text_color_c alinear">Modo Transporte</th>
+                            <th class="text_color_c alinear">Precio</th>
+                            <th class="text_color_c alinear">Dto.%</th>
+                            <th class="text_color_c alinear">Imp.Monto</th>
+                            <th class="text_color_c alinear">Importe</th>
                         </tr>
                     </thead>
                     <tbody >
+                    @foreach ($Detalle as $detalle)
                         <tr >
-                                <td class="text_color ancho_celda alinear"></td>
-                                <td class="text_color alinear"></td>
-                                <td class="text_color"></td>
-                                <td class="text_color"></td>
-                                <td class="text_color alinear"></td>
-                                <td class="text_color"></td>
-                                <td class="text_color alinear"></td>
-                                <td class="text_color"></td>
-                                <td class="text_color"></td>
-                                <td class="text_color"></td>
+                            <td class="text_color ancho_celda alinear">{{$detalle->no}}</td>
+                            <td class="text_color alinear">{{$detalle->codigo}}</td>
+                            <td class="text_color">{{$detalle->carga}}</td>
+                            <td class="text_color">{{$detalle->descripcion}}</td>
+                            <td class="text_color alinear">{{$detalle->cantidad}}</td>
+                            <td class="text_color">{{$detalle->transporte}}</td>
+                            <td class="text_color alinear">{{$detalle->precio}}</td>
+                            <td class="text_color alinear">{{$detalle->dto}}</td>
+                            <td class="text_color alinear">{{$detalle->iva}}</td>
+                            <td class="text_color alinear">{{$detalle->total}}</td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -325,28 +324,33 @@
                 <table class="table-borde_4 table-responsive tbl_tamano_5">
                     <tr>
                         <th class="text_color_c alinear_3 th_ancho_grande tamano_fuente_2" valign="top">Nota Adicional:</th>
-                        <td class="text_color alinear_3 tamano_fuente_3"  valign="top"></td>
+                        <td class="text_color alinear_3 tamano_fuente_3"  valign="top">{{$informacion->nota}}</td>
                     </tr>
                 </table>
 
                 <table class=" table-borde_3 table-responsive tbl_tamano_2">
                     <tr>
                         <th class="text_color_c alinear_2 ancho_celda_2 tamano_fuente_1">Subtotal</th>
-                        <td class="text_color ancho_columna alinear_2 tamano_fuente_1"></td>
+                        <td class="text_color ancho_columna alinear_2 tamano_fuente_1">$ {{$informacion->subtotal}}</td>
                     </tr>
                     <tr>
                         <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1 ">Descuento</th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
+                        <td class="text_color alinear_2 tamano_fuente_1">$ {{$informacion->descuento}}</td>
                     </tr>
                     <tr>
                         <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1">Miscelaneos</th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
+                        <td class="text_color alinear_2 tamano_fuente_1">$ {{$informacion->micelaneos}}</td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1"><strong>TOTAL</strong></th>
-                        <td class="text_color alinear_2 tamano_fuente_1"></td>
+                        <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1">Iva</th>
+                        <td class="text_color alinear_2 tamano_fuente_1">$ {{$informacion->iva}}</td>
+                    </tr>
+                    <tr>
+                        <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1"><strong>Total</strong></th>
+                        <td class="text_color alinear_2 tamano_fuente_1">{{$informacion->total}}</td>
                     </tr>
                 </table>
+            @endforeach
         </main>
         <footer>
             <script type="text/php">

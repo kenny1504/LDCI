@@ -1,10 +1,14 @@
 var tblCotizaciones = null;
+var id_flete=null
+var id_cotizacion=null
 var Total=0;
 var TotalCordoba=0;
 var SubTotal=0;
 var Descuento=0;
 var Micelaneos=0;
 var Iva=0;
+var codCliente=null; /** Guarda el codigo del pais del cliente */
+var codConsig=null; /** Guarda el codigo del pais del consignatario */
 
 $(document).ready(function () {
 
@@ -93,11 +97,16 @@ $(document).ready(function () {
             url: '/factura/EncabezadoCotizaciones', //llamada a la ruta
             data: {
                 _token:_token,
-                id_cotizacion:id_cotizacion,
+                id_cotizacion:id_cotizacion
             },
             success: function (data) {
 
-                Total=data[0].total
+                limpiartablas();
+
+                codCliente=allCountries.find( paises => paises.iso2 === data[0].telcliente );
+                codConsig=allCountries.find( paises => paises.iso2 === data[0].telconsignatario );
+                id_flete=data[0].id_flete;
+                Total=data[0].total;
                 Total=parseFloat( Total= Total.replace(/,/g, ""));
                 SubTotal=data[0].subtotal
                 SubTotal=parseFloat( SubTotal= SubTotal.replace(/,/g, ""));
@@ -178,6 +187,7 @@ $(document).ready(function () {
             TotalCordoba=Total*parseFloat(tasa_cambio)
 
             $('#txt_micelaneos').text(number_format(Micelaneos, 2, ".", ","));
+            $('#txt_totalMice').text(number_format(Micelaneos, 2, ".", ","));
             $('#txt_total').text(number_format(Total, 2, ".", ","));
             $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
 
@@ -234,8 +244,168 @@ $(document).ready(function () {
             TotalCordoba=Total*parseFloat(tasa_cambio)
 
             $('#txt_micelaneos').text(number_format(Micelaneos, 2, ".", ","));
+            $('#txt_totalMice').text(number_format(Micelaneos, 2, ".", ","));
             $('#txt_total').text(number_format(Total, 2, ".", ","));
             $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
         }
+
+    }
+
+    function limpiartablas()
+    {
+         Total=0;
+         TotalCordoba=0;
+         SubTotal=0;
+         Descuento=0;
+         Micelaneos=0;
+         Iva=0;
+
+        /** Limpia todos los inputs*/
+        $('input[type="text"]').val('');
+        $('input[type="text"]').focus();
+
+
+        $('input[type="tel"]').val('');
+        $('textarea').val('');
+
+        $('select').val(""); /** Limpia todos select */
+       $('#txt_subtotal,#txt_iva,#txt_total,#txt_micelaneos,#txt_descuento,#txt_total_corboba').text("0.00");
+        /** Elimina todas las filas de tabla dinamica menos la primera */
+        $('#tblDetalleCargos tr').closest('.otrasFilas').remove();
+    }
+
+    /** Funcion para generar factura de una cotizacion */
+    function generar()
+    {
+        let guardar=true;
+        var _token= $('input[name=_token]').val();
+
+        alertConfirm("¿Está seguro que desea Generar factura?", function (e) {
+
+            /** Se recuperan datos de tabla servicios adicionales*/
+            var DATA = [];
+            var TABLA= $("#tblDetalleCargos tbody > tr");
+
+            /*Obtención de datos de la tabla dinámica*/
+            TABLA.each(function (e) {
+
+                let descripcion = $(this).find("textarea[id*='txt_descripcion']").val();
+                let monto = $(this).find("input[id*='txtmonto']").val();
+                if (descripcion.trim()!="")
+                {
+
+                    if (monto!="")
+                    {
+                        item = {};
+                        item["descripcion"] =descripcion;
+                        precio=parseFloat( monto= monto.replace(/,/g, "")); /**Formate numero */
+                        item["monto"] =precio;
+                        DATA.push(item);
+                    }
+                    else
+                    {
+                        alertError("Favor ingrese el monto del cargo");
+                        monto.focus(); guardar=false;
+                    }
+
+                }
+
+            });
+
+            let tblDetalleCargos = JSON.stringify(DATA);
+
+            if (guardar==true)
+            {
+                var codigoFacturaVAL=$('#txt_codigoFactura').parsley();
+                var monedaVAL=$('#cmb_moneda').parsley();
+                var descuentoVAL=$('#cmb_descuento').parsley();
+                var tipo_VAL=$('#cmb_tipo').parsley();
+
+
+                if (codigoFacturaVAL.isValid() && monedaVAL.isValid() && descuentoVAL.isValid() && tipo_VAL.isValid())
+                {
+                    var tipo = $('#cmb_tipo').val();
+                    tipo=parseInt(tipo);
+                    var termino = $('#txt_termino').val();
+                    var termino_VAL=$('#txt_termino').parsley();
+
+                    if (tipo==2 && termino.trim()=="")
+                    {
+                        termino_VAL.validate();
+                        alertError("Favor especificar termino");
+                    }
+                    else
+                    {
+                        var codigoFactura=$('#txt_codigoFactura').val();
+                        var moneda=$('#cmb_moneda').val();
+
+                      showLoad(true);
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Generarfactura/cotizacion', //llamada a la ruta
+                            data: {
+                                _token: _token,
+                                tblDetalleCargos: tblDetalleCargos,
+                                termino: termino.trim(),
+                                tipo: tipo,
+                                id_flete: id_flete,
+                                id_cotizacion:id_cotizacion,
+                                codigoFactura:codigoFactura,
+                                descuento:Descuento,
+                                total:Total,
+                                micelaneos:Micelaneos,
+                                moneda:moneda
+                            },
+                            success: function (data) {
+
+                                if (data.error) {
+                                    alertError(data.mensaje);
+                                } else {
+                                    alertSuccess(data.mensaje);
+                                    alertSuccess("Generando Factura ...");
+
+                                    $.ajax({
+                                        type:"post",
+                                        url: '/cotizaciones/factura', //llamada a la ruta
+                                        global:false,
+                                        data:{
+                                            _token:_token,
+                                            id_cotizacion: id_cotizacion,
+                                            codConsig: codConsig.dialCode,
+                                            codCliente: codCliente.dialCode
+                                        }
+                                    })
+                                        .done(function(data,textstatus,jqXHR )
+                                        {
+                                            var nombrelogico="pdf"
+                                            var parametros="dependent=yes,locationbar=no,scrollbars=yes,menubar=yes,resizable,screenX=80,screenY=80,width=900,height=1400";
+                                            var htmltext="<embed width=100% height=100% type='application/pdf' src='data:application/pdf,"+escape(data) +"'></enbed>";
+                                            var detailwindows= window.open("",nombrelogico,parametros);
+                                            detailwindows.document.write(htmltext);
+                                            detailwindows.document.close();
+                                            showLoad(false);
+                                            $('#btnlimpiar').click();
+                                        });
+
+                                }
+                            },
+                            error: function (err) {
+                                alertError(err.responseText);
+                                showLoad(false);
+                            }
+
+                        });
+                    }
+                }
+                else
+                {
+                    codigoFacturaVAL.validate();
+                    monedaVAL.validate();
+                    descuentoVAL.validate();
+                    tipo_VAL.validate();
+                    alertError("Favor completar Datos")
+                }
+            }
+        });
 
     }

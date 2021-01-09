@@ -37,7 +37,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="txt_codigoFactura">No.Factura</label>
-                                <input name="txt_codigoFactura" id="txt_codigoFactura"  class="form-control input-sm">
+                                <input required name="txt_codigoFactura" id="txt_codigoFactura"  class="form-control input-sm">
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -50,7 +50,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="txt_fecha">Fecha Envio</label>
+                                <label for="txt_fecha">Fecha Llegada</label>
                                 <input readonly type="text" name="txt_fecha"  id="txt_fecha" class="form-control input-md">
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="cmb_moneda">Moneda</label>
-                                <select onchange="" name="cmb_moneda" id="cmb_moneda"  class="form-control input-md">
+                                <select required onchange="" name="cmb_moneda" id="cmb_moneda"  class="form-control input-md">
                                     <option selected disabled value="">Seleccione</option>
                                     <option  value="1">Dollar</option>
                                     <option  value="2">Cordoba</option>
@@ -89,7 +89,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="cmb_descuento">Descuento</label>
-                                <select onchange="changeDescuento(this)" name="cmb_descuento" id="cmb_descuento"  class="form-control input-md">
+                                <select required  onchange="changeDescuento(this)" name="cmb_descuento" id="cmb_descuento"  class="form-control input-md">
                                     <option selected disabled value="">Seleccione</option>
                                     <option  value="0">Ninguno</option>
                                     <option  value="0.5">5 %</option>
@@ -109,7 +109,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="cmb_tipo">Tipo</label>
-                                <select onchange="" name="cmb_tipo" id="cmb_tipo"  class="form-control input-md">
+                                <select required onchange="" name="cmb_tipo" id="cmb_tipo"  class="form-control input-md">
                                     <option selected disabled value="">Seleccione</option>
                                     <option  value="1">Contado</option>
                                     <option  value="2">Credito</option>
@@ -119,7 +119,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="txt_termino">Termino</label>
-                                <input type="text" name="txt_termino"  id="txt_termino" class="form-control input-md">
+                                <input required type="text" name="txt_termino"  id="txt_termino" class="form-control input-md">
                             </div>
                         </div>
                     </div>
@@ -184,9 +184,9 @@
                                 <tr>
                                     <td>
                                         <br><br>
-                                        <h6 class="precio">Micelaneos: $<label id="txt_micelaneos">0.00</label></h6>
                                         <h6 class="precio">SubTotal: $<label id="txt_subtotal">0.00</label></h6>
                                         <h6 class="precio">Descuento: $<label id="txt_descuento" >0.00</label></h6>
+                                        <h6 class="precio">Micelaneos: $<label id="txt_micelaneos">0.00</label></h6>
                                         <h6 class="precio">Iva: $<label id="txt_iva" >0.00</label></h6>
                                         <h6 class="precio">Total Dollar: $<label id="txt_total">0.00</label></h6>
                                         <h6 class="precio">Total Cordoba: C$<label id="txt_total_corboba">0.00</label></h6>
@@ -200,7 +200,7 @@
             </div>
         </div>
         <div class="box-footer text-center">
-            <button title="Generar Factura" onclick="generarFactura()" class="btn btn-info btn-sm" id="btnGuardarEntrada"><i class="fa fa-print"> </i> Generar</button>
+            <button title="Generar Factura" onclick="generar()" class="btn btn-info btn-sm" id="btnGuardarEntrada"><i class="fa fa-print"> </i> Generar</button>
             <a href="factura.generarFactura" title="Limpiar formulario" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>

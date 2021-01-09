@@ -114,6 +114,7 @@ Route::post('/vendedores', 'ReporteController@downloadVendedores')->name('LDCI')
 Route::post('/clientes', 'ReporteController@downloadClientes')->name('LDCI');
 Route::post('/productos', 'ReporteController@downloadProductos')->name('LDCI');
 Route::post('/cotizaciones/datos', 'ReporteController@downloadCotizacion')->name('LDCI');
+Route::post('/cotizaciones/factura', 'ReporteController@downloadFacturaCotizacion')->name('LDCI');
 
 //Rutas Entradas
 Route::post('/proveedores/getAll', 'EntradaController@getProveedores')->name('LDCI');
@@ -129,3 +130,4 @@ Route::post('/entrada/producto/guardar', 'EntradaController@guardarProductoEntra
 //Rutas Factura
 Route::post('/factura/cotizaciones', 'FacturaController@getCotizaciones')->name('getAll');
 Route::post('/factura/EncabezadoCotizaciones', 'FacturaController@getEncabezadoCotizacion')->name('getEncabezado');
+Route::post('/Generarfactura/cotizacion', 'FacturaController@generarFacturaCotizacion')->name('generar');
