@@ -347,6 +347,9 @@ var Iva=0;
                 else
                     $("#btnGuardar ").attr("disabled", "disabled");
 
+                if(Estado==5 )
+                    $("#btnGuardar ").attr("disabled", "disabled");
+
                 /** Solo se puede editar informacion de cargar y servicio cuando esten en estado NUEVA o REVISADA  */
                 if(Estado==1 || Estado==2)
                 {
@@ -899,7 +902,8 @@ var Iva=0;
                             let id_tipo_mercancia = $(this).find("select[id*='cmb_tipo_mercancia']").val();
                             let id_modo_transporte = $(this).find("select[id*='cmb_modo_transporte']").val();
                             let observacion = $(this).find("textarea[id*='txt_observacion']").val();
-                            let precio = $(this).find("input[id*='txtprecioCargar']").val();
+                            debugger;
+                            let precio = $(this).find("input[id*='txtprecioCargar']")[0].attributes[1].value;
 
                             if (Cantidad !== "" && id_tipo_mercancia !== "" && id_modo_transporte && precio!== "") {
                                 item = {};
@@ -978,6 +982,7 @@ var Iva=0;
                                         alertError(data.mensaje);
                                     } else {
                                         alertSuccess(data.mensaje);
+                                        $('#btnRefresh').click();
                                     }
                                 },
                                 error: function (err) {
@@ -1015,7 +1020,7 @@ var Iva=0;
                                 alertError(data.mensaje);
                             } else {
                                 alertSuccess(data.mensaje);
-                                $("#btnGuardar ").attr("disabled", "disabled");
+                                $('#btnRefresh').click();
                             }
                         },
                         error: function (err) {

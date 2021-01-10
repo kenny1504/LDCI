@@ -127,8 +127,8 @@
                                         <th class=" text-center" width="20%">TIPO MERCANCIA</th>
                                         <th class=" text-center" width="25%">TRANSPORTE</th>
                                         <th class=" text-center" width="25%">DESCRIPCION</th>
-                                        <th class=" text-center" width="10%">PRECIO $</th>
-                                        <th class=" text-center" width="10%">ACCIÓN</th>
+                                        <th style="display:none;" class="text-center" width="10%">PRECIO $</th>
+                                        <th  class=" text-center" width="10%">ACCIÓN</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -159,8 +159,8 @@
                                         <td width="25%" class="text-center">
                                             <textarea id="txt_observacion" class="form-control"></textarea>
                                         </td>
-                                        <td width="5%" class="text-center">
-                                            <input title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtprecioCargar);"  type="text" name="txtprecioCargar"  id="txtprecioCargar" class="cantidad text-center form-control input-sm">
+                                        <td width="5%" style="display:none;" class=" text-center">
+                                            <input hidden value="0" title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtprecioCargar);"  type="text" name="txtprecioCargar"  id="txtprecioCargar" class="cantidad text-center form-control input-sm">
                                         </td>
                                         <td width="10%" class="text-center">
                                             <div class="form-group">

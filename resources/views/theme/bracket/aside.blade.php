@@ -92,7 +92,6 @@
                       <li class="nav-item"><a style="color: #adb5bd" onclick="rpt_vendedores()" class="nav-link">Vendedores</a></li>
                       <li class="nav-item"><a style="color: #adb5bd" onclick="rpt_clientes()" class=" nav-link">Clientes</a></li>
                       <li class="nav-item"><a style="color: #adb5bd" onclick="rpt_productos()" class=" nav-link">Productos</a></li>
-                      <li class="nav-item"><a style="color: #adb5bd" onclick="rpt_cotizaciones()" class=" nav-link">Cotizaciones</a></li>
                       <li class="nav-item"><a href="" class=" nav-link">Otros</a></li>
                   </ul>
               @endif
@@ -136,6 +135,7 @@
           <ul class="br-menu-sub nav flex-column">
               <li class="nav-item"><a href="factura.verFactura" class="optionMenu nav-link">Ver Facturas</a></li>
           </ul>
+
       @endif
   </div><!-- br-sideleft-menu -->
 
