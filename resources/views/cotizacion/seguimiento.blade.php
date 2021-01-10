@@ -85,7 +85,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="txt_fecha">Fecha Envio</label>
-                                <input readonly type="text" name="txt_fecha"  id="txt_fecha" class="form-control input-md">
+                                <input readonly type="date" name="txt_fecha"  id="txt_fecha" class="form-control input-md">
                             </div>
                         </div>
                         <div class="col-md-3">

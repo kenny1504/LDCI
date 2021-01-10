@@ -308,7 +308,7 @@ class CotizacionModel extends Model
         $query = new static;
         $query = DB::select("select c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,upper(c.nota) as nota,upper(c.descripcion) as descripcion,
                                    c2.ciudad ||'/'||c2.pais as destino,c.estado,us.usuario as grabacion,us.correo
-                                   ,us1.usuario vendedor,to_char(c.fecha,'DD/MM/YYYY')as fecha,c.id_tipo_transporte
+                                   ,us1.usuario vendedor,c.fecha ::date ,c.id_tipo_transporte
                             from ldci.tb_cotizacion c
                             join ldci.vw_ciudades c1 on c.id_ciudad_origen=c1.id_ciudad
                             join ldci.vw_ciudades c2 on c.id_ciudad_destino=c2.id_ciudad
