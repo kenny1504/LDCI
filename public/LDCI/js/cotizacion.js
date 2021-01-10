@@ -60,8 +60,8 @@
             },
             success: function (data) {
 
-                $('#cmb_destino').select2({  height: "40px"}) // agrega el select2 a combobox tutores para buscar
-                $('#cmb_origen').select2({  height: "40px"})
+                $('#cmb_destino').select2({ width:"100%", height: "40px"}) // agrega el select2 a combobox tutores para buscar
+                $('#cmb_origen').select2({ width:"100%",  height: "40px"})
 
                 var datos='<option selected disabled value ="">Seleccione</option>';
                 data.forEach(element => {
