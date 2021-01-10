@@ -72,7 +72,7 @@
                             <tr>
                                 <th class=" text-center" width="5%">UNIDADES</th>
                                 <th class=" text-center" width="5%">NUEVO</th>
-                                <th class=" text-center" width="25%">TIPO MERCANCIA</th>
+                                <th class=" text-center" width="20%">TIPO MERCANCIA</th>
                                 <th class=" text-center" width="30%">TRANSPORTE</th>
                                 <th class=" text-center" width="30%">DESCRIPCION</th>
                                 <th class=" text-center" width="10%">ACCIÓN</th>
@@ -93,7 +93,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td width="25%" class="text-center">
+                                <td width="20%" class="text-center">
                                     <select required title="Seleccione" class="form-control input-sm" id="cmb_tipo_mercancia" data-live-search="true">
                                         <option selected disabled value=""> Seleccione</option>
                                     </select>
