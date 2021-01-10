@@ -902,7 +902,7 @@ var Iva=0;
                             let id_tipo_mercancia = $(this).find("select[id*='cmb_tipo_mercancia']").val();
                             let id_modo_transporte = $(this).find("select[id*='cmb_modo_transporte']").val();
                             let observacion = $(this).find("textarea[id*='txt_observacion']").val();
-                            debugger;
+
                             let precio = $(this).find("input[id*='txtprecioCargar']")[0].attributes[1].value;
 
                             if (Cantidad !== "" && id_tipo_mercancia !== "" && id_modo_transporte && precio!== "") {

@@ -26,7 +26,7 @@ var tblFacturas = null;
                             if(tipoUsuario==1)
                             {
                                 return '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura(this)">PDF</i>'+
-                                       '<i title="Anular factura"  class=" btn btn-danger fa fa-trash-o" id="btnAnularFactura">Anular</i>'
+                                       '<i title="Anular factura"  class=" btn btn-danger fa fa-trash-o" onclick="anularFactura(this)" id="btnAnularFactura">Anular</i>'
 
                             }
                             else
@@ -87,4 +87,41 @@ var tblFacturas = null;
                 showLoad(false);
                 $('#btnlimpiar').click();
             });
+    }
+
+    function anularFactura(datos)
+    {
+        var dt = tblFacturas.row($(datos).parents('tr')).data();
+        var  id_cotizacion= dt[1];
+        var  factura= dt[0];
+        var _token= $('input[name=_token]').val();
+
+        alertConfirm("Esta seguro de anular factura?", function (e){
+            showLoad(true);
+            $.ajax({
+                type:'POST',
+                url: '/facturaCotizacion/anular',
+                data:{
+                    _token:_token,
+                    id_cotizacion:id_cotizacion,
+                    factura:factura
+                },
+                success: function(data){
+                    showLoad(false);
+                    if(data.error){
+                        alertError(data.mensaje);
+                    }
+                    else{
+                        alertSuccess(data.mensaje);
+                        tblFacturas.ajax.reload();
+                    }
+                },
+                error: function(err){
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+            });
+
+        });
+
     }

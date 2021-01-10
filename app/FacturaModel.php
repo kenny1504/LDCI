@@ -134,7 +134,7 @@ class FacturaModel extends Model
 		JOIN ldci.tb_tipo_transporte AS tt ON c.id_tipo_transporte=tt.id_tipo_transporte
 		JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
 		JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
-		where c.id_cotizacion=$id_cotizacion");
+		where c.id_cotizacion=$id_cotizacion and fa.estado=1");
         return $query;
     }
 
@@ -168,7 +168,7 @@ class FacturaModel extends Model
             from ldci.tb_cargo_aplicado ca
             join ldci.tb_factura fa on fa.id_factura=ca.id_factura
             join ldci.tb_flete f on f.id_flete=fa.id_flete
-             where f.id_cotizacion=$id_cotizacion
+             where f.id_cotizacion=$id_cotizacion and fa.estado=1
             )as t");
 
         return $query;
@@ -373,5 +373,31 @@ class FacturaModel extends Model
         $query = DB::select("select precio from ldci.tb_producto where id_producto=$id_producto");
         return $query;
     }
+
+    function  anularFacturaCotizacion($id_cotizacion,$factura,$id_session)
+    {
+        DB::beginTransaction();
+        $transaccionOk = true;
+        $query_factura = new static;
+        $query_factura = DB::select('UPDATE ldci.tb_factura
+                        SET estado=-1, usuario_modificacion=?, fecha_modificacion=now()
+                        WHERE codigo=? RETURNING id_factura', [$id_session,$factura]);
+
+
+        if (empty($query_factura)) {
+            DB::rollBack();
+            return collect([
+                'mensaje' => 'Hubo un error al anular factura',
+                'error' => true
+            ]);
+        } else {
+                    DB::commit();
+                    return collect([
+                        'mensaje' => 'Factura Anulada con exito!',
+                        'error' => false,
+                    ]);
+        }
+    }
+
 
 }

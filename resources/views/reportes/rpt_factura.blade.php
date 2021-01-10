@@ -332,12 +332,12 @@
                         <td class="text_color ancho_columna alinear_2 tamano_fuente_1">$ {{$informacion->subtotal}}</td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1 ">Descuento</th>
-                        <td class="text_color alinear_2 tamano_fuente_1">$ {{$informacion->descuento}}</td>
-                    </tr>
-                    <tr>
                         <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1">Miscelaneos</th>
                         <td class="text_color alinear_2 tamano_fuente_1">$ {{$informacion->micelaneos}}</td>
+                    </tr>
+                    <tr>
+                        <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1 ">Descuento</th>
+                        <td class="text_color alinear_2 tamano_fuente_1">$ {{$informacion->descuento}}</td>
                     </tr>
                     <tr>
                         <th class="text_color_c ancho_celda_2 alinear_2 tamano_fuente_1">Iva</th>

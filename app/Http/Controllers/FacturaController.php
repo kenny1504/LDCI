@@ -98,4 +98,21 @@ class FacturaController extends Controller
         return response()->json($datos);
     }
 
+    public function anularFacturaCotizacion(Request $request)
+    {
+        $id_cotizacion=$request->id_cotizacion;
+        $factura=$request->factura;
+        $id_session = session('idUsuario');
+
+        $anular=(new FacturaModel)->anularFacturaCotizacion($id_cotizacion,$factura,$id_session);
+
+        if (!json_decode($anular)->error) {
+
+            $actualizar=(new CotizacionModel)->CambiarEstadoCotizacion($id_cotizacion,'',4,$id_session);
+
+        }
+        return $anular;
+
+    }
+
 }

@@ -11,7 +11,7 @@ var Iva=0;
         showLoad(true);
         var _token= $('input[name=_token]').val();
 
-        /** recupera proveedores*/
+        /** recupera clientes*/
         $.ajax({
             type: 'POST',
             url: '/getClientes', //llamada a la ruta
@@ -21,7 +21,7 @@ var Iva=0;
             success: function (data) {
 
 
-                $('#cmb_Cliente').select2({  height: "40px"})
+                $('#cmb_Cliente').select2({ width:"100%", height: "40px"})
                 $('#cmb_Cliente').empty();
 
                 var datos = '<option selected disabled value ="">Seleccione</option>';
