@@ -69,4 +69,33 @@ class FacturaController extends Controller
         return response()->json($datos);
     }
 
+    /** Funcion que recupera todos los productos*/
+    public function getProductos()
+    {
+        $datos = (new FacturaModel)->getProductos();
+        return response()->json($datos);
+    }
+
+    /** Funcion que recupera todos los clientes*/
+    public function getClientes()
+    {
+        $datos = (new FacturaModel)->getClientes();
+        return response()->json($datos);
+    }
+
+    /** Funcion para recuperar lista de ventas*/
+    public function getVentas()
+    {
+        $datos = (new FacturaModel)->getVentas();
+        return response()->json($datos);
+    }
+
+    /** Funcion para recuperar precio de un producto*/
+    public function getPrecio(Request $request)
+    {
+        $id_producto=$request->id_producto;
+        $datos = (new FacturaModel)->getPrecio($id_producto);
+        return response()->json($datos);
+    }
+
 }

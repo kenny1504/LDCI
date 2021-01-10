@@ -133,3 +133,7 @@ Route::post('/factura/EncabezadoCotizaciones', 'FacturaController@getEncabezadoC
 Route::post('/Generarfactura/cotizacion', 'FacturaController@generarFacturaCotizacion')->name('generar');
 Route::post('/getNoFactura', 'FacturaController@validaNoFactura')->name('factura');
 Route::post('/getFacturas', 'FacturaController@getFacturas')->name('facturas');
+Route::post('/getProductos', 'FacturaController@getProductos')->name('productos');
+Route::post('/getClientes', 'FacturaController@getClientes')->name('clientes');
+Route::post('/getVentas', 'FacturaController@getVentas')->name('Ventas');
+Route::post('/producto/precio', 'FacturaController@getPrecio')->name('Precio');

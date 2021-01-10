@@ -222,7 +222,7 @@ class FacturaModel extends Model
     function getNoFactura($codigoFactura)
     {
         $query = new static;
-        $query = DB::select("select * from ldci.tb_factura where codigo='$codigoFactura'");
+        $query = DB::select("select TO_CHAR (fecha_emision,'DD-MM-YYYY') as fecha_emision  from ldci.tb_factura where codigo='$codigoFactura' and estado=1");
         return $query;
     }
 
@@ -232,7 +232,7 @@ class FacturaModel extends Model
 
         if ($tipoUsuario != 3) {
 
-            $table = "(SELECT   fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+            $table = "(SELECT 1 as tipo, fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
             TO_CHAR (fa.fecha_emision,'DD-MM-YYYY') as fecha_factura,tt.nombre AS t_transporte,
             co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino,
             p1.iso_2 as isocl,p2.iso_2 as isoconsig
@@ -245,21 +245,22 @@ class FacturaModel extends Model
             JOIN ldci.tb_tipo_transporte AS tt ON c.id_tipo_transporte=tt.id_tipo_transporte
             JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
             JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
-                union
-                  select f.codigo,null,
+            where fa.estado=1
+            union
+            select 2 as tipo, f.codigo,null,
                case when fc.comun=true then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
                else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
                null,null,null,null,null
-              from ldci.tb_factura f
-              join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
-              join ldci.tb_detalle_factura df on fc.id_factura_cliente=df.id_factura_cliente
-              left  JOIN ldci.tb_cliente cl on fc.id_cliente=cl.id_cliente
-              left	JOIN ldci.tb_persona p1 on p1.id_persona=cl.id_persona) as tb ";
+            from ldci.tb_factura f
+            join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
+            join ldci.tb_detalle_factura df on fc.id_factura_cliente=df.id_factura_cliente
+            left  JOIN ldci.tb_cliente cl on fc.id_cliente=cl.id_cliente
+            left	JOIN ldci.tb_persona p1 on p1.id_persona=cl.id_persona where f.estado=1) as tb ";
 
         }
         else{
 
-            $table = "(SELECT  fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+            $table = "( SELECT 1 as tipo, fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
             TO_CHAR (fa.fecha_emision,'DD-MM-YYYY') as fecha_factura,tt.nombre AS t_transporte,
             co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino,
             p1.iso_2 as isocl,p2.iso_2 as isoconsig
@@ -273,8 +274,9 @@ class FacturaModel extends Model
             JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
             JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
             join ldci.tb_usuario u on p1.correo=u.correo where u.id_usuario=$id_session
+            and fa.estado=1
             union
-              select f.codigo,null,
+              select 2 as tipo, f.codigo,null,
                case when fc.comun=true then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
                else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
                null,null,null,null,null
@@ -283,7 +285,7 @@ class FacturaModel extends Model
               join ldci.tb_detalle_factura df on fc.id_factura_cliente=df.id_factura_cliente
               left  JOIN ldci.tb_cliente cl on fc.id_cliente=cl.id_cliente
               left	JOIN ldci.tb_persona p1 on p1.id_persona=cl.id_persona
-              left join  ldci.tb_usuario u on p1.correo=u.correo where u.id_usuario=$id_session) as tb ";
+              left join  ldci.tb_usuario u on p1.correo=u.correo where u.id_usuario=$id_session and f.estado=1) as tb ";
 
         }
 
@@ -299,7 +301,8 @@ class FacturaModel extends Model
             ['db' => 'fecha_factura', 'dt' => 5],
             ['db' => 'cliente', 'dt' => 6],
             ['db' => 'isocl', 'dt' => 7],
-            ['db' => 'isoconsig', 'dt' => 8]
+            ['db' => 'isoconsig', 'dt' => 8],
+            ['db' => 'tipo', 'dt' => 9]
         ];
 
         /*** Config DB */
@@ -310,6 +313,65 @@ class FacturaModel extends Model
             'pass' => $_ENV['DB_PASSWORD']
         );
         return SSP::complex($_POST, $db, $table, $primaryKey, $columns);
+    }
+
+    /** Funcion que recupera todos los productos*/
+    public function getproductos()
+    {
+        $query = new static;
+        $query = DB::select('SELECT p.id_producto,p.nombre FROM ldci.tb_producto as p WHERE p.estado=1 AND p.tipo=1 and existencia!=0');
+        return $query;
+    }
+
+    /** Funcion que recupera todos los clientes*/
+    public function getClientes()
+    {
+        $query = new static;
+        $query = DB::select("select cl.id_cliente,  p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ') as nombre
+                                    from ldci.tb_cliente cl
+                                    join ldci.tb_persona p on cl.id_persona=p.id_persona
+                                    where cl.estado=1");
+        return $query;
+    }
+
+    /** Funcion para Recuperar ventas */
+    public function getVentas()
+    {
+        $table = "(select fc.id_factura_cliente as venta,f.codigo as factura,f.estado,
+                    to_char(coalesce(f.monto,0),'9,999,999.99') as monto ,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura ,
+                     p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ') as cliente
+                    from ldci.tb_factura f
+                    join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
+                    join ldci.tb_cliente cl on cl.id_cliente=fc.id_cliente
+                    join ldci.tb_persona p on p.id_persona=cl.id_persona
+                    order by fc.id_factura_cliente desc) as tb";
+
+        $primaryKey = 'venta';
+        $columns = [
+            ['db' => 'venta', 'dt' => 0],
+            ['db' => 'factura', 'dt' => 1],
+            ['db' => 'estado', 'dt' => 2],
+            ['db' => 'monto', 'dt' => 3],
+            ['db' => 'fecha_factura', 'dt' => 4],
+            ['db' => 'cliente', 'dt' => 5]
+        ];
+
+        /*** Config DB */
+        $db = array(
+            'host' => $_ENV['DB_HOST'],
+            'db' => $_ENV['DB_DATABASE'],
+            'user' => $_ENV['DB_USERNAME'],
+            'pass' => $_ENV['DB_PASSWORD']
+        );
+        return SSP::complex($_POST, $db, $table, $primaryKey, $columns);
+    }
+
+    /** Funcion para recuperar precio de un producto*/
+    public function getPrecio($id_producto)
+    {
+        $query = new static;
+        $query = DB::select("select precio from ldci.tb_producto where id_producto=$id_producto");
+        return $query;
     }
 
 }

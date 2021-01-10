@@ -19,10 +19,29 @@ var tblFacturas = null;
                     targets: -1,
                     data: null,
                     orderable: false,
-                    defaultContent: '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura(this)">PDF</i>'
+                    render: function (json) {
+
+                        if (json[9]==1)
+                        {
+                            if(tipoUsuario==1)
+                            {
+                                return '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura(this)">PDF</i>'+
+                                       '<i title="Anular factura"  class=" btn btn-danger fa fa-trash-o" id="btnAnularFactura">Anular</i>'
+
+                            }
+                            else
+                                return '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura(this)">PDF</i>'
+
+                        }
+                        else
+                        {
+                            return '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura(this)">PDF</i>'
+                        }
+
+                    }
                 },
                 {
-                    targets: [ 7,8 ],
+                    targets: [ 7,8,9 ],
                     visible: false
                 }
             ]

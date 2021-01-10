@@ -24,6 +24,7 @@
                                         <th>Cliente</th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
