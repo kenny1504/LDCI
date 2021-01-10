@@ -253,7 +253,7 @@
                     <tr>
                         <th class="text_color_c largo_celda_info">Origen</th>
                         <th class="text_color_c largo_celda_info">Destino</th>
-                        <th class="text_color_c " style="width: 15%">Transporte</th>
+                        <th class="text_color_c " style="width: 15%">Fecha llegada</th>
                         <th class="text_color_c " style="width: 11%">Fecha de Envio</th>
                     </tr>
                 </thead>
@@ -261,7 +261,7 @@
                     <tr>
                         <th class="text_color ancho_celda">{{$informacion->c_origen}}</th>
                         <th class="text_color ancho_celda">{{$informacion->c_destino}}</th>
-                        <th class="text_color">{{$informacion->t_transporte}}</th>
+                        <th class="text_color">{{$informacion->fecha_entrega}}</th>
                         <th class="text_color">{{$informacion->fecha_envio}}</th>
                     </tr>
                 </tbody>
@@ -269,18 +269,16 @@
             <table class="table-responsive ancho_tabla table-borde_6">
                 <thead>
                     <tr>
-                        <th class="text_color_c largo_celda_info">Terminos</th>
-                        <th class="text_color_c largo_celda_info " style="width: 15%">Vendedor</th>
-                        <th class="text_color_c " style="width: 15%">Moneda</th>
-                        <th class="text_color_c " style="width: 11%">Fecha llegada</th>
+                        <th class="text_color_c largo_celda_info" style="width: 13%">Terminos</th>
+                        <th class="text_color_c " style="width: 11%">Moneda</th>
+                        <th class="text_color_c " style="width: 11%">Transporte</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th class="text_color ancho_celda">{{$informacion->terminos}}</th>
-                        <th class="text_color ancho_celda"></th>
                         <th class="text_color">{{$informacion->moneda}}</th>
-                        <th class="text_color">{{$informacion->fecha_entrega}}</th>
+                        <th class="text_color">{{$informacion->t_transporte}}</th>
                     </tr>
                 </tbody>
             </table>

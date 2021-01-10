@@ -103,7 +103,7 @@ $(document).ready(function () {
             success: function (data) {
 
                 limpiartablas();
-
+                $("#btnGenerar ").removeAttr("disabled", "disabled");
                 /** Busca codigos de pais en arreglo de objeto */
                 codCliente=allCountries.find( paises => paises.iso2 === data[0].telcliente );
                 codConsig=allCountries.find( paises => paises.iso2 === data[0].telconsignatario );

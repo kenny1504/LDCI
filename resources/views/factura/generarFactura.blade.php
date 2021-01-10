@@ -200,7 +200,7 @@
             </div>
         </div>
         <div class="box-footer text-center">
-            <button title="Generar Factura" onclick="generar()" class="btn btn-info btn-sm" id="btnGuardarEntrada"><i class="fa fa-print"> </i> Generar</button>
+            <button disabled title="Generar Factura" onclick="generar()" class="btn btn-info btn-sm" id="btnGenerar"><i class="fa fa-print"> </i> Generar</button>
             <a href="factura.generarFactura" title="Limpiar formulario" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>
