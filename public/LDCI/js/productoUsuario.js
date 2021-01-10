@@ -64,7 +64,7 @@ $(document).ready(function () {
                             if(control==1)
                             {
                                 html+="<div class=\"carousel-item active\">\n" +
-                                    "            <img class=\"d-block w-100\" src="+element.url+"/"+element.imagen+" alt=\"First slide\">\n" +
+                                    "            <img style='width: 70% !important' class=\"d-block w-100\" src="+element.url+"/"+element.imagen+" alt=\"First slide\">\n" +
                                     "<div class=\"carousel-caption d-none d-md-block\">\n" +
                                     "    <h5>"+element.nombre+"</h5>\n" +
                                     "<p>"+element.descripcion+"</p>"+
