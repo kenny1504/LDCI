@@ -24,14 +24,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">Origen <span class="tx-danger">*</span></label>
-                            <select title="Seleccione destino"  name="cmb_destino"  id="cmb_destino" class=" form-control input-md" required>
+                            <select title="Seleccione destino"  name="cmb_origen"  id="cmb_origen" class=" form-control input-md" required>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label">Destino <span class="tx-danger">*</span></label>
-                            <select title="Seleccione origen"  name="cmb_origen"  id="cmb_origen" class=" form-control input-md" required>
+                            <select title="Seleccione origen"  name="cmb_destino"  id="cmb_destino"  class=" form-control input-md" required>
                             </select>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-control-label">fecha <span class="tx-danger">*</span></label>
+                            <label class="form-control-label">Fecha envio <span class="tx-danger">*</span></label>
                             <input title="Ingrese fecha de envio"  type="date" id="txt_fecha" name="txt_fecha" class="form-control input-md" required>
                         </div>
                     </div>
@@ -87,8 +87,8 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="switch">
-                                                <input style="display: none" id="ckEstado" name="ckEstado" type="checkbox">
-                                                <span class="slider round"></span>
+                                                <input  style="display: none" id="ckEstado" name="ckEstado" type="checkbox">
+                                                <span title="seleccionar si la carga es nueva" class="slider round"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -181,7 +181,7 @@
             </div>
         </div>
         <br><br>
-        <div class="text-success text-primary align-top"><h6>Al guardar,Esta cotizacion posee un periodo aproximado de 48 horas para ser contestada </h6></div>
+        <div class="text-success text-primary align-top"><h6>Al guardar esta cotizacion posee un periodo aproximado de 48 horas para ser contestada </h6></div>
     </section>
 </div>
 

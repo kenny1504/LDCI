@@ -312,6 +312,7 @@ var Iva=0;
 
             let  precio=$(this).closest('tr').find("input[id*='txt_precio']").val();
             let  cantidad=$(this).closest('tr').find("input[id*='txt_cantidad']").val();
+            var descuento= $('#cmb_descuento').val();
 
             if (precio!="" && precio!=undefined )
                 precio=parseFloat( precio= precio.replace(/,/g, ""));
@@ -327,11 +328,14 @@ var Iva=0;
 
             SubTotal=SubTotal-importe
             Iva=SubTotal*0.15
+            if (descuento!=0)
+                Descuento=SubTotal*parseFloat(descuento);
             Total=SubTotal+Iva-Descuento
             TotalCordoba=Total*parseFloat(tasa_cambio)
 
 
             $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+            $('#txt_descuento').text(number_format(Descuento, 2, ".", ","));
             $('#txt_iva').text(number_format(Iva, 2, ".", ","));
             $('#txt_totalPr').text(number_format(SubTotal, 2, ".", ","));
             $('#txt_total').text(number_format(Total, 2, ".", ","));
