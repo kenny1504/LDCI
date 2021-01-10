@@ -186,7 +186,7 @@
                                         <br><br>
                                         <h6 class="precio">SubTotal: $<label id="txt_subtotal">0.00</label></h6>
                                         <h6 class="precio">Descuento: $<label id="txt_descuento" >0.00</label></h6>
-                                        <h6 class="precio">Micelaneos: $<label id="txt_micelaneos">0.00</label></h6>
+                                        <h6 class="precio">Miscelaneos: $<label id="txt_micelaneos">0.00</label></h6>
                                         <h6 class="precio">Iva: $<label id="txt_iva" >0.00</label></h6>
                                         <h6 class="precio">Total Dollar: $<label id="txt_total">0.00</label></h6>
                                         <h6 class="precio">Total Cordoba: C$<label id="txt_total_corboba">0.00</label></h6>
