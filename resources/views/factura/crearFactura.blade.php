@@ -138,7 +138,7 @@
                                                 <input readonly name="txt_importe" id="txt_importe"  class=" text-center form-control input-sm" type="text">
                                             </td>
                                             <td width="10%" class="text-center">
-                                                <div class="pull-right row form-group">
+                                                <div class="form-group">
                                                     <button class="btn btn-danger eliminarFila"
                                                             title="Eliminar Producto"
                                                             id="btnEliminarFila">

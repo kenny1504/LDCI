@@ -108,7 +108,7 @@
                                 </td>
 
                                 <td width="10%" class="text-center">
-                                    <div class="pull-right row form-group">
+                                    <div class="form-group">
                                         <button class="btn btn-danger eliminarFila"
                                                 title="Eliminar Carga"
                                                 id="btnEliminarFila">

@@ -156,7 +156,7 @@
                                                 <input title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtmonto);"  type="text" name="txtmonto"  id="txtmonto" class="cantidad text-center form-control input-sm">
                                             </td>
                                             <td width="10%" class="text-center">
-                                                <div class="pull-right row form-group">
+                                                <div class="form-group">
                                                     <button class="btn btn-danger eliminarFila"
                                                             title="Eliminar Cargo"
                                                             id="btnEliminarFila">

@@ -124,7 +124,7 @@
                                     <tr>
                                         <th class=" text-center" width="5%">UNIDADES</th>
                                         <th class=" text-center" width="5%">NUEVO</th>
-                                        <th class=" text-center" width="25%">TIPO MERCANCIA</th>
+                                        <th class=" text-center" width="20%">TIPO MERCANCIA</th>
                                         <th class=" text-center" width="25%">TRANSPORTE</th>
                                         <th class=" text-center" width="25%">DESCRIPCION</th>
                                         <th class=" text-center" width="10%">PRECIO $</th>
@@ -146,7 +146,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td width="25%" class="text-center">
+                                        <td width="20%" class="text-center">
                                             <select required title="Seleccione" class="form-control input-sm" id="cmb_tipo_mercancia" data-live-search="true">
                                                 <option selected disabled value=""> Seleccione</option>
                                             </select>
@@ -163,7 +163,7 @@
                                             <input title="Ingrese precio"  onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtprecioCargar);"  type="text" name="txtprecioCargar"  id="txtprecioCargar" class="cantidad text-center form-control input-sm">
                                         </td>
                                         <td width="10%" class="text-center">
-                                            <div class="pull-right row form-group">
+                                            <div class="form-group">
                                                 <button class="btn btn-danger eliminarFila"
                                                         title="Eliminar Carga"
                                                         id="btnEliminarFila">
@@ -210,7 +210,7 @@
                                                 <input title="Ingrese precio" onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtPrecioServicio);"  type="text" name="txtPrecioServicio"  id="txtPrecioServicio" class="cantidad text-center form-control input-sm">
                                             </td>
                                             <td width="10%" class="text-center">
-                                                <div class="pull-right row form-group">
+                                                <div class="form-group">
                                                     <button class="btn btn-danger eliminarFila"
                                                             title="Eliminar servicio"
                                                             id="btnEliminarFila">
