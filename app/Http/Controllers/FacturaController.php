@@ -115,4 +115,36 @@ class FacturaController extends Controller
 
     }
 
+    /** Funcion que permite validar la existencia de un producto */
+    public  function  validarExistencia(Request $request)
+    {
+
+        $producto=$request->producto;
+        $datos = (new FacturaModel)->getExistencia($producto);
+        return response()->json($datos);
+
+    }
+
+    public  function  guardarFactura(Request $request)
+    {
+
+        $tblDetalleProductos= json_decode($request->tblDetalleProductos);
+        $termino=$request->termino;
+        $tipo=$request->tipo;
+        $cliente=$request->cliente;
+        $codigoFactura=$request->codigoFactura;
+        $descuento=$request->descuento;
+        $total=$request->total;
+        $subTotal=$request->SubTotal;
+        $iva=$request->iva;
+        $moneda=$request->moneda;
+        $id_session = session('idUsuario');
+
+
+        $guardar=(new FacturaModel)->guardarFactura($tblDetalleProductos,$termino,$tipo,$codigoFactura,$descuento,$total,$moneda,$cliente,$subTotal,$iva,$id_session);
+
+        return $guardar;
+
+    }
+
 }

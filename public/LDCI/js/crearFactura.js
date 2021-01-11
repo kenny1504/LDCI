@@ -351,3 +351,201 @@ var Iva=0;
     });
 
 
+    /** Funcion para verificar la existencia de un producto */
+    function  validarExistencia(input)
+    {
+
+        let producto= $(input).parents('tr').find("select[id*='cmb_Producto']").val();
+        var _token= $('input[name=_token]').val();
+
+        if (producto!=null && producto!="")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/factura/existencia', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    producto:producto
+                },
+                success: function (data) {
+
+                    if(data[0].existencia<input.value)
+                    {
+                        input.value="";
+                        alertError("Error la cantidad en existencia es igual a "+data[0].existencia);
+                    }
+
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        }
+
+    }
+
+    function GenerarFactura()
+    {
+        let guardar=true;
+
+        alertConfirm("¿Está seguro que desea Generar factura?", function (e) {
+
+            /** Se recuperan datos de tabla servicios adicionales*/
+            var DATA = [];
+            var TABLA= $("#tblDetalleProductos tbody > tr");
+
+            /*Obtención de datos de la tabla dinámica*/
+            TABLA.each(function (e) {
+
+                let producto = $(this).find("select[id*='cmb_Producto']").val();
+                let precio = $(this).find("input[id*='txt_precio']").val()
+                let cantidad = $(this).find("input[id*='txt_cantidad']").val();
+
+                if (producto!="" && producto!=null && cantidad!="" )
+                {
+                        item = {};
+                        item["producto"] =parseInt(producto);
+                        precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
+                        item["monto"] =precio;
+                        item["cantidad"] =parseInt(cantidad);
+                        DATA.push(item);
+                }
+                else
+                {
+                    alertError("Favor completar datos de productos");
+                     guardar=false;
+                }
+
+
+            });
+
+            let tblDetalleProductos = JSON.stringify(DATA);
+
+            if (guardar==true)
+            {
+                var clienteVAL=$('#cmb_Cliente').parsley();
+                var codigoFacturaVAL=$('#txt_codigoFactura').parsley();
+                var monedaVAL=$('#cmb_moneda').parsley();
+                var descuentoVAL=$('#cmb_descuento').parsley();
+                var tipo_VAL=$('#cmb_tipo').parsley();
+
+
+                if (codigoFacturaVAL.isValid() && monedaVAL.isValid() && descuentoVAL.isValid() && tipo_VAL.isValid())
+                {
+                    var tipo = $('#cmb_tipo').val();
+                    tipo=parseInt(tipo);
+                    var termino = $('#txt_termino').val();
+                    var termino_VAL=$('#txt_termino').parsley();
+
+                    if (tipo==2 && termino.trim()=="")
+                    {
+                        termino_VAL.validate();
+                        alertError("Favor especificar termino");
+                    }
+                    else
+                    {
+                        if (clienteVAL.isValid())
+                        {
+                                var cliente=$('#cmb_Cliente').val();
+                                var codigoFactura=$('#txt_codigoFactura').val();
+                                var moneda=$('#cmb_moneda').val();
+
+                              Guardar(cliente,codigoFactura,moneda,tblDetalleProductos,termino,tipo);
+                        }
+                        else
+                        {
+                            var checkbox=document.getElementById('ckComun');
+                            if(checkbox.checked==true)
+                            {
+
+                                var cliente=$('#cmb_Cliente').val();
+                                var codigoFactura=$('#txt_codigoFactura').val();
+                                var moneda=$('#cmb_moneda').val();
+
+                                Guardar(cliente,codigoFactura,moneda,tblDetalleProductos,termino,tipo);
+                            }
+                            else
+                                alertError("Favor seleccione un cliente o de check en 'Comun' si es un cliente comun")
+                        }
+
+                    }
+                }
+                else
+                {
+                    codigoFacturaVAL.validate();
+                    monedaVAL.validate();
+                    descuentoVAL.validate();
+                    tipo_VAL.validate();
+                    alertError("Favor completar Datos");
+                }
+            }
+        });
+
+    }
+
+    function Guardar(cliente,codigoFactura,moneda,tblDetalleProductos,termino,tipo)
+    {
+        var _token= $('input[name=_token]').val();
+        showLoad(true);
+        $.ajax({
+            type: 'POST',
+            url: '/factura/guardar', //llamada a la ruta
+            data: {
+                _token: _token,
+                tblDetalleProductos: tblDetalleProductos,
+                termino: termino.trim(),
+                tipo: tipo,
+                codigoFactura:codigoFactura,
+                descuento:Descuento,
+                total:Total,
+                subTotal:SubTotal,
+                iva:Iva,
+                moneda:moneda,
+                cliente:cliente
+            },
+            success: function (data) {
+
+                if (data.error) {
+                    alertError(data.mensaje);
+                } else {
+                    alertSuccess(data.mensaje);
+                    alertSuccess("Generando Factura ...");
+
+                 /**   $.ajax({
+                        type:"post",
+                        url: '/cotizaciones/factura', //llamada a la ruta
+                        global:false,
+                        data:{
+                            _token:_token,
+                            id_cotizacion: id_cotizacion,
+                            codConsig: codConsig.dialCode,
+                            codCliente: codCliente.dialCode
+                        }
+                    })
+                        .done(function(data,textstatus,jqXHR )
+                        {
+                            var nombrelogico="pdf"
+                            var parametros="dependent=yes,locationbar=no,scrollbars=yes,menubar=yes,resizable,screenX=80,screenY=80,width=900,height=1400";
+                            var htmltext="<embed width=100% height=100% type='application/pdf' src='data:application/pdf,"+escape(data) +"'></enbed>";
+                            var detailwindows= window.open("",nombrelogico,parametros);
+                            detailwindows.document.write(htmltext);
+                            detailwindows.document.close();
+                            showLoad(false);
+                            $('#btnlimpiar').click();
+                        });*/
+                 showLoad(false);
+                }
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+        });
+
+    }
+
+
+
+

@@ -5,6 +5,8 @@ namespace App;
 use App\ssp\SSP;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\False_;
+use phpDocumentor\Reflection\Types\True_;
 
 class FacturaModel extends Model
 {
@@ -180,9 +182,9 @@ class FacturaModel extends Model
         $transaccionOk = true;
         $query_factura = new static;
         $query_factura = DB::select('INSERT INTO ldci.tb_factura(
-	codigo, termino, tipo, moneda, descuento, monto, micelaneo,
-	fecha_emision,id_flete, usuario_grabacion, fecha_grabacion)
-	VALUES ( ?, ?, ?, ?, ?, ?, ?, now()::date, ?, ?,now()) RETURNING id_factura', [$codigoFactura,$termino, $tipo, $moneda, $descuento, $total,$micelaneos,$id_flete, $id_session]);
+        codigo, termino, tipo, moneda, descuento, monto, micelaneo,
+        fecha_emision,id_flete, usuario_grabacion, fecha_grabacion)
+        VALUES ( ?, ?, ?, ?, ?, ?, ?, now()::date, ?, ?,now()) RETURNING id_factura', [$codigoFactura,$termino, $tipo, $moneda, $descuento, $total,$micelaneos,$id_flete, $id_session]);
 
 
         if (empty($query_factura)) {
@@ -211,7 +213,7 @@ class FacturaModel extends Model
             if ($transaccionOk) {
                 DB::commit();
                 return collect([
-                    'mensaje' => 'Factura Gurdada con exito',
+                    'mensaje' => 'Factura Guardada con exito',
                     'error' => false,
                 ]);
             }
@@ -248,7 +250,7 @@ class FacturaModel extends Model
             where fa.estado=1
             union
             select 2 as tipo, f.codigo,null,
-               case when fc.comun=true then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
+               case when fc.comun=false then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
                else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
                null,null,null,null,null
             from ldci.tb_factura f
@@ -277,7 +279,7 @@ class FacturaModel extends Model
             and fa.estado=1
             union
               select 2 as tipo, f.codigo,null,
-               case when fc.comun=true then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
+               case when fc.comun=false then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
                else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
                null,null,null,null,null
               from ldci.tb_factura f
@@ -374,6 +376,14 @@ class FacturaModel extends Model
         return $query;
     }
 
+    /** Funcion que permite validar la existencia de un producto */
+    public function getExistencia($id_producto)
+    {
+        $query = new static;
+        $query = DB::select("select existencia from ldci.tb_producto where tipo=1 and id_producto=$id_producto");
+        return $query;
+    }
+
     function  anularFacturaCotizacion($id_cotizacion,$factura,$id_session)
     {
         DB::beginTransaction();
@@ -399,5 +409,77 @@ class FacturaModel extends Model
         }
     }
 
+    function  guardarFactura($tblDetalleProductos,$termino,$tipo,$codigoFactura,$descuento,$total,$moneda,$cliente,$subTotal,$iva,$id_session)
+    {
+        DB::beginTransaction();
+        $transaccionOk = true;
+        $query_factura = new static;
+        $query_factura = DB::select('INSERT INTO ldci.tb_factura(
+        codigo, termino, tipo, moneda, descuento, monto,
+        fecha_emision,usuario_grabacion, fecha_grabacion)
+        VALUES ( ?, ?, ?, ?, ?, ?, now()::date,?,now()) RETURNING id_factura', [$codigoFactura, $termino, $tipo, $moneda, $descuento, $total, $id_session]);
 
-}
+
+        if (empty($query_factura)) {
+            DB::rollBack();
+            return collect([
+                'mensaje' => 'Hubo un error al guardar factura',
+                'error' => true
+            ]);
+        } else {
+             if ($cliente==null)
+                 $comun = True;
+             else
+                 $comun = False;
+
+            $query_factura_cliente = new static;
+            $query_factura_cliente = DB::select('INSERT INTO ldci.tb_factura_cliente(
+             id_factura, id_cliente, comun, iva, subtotal)
+            VALUES ( ?, ?, ?, ?, ?) RETURNING id_factura_cliente', [$query_factura[0]->id_factura, $cliente, $comun, $iva, $subTotal]);
+
+
+            if (empty($query_factura_cliente)) {
+                DB::rollBack();
+                return collect([
+                    'mensaje' => 'Hubo un error al guardar factura',
+                    'error' => true
+                ]);
+            } else {
+
+                foreach ($tblDetalleProductos as $producto) {
+                    $query_detalle = new static;
+                    $query_detalle = DB::insert('INSERT INTO ldci.tb_detalle_factura(
+                     id_factura_cliente, id_producto, precio, cantidad, usuario_grabacion, fecha_grabacion)
+                    VALUES (?, ?, ?, ?, ?, now());', [$query_factura_cliente[0]->id_factura_cliente, $producto->producto, $producto->monto, $producto->cantidad, $id_session]);
+
+                    /** Actualiza existencia del producto */
+                    $query_existencia = new static;
+                    $query_existencia = DB::select('	UPDATE ldci.tb_producto
+                    SET existencia=(select existencia from ldci.tb_producto where id_producto=?)-?,
+                    usuario_modificacion=?, fecha_modificacion=now()
+                    WHERE id_producto=?', [$producto->producto, $producto->cantidad, $id_session,$producto->producto]);
+
+
+                    if (!$query_detalle) {
+                        $transaccionOk = false;
+                        DB::rollBack();
+                        return collect([
+                            'mensaje' => 'Hubo un error al guardar detalle de factura',
+                            'error' => true
+                        ]);
+                    }
+                }
+
+                    if ($transaccionOk) {
+
+
+                        DB::commit();
+                        return collect([
+                            'mensaje' => 'Factura Guardada con exito',
+                            'error' => false,
+                        ]);
+                    }
+                }
+            }
+        }
+    }

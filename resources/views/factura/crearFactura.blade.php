@@ -40,10 +40,19 @@
                                 <input onchange="validarNoFactura(this)" required name="txt_codigoFactura" id="txt_codigoFactura"  class="form-control input-sm">
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-1">
+                            <label >Común</label>
+                            <div class="form-group">
+                                <label class="switch">
+                                    <input  id="ckComun" type="checkbox">
+                                    <span title="Seleccionar si es un cliente comun" class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
                             <div class="form-group">
                                 <label for="cmb_Cliente">Cliente</label>
-                                <select name="cmb_Cliente"  id="cmb_Cliente" class=" form-control input-md">
+                                <select required name="cmb_Cliente"  id="cmb_Cliente" class=" form-control input-md">
                                     <option selected disabled value=""> Seleccione</option>
                                 </select>                            </div>
                         </div>
@@ -124,7 +133,7 @@
                                         <tbody>
                                         <tr class="fila-base">
                                             <td width="10%" class="text-center">
-                                                <input onkeypress="return soloNumeros(event,txt_cantidad);" onFocus="this.oldValue = this.value;"  onchange="importe(event,this);this.oldValue = this.value;"   name="txt_cantidad" id="txt_cantidad"  class="text-center form-control input-sm" type="text">
+                                                <input onblur="validarExistencia(this)" onkeypress="return soloNumeros(event,txt_cantidad);" onFocus="this.oldValue = this.value;"  onchange="importe(event,this);this.oldValue = this.value;"   name="txt_cantidad" id="txt_cantidad"  class="text-center form-control input-sm" type="text">
                                             </td>
                                             <td width="50%" class="text-center">
                                                 <select onchange="changeProducto(event,this)" name="cmb_Producto"  id="cmb_Producto" class=" form-control input-md">
@@ -181,8 +190,8 @@
             </div>
         </div>
         <div class="box-footer text-center">
-            <button disabled title="Generar Factura" onclick="generar()" class="btn btn-info btn-sm" id="btnGenerar"><i class="fa fa-print"> </i> Generar</button>
-            <button onclick="" disabled class="remover btn btn-danger btn-sm" id="btnAnularFactura"><i class="fa fa-trash-o"> </i> Anular</button>
+            <button  title="Generar Factura" onclick="GenerarFactura()" class="btn btn-info btn-sm" id="btnGenerar"><i class="fa fa-print"> </i> Generar</button>
+            <button  disabled title="Anular Factura" onclick="" disabled class="remover btn btn-danger btn-sm" id="btnAnularFactura"><i class="fa fa-trash-o"> </i> Anular</button>
             <a href="factura.crearFactura" title="Limpiar formulario" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
         </div>
     </div>

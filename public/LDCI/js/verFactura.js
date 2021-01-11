@@ -35,7 +35,7 @@ var tblFacturas = null;
                         }
                         else
                         {
-                            return '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura(this)">PDF</i>'
+                            return '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="">PDF</i>'
                         }
 
                     }
