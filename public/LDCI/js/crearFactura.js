@@ -532,8 +532,8 @@ var Iva=0;
                             detailwindows.document.close();
                             showLoad(false);
                             $('#btnlimpiar').click();
+                            showLoad(false);
                         });
-                 showLoad(false);
                 }
             },
             error: function (err) {
