@@ -135,7 +135,7 @@ class FacturaController extends Controller
         $codigoFactura=$request->codigoFactura;
         $descuento=$request->descuento;
         $total=$request->total;
-        $subTotal=$request->SubTotal;
+        $subTotal=$request->subTotal;
         $iva=$request->iva;
         $moneda=$request->moneda;
         $id_session = session('idUsuario');

@@ -341,11 +341,12 @@ class FacturaModel extends Model
     {
         $table = "(select fc.id_factura_cliente as venta,f.codigo as factura,f.estado,
                     to_char(coalesce(f.monto,0),'9,999,999.99') as monto ,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura ,
-                     p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ') as cliente
+                      case when fc.comun=false then p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ')
+                      else 'COMUN' end as cliente
                     from ldci.tb_factura f
                     join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
-                    join ldci.tb_cliente cl on cl.id_cliente=fc.id_cliente
-                    join ldci.tb_persona p on p.id_persona=cl.id_persona
+                    left join ldci.tb_cliente cl on cl.id_cliente=fc.id_cliente
+                    left join ldci.tb_persona p on p.id_persona=cl.id_persona
                     order by fc.id_factura_cliente desc) as tb";
 
         $primaryKey = 'venta';
@@ -482,4 +483,42 @@ class FacturaModel extends Model
                 }
             }
         }
+
+    /** Funcion que recupera encabezado de factura de venta directa*/
+    function getDatosFacturaProductos($codigoFactura)
+    {
+        $query = new static;
+        $query = DB::select("select f.codigo as factura,upper (f.termino) as termino,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura ,
+                                    case when fc.comun=false then p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ')
+                                    else 'COMUN' end as cliente,upper (u.usuario) as vendedor,case when f.moneda=1 then 'DOLLAR' else 'CORDOBA' end as moneda,
+                                    to_char(coalesce(f.monto,0),'9,999,999.99') as total,to_char(coalesce(f.descuento,0),'9,999,999.99') as descuento,
+                                    to_char(coalesce(fc.iva,0),'9,999,999.99') as iva,to_char(coalesce(fc.subtotal,0),'9,999,999.99') as subtotal
+                                    from ldci.tb_factura f
+                                    join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
+                                    left join ldci.tb_cliente cl on cl.id_cliente=fc.id_cliente
+                                    left join ldci.tb_persona p on p.id_persona=cl.id_persona
+                                    join ldci.tb_usuario u on u.id_usuario=f.usuario_grabacion
+                                    where f.codigo='$codigoFactura' and f.estado=1");
+
+        return $query;
     }
+
+    /**Funcion para mostrar detalle de factura de venta directa*/
+    function getDetalleFactura($codigoFactura)
+    {
+        $query = new static;
+        $query = DB::select("select row_number() OVER () as no,
+                                 p.id_producto, p.nombre,p.descripcion,df.precio,
+                                 df.cantidad,coalesce((df.cantidad*df.precio),0) total,
+                                 0 as Dto,coalesce(((df.cantidad*df.precio)*0.15),0) as iva,
+                                 coalesce(((df.cantidad*df.precio)*0.15)+(df.cantidad*df.precio),0) as importe
+                                from ldci.tb_detalle_factura df
+                                join ldci.tb_producto p on df.id_producto=p.id_producto
+                                join ldci.tb_factura_cliente fc on fc.id_factura_cliente=df.id_factura_cliente
+                                join ldci.tb_factura f on f.id_factura=fc.id_factura
+                                where f.codigo='$codigoFactura' and f.estado=1");
+
+        return $query;
+    }
+
+}

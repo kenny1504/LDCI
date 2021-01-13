@@ -83,7 +83,7 @@ class ReporteController extends Controller
                 'Detalle' => $detalle
             ];
 
-            $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4'); //prueba para mandar datos a tabla de pdf
+            $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4');
             echo utf8_encode(($pdf->stream('archivo.pdf')));
 
     }
@@ -106,8 +106,28 @@ class ReporteController extends Controller
         ];
 
 
-        $pdf = PDF::loadView('reportes.rpt_factura', $data)->setPaper('a4'); //prueba para mandar datos a tabla de pdf
+        $pdf = PDF::loadView('reportes.rpt_factura', $data)->setPaper('a4');
         echo utf8_encode(($pdf->stream('archivo.pdf')));
 
     }
+
+    /** Funcion para generar factura de una venta directa*/
+    public function downloadFacturaProductos(Request $request)
+    {
+        $codigoFactura = $request->codigoFactura;
+
+        $datos = (new FacturaModel)->getDatosFacturaProductos($codigoFactura);
+        $detalle = (new FacturaModel)->getDetalleFactura($codigoFactura);
+
+        $data = [
+            'Informacion' => $datos,
+             'Detalle' => $detalle,
+        ];
+
+
+        $pdf = PDF::loadView('reportes.rpt_factura_productos', $data)->setPaper('a4');
+        echo utf8_encode(($pdf->stream('archivo.pdf')));
+
+    }
+
 }

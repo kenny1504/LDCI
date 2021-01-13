@@ -82,7 +82,7 @@ var Iva=0;
                 },
             },
             columnDefs: [{
-                targets: 4,
+                targets: 2,
                 data: null,
                 orderable: false,
                 render: function (json) {
@@ -513,15 +513,13 @@ var Iva=0;
                     alertSuccess(data.mensaje);
                     alertSuccess("Generando Factura ...");
 
-                 /**   $.ajax({
+                   $.ajax({
                         type:"post",
-                        url: '/cotizaciones/factura', //llamada a la ruta
+                        url: '/productos/factura', //llamada a la ruta
                         global:false,
                         data:{
                             _token:_token,
-                            id_cotizacion: id_cotizacion,
-                            codConsig: codConsig.dialCode,
-                            codCliente: codCliente.dialCode
+                            codigoFactura:codigoFactura
                         }
                     })
                         .done(function(data,textstatus,jqXHR )
@@ -534,7 +532,7 @@ var Iva=0;
                             detailwindows.document.close();
                             showLoad(false);
                             $('#btnlimpiar').click();
-                        });*/
+                        });
                  showLoad(false);
                 }
             },
