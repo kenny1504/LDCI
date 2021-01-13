@@ -411,5 +411,39 @@ $(document).ready(function () {
 
     }
 
+    function  validarNoFactura(input)
+    {
+        var _token= $('input[name=_token]').val();
+        var codigoFactura=input.value;
+
+
+        if (codigoFactura!="")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/getNoFactura', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    codigoFactura:codigoFactura
+                },
+                success: function (data) {
+
+                    if (Object.entries(data).length!=0)
+                    {
+                        alertError("Ya existe una factura con el numero proporsionado, emitida el "+data[0].fecha_emision);
+                        input.value="";
+                    }
+                    showLoad(false);
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        }
+
+    }
+
 
 
