@@ -124,7 +124,7 @@ class CotizacionModel extends Model
             if ($estado != 0) {
                 $table = "(select co.id_cotizacion, t.nombre as
                         transporte,c1.ciudad ||','||c1.pais as destino,
-                        c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date,co.estado,us.usuario,
+                        c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date as fecha,co.estado,us.usuario,
                         co.fecha_grabacion,us1.usuario as asignada
                         from ldci.tb_cotizacion co
                         join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
@@ -157,7 +157,7 @@ class CotizacionModel extends Model
                 $table = "(select distinct t1.id_cotizacion,t1.transporte,t1.destino,
                             t1.origen,t1.fecha,t1.estado,t1.usuario,t1.asignada
                             from(select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
-                            c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date,co.estado,us.usuario,
+                            c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date as fecha,co.estado,us.usuario,
                             co.fecha_grabacion,us1.usuario as asignada
                             from ldci.tb_cotizacion co
                             join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
@@ -186,7 +186,7 @@ class CotizacionModel extends Model
                 $table = "(select distinct t1.id_cotizacion,t1.transporte,t1.destino,
                             t1.origen,t1.fecha,t1.estado,t1.usuario,t1.asignada
                             from(select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
-                            c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date,co.estado,us.usuario,
+                            c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date as fecha,co.estado,us.usuario,
                             co.fecha_grabacion,us1.usuario as asignada
                             from ldci.tb_cotizacion co
                             join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
@@ -198,7 +198,7 @@ class CotizacionModel extends Model
                             where  co.usuario_grabacion=$id_session
                             union all
                             select co.id_cotizacion, t.nombre as transporte,c1.ciudad ||','||c1.pais as destino,
-                            c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date,co.estado,us.usuario,
+                            c2.ciudad ||','|| c2.pais as origen,co.fecha_grabacion :: date as fecha,co.estado,us.usuario,
                                    co.fecha_grabacion,us2.usuario as asignada
                             from ldci.tb_cotizacion co
                             join ldci.vw_ciudades c1 on co.id_ciudad_destino=c1.id_ciudad
