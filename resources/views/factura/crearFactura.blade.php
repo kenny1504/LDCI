@@ -74,7 +74,7 @@
                                 <select required  onchange="changeDescuento(this)" name="cmb_descuento" id="cmb_descuento"  class="form-control input-md">
                                     <option selected disabled value="">Seleccione</option>
                                     <option  value="0">Ninguno</option>
-                                    <option  value="0.5">5 %</option>
+                                    <option  value="0.05">5 %</option>
                                     <option  value="0.10">10 %</option>
                                     <option  value="0.20">20 %</option>
                                     <option  value="0.30">30 %</option>
