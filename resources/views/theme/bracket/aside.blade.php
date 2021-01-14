@@ -108,7 +108,7 @@
                   <span class="menu-item-label">Productos</span>
               </div><!-- menu-item -->
           </a><!-- br-menu-link -->
-          <a href="rastreo.rastreo" class="optionMenu br-menu-link">
+          <a href="rastreo.rastreoUsuario" class="optionMenu br-menu-link">
               <div class="br-menu-item">
                   <i  class="menu-item-icon icon ion-location tx-20"></i>
                   <span class="menu-item-label">Rastreo</span>
