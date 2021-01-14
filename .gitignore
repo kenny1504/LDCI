@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/images/productos
+/public/images/rastreo
 /public/storage
 /storage/*.key
 /vendor

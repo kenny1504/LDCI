@@ -12,6 +12,7 @@
     background-color:#337ab7;
     text-align: center;
     }
+
 </style>
     <div>
         <center>
@@ -25,8 +26,6 @@
         <div class="box box-success">
             <div class="box-heading"><legend class="text-primary text-center">Rastreo</legend></div>
             <div class="box-body">
-                <form  method="post" action="{{route('guardarRastreo')}}" accept-charset="utf-8"  enctype="multipart/form-data" class="dropzone dz-clickable" id="image-upload">
-                    @csrf
                 <div class="row" style="margin: 2%">
                     <div class="col-md-12">
                         <div class="row">
@@ -91,32 +90,19 @@
                                                 <th class=" text-center" width="15%">Fecha</th>
                                                 <th class=" text-center" width="25%">Evento</th>
                                                 <th class=" text-center" width="50%">Detalle Evento</th>
-                                                <th class=" text-center" width="10%">ACCIÓN</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="fila-base" >
                                                 <td width="15%" class="text-center">
                                                     <input type="hidden" id="id_detalle" name="id_detalle[]" class="form-control input-md">
-                                                    <input type="date" id="fecha_evento" name="fecha_evento[]" class="form-control input-md">
+                                                    <input readonly type="date" id="fecha_evento" name="fecha_evento[]" class="form-control input-md">
                                                 </td>
                                                 <td width="25%" class="text-center">
-                                                    <input placeholder="Ej: En Aduana" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
+                                                    <input readonly placeholder="Ej: En Aduana" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
                                                 </td>
                                                 <td width="40%" class="text-center">
-                                                    <textarea placeholder="descripcion de evento" name="txt_descripcion_evento[]" id="txt_descripcion_evento" class="form-control"></textarea>
-                                                </td>
-                                                <td width="10%" class="text-center">
-                                                    <div class="form-group">
-                                                        <a class="btn btn-danger eliminarFila"
-                                                                title="Eliminar Evento"
-                                                                id="btnEliminarFila">
-                                                            <i class=" fa fa-trash" style="color: ghostwhite"></i></a>
-                                                        <button class="btn btn-primary"
-                                                                data-confirm="" id="btnAgregarFila"
-                                                                title="Añadir Evento">
-                                                            <i class=" fa fa-plus"></i></button>
-                                                    </div>
+                                                    <textarea readonly placeholder="descripcion de evento" name="txt_descripcion_evento[]" id="txt_descripcion_evento" class="form-control"></textarea>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -128,26 +114,23 @@
                     </div>
                 </div>
 
-                <div class="row ocular" style="margin: 2%">
+                <div class="row">
                     <div class="col-md-12">
-                        <table class="punteado" width=100% align="center">
-                            <tr>
-                                <td>
-                                    <div class="dz-default dz-message">
-                                        <span > Arrastre aqui imagen</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="box box-success">
+                            <div  class="box-heading"><legend class="text-primary text-center">Imagenes de Seguimiento</legend></div>
+                            <div class="box-body">
+                                <div id="imagenes" class="row">
+
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
-        </form>
             <div class="box-footer text-center">
-                <button readonly type="submit" class="btn btn-success btn-sm" id="btnGuardarRastreo">
-                    <i class="fa fa-refresh"> </i> Actualizar
-                </button>
-                <a href="rastreo.rastreo" title="Limpiar formulario" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
+                <a href="rastreo.rastreoUsuario" title="Limpiar formulario" id="btnlimpiar" class="optionMenu btn btn-md btn-warning btn-sm" ><i class="fa fa-recycle"></i> Limpiar</a>
             </div>
         </div>
     </div>
@@ -194,4 +177,5 @@
         </div>
     </div>
 
-<script src="{{asset("LDCI/js/rastreo.js")}}" ></script>
+<script src="{{asset("LDCI/js/rastreoUsuario.js")}}" ></script>
+<script src="{{asset("LDCI/Core/jquery.elevatezoom.js")}}"></script>

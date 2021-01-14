@@ -139,3 +139,12 @@ Route::post('/getVentas', 'FacturaController@getVentas')->name('Ventas');
 Route::post('/producto/precio', 'FacturaController@getPrecio')->name('Precio');
 Route::post('/facturaCotizacion/anular', 'FacturaController@anularFacturaCotizacion')->name('Anular');
 
+//Rutas Rastreo
+Route::post('/rastreo/getAllCotizaciones', 'RastreoController@getCotizaciones')->name('getAllCotizaciones');
+Route::post('/getDetalle/rastreo', 'RastreoController@getDetalleSeguimiento')->name('getDetalle');
+Route::post('/rastreo/guardar', 'RastreoController@guardarRastreo')->name('guardarRastreo');
+Route::post('/rastreo/fotos', 'RastreoController@getImagen')->name('fotos');
+Route::post('/rastreo/eliminarImagen', 'RastreoController@eliminarImagen')->name('eliminarImagen');
+Route::post('/rastreoEvento/anular', 'RastreoController@eliminarEvento')->name('eliminarEvento');
+
+Route::post('/rastreo/getRastreoImagenes', 'RastreoController@getRastreoImagenes')->name('getRastreoImagenes');
