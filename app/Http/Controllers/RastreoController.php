@@ -124,4 +124,13 @@ class RastreoController extends Controller
                 'error' => true,
             ]);
     }
+
+    /** Funcion para obtener fecha de llegada */
+    function fechaRastreo(Request $request)
+    {
+        $id_rastreo = $request->id_flete;
+        $fecha = (new RastreoModel)->fechaRastreo($id_rastreo);
+
+        return $fecha;
+    }
 }

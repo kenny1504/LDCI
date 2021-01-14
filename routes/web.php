@@ -150,5 +150,6 @@ Route::post('/rastreo/guardar', 'RastreoController@guardarRastreo')->name('guard
 Route::post('/rastreo/fotos', 'RastreoController@getImagen')->name('fotos');
 Route::post('/rastreo/eliminarImagen', 'RastreoController@eliminarImagen')->name('eliminarImagen');
 Route::post('/rastreoEvento/anular', 'RastreoController@eliminarEvento')->name('eliminarEvento');
+Route::post('/getFecha/rastreo', 'RastreoController@fechaRastreo')->name('fechaRastreo');
 
 Route::post('/rastreo/getRastreoImagenes', 'RastreoController@getRastreoImagenes')->name('getRastreoImagenes');

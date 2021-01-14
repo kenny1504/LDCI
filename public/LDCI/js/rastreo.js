@@ -181,6 +181,25 @@ debugger;
             $('.ocular').removeAttr('hidden');
             $('#btnGuardarRastreo').removeAttr('disabled');
         }
+
+        /** Recuperar fecha en formato para asignarla en input fecha */
+        $.ajax({
+            type: 'POST',
+            url: '/getFecha/rastreo', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_flete:id_flete,
+            },
+            success: function (response) {
+                debugger;
+                $('#fecha_llegada').val(response[0].fecha);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+        });
+
         /** Recupera informacion de rastreo*/
         $.ajax({
             type: 'POST',
