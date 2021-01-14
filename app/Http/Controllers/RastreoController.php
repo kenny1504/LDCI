@@ -25,9 +25,20 @@ class RastreoController extends Controller
         return response()->json($datos);
     }
 
+    //** funcion para guardar rastreo sin imagen */
+    function guardarRastreoSI(Request $request)
+    {
+        $tblRastreo = json_decode($request->tblRastreo); //sin imagen
+        $id_fleteR = $request->id_flete; //sin imagen
+        $id_session = session('idUsuario');
+
+        $guardar_rastreo_s = (new RastreoModel)->guardarRastreoSImagen($id_fleteR, $tblRastreo, $id_session);
+        return $guardar_rastreo_s;
+    }
     //Funcion rastreo
     function guardarRastreo(Request $request)
     {
+
         $fecha = $request->fecha_evento;
         $evento = $request->txt_evento;
         $descripcion = $request->txt_descripcion_evento;
@@ -130,7 +141,6 @@ class RastreoController extends Controller
     {
         $id_rastreo = $request->id_flete;
         $fecha = (new RastreoModel)->fechaRastreo($id_rastreo);
-
         return $fecha;
     }
 }

@@ -141,6 +141,46 @@ class RastreoModel extends Model
         ]);
     }
 
+    /** Funcion para guardar el detalle de rastreo del flete sin imagenes */
+    public function guardarRastreoSImagen($id_flete, $tblRastreo, $id_session)
+    {
+        DB::beginTransaction();
+        foreach ($tblRastreo as $evento) {
+            if ($evento->Id_detalle_seguimiento == null) {
+                $query_detalle_seguimiento = new static;
+                $query_detalle_seguimiento = DB::insert('INSERT INTO ldci.tb_detalle_seguimiento(
+                fecha, evento, detalle, estado, id_flete,  usuario_grabacion, fecha_grabacion)
+                VALUES (?, ?, ?, ?, ?, ?, now())', [$evento->Fecha, $evento->Evento, $evento->Descripcion, 1, $id_flete, $id_session]);
+
+                if (!$query_detalle_seguimiento) {
+                    DB::rollBack();
+                    return collect([
+                        'mensaje' => 'Hubo un error al guardar el detalle de rastreo',
+                        'error' => true
+                    ]);
+                }
+            } else {
+                $query_detalle_seguimiento_p = new static;
+                $query_detalle_seguimiento_p = DB::Update("UPDATE ldci.tb_detalle_seguimiento SET
+                fecha=?, evento=?, detalle=?,  usuario_modificacion=?, fecha_modificacion=now()
+                WHERE id_detalle_seguimiento=?", [$evento->Fecha, $evento->Evento, $evento->Descripcion, $id_session, $evento->Id_detalle_seguimiento]);
+
+                if (!$query_detalle_seguimiento_p) {
+                    DB::rollBack();
+                    return collect([
+                        'mensaje' => 'Hubo un error al guardar el detalle de rastreo',
+                        'error' => true
+                    ]);
+                }
+            }
+        }
+        DB::commit();
+        return collect([
+            'mensaje' => 'Detalle Rastreo guardada con exito',
+            'error' => false
+        ]);
+    }
+
     /** Funcion para guardar la imagen del rastreo de la cotizacion */
     public function guardarImagenRastreo($id_flete, $url, $imageName, $id_session)
     {

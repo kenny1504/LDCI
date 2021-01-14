@@ -147,6 +147,7 @@ Route::post('/factura/guardar', 'FacturaController@guardarFactura')->name('Guard
 Route::post('/rastreo/getAllCotizaciones', 'RastreoController@getCotizaciones')->name('getAllCotizaciones');
 Route::post('/getDetalle/rastreo', 'RastreoController@getDetalleSeguimiento')->name('getDetalle');
 Route::post('/rastreo/guardar', 'RastreoController@guardarRastreo')->name('guardarRastreo');
+Route::post('/rastreoSI/guardar', 'RastreoController@guardarRastreoSI')->name('guardarRastreoSI');
 Route::post('/rastreo/fotos', 'RastreoController@getImagen')->name('fotos');
 Route::post('/rastreo/eliminarImagen', 'RastreoController@eliminarImagen')->name('eliminarImagen');
 Route::post('/rastreoEvento/anular', 'RastreoController@eliminarEvento')->name('eliminarEvento');
