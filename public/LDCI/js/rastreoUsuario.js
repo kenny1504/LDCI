@@ -102,7 +102,7 @@
                 var html='';
                 data.forEach(element =>{
                     html+=
-                            "<div class=\"col-md-7 ventanas\"> <div class=\"box box-success\"> <div class=\"box-body\"> <div  class=\"col-md-12\"> <img class=\"zoom_mouse\" style='width: 100% !important' src="+element.url+"/"+element.imagen+" data-zoom-image="+element.url+"/"+element.imagen+"> </div> </div> </div> </div> <br>"
+                            "<div  class=\"col-md-6\"> <img class=\"zoom_mouse\" style='width: 100% !important' src="+element.url+"/"+element.imagen+" data-zoom-image="+element.url+"/"+element.imagen+"> </div>  <br>"
 
                         });
                 showLoad(false);
