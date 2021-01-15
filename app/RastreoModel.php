@@ -16,7 +16,7 @@ class RastreoModel extends Model
                 then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
                 else cl.nombre_empresa end as cliente,
                 tt.nombre as transporte, cd.ciudad||'/'||cd.pais as destino,
-                co.ciudad||'/'||co.pais as origen, TO_CHAR (c.fecha,'DD-MM-YYYY') AS fecha_envio
+                co.ciudad||'/'||co.pais as origen, TO_CHAR (f.fecha_entrega,'DD-MM-YYYY') AS fecha_llegada
                 FROM ldci.tb_cotizacion AS c
                 JOIN ldci.tb_tipo_transporte AS tt on tt.id_tipo_transporte=c.id_tipo_transporte
                 JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
@@ -25,35 +25,50 @@ class RastreoModel extends Model
                 JOIN ldci.tb_cliente AS cl ON cl.id_cliente=f.id_cliente
                 JOIN ldci.tb_persona AS p ON cl.id_persona=p.id_persona WHERE c.estado=4) as tb";
         } else {
-            $table = "(SELECT DISTINCT f.id_flete,f.cliente,f.transporte,f.destino, f.origen, f.fecha_envio FROM(
-                SELECT f.id_flete,case cl.tipo when 1
-                    then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
-                    else cl.nombre_empresa end as cliente,
-                    tt.nombre as transporte, cd.ciudad||'/'||cd.pais as destino,
-                    co.ciudad||'/'||co.pais as origen, TO_CHAR (c.fecha,'DD-MM-YYYY') AS fecha_envio
-                    FROM ldci.tb_cotizacion AS c
-                    JOIN ldci.tb_tipo_transporte AS tt on tt.id_tipo_transporte=c.id_tipo_transporte
-                    JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
-                    JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
-                    JOIN ldci.tb_flete AS f ON f.id_cotizacion=c.id_cotizacion
-                    JOIN ldci.tb_cliente AS cl ON cl.id_cliente=f.id_cliente
-                    JOIN ldci.tb_persona AS p ON cl.id_persona=p.id_persona
-                    WHERE c.estado=4 AND c.usuario_grabacion=$id_session
-                    UNION ALL
-                    SELECT f.id_flete,case cl.tipo when 1
-                    then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
-                    else cl.nombre_empresa end as cliente,
-                    tt.nombre as transporte, cd.ciudad||'/'||cd.pais as destino,
-                    co.ciudad||'/'||co.pais as origen, TO_CHAR (c.fecha,'DD-MM-YYYY') AS fecha_envio
-                    FROM ldci.tb_cotizacion AS c
-                    JOIN ldci.tb_tipo_transporte AS tt on tt.id_tipo_transporte=c.id_tipo_transporte
-                    JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
-                    JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
-                    JOIN ldci.tb_flete AS f ON f.id_cotizacion=c.id_cotizacion
-                    JOIN ldci.tb_cliente AS cl ON cl.id_cliente=f.id_cliente
-                    JOIN ldci.tb_persona AS p ON cl.id_persona=p.id_persona
-                    JOIN ldci.tb_vendedor_cotizacion AS vc ON vc.id_cotizacion=c.id_cotizacion
-                    WHERE c.estado=4 AND vc.id_usuario=$id_session) AS f) as tb";
+            $table = "(SELECT DISTINCT f.id_flete,UPPER(f.cliente) AS cliente,f.transporte,f.destino, f.origen, f.fecha_llegada FROM(
+                        SELECT f.id_flete,case cl.tipo when 1
+                            then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
+                            else cl.nombre_empresa end as cliente,
+                            tt.nombre as transporte, cd.ciudad||'/'||cd.pais as destino,
+                            co.ciudad||'/'||co.pais as origen, TO_CHAR (f.fecha_entrega,'DD-MM-YYYY') AS fecha_llegada
+                            FROM ldci.tb_cotizacion AS c
+                            JOIN ldci.tb_tipo_transporte AS tt on tt.id_tipo_transporte=c.id_tipo_transporte
+                            JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
+                            JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
+                            JOIN ldci.tb_flete AS f ON f.id_cotizacion=c.id_cotizacion
+                            JOIN ldci.tb_cliente AS cl ON cl.id_cliente=f.id_cliente
+                            JOIN ldci.tb_persona AS p ON cl.id_persona=p.id_persona
+                            JOIN ldci.tb_usuario as u ON u.correo=p.correo
+                            WHERE c.estado=4 AND u.id_usuario=$id_session
+                            UNION ALL
+                            SELECT f.id_flete,case cl.tipo when 1
+                            then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
+                            else cl.nombre_empresa end as cliente,
+                            tt.nombre as transporte, cd.ciudad||'/'||cd.pais as destino,
+                            co.ciudad||'/'||co.pais as origen, TO_CHAR (f.fecha_entrega,'DD-MM-YYYY') AS fecha_llegada
+                            FROM ldci.tb_cotizacion AS c
+                            JOIN ldci.tb_tipo_transporte AS tt on tt.id_tipo_transporte=c.id_tipo_transporte
+                            JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
+                            JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
+                            JOIN ldci.tb_flete AS f ON f.id_cotizacion=c.id_cotizacion
+                            JOIN ldci.tb_cliente AS cl ON cl.id_cliente=f.id_cliente
+                            JOIN ldci.tb_persona AS p ON cl.id_persona=p.id_persona
+                            JOIN ldci.tb_vendedor_cotizacion AS vc ON vc.id_cotizacion=c.id_cotizacion
+                            WHERE c.estado=4 AND vc.id_usuario=$id_session
+                            UNION ALL
+                            SELECT f.id_flete,case cl.tipo when 1
+                            then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
+                            else cl.nombre_empresa end as cliente,
+                            tt.nombre as transporte, cd.ciudad||'/'||cd.pais as destino,
+                            co.ciudad||'/'||co.pais as origen, TO_CHAR (f.fecha_entrega,'DD-MM-YYYY') AS fecha_llegada
+                            FROM ldci.tb_cotizacion AS c
+                            JOIN ldci.tb_tipo_transporte AS tt on tt.id_tipo_transporte=c.id_tipo_transporte
+                            JOIN ldci.vw_ciudades AS cd ON cd.id_ciudad=c.id_ciudad_destino
+                            JOIN ldci.vw_ciudades AS co ON co.id_ciudad=c.id_ciudad_origen
+                            JOIN ldci.tb_flete AS f ON f.id_cotizacion=c.id_cotizacion
+                            JOIN ldci.tb_cliente AS cl ON cl.id_cliente=f.id_cliente
+                            JOIN ldci.tb_persona AS p ON cl.id_persona=p.id_persona
+                            WHERE c.estado=4 AND c.usuario_grabacion=$id_session) AS f) as tb";
         }
         $primaryKey = 'id_flete';
         $columns = [
@@ -62,7 +77,7 @@ class RastreoModel extends Model
             ['db' => 'transporte', 'dt' => 2],
             ['db' => 'destino', 'dt' => 3],
             ['db' => 'origen', 'dt' => 4],
-            ['db' => 'fecha_envio', 'dt' => 5]
+            ['db' => 'fecha_llegada', 'dt' => 5]
         ];
         /*** Config DB */
         $db = array(
@@ -109,6 +124,46 @@ class RastreoModel extends Model
                 $query_detalle_seguimiento_p = DB::Update("UPDATE ldci.tb_detalle_seguimiento SET
                 fecha=?, evento=?, detalle=?,  usuario_modificacion=?, fecha_modificacion=now()
                 WHERE id_detalle_seguimiento=?", [$fecha[$i], $evento[$i], $descripcion[$i], $id_session, $id_detalle_seguimiento[$i]]);
+
+                if (!$query_detalle_seguimiento_p) {
+                    DB::rollBack();
+                    return collect([
+                        'mensaje' => 'Hubo un error al guardar el detalle de rastreo',
+                        'error' => true
+                    ]);
+                }
+            }
+        }
+        DB::commit();
+        return collect([
+            'mensaje' => 'Detalle Rastreo guardada con exito',
+            'error' => false
+        ]);
+    }
+
+    /** Funcion para guardar el detalle de rastreo del flete sin imagenes */
+    public function guardarRastreoSImagen($id_flete, $tblRastreo, $id_session)
+    {
+        DB::beginTransaction();
+        foreach ($tblRastreo as $evento) {
+            if ($evento->Id_detalle_seguimiento == null) {
+                $query_detalle_seguimiento = new static;
+                $query_detalle_seguimiento = DB::insert('INSERT INTO ldci.tb_detalle_seguimiento(
+                fecha, evento, detalle, estado, id_flete,  usuario_grabacion, fecha_grabacion)
+                VALUES (?, ?, ?, ?, ?, ?, now())', [$evento->Fecha, $evento->Evento, $evento->Descripcion, 1, $id_flete, $id_session]);
+
+                if (!$query_detalle_seguimiento) {
+                    DB::rollBack();
+                    return collect([
+                        'mensaje' => 'Hubo un error al guardar el detalle de rastreo',
+                        'error' => true
+                    ]);
+                }
+            } else {
+                $query_detalle_seguimiento_p = new static;
+                $query_detalle_seguimiento_p = DB::Update("UPDATE ldci.tb_detalle_seguimiento SET
+                fecha=?, evento=?, detalle=?,  usuario_modificacion=?, fecha_modificacion=now()
+                WHERE id_detalle_seguimiento=?", [$evento->Fecha, $evento->Evento, $evento->Descripcion, $id_session, $evento->Id_detalle_seguimiento]);
 
                 if (!$query_detalle_seguimiento_p) {
                     DB::rollBack();
@@ -225,6 +280,14 @@ class RastreoModel extends Model
                                 SET estado=-1, usuario_modificacion=?, fecha_modificacion=now()
                                 WHERE id_detalle_seguimiento=?', [$id_session, $id_detalle]);
 
+        return $query;
+    }
+
+    /** */
+    public function fechaRastreo($id_flete)
+    {
+        $query = new static;
+        $query = DB::select("SELECT f.fecha_entrega as fecha FROM ldci.tb_flete AS f where f.id_flete = $id_flete");
         return $query;
     }
 }

@@ -55,6 +55,10 @@ var img=null;
                             myDropzone.processQueue();
                         });
                     }
+                    else if(estado==true && myDropzone.files.length==0)
+                    {
+                        guardarrastreo();
+                    }
                     else
                         alertError("Favor completar campos y/o añadir imagenes");
                     });
@@ -95,14 +99,12 @@ var img=null;
 
     /** Funcion para eliminar fila */
     $("#tblRastreo").on('click', '.eliminarFila', function () {
-debugger;
 
         let fila = $(this).closest('tr');
         let id_detalle= $(fila).find("#id_detalle").val();
         var numeroFilas = $("#tblRastreo tr").length;
 
         if(id_detalle!="" && numeroFilas > 2){
-
             var _token = $('input[name=_token]').val();
             alertConfirm("¿Está seguro que desea eliminar el evento?", function (e) {
                 showLoad(true);
@@ -181,6 +183,24 @@ debugger;
             $('.ocular').removeAttr('hidden');
             $('#btnGuardarRastreo').removeAttr('disabled');
         }
+
+        /** Recuperar fecha en formato para asignarla en input fecha */
+        $.ajax({
+            type: 'POST',
+            url: '/getFecha/rastreo', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_flete:id_flete,
+            },
+            success: function (response) {
+                $('#fecha_llegada').val(response[0].fecha);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+        });
+
         /** Recupera informacion de rastreo*/
         $.ajax({
             type: 'POST',
@@ -315,6 +335,66 @@ debugger;
         $('input[type="text"]').val('');
         /** Elimina todas las filas de tabla dinamica menos la primera */
         $('#tblRastreo tr').closest('.otrasFilas').remove();
+    }
+
+    /** funcion para guardar detalle seguimiento sin imagen*/
+    function guardarrastreo()
+    {
+        alertConfirm("¿Está seguro que desea guardar?", function (e) {
+            /** Se recuperan datos de tabla Detalles de carga */
+            var DATA1 = [];
+            /** Se recuperan datos de tabla detalle de rastreo para validar*/
+            var TABLA = $("#tblRastreo tbody > tr");
+                //obtener detalle de rastreo
+            TABLA.each(function (e) {
+                let Fecha = $(this).find("input[id*='fecha_evento']").val();
+                let Evento = $(this).find("input[id*='txt_evento']").val();
+                let Descripcion = $(this).find("textarea[id*='txt_descripcion_evento']").val();
+                let Id_detalle_seguimiento = $(this).find("input[id*='id_detalle']").val();
+
+                item = {};
+                item ["Fecha"] =Fecha;
+                item ["Evento"] = Evento;
+                item ["Descripcion"] = Descripcion;
+                item ["Id_detalle_seguimiento"] = parseInt(Id_detalle_seguimiento);
+                DATA1.push(item);
+            });
+            let tblRastreo = JSON.stringify(DATA1);
+
+            var _token = $('input[name=_token]').val();
+            var id_flete = $('#id_flete').val();
+            if(id_flete!="")
+            {
+                showLoad(true);
+                $.ajax({
+                    type: 'POST',
+                    url: '/rastreoSI/guardar', //llamada a la ruta
+                    data: {
+                        _token:_token,
+                        tblRastreo:tblRastreo,
+                        id_flete:id_flete
+                    },
+                    success: function (data) {
+                        showLoad(false);
+                        if (data.error) {
+                            alertError(data.mensaje);
+                        }
+                        else
+                        {
+                            alertSuccess(data.mensaje);
+                            $('#btnlimpiar').click();
+                        }
+                    },
+                    error: function (err) {
+                        alertError(err.responseText);
+                        showLoad(false);
+                    }
+
+                });
+            }
+            else
+                alertError("Favor seleccione un flete");
+        });
     }
 
 

@@ -55,6 +55,24 @@
             $('.ocular').removeAttr('hidden');
             $('#btnGuardarRastreo').removeAttr('disabled');
         }
+
+        /** Recuperar fecha en formato para asignarla en input fecha */
+        $.ajax({
+            type: 'POST',
+            url: '/getFecha/rastreo', //llamada a la ruta
+            data: {
+                _token:_token,
+                id_flete:id_flete,
+            },
+            success: function (response) {
+                $('#fecha_llegada').val(response[0].fecha);
+            },
+            error: function (err) {
+                alertError(err.responseText);
+                showLoad(false);
+            }
+        });
+
         /** Recupera informacion de rastreo*/
         $.ajax({
             type: 'POST',
@@ -81,15 +99,15 @@
                 id_flete:id_flete
             },
             success: function (data) {
-                var html='',html1='';
+                var html='';
                 data.forEach(element =>{
                     html+=
-                            "<div class=\"col-md-6\"> <div class=\"box box-success\"> <div class=\"box-body\"> <div  class=\"col-md-12\"> <img class=\"zoom_mouse\" style='width: 100% !important' src="+element.url+"/"+element.imagen+" data-zoom-image="+element.url+"/"+element.imagen+"> </div> </div> </div> </div> <br>"
+                            "<div class=\"col-md-7 ventanas\"> <div class=\"box box-success\"> <div class=\"box-body\"> <div  class=\"col-md-12\"> <img class=\"zoom_mouse\" style='width: 100% !important' src="+element.url+"/"+element.imagen+" data-zoom-image="+element.url+"/"+element.imagen+"> </div> </div> </div> </div> <br>"
 
                         });
                 showLoad(false);
                 $('#imagenes').append(html);
-                $(".zoom_mouse").elevateZoom({scrollZoom : true,zoomWindowPosition: 6});
+                $(".zoom_mouse").elevateZoom({scrollZoom : true,zoomWindowPosition: 2});
             },
             error: function (err) {
                 alertError(err.responseText);
@@ -140,4 +158,5 @@
         $('input[type="text"]').val('');
         /** Elimina todas las filas de tabla dinamica menos la primera */
         $('#tblRastreo tr').closest('.otrasFilas').remove();
+        $('#imagenes').closest('.ventana').remove();
     }

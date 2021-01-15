@@ -47,6 +47,12 @@
                                     <input readonly required type="text" name="txt_cliente"  id="txt_cliente" class="form-control input-md">
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="fecha_llegada">Fecha llegada</label>
+                                    <input readonly type="date" id="fecha_llegada" name="fecha_llegada" class="form-control input-md">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -161,7 +167,7 @@
                                             <th>Transporte</th>
                                             <th>Destino</th>
                                             <th>Origen</th>
-                                            <th>Fecha Envio</th>
+                                            <th>Fecha Llegada</th>
                                             <th>Seleccione</th>
                                         </tr>
                                     </thead>
