@@ -99,10 +99,10 @@
                                                     <input readonly type="date" id="fecha_evento" name="fecha_evento[]" class="form-control input-md">
                                                 </td>
                                                 <td width="25%" class="text-center">
-                                                    <input readonly placeholder="Ej: En Aduana" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
+                                                    <input readonly placeholder="Sin Evento" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
                                                 </td>
                                                 <td width="40%" class="text-center">
-                                                    <textarea readonly placeholder="descripcion de evento" name="txt_descripcion_evento[]" id="txt_descripcion_evento" class="form-control"></textarea>
+                                                    <textarea readonly placeholder="Sin Evento" name="txt_descripcion_evento[]" id="txt_descripcion_evento" class="form-control"></textarea>
                                                 </td>
                                             </tr>
                                             </tbody>
