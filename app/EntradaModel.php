@@ -160,13 +160,6 @@ class EntradaModel extends Model
                             'mensaje' => 'Hubo un error al anular la entrada ',
                             'error' => true,
                         ]);
-                    } else {
-
-                        DB::commit();
-                        return collect([
-                            'mensaje' => 'Entrada anulada con exito',
-                            'error' => false,
-                        ]);
                     }
                 }
             } else {
@@ -176,5 +169,10 @@ class EntradaModel extends Model
                 ]);
             }
         }
+        DB::commit();
+        return collect([
+            'mensaje' => 'Entrada anulada con exito',
+            'error' => false,
+        ]);
     }
 }
