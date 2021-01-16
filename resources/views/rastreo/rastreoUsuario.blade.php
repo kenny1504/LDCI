@@ -94,7 +94,7 @@
                                             <tr>
 
                                                 <th class=" text-center" width="15%">Fecha</th>
-                                                <th class=" text-center" width="25%">Evento</th>
+                                                <th class=" text-center" width="35%">Evento</th>
                                                 <th class=" text-center" width="50%">Detalle Evento</th>
                                             </tr>
                                             </thead>
@@ -104,7 +104,7 @@
                                                     <input type="hidden" id="id_detalle" name="id_detalle[]" class="form-control input-md">
                                                     <input readonly type="date" id="fecha_evento" name="fecha_evento[]" class="form-control input-md">
                                                 </td>
-                                                <td width="25%" class="text-center">
+                                                <td width="35%" class="text-center">
                                                     <input readonly placeholder="Sin Evento" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
                                                 </td>
                                                 <td width="40%" class="text-center">
