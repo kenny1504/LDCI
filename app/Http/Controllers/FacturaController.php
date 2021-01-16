@@ -147,4 +147,16 @@ class FacturaController extends Controller
 
     }
 
+    public  function  anularFactura(Request $request)
+    {
+
+        $factura=$request->factura;
+        $id_session = session('idUsuario');
+
+        $guardar=(new FacturaModel)->anularFactura($factura,$id_session);
+
+        return $guardar;
+
+    }
+
 }

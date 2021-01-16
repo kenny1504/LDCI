@@ -142,6 +142,8 @@ Route::post('/producto/precio', 'FacturaController@getPrecio')->name('Precio');
 Route::post('/facturaCotizacion/anular', 'FacturaController@anularFacturaCotizacion')->name('Anular');
 Route::post('/factura/existencia', 'FacturaController@validarExistencia')->name('Existencia');
 Route::post('/factura/guardar', 'FacturaController@guardarFactura')->name('Guardar');
+Route::post('/factura/anular', 'FacturaController@anularFactura')->name('Anular');
+
 
 //Rutas Rastreo
 Route::post('/rastreo/getAllCotizaciones', 'RastreoController@getCotizaciones')->name('getAllCotizaciones');

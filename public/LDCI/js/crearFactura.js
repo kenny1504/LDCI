@@ -97,7 +97,14 @@ var Iva=0;
                     targets: -1,
                     data: null,
                     orderable: false,
-                    defaultContent: '<button class="btn btn-info" title="Seleccione Venta" onclick="selectEntrada(this)" data-dismiss="modal"><i class="fa fa-check"> </i> </button>'
+                    render: function (json) {
+
+                        if (json[2] == 1) {
+                            return '<i title="Anular factura"  class=" btn btn-danger fa fa-trash-o" onclick="anularFacturaProducto(this)" id="btnAnularFactura">Anular</i>'
+                        }
+                        else
+                            return ' ';
+                    }
                 }]
         });
     }
@@ -543,6 +550,43 @@ var Iva=0;
         });
 
     }
+
+    function anularFacturaProducto(datos)
+    {
+        var dt = tblFacturas.row($(datos).parents('tr')).data();
+        var  factura= dt[1];
+        var _token= $('input[name=_token]').val();
+
+        alertConfirm("Esta seguro de anular factura?", function (e){
+            showLoad(true);
+            $.ajax({
+                type:'POST',
+                url: '/factura/anular',
+                data:{
+                    _token:_token,
+                    factura:factura
+                },
+                success: function(data){
+                    showLoad(false);
+                    if(data.error){
+                        alertError(data.mensaje);
+                    }
+                    else{
+                        alertSuccess(data.mensaje);
+                        tblFacturas.ajax.reload();
+                    }
+                },
+                error: function(err){
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+            });
+
+        });
+
+    }
+
+
 
 
 

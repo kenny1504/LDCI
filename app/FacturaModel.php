@@ -521,4 +521,52 @@ class FacturaModel extends Model
         return $query;
     }
 
+    function  anularFactura($factura,$id_session)
+    {
+        DB::beginTransaction();
+
+        /** calcula la existencia*/
+        $query_existencia = new static;
+        $query_existencia = DB::select('UPDATE ldci.tb_producto
+            SET  existencia= existencia+ (select sum(df.cantidad)  from ldci.tb_detalle_factura df
+                                        join ldci.tb_factura_cliente fc on df.id_factura_cliente=fc.id_factura_cliente
+                                        join ldci.tb_factura f on fc.id_factura=f.id_factura
+                                        where f.codigo=? and f.estado=1 and df.id_producto=id_producto
+                                        ), usuario_modificacion=?, fecha_modificacion=now()
+            WHERE id_producto in (select df.id_producto from ldci.tb_detalle_factura df
+                                    join ldci.tb_factura_cliente fc on df.id_factura_cliente=fc.id_factura_cliente
+                                    join ldci.tb_factura f on fc.id_factura=f.id_factura
+                                    where f.codigo=? and f.estado=1)', [$factura,$id_session,$factura]);
+
+        if (!$query_existencia) {
+            DB::rollBack();
+            return collect([
+                'mensaje' => 'Hubo un error al anular factura',
+                'error' => true
+            ]);
+        } else {
+
+            $query_factura = new static;
+            $query_factura = DB::UPDATE('UPDATE ldci.tb_factura
+                        SET estado=-1, usuario_modificacion=?, fecha_modificacion=now()
+                        WHERE codigo=?', [$id_session,$factura]);
+
+
+            if (!$query_factura) {
+                DB::rollBack();
+                return collect([
+                    'mensaje' => 'Hubo un error al anular factura',
+                    'error' => true
+                ]);
+            }
+            else{
+                DB::commit();
+                return collect([
+                    'mensaje' => 'Factura Anulada con exito!',
+                    'error' => false,
+                ]);
+            }
+        }
+    }
+
 }
