@@ -234,7 +234,7 @@ class FacturaModel extends Model
 
         if ($tipoUsuario != 3) {
 
-            $table = "(SELECT 1 as tipo, fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+            $table = "(SELECT 1 as tipo, fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(upper(p1.apellido2),' ') as cliente,
             TO_CHAR (fa.fecha_emision,'DD-MM-YYYY') as fecha_factura,tt.nombre AS t_transporte,
             co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino,
             p1.iso_2 as isocl,p2.iso_2 as isoconsig
@@ -250,7 +250,7 @@ class FacturaModel extends Model
             where fa.estado=1
             union
             select 2 as tipo, f.codigo,null,
-               case when fc.comun=false then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
+               case when fc.comun=false then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(upper(p1.apellido2),' ')
                else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
                null,null,null,null,null
             from ldci.tb_factura f
@@ -262,7 +262,7 @@ class FacturaModel extends Model
         }
         else{
 
-            $table = "( SELECT 1 as tipo, fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+            $table = "( SELECT 1 as tipo, fa.codigo as factura,c.id_cotizacion, p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(upper(p1.apellido2),' ') as cliente,
             TO_CHAR (fa.fecha_emision,'DD-MM-YYYY') as fecha_factura,tt.nombre AS t_transporte,
             co.ciudad||'/'||co.pais AS c_origen,cd.ciudad||'/'||cd.pais as c_destino,
             p1.iso_2 as isocl,p2.iso_2 as isoconsig
@@ -279,7 +279,7 @@ class FacturaModel extends Model
             and fa.estado=1
             union
               select 2 as tipo, f.codigo,null,
-               case when fc.comun=false then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ')
+               case when fc.comun=false then p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(upper(p1.apellido2),' ')
                else 'COMUN' end as cliente,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura,
                null,null,null,null,null
               from ldci.tb_factura f
