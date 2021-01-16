@@ -105,7 +105,21 @@
                                                     <input readonly type="date" id="fecha_evento" name="fecha_evento[]" class="form-control input-md">
                                                 </td>
                                                 <td width="35%" class="text-center">
-                                                    <input readonly placeholder="Sin Evento" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
+                                                    <select name="txt_evento[]" id="txt_evento"  class="form-control input-md">
+                                                        <option selected disabled value="">Seleccione</option>
+                                                        <option value="Pendiente">Pendiente</option>
+                                                        <option value="Recogido">Recogido</option>
+                                                        <option value="En espera">En espera</option>
+                                                        <option value="Salir para la entrega">Salir para la entrega</option>
+                                                        <option value="En tránsito">En tránsito</option>
+                                                        <option value="En Ruta">En Ruta</option>
+                                                        <option value="Cancelado">Cancelado</option>
+                                                        <option value="Entregado">Entregado</option>
+                                                        <option value="Devuelto">Devuelto</option>
+                                                        <option value="Retenido por Aduana">Retenido por Aduana</option>
+                                                        <option value="En revisión por Aduana">En revisión por Aduana</option>
+                                                        <option value="En transito de Entrega">En transito de Entrega</option>
+                                                    </select>
                                                 </td>
                                                 <td width="40%" class="text-center">
                                                     <textarea readonly placeholder="Sin Evento" name="txt_descripcion_evento[]" id="txt_descripcion_evento" class="form-control"></textarea>

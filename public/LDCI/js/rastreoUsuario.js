@@ -50,7 +50,7 @@
         $('#txt_transporte').val(c[2]);
         $('#txt_destino').val(c[3]);
         $('#txt_origen').val(c[4]);
-        showLoad(false);
+
         if($('#id_flete').val()!='')
         {
             $('.ocular').removeAttr('hidden');
@@ -83,6 +83,7 @@
                 id_flete:id_flete,
             },
             success: function (response) {
+                $("#tblRastreo ").find("input,button,textarea,select").attr("disabled", "disabled");
                     response.forEach(cargarDetalleRastreo);
             },
             error: function (err) {
@@ -110,6 +111,7 @@
                 $(".zoom_mouse").elevateZoom({
                     zoomType: "inner",
                     cursor: "crosshair"});
+                showLoad(false);
             },
             error: function (err) {
                 alertError(err.responseText);

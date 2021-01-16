@@ -36,7 +36,7 @@ var img=null;
                         //obtener detalle de rastreo
                         TABLA.each(function (e) {
                             let Fecha = $(this).find("input[id*='fecha_evento']").val();
-                            let Evento = $(this).find("input[id*='txt_evento']").val();
+                            let Evento = $(this).find("select[id*='txt_evento']").val();
                             let Descripcion = $(this).find("textarea[id*='txt_descripcion_evento']").val();
 
                             if (Fecha !== "" && Evento !== "" && Descripcion !== "") {
@@ -177,7 +177,7 @@ var img=null;
         $('#txt_transporte').val(c[2]);
         $('#txt_destino').val(c[3]);
         $('#txt_origen').val(c[4]);
-        showLoad(false);
+
         if($('#id_flete').val()!='')
         {
             $('.ocular').removeAttr('hidden');
@@ -348,7 +348,7 @@ var img=null;
                 //obtener detalle de rastreo
             TABLA.each(function (e) {
                 let Fecha = $(this).find("input[id*='fecha_evento']").val();
-                let Evento = $(this).find("input[id*='txt_evento']").val();
+                let Evento = $(this).find("select[id*='txt_evento']").val();
                 let Descripcion = $(this).find("textarea[id*='txt_descripcion_evento']").val();
                 let Id_detalle_seguimiento = $(this).find("input[id*='id_detalle']").val();
 
