@@ -341,7 +341,7 @@ class FacturaModel extends Model
     {
         $table = "(select fc.id_factura_cliente as venta,f.codigo as factura,f.estado,
                     to_char(coalesce(f.monto,0),'9,999,999.99') as monto ,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura ,
-                      case when fc.comun=false then p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ')
+                      case when fc.comun=false then p.nombre ||' '|| p.apellido1 ||' '|| coalesce(upper(p.apellido2),' ')
                       else 'COMUN' end as cliente
                     from ldci.tb_factura f
                     join ldci.tb_factura_cliente fc on f.id_factura=fc.id_factura
