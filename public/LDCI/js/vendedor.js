@@ -113,9 +113,9 @@ var tblVendedores = null;
                         }
                         else
                         {
+                            resetForm();
                             alertSuccess(data.mensaje);
                             tblVendedores.ajax.reload();
-                            resetForm();
                         }
                     },
                     error: function (err) {

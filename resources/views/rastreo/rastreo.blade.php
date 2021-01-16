@@ -94,22 +94,22 @@
                                             <thead>
                                             <tr>
 
-                                                <th class=" text-center" width="15%">Fecha</th>
-                                                <th class=" text-center" width="25%">Evento</th>
-                                                <th class=" text-center" width="50%">Detalle Evento</th>
+                                                <th class=" text-center" width="10%">Fecha</th>
+                                                <th class=" text-center" width="32%">Evento</th>
+                                                <th class=" text-center" width="48%">Detalle Evento</th>
                                                 <th class=" text-center" width="10%">ACCIÓN</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="fila-base" >
-                                                <td width="15%" class="text-center">
+                                                <td width="10%" class="text-center">
                                                     <input type="hidden" id="id_detalle" name="id_detalle[]" class="form-control input-md">
                                                     <input type="date" id="fecha_evento" name="fecha_evento[]" class="form-control input-md">
                                                 </td>
-                                                <td width="25%" class="text-center">
-                                                    <input placeholder="Ej: En Aduana" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
+                                                <td width="32%" class="text-center">
+                                                    <input maxlength="40" placeholder="Ej: En Aduana" required type="text" name="txt_evento[]"  id="txt_evento" class="form-control input-md">
                                                 </td>
-                                                <td width="40%" class="text-center">
+                                                <td width="48%" class="text-center">
                                                     <textarea placeholder="descripcion de evento" name="txt_descripcion_evento[]" id="txt_descripcion_evento" class="form-control"></textarea>
                                                 </td>
                                                 <td width="10%" class="text-center">

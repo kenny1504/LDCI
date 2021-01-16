@@ -199,9 +199,9 @@ var tblClientes=null;
                         }
                         else
                         {
+                            resetForm();
                             alertSuccess(data.mensaje);
                             tblClientes.ajax.reload();
-                            resetForm();
                             clienteExtranjero();
                         }
                     },

@@ -4,6 +4,7 @@
         /** Detiene , para mostrar alertSucess  */
         setTimeout(function () {
             $(document).keydown();
+            limpiartablas();
             showLoad(false);
         }, 200);
 
@@ -39,8 +40,8 @@
     //** Funcion para seleccionar y mostrar detalle de seguimiento */
     function selectCotizacion(datos)
     {
+        limpiartablas();
         showLoad(true);
-        limpiartablas()
         var _token= $('input[name=_token]').val();
         var c = tblCotizaciones.row($(datos).parents('tr')).data();
         id_flete=c[0];
@@ -99,15 +100,16 @@
                 id_flete:id_flete
             },
             success: function (data) {
-                var html='';
+                var html="";
                 data.forEach(element =>{
                     html+=
                             "<div  class=\"col-md-6\"> <img class=\"zoom_mouse\" style='width: 100% !important' src="+element.url+"/"+element.imagen+" data-zoom-image="+element.url+"/"+element.imagen+"> </div>  <br>"
-
                         });
                 showLoad(false);
                 $('#imagenes').append(html);
-                $(".zoom_mouse").elevateZoom({scrollZoom : true,zoomWindowPosition: 2});
+                $(".zoom_mouse").elevateZoom({
+                    zoomType: "inner",
+                    cursor: "crosshair"});
             },
             error: function (err) {
                 alertError(err.responseText);
@@ -154,9 +156,10 @@
     /** Funcion para limpiar tablas */
     function limpiartablas()
     {
+        $('#imagenes').empty();
         /** Limpia todos los inputs*/
         $('input[type="text"]').val('');
         /** Elimina todas las filas de tabla dinamica menos la primera */
         $('#tblRastreo tr').closest('.otrasFilas').remove();
-        $('#imagenes').closest('.ventana').remove();
+
     }
