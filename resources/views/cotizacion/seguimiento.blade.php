@@ -585,7 +585,7 @@
                                    <div class="form-group text-center">
                                        <label >Correo</label>
                                        <div class="col-md-12">
-                                           <input type="text" id="txt_enviarCorreo" name="txt_enviarCorreo" class="text-center form-control input-md">
+                                           <input  onchange="CorreoVerify(this)" type="text" id="txt_enviarCorreo" name="txt_enviarCorreo" class="text-center form-control input-md">
                                        </div>
                                        <label class="text-info">Tambien puede modificar esta direccion de correo</label>
                                    </div>
