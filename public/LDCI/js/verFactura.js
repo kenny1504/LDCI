@@ -23,7 +23,7 @@ var tblFacturas = null;
 
                         if (json[9]==1)
                         {
-                            if(tipoUsuario==1)
+                            if(tipoUsuario==1 || tipoUsuario==2 )
                             {
                                 return '<i title="Anular factura"  class=" btn btn-danger fa fa-trash-o" onclick="anularFactura(this)" id="btnAnularFactura">Anular</i>'+
                                        '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura(this)">PDF</i>'
@@ -35,8 +35,15 @@ var tblFacturas = null;
                         }
                         else
                         {
-                            return '<i title="Anular factura"  class=" btn btn-danger fa fa-trash-o" onclick="anularFacturaProducto(this)" id="btnAnularFactura">Anular</i>'+
-                            '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura_productos(this)">PDF</i>'
+                            if(tipoUsuario==1 || tipoUsuario==2 )
+                            {
+                                return '<i title="Anular factura"  class=" btn btn-danger fa fa-trash-o" onclick="anularFacturaProducto(this)" id="btnAnularFactura">Anular</i>'+
+                                    '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura_productos(this)">PDF</i>'
+
+                            }
+                            else
+                                return '<i title="Imprimir factura" class=" btn btn-info fa  fa-file-pdf-o" onclick="rpt_factura_productos(this)">PDF</i>'
+
 
                         }
 
