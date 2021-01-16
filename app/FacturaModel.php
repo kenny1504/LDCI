@@ -90,7 +90,7 @@ class FacturaModel extends Model
         $query = new static;
         $query = DB::select("select f.id_flete,c.id_cotizacion,c1.ciudad ||'/'||c1.pais as origen,
                            c2.ciudad ||'/'||c2.pais as destino,
-                           p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(p1.apellido2,' ') as cliente,
+                           p1.nombre ||' '|| p1.apellido1 ||' '|| coalesce(upper(p1.apellido2),' ') as cliente,
                            to_char(f.fecha_entrega,'DD/MM/YYYY')as fecha,c.id_tipo_transporte,
                            to_char(coalesce(c.iva,0),'9,999,999.99') as iva ,
                             to_char(coalesce(c.monto_total,0),'9,999,999.99') as total,
@@ -329,7 +329,7 @@ class FacturaModel extends Model
     public function getClientes()
     {
         $query = new static;
-        $query = DB::select("select cl.id_cliente,  p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ') as nombre
+        $query = DB::select("select cl.id_cliente,  p.nombre ||' '|| p.apellido1 ||' '|| coalesce(upper(p.apellido2),' ') as nombre
                                     from ldci.tb_cliente cl
                                     join ldci.tb_persona p on cl.id_persona=p.id_persona
                                     where cl.estado=1");
@@ -489,7 +489,7 @@ class FacturaModel extends Model
     {
         $query = new static;
         $query = DB::select("select f.codigo as factura,upper (f.termino) as termino,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura ,
-                                    case when fc.comun=false then p.nombre ||' '|| p.apellido1 ||' '|| coalesce(p.apellido2,' ')
+                                    case when fc.comun=false then p.nombre ||' '|| p.apellido1 ||' '|| coalesce(upper(p.apellido2),' ')
                                     else 'COMUN' end as cliente,upper (u.usuario) as vendedor,case when f.moneda=1 then 'DOLLAR' else 'CORDOBA' end as moneda,
                                     to_char(coalesce(f.monto,0),'9,999,999.99') as total,to_char(coalesce(f.descuento,0),'9,999,999.99') as descuento,
                                     to_char(coalesce(fc.iva,0),'9,999,999.99') as iva,to_char(coalesce(fc.subtotal,0),'9,999,999.99') as subtotal

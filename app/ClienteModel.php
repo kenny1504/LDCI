@@ -50,7 +50,7 @@ class ClienteModel extends Model
     {
 
         $query = new static;
-        $query = DB::select('select p.id_persona, p.nombre,p.apellido1,p.apellido2,p.cedula,p.correo,p.id_departamento,
+        $query = DB::select('select p.id_persona, p.nombre,p.apellido1,upper(p.apellido2) as apellido2,p.cedula,p.correo,p.id_departamento,
                                        p.iso,p.iso_2,p.sexo,p.direccion,p.telefono_1,p.telefono_2,c.ruc,c.nombre_empresa
                                        ,c.giro_negocio,c.tipo,c.extranjero,
                                        ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+1900)-(select extract(year from now())))*(-1) as edad
@@ -235,7 +235,7 @@ class ClienteModel extends Model
 
         $query = new static;
         $query = DB::select("select row_number() OVER (ORDER BY p.id_persona) AS no, case c.tipo when 1
-        then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (p.apellido2,'')
+        then p.nombre ||' '|| p.apellido1 ||' '|| COALESCE (upper (p.apellido2),'')
         else c.nombre_empresa end as nombre,
         case c.tipo when 1
         then p.cedula

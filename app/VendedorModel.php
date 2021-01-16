@@ -105,7 +105,7 @@ class VendedorModel extends Model
     {
 
         $query = new static;
-        $query = DB::select('select p.nombre,p.apellido1,p.apellido2,ltrim(p.sexo) as sexo,v.estado_civil,p.cedula,p.correo,
+        $query = DB::select('select p.nombre,p.apellido1,upper(p.apellido2) as apellido2,ltrim(p.sexo) as sexo,v.estado_civil,p.cedula,p.correo,
                                         p.direccion,p.id_departamento,p.telefono_1,p.telefono_2,v.contacto_emergencia,v.telefono_emergencia,
                                         ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+1900)-(select extract(year from now())))*(-1) as edad
                                         from ldci.tb_vendedor v
@@ -120,7 +120,7 @@ class VendedorModel extends Model
     {
 
         $query = new static;
-        $query = DB::select("select row_number() OVER (ORDER BY p.id_persona) AS no, (nombre ||' '|| apellido1 ||' '|| coalesce(apellido2,'') ) as nombre,
+        $query = DB::select("select row_number() OVER (ORDER BY p.id_persona) AS no, (nombre ||' '|| apellido1 ||' '|| coalesce(upper(apellido2),'') ) as nombre,
                 cedula,sexo, case when (SUBSTRING(cedula FROM 9 FOR 2)) :: integer>40 then
                        ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+1900)-(select extract(year from now())))*(-1)
                         else ((((SUBSTRING(cedula FROM 9 FOR 2)) :: integer)+2000)-(select extract(year from now())))*(-1)
