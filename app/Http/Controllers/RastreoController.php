@@ -20,8 +20,8 @@ class RastreoController extends Controller
     //funcion para cargar el detalle de seguimiento de cotizacion
     function getDetalleSeguimiento(Request $request)
     {
-        $id_flete = $request->id_flete;
-        $datos = (new RastreoModel)->getDetalleSeguimiento($id_flete);
+        $id_cotizacion = $request->id_cotizacion;
+        $datos = (new RastreoModel)->getDetalleSeguimiento($id_cotizacion);
         return response()->json($datos);
     }
 
@@ -73,9 +73,9 @@ class RastreoController extends Controller
     //** Funcion para obtener imagenes de rastreo */
     function getImagen(Request $request)
     {
-        $id_flete = $request->id_flete;
+        $id_cotizacion = $request->id_cotizacion;
 
-        $datos = (new RastreoModel)->getImagen($id_flete);
+        $datos = (new RastreoModel)->getImagen($id_cotizacion);
         return $datos;
     }
 
@@ -108,16 +108,6 @@ class RastreoController extends Controller
         ]);
     }
 
-    /** Recupera imagenes de un rastreo  para vista cliente*/
-    function  getRastreoImagenes(Request $request)
-    {
-        $id_flete = $request->id_flete;
-
-        $datos = (new RastreoModel)->getRastreoImagenes($id_flete);
-        return $datos;
-        var_dump($datos);
-    }
-
     /** Funcion para eliminar un evento de un rastreo */
     function eliminarEvento(Request $request)
     {
@@ -136,11 +126,11 @@ class RastreoController extends Controller
             ]);
     }
 
-    /** Funcion para obtener fecha de llegada */
-    function fechaRastreo(Request $request)
+    /** Funcion para obtener fecha de llegada e id_flete */
+    function infoRastreo(Request $request)
     {
-        $id_rastreo = $request->id_flete;
-        $fecha = (new RastreoModel)->fechaRastreo($id_rastreo);
+        $id_cotizacion = $request->id_cotizacion;
+        $fecha = (new RastreoModel)->infoRastreo($id_cotizacion);
         return $fecha;
     }
 }

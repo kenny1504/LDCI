@@ -39,7 +39,7 @@ var img=null;
                             let Evento = $(this).find("select[id*='txt_evento']").val();
                             let Descripcion = $(this).find("textarea[id*='txt_descripcion_evento']").val();
 
-                            if (Fecha !== "" && Evento !== "" && Descripcion !== "") {
+                            if (Fecha !== "" && Evento != "" && Evento!=null && Descripcion !== "") {
                                 estado=true;
                             }
                             else
@@ -167,33 +167,35 @@ var img=null;
     //** Funcion para seleccionar y mostrar detalle de seguimiento */
     function selectCotizacion(datos)
     {
+        debugger;
         showLoad(true);
         limpiartablas()
         var _token= $('input[name=_token]').val();
         var c = tblCotizaciones.row($(datos).parents('tr')).data();
-        id_flete=c[0];
-        $('#id_flete').val(id_flete);
+        id_cotizacion=c[0];
+        $('#id_cotizacion').val(id_cotizacion);
         $('#txt_cliente').val(c[1]);
         $('#txt_transporte').val(c[2]);
         $('#txt_destino').val(c[3]);
         $('#txt_origen').val(c[4]);
 
-        if($('#id_flete').val()!='')
+        if($('#id_cotizacion').val()!='')
         {
             $('.ocular').removeAttr('hidden');
             $('#btnGuardarRastreo').removeAttr('disabled');
         }
 
-        /** Recuperar fecha en formato para asignarla en input fecha */
+        /** Recuperar fecha e id_flete en formato para asignarla en input fecha */
         $.ajax({
             type: 'POST',
-            url: '/getFecha/rastreo', //llamada a la ruta
+            url: '/getInfo/rastreo', //llamada a la ruta
             data: {
                 _token:_token,
-                id_flete:id_flete,
+                id_cotizacion:id_cotizacion,
             },
             success: function (response) {
                 $('#fecha_llegada').val(response[0].fecha);
+                $('#id_flete').val(response[0].id_flete);
             },
             error: function (err) {
                 alertError(err.responseText);
@@ -207,7 +209,7 @@ var img=null;
             url: '/getDetalle/rastreo', //llamada a la ruta
             data: {
                 _token:_token,
-                id_flete:id_flete,
+                id_cotizacion:id_cotizacion,
             },
             success: function (response) {
                     response.forEach(cargarDetalleRastreo);
@@ -225,7 +227,7 @@ var img=null;
             url: '/rastreo/fotos', //llamada a la ruta
             data: {
                 _token:$('input[name=_token]').val(),
-                id_flete:id_flete
+                id_cotizacion:id_cotizacion
             },
             success: function (data) {
 

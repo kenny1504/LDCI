@@ -31,9 +31,10 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="id_flete">No.Flete</label>
+                                    <label for="id_cotizacion">No.Cotizacion</label>
                                     <div class="input-group">
-                                        <input name="id_flete" id="id_flete" readonly class="form-control input-sm">
+                                        <input name="id_cotizacion" id="id_cotizacion" readonly class="form-control input-sm">
+                                        <input name="id_flete" id="id_flete" readonly class="form-control input-sm" type="hidden">
                                         <span class="input-group-btn">
                                             <button title="Buscar cotizacion" onclick="listarCotizaciones()" class="btn btn-default" data-toggle="modal" data-target="#ModalCotizaciones"
                                                     id="btnBuscarCotizacion" type="button"><i class="fa fa-search"></i></button>
