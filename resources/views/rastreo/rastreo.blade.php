@@ -20,7 +20,6 @@
         </center>
     </div>
 
-
     <div class="col-md-12">
         <div class="box box-success">
             <div class="box-heading"><legend class="text-primary text-center">Rastreo</legend></div>
@@ -32,9 +31,10 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="id_flete">No.Flete</label>
+                                    <label for="id_cotizacion">No.Cotizacion</label>
                                     <div class="input-group">
-                                        <input name="id_flete" id="id_flete" readonly class="form-control input-sm">
+                                        <input name="id_cotizacion" id="id_cotizacion" readonly class="form-control input-sm">
+                                        <input type="hidden" name="id_flete" id="id_flete" class="form-control input-sm">
                                         <span class="input-group-btn">
                                             <button title="Buscar cotizacion" onclick="listarCotizaciones()" class="btn btn-default" data-toggle="modal" data-target="#ModalCotizaciones"
                                                     id="btnBuscarCotizacion" type="button"><i class="fa fa-search"></i></button>
@@ -93,7 +93,6 @@
                                                 id="tblRastreo">
                                             <thead>
                                             <tr>
-
                                                 <th class=" text-center" width="10%">Fecha</th>
                                                 <th class=" text-center" width="32%">Evento</th>
                                                 <th class=" text-center" width="48%">Detalle Evento</th>
@@ -132,10 +131,10 @@
                                                                 title="Eliminar Evento"
                                                                 id="btnEliminarFila">
                                                             <i class=" fa fa-trash" style="color: ghostwhite"></i></a>
-                                                        <button class="btn btn-primary"
-                                                                data-confirm="" id="btnAgregarFila"
+                                                        <a class="btn btn-primary agregarFila"
+                                                                id="btnAgregarFila"
                                                                 title="Añadir Evento">
-                                                            <i class=" fa fa-plus"></i></button>
+                                                            <i class=" fa fa-plus" style="color: ghostwhite"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

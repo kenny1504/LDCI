@@ -8,7 +8,7 @@
             showLoad(false);
         }, 200);
 
-        if($('#id_flete').val()=='')
+        if($('#id_cotizacion').val()=='')
         {
             $('.ocular').attr("hidden",true);
         }
@@ -44,14 +44,14 @@
         showLoad(true);
         var _token= $('input[name=_token]').val();
         var c = tblCotizaciones.row($(datos).parents('tr')).data();
-        id_flete=c[0];
-        $('#id_flete').val(id_flete);
+        id_cotizacion=c[0];
+        $('#id_cotizacion').val(id_cotizacion);
         $('#txt_cliente').val(c[1]);
         $('#txt_transporte').val(c[2]);
         $('#txt_destino').val(c[3]);
         $('#txt_origen').val(c[4]);
 
-        if($('#id_flete').val()!='')
+        if($('#id_cotizacion').val()!='')
         {
             $('.ocular').removeAttr('hidden');
             $('#btnGuardarRastreo').removeAttr('disabled');
@@ -60,13 +60,14 @@
         /** Recuperar fecha en formato para asignarla en input fecha */
         $.ajax({
             type: 'POST',
-            url: '/getFecha/rastreo', //llamada a la ruta
+            url: '/getInfo/rastreo', //llamada a la ruta
             data: {
                 _token:_token,
-                id_flete:id_flete,
+                id_cotizacion:id_cotizacion,
             },
             success: function (response) {
                 $('#fecha_llegada').val(response[0].fecha);
+                $('#id_flete').val(response[0].id_flete);
             },
             error: function (err) {
                 alertError(err.responseText);
@@ -80,7 +81,7 @@
             url: '/getDetalle/rastreo', //llamada a la ruta
             data: {
                 _token:_token,
-                id_flete:id_flete,
+                id_cotizacion:id_cotizacion,
             },
             success: function (response) {
                 $("#tblRastreo ").find("input,button,textarea,select").attr("disabled", "disabled");
@@ -95,16 +96,16 @@
         /** Recupera todas las imagenes de un rastreo*/
         $.ajax({
             type: 'POST',
-            url: '/rastreo/getRastreoImagenes', //llamada a la ruta
+            url: '/rastreo/fotos', //llamada a la ruta
             data: {
                 _token:$('input[name=_token]').val(),
-                id_flete:id_flete
+                id_cotizacion:id_cotizacion
             },
             success: function (data) {
                 var html="";
                 data.forEach(element =>{
                     html+=
-                            "<div  class=\"col-md-6\"> <img class=\"zoom_mouse\" style='width: 100% !important' src="+element.url+"/"+element.imagen+" data-zoom-image="+element.url+"/"+element.imagen+"> </div>  <br>"
+                            "<div  class=\"col-md-6\"> <img class=\"zoom_mouse\" style='width: 100% !important' src="+element.url+"/"+element.nombre+" data-zoom-image="+element.url+"/"+element.nombre+"> </div>  <br>"
                         });
                 showLoad(false);
                 $('#imagenes').append(html);
