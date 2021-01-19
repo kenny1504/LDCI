@@ -95,12 +95,7 @@
         .table-borde_4 td {
             background-color: #F2F3F4;
         }
-        .tbl_tamano{
-            width: 23%;
-            position: absolute;
-            right: 15px;
-            z-index: -1;
-        }
+
         .tbl_tamano_2{
             width: 30%;
             position: absolute;
@@ -113,18 +108,7 @@
             margin-top: 1%;
             margin-left: -1px;
         }
-        .tbl_tamano_6{
-            width: 49.8%;
-            margin-left: 0px;
-            margin-top: -2.1%;
-        }
-        .tbl_tamano_6A{
-            width: 49.8%;
-            position: absolute;
-            margin-top: 7.1%;
-            right: 0px;
-            z-index: -1;
-        }
+
         .table-borde_6 {
         }
         .table-borde_6 th,
@@ -150,10 +134,7 @@
             font-style: italic !important;
             margin-left: 4px !important;
         }
-        .tamano_fuente_3{
-            font-size:13px !important;
-            font-style: italic !important;
-        }
+
         .ancho_celda{
             height: 1.7%;
         }
@@ -185,12 +166,6 @@
         .text_color_c{
             color: #1A5276 ;
         }
-        .loc_remitente{
-            position: absolute;
-            margin-top: 5%;
-            right: 260px;
-            z-index: -1;
-        }
     </style>
 </head>
 
@@ -204,18 +179,23 @@
 
 <main>
     @foreach($Informacion as $informacion)
-        <table class="tbl_tamano">
+
+        <table class="table-responsive pull-right">
+            <tr>
+                <th class="tamano_fuente_1 text_color_c largo_celda_2">RUC:</th>
+                <td class="tamano_fuente_1 text_color ">0010810840027X </td>
+            </tr>
             <tr>
                 <th class="tamano_fuente_1 text_color_c largo_celda_2">N° Factura:</th>
-                <td class="tamano_fuente_1 text_color ">{{$informacion->factura}} </td>
+                <td class="tamano_fuente_1 text_color "> {{$informacion->factura}} </td>
             </tr>
             <tr>
                 <th class="tamano_fuente_1 text_color_c">Fecha:</th>
                 <td class="tamano_fuente_1 text_color ">{{$informacion->fecha_factura}}</td>
             </tr>
         </table>
-        <h3 class="text_color_c">Factura</h3>
-        <table class="table-responsive ancho_tabla table-borde_6" style="margin-top: -1.2%">
+        <h3 class="text_color_c" style="padding-left: 25%">Factura</h3>
+        <table class="table-responsive ancho_tabla table-borde_6" style="margin-top: 3%">
             <thead>
             <tr>
                 <th class="text_color_c largo_celda_info">Cliente</th>

@@ -28,6 +28,13 @@ class ProductoController extends Controller
             $tipo = 2;
         else
             $tipo = 1;
+
+        if (isset($request->ckiva))
+            $iva = true;
+        else
+            $iva = false;
+
+
         $id_Producto = $request->id_Producto;
         $nombre = $request->txt_nombre;
         $existencia = $request->txt_existencia;
@@ -39,7 +46,7 @@ class ProductoController extends Controller
         $existe = (new ProductoModel)->existe($nombre, $id_Producto);
 
         if (!$existe) {
-            $guardar = (new ProductoModel)->guardarProducto($id_Producto, strtoupper($nombre), $existencia, $precio, strtoupper($descripcion), $tipo, $id_session);
+            $guardar = (new ProductoModel)->guardarProducto($id_Producto, strtoupper($nombre), $existencia, $precio, strtoupper($descripcion), $tipo,$iva, $id_session);
             if (!empty($guardar)) {
                 /** Recorre Arreglo de imagenes */
                 foreach ($image as $imagen) {

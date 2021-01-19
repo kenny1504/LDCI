@@ -135,7 +135,8 @@ var img=null;
             descricion:data[2],
             precio:data[3],
             existencia:data[4],
-            tipo:data[5]
+            tipo:data[5],
+            iva:data[6]
         };
 
         //Asignamos valores a formulario
@@ -157,6 +158,21 @@ var img=null;
         {
             if (checkbox.checked == true)
                 $('#cktipo').click();
+        }
+
+debugger;
+        var checkbox2=document.getElementById('ckiva');
+
+        /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
+        if (Producto.iva==true)
+        {
+            if (checkbox2.checked == false)
+                $('#ckiva').click();
+        }
+        else
+        {
+            if (checkbox2.checked == true)
+                $('#ckiva').click();
         }
 
         /** Carga imagenes del producto seleccionado */

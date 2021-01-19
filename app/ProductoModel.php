@@ -11,7 +11,7 @@ class ProductoModel extends Model
 {
     public function getProducto()
     {
-        $table = "(select id_producto,nombre,descripcion,precio,existencia,tipo
+        $table = "(select id_producto,nombre,descripcion,precio,existencia,tipo,iva
                     from ldci.tb_producto where estado=1 order by  id_producto desc) as tb ";
 
         $primaryKey = 'id_producto';
@@ -21,7 +21,8 @@ class ProductoModel extends Model
             ['db' => 'descripcion', 'dt' => 2],
             ['db' => 'precio', 'dt' => 3],
             ['db' => 'existencia', 'dt' => 4],
-            ['db' => 'tipo', 'dt' => 5]
+            ['db' => 'tipo', 'dt' => 5],
+            ['db' => 'iva', 'dt' => 6]
         ];
 
         /*** Config DB */
@@ -51,21 +52,21 @@ class ProductoModel extends Model
     }
 
     /** Metodo para guardar /actuliazar un registro*/
-    public function guardarProducto($id_Producto, $nombre, $existencia, $precio, $descripcion, $tipo, $id_session)
+    public function guardarProducto($id_Producto, $nombre, $existencia, $precio, $descripcion, $tipo,$iva, $id_session)
     {
         $query = new static;
 
         if (!empty($id_Producto)) // si existe un id, actualiza
         {
             $query = DB::select("UPDATE ldci.tb_producto
-                                SET  nombre=?, precio=?, descripcion=?,  existencia=?,tipo=?,
+                                SET  nombre=?, precio=?, descripcion=?,  existencia=?,tipo=?,iva=?,
                                 usuario_modificacion=?, fecha_modificacion=now()
-                                WHERE id_producto=? RETURNING id_producto", [$nombre, $precio, $descripcion, $existencia, $tipo, $id_session, $id_Producto]);
+                                WHERE id_producto=? RETURNING id_producto", [$nombre, $precio, $descripcion, $existencia, $tipo,$iva, $id_session, $id_Producto]);
         } else {
             $query = DB::select("INSERT INTO ldci.tb_producto(
-                                nombre, precio, descripcion,tipo,
+                                nombre, precio, descripcion,tipo,iva,
                                 existencia, usuario_grabacion,fecha_grabacion)
-                                VALUES (?, ?, ?, ?, ?,?, now()) RETURNING id_producto", [$nombre, $precio, $descripcion, $tipo, $existencia, $id_session]);
+                                VALUES (?, ?, ?, ?, ?,?,?, now()) RETURNING id_producto", [$nombre, $precio, $descripcion, $tipo,$iva, $existencia, $id_session]);
         }
         return $query;
     }

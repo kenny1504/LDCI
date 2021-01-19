@@ -49,7 +49,16 @@
                             <input onkeypress="return soloNumeros(event,txt_precio);" name="txt_precio" id="txt_precio"  class="form-control input-sm">
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-2">
+                        <label >Iva</label>
+                        <div title="Dar check si al producto se le aplica iva" class="form-group">
+                            <label class="switch">
+                                <input name="ckiva" id="ckiva" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <label >Existencia</label>
                         <input onkeypress="return soloNumeros(event,txt_existencia);" name="txt_existencia" id="txt_existencia"  class="form-control input-sm">
                     </div>
@@ -107,7 +116,7 @@
                                 <th>Descripcion</th>
                                 <th>Precio</th>
                                 <th>Existencia</th>
-                                <th>Tipo</th>
+                                <th>Iva</th>
                                 <th>Seleccione</th>
                             </tr>
                             </thead>

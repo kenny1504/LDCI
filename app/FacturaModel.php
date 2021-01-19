@@ -490,7 +490,7 @@ class FacturaModel extends Model
         $query = new static;
         $query = DB::select("select f.codigo as factura,upper (f.termino) as termino,TO_CHAR (f.fecha_emision,'DD-MM-YYYY') as fecha_factura ,
                                     case when fc.comun=false then p.nombre ||' '|| p.apellido1 ||' '|| coalesce(upper(p.apellido2),' ')
-                                    else 'COMUN' end as cliente,upper (u.usuario) as vendedor,case when f.moneda=1 then 'DOLLAR' else 'CORDOBA' end as moneda,
+                                    else 'COMUN' end as cliente,u.usuario as vendedor,case when f.moneda=1 then 'DOLLAR' else 'CORDOBA' end as moneda,
                                     to_char(coalesce(f.monto,0),'9,999,999.99') as total,to_char(coalesce(f.descuento,0),'9,999,999.99') as descuento,
                                     to_char(coalesce(fc.iva,0),'9,999,999.99') as iva,to_char(coalesce(fc.subtotal,0),'9,999,999.99') as subtotal
                                     from ldci.tb_factura f

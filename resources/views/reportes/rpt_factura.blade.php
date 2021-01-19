@@ -122,7 +122,7 @@
             .tbl_tamano_6A{
                 width: 49.8%;
                 position: absolute;
-                margin-top: 7.1%;
+                margin-top: 8%;
                 right: 0px;
                 z-index: -1;
             }
@@ -188,7 +188,7 @@
             }
             .loc_remitente{
                 position: absolute;
-                margin-top: 5%;
+                margin-top: 6%;
                 right: 260px;
                 z-index: -1;
             }
@@ -207,6 +207,10 @@
             @foreach($Informacion as $informacion)
             <h3 class="text_color_c">Factura</h3>
             <table class="tbl_tamano">
+                    <tr>
+                        <th class="tamano_fuente_1 text_color_c largo_celda_2">RUC:</th>
+                        <td class="tamano_fuente_1 text_color ">0010810840027X </td>
+                    </tr>
                     <tr>
                         <th class="tamano_fuente_1 text_color_c largo_celda_2">N° Factura:</th>
                         <td class="tamano_fuente_1 text_color ">{{$informacion->codigo}} </td>
@@ -232,7 +236,7 @@
                 </tr>
             </table>
 
-            <h4 class="text-left text_color_c" style="margin-top: 5%">Remitente:</h4>
+            <h4 class="text-left text_color_c" style="margin-top: 6%">Remitente:</h4>
             <table class="table-responsive tbl_tamano_6 table-borde_6">
                 <tr>
                     <th class="tamano_fuente_1 text_color ancho_celda_2">{{$informacion->cliente}}</th>
