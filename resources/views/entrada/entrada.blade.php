@@ -198,9 +198,6 @@
                                             <input onkeypress="return soloNumeros(event,txt_precio);" name="txt_precio_p_entrada" id="txt_precio_p_entrada"  class="form-control input-sm">
                                         </div>
                                     </div>
-
-
-
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10">
