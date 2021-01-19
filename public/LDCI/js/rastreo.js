@@ -103,7 +103,6 @@ var img=null;
         let fila = $(this).closest('tr');
         let id_detalle= $(fila).find("#id_detalle").val();
         var numeroFilas = $("#tblRastreo tr").length;
-
         if(id_detalle!="" && numeroFilas > 2){
             var _token = $('input[name=_token]').val();
             alertConfirm("¿Está seguro que desea eliminar el evento?", function (e) {
@@ -123,6 +122,7 @@ var img=null;
                         else
                         {
                             fila.remove();
+                            $('#tblRastreo').find("tbody tr").eq(0).addClass("fila-base").removeClass("otrasFilas");
                             alertSuccess(data.mensaje);
                         }
                     },
@@ -136,9 +136,40 @@ var img=null;
 
         } else if (id_detalle == "" && numeroFilas > 2) {
             $(this).closest('tr').remove();
-        } else {
+        } else if(id_detalle != "" && numeroFilas == 2)
+        {
+            var _token = $('input[name=_token]').val();
+            alertConfirm("¿Está seguro que desea eliminar el evento?", function (e) {
+                showLoad(true);
+                $.ajax({
+                    type: 'POST',
+                    url: '/rastreoEvento/anular', //llamada a la ruta
+                    data: {
+                        _token:_token,
+                        id_detalle:id_detalle
+                    },
+                    success: function (data) {
+                        showLoad(false);
+                        if (data.error) {
+                            alertError(data.mensaje);
+                        }
+                        else
+                        {
+                            alertSuccess(data.mensaje);
+                            $("#id_detalle,#fecha_evento,#txt_evento,#txt_descripcion_evento").val("");
+                        }
+                    },
+                    error: function (err) {
+                        alertError(err.responseText);
+                        showLoad(false);
+                    }
+
+                });
+            });
+        }else {
             alertError("¡Esta fila no puede ser eliminada!");
         }
+
     });
 
     //Funcion para listar cotizaciones estado tramite
@@ -167,9 +198,8 @@ var img=null;
     //** Funcion para seleccionar y mostrar detalle de seguimiento */
     function selectCotizacion(datos)
     {
-        debugger;
         showLoad(true);
-        limpiartablas()
+        limpiartablas();
         var _token= $('input[name=_token]').val();
         var c = tblCotizaciones.row($(datos).parents('tr')).data();
         id_cotizacion=c[0];
@@ -337,6 +367,8 @@ var img=null;
         $('input[type="text"]').val('');
         /** Elimina todas las filas de tabla dinamica menos la primera */
         $('#tblRastreo tr').closest('.otrasFilas').remove();
+        $("#id_detalle,#fecha_evento,#txt_evento,#txt_descripcion_evento").val("");
+
     }
 
     /** funcion para guardar detalle seguimiento sin imagen*/
