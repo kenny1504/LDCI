@@ -70,6 +70,10 @@ class EntradaController extends Controller
     //Funcion para agregar un producto desde entrada
     public function guardarProductoEntrada(Request $request)
     {
+        if (isset($request->ck_iva))
+            $iva = true;
+        else
+            $iva = false;
         $id_Producto = 0;
         $nombre = $request->txt_nombre_p_entrada;
         $precio = $request->txt_precio_p_entrada;
@@ -82,7 +86,7 @@ class EntradaController extends Controller
         $existe = (new ProductoModel)->existe($nombre, $id_Producto);
 
         if (!$existe) {
-            $guardar = (new ProductoModel)->guardarProducto($id_Producto, strtoupper($nombre), $existencia, $precio, strtoupper($descripcion), $tipo, $id_session);
+            $guardar = (new ProductoModel)->guardarProducto($id_Producto, strtoupper($nombre), $existencia, $precio, strtoupper($descripcion), $tipo, $iva, $id_session);
             if (!empty($guardar)) {
                 /** Recorre Arreglo de imagenes */
                 foreach ($image as $imagen) {
