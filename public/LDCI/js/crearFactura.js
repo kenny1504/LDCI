@@ -201,79 +201,105 @@ var Iva=0;
     /** Funcion para recuperar precio de un producto */
     function changeProducto(e, select)
     {
+
         var id_producto=select.value;
         var _token= $('input[name=_token]').val();
+
+        var TABLA= $("#tblDetalleProductos tbody > tr");
+
+        producto=0;
+        TABLA.each(function (e) {
+
+            let prod = $(this).find("select[id*='cmb_Producto']").val();
+
+            if (id_producto==prod)
+            {
+                producto++;
+            }
+
+            if (producto>1)
+            {
+                select.value=""
+                alertError("EL producto ya existe en la factura")
+            }
+
+        });
+
 
         // Obtener contenedor desde el elemento que cambió
         let fila = $(e.target).closest('tr');
 
-        $.ajax({
-            type: 'POST',
-            url: '/producto/precio', //llamada a la ruta
-            data: {
-                _token:_token,
-                id_producto:id_producto
-            },
-            success: function (data) {
+        if (select.value!="")
+        {
+            $.ajax({
+                type: 'POST',
+                url: '/producto/precio', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    id_producto:id_producto
+                },
+                success: function (data) {
 
-                $(fila).find("#txt_precio").trigger("focus") //desencadena evento
-                $(fila).find("#txt_precio").val(data[0].precio);
-                $(fila).find("#txtIva").val(data[0].iva);
-                $(fila).find("#txt_precio").trigger("change")
-
-
-                let precio= $(select).parents('tr').find("input[id*='txt_precio']");
-                let producto= $(select).parents('tr').find("input[id*='txt_cantidad']");
-                var oldvalue=  precio[0].attributes.oldvalue.nodeValue /** Captura el anterior valor del input */
-                var valor= precio.val();/** Captura el nuevo valor del input*/
-
-                if (valor!="" && valor!=undefined )
-                    valor=parseFloat( valor= valor.replace(/,/g, "")); /**Formate numero */
-                else
-                    valor=0
-
-                if (oldvalue!="" && oldvalue!=undefined )
-                    oldvalue=parseFloat( oldvalue= oldvalue.replace(/,/g, ""));
-                else
-                    oldvalue=0
-
-                var tasa_cambio=$('#lbl_tasa_cambio').text();
-
-                /** Recupera valores de la cantidad de productos*/
-
-                var  producto_actual=producto.val();
-                if (producto_actual!="" && producto_actual!=undefined )
-                    producto_actual=parseFloat( producto_actual= producto_actual.replace(/,/g, "")); /**Formate numero */
-                else
-                    producto_actual=0
-
-                /********* +++++++++++++++++++++++ ************/
+                    $(fila).find("#txt_precio").trigger("focus") //desencadena evento
+                    $(fila).find("#txt_precio").val(data[0].precio);
+                    $(fila).find("#txtIva").val(data[0].iva);
+                    $(fila).find("#txt_precio").trigger("change")
 
 
-                var importe_old=producto_actual*oldvalue;
-                var importe_new=producto_actual*valor;
+                    let precio= $(select).parents('tr').find("input[id*='txt_precio']");
+                    let producto= $(select).parents('tr').find("input[id*='txt_cantidad']");
+                    var oldvalue=  precio[0].attributes.oldvalue.nodeValue /** Captura el anterior valor del input */
+                    var valor= precio.val();/** Captura el nuevo valor del input*/
 
-                SubTotal=SubTotal-importe_old
-                SubTotal+=importe_new
-                calcularIva();
-                Total=SubTotal+Iva-Descuento
-                TotalCordoba=Total*parseFloat(tasa_cambio)
+                    if (valor!="" && valor!=undefined )
+                        valor=parseFloat( valor= valor.replace(/,/g, "")); /**Formate numero */
+                    else
+                        valor=0
 
-                $(select).parents('tr').find("input[id*='txt_importe']").val(importe_new);
-                $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
-                $('#txt_iva').text(number_format(Iva, 2, ".", ","));
-                $('#txt_totalPr').text(number_format(SubTotal, 2, ".", ","));
-                $('#txt_total').text(number_format(Total, 2, ".", ","));
-                $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
+                    if (oldvalue!="" && oldvalue!=undefined )
+                        oldvalue=parseFloat( oldvalue= oldvalue.replace(/,/g, ""));
+                    else
+                        oldvalue=0
+
+                    var tasa_cambio=$('#lbl_tasa_cambio').text();
+
+                    /** Recupera valores de la cantidad de productos*/
+
+                    var  producto_actual=producto.val();
+                    if (producto_actual!="" && producto_actual!=undefined )
+                        producto_actual=parseFloat( producto_actual= producto_actual.replace(/,/g, "")); /**Formate numero */
+                    else
+                        producto_actual=0
+
+                    /********* +++++++++++++++++++++++ ************/
 
 
-            },
-            error: function (err) {
-                alertError(err.responseText);
-                showLoad(false);
-            }
+                    var importe_old=producto_actual*oldvalue;
+                    var importe_new=producto_actual*valor;
 
-        });
+                    SubTotal=SubTotal-importe_old
+                    SubTotal+=importe_new
+                    calcularIva();
+                    Total=SubTotal+Iva-Descuento
+                    TotalCordoba=Total*parseFloat(tasa_cambio)
+
+                    $(select).parents('tr').find("input[id*='txt_importe']").val(importe_new);
+                    $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+                    $('#txt_iva').text(number_format(Iva, 2, ".", ","));
+                    $('#txt_totalPr').text(number_format(SubTotal, 2, ".", ","));
+                    $('#txt_total').text(number_format(Total, 2, ".", ","));
+                    $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
+
+
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        }
+
 
     }
 
@@ -590,9 +616,9 @@ var Iva=0;
     {
         var TABLA= $("#tblDetalleProductos tbody > tr");
 
+        Iva=0;
         TABLA.each(function (e) {
 
-            Iva=0;
             let iva = $(this).find("input[id*='txtIva']").val();
 
             if (iva=="true")
