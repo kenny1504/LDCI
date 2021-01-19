@@ -220,7 +220,9 @@ var Iva=0;
             if (producto>1)
             {
                 select.value=""
-                alertError("EL producto ya existe en la factura")
+                alertError("El producto ya existe en la factura")
+                $(this).find("select[id*='txt_precio']").trigger("focus")
+                $(this).find("select[id*='txt_precio']").trigger("change")
             }
 
         });
