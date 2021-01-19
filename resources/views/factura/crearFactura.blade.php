@@ -127,13 +127,14 @@
                                             <th class=" text-center" width="50%">Producto</th>
                                             <th class=" text-center" width="15%">Precio $</th>
                                             <th class=" text-center" width="15%">Importe $</th>
+                                            <th style="display:none;" >IVA $</th>
                                             <th class=" text-center" width="10%">ACCIÓN</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="fila-base">
                                             <td width="10%" class="text-center">
-                                                <input onblur="validarExistencia(this)" onkeypress="return soloNumeros(event,txt_cantidad);" onFocus="this.oldValue = this.value;"  onchange="importe(event,this);this.oldValue = this.value;"   name="txt_cantidad" id="txt_cantidad"  class="text-center form-control input-sm" type="text">
+                                                <input onchange="validarExistencia(this)" onkeypress="return soloNumeros(event,txt_cantidad);" onFocus="this.oldValue = this.value;"  onblur="importe(event,this);this.oldValue = this.value;"   name="txt_cantidad" id="txt_cantidad"  class="text-center form-control input-sm" type="text">
                                             </td>
                                             <td width="50%" class="text-center">
                                                 <select onchange="changeProducto(event,this)" name="cmb_Producto"  id="cmb_Producto" class=" form-control input-md">
@@ -145,6 +146,9 @@
                                             </td>
                                             <td width="15%" class="text-center">
                                                 <input readonly name="txt_importe" id="txt_importe"  class=" text-center form-control input-sm" type="text">
+                                            </td>
+                                            <td width="5%" style="display:none;" class=" text-center">
+                                                <input hidden value="0" type="text" name="txtIva"  id="txtIva" class="cantidad text-center form-control input-sm">
                                             </td>
                                             <td width="10%" class="text-center">
                                                 <div class="form-group">

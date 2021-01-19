@@ -373,7 +373,7 @@ class FacturaModel extends Model
     public function getPrecio($id_producto)
     {
         $query = new static;
-        $query = DB::select("select precio from ldci.tb_producto where id_producto=$id_producto");
+        $query = DB::select("select precio,iva from ldci.tb_producto where id_producto=$id_producto");
         return $query;
     }
 

@@ -180,13 +180,12 @@ var Iva=0;
                     producto_old=0
                 /********* +++++++++++++++++++++++ ************/
 
-
                 var importe_old=producto_old*valor;
                 var importe_new=producto_actual*valor;
 
                 SubTotal=SubTotal-importe_old
                 SubTotal+=importe_new
-                Iva=SubTotal*0.15
+                calcularIva();
                 Total=SubTotal+Iva-Descuento
                 TotalCordoba=Total*parseFloat(tasa_cambio)
 
@@ -219,6 +218,7 @@ var Iva=0;
 
                 $(fila).find("#txt_precio").trigger("focus") //desencadena evento
                 $(fila).find("#txt_precio").val(data[0].precio);
+                $(fila).find("#txtIva").val(data[0].iva);
                 $(fila).find("#txt_precio").trigger("change")
 
 
@@ -255,7 +255,7 @@ var Iva=0;
 
                 SubTotal=SubTotal-importe_old
                 SubTotal+=importe_new
-                Iva=SubTotal*0.15
+                calcularIva();
                 Total=SubTotal+Iva-Descuento
                 TotalCordoba=Total*parseFloat(tasa_cambio)
 
@@ -375,12 +375,12 @@ var Iva=0;
                     producto:producto
                 },
                 success: function (data) {
-
                     if(data[0].existencia<input.value)
                     {
                         input.value="";
                         alertError("Error la cantidad en existencia es igual a "+data[0].existencia);
                     }
+                    calcularIva()
 
                 },
                 error: function (err) {
@@ -586,6 +586,33 @@ var Iva=0;
 
     }
 
+    function calcularIva()
+    {
+        var TABLA= $("#tblDetalleProductos tbody > tr");
+
+        TABLA.each(function (e) {
+
+            Iva=0;
+            let iva = $(this).find("input[id*='txtIva']").val();
+
+            if (iva=="true")
+            {
+                let precio = $(this).find("input[id*='txt_precio']").val()
+                let cantidad = $(this).find("input[id*='txt_cantidad']").val();
+
+
+                if (cantidad!="" && cantidad!=undefined )
+                    cantidad=parseFloat( cantidad= cantidad.replace(/,/g, "")); /**Formate numero */
+                else
+                    cantidad=0
+
+                Iva+=cantidad*parseFloat(precio)*0.15;
+            }
+
+
+        });
+
+    }
 
 
 
