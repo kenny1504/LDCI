@@ -155,51 +155,46 @@ var Iva=0;
             }
             else
             {
-                setTimeout(function () {
+                let precio= $(input).parents('tr').find("input[id*='txt_precio']");
+                var valor= precio.val();/** Captura el nuevo valor del input*/
 
-                    let precio= $(input).parents('tr').find("input[id*='txt_precio']");
-                    var valor= precio.val();/** Captura el nuevo valor del input*/
+                if (valor!="" && valor!=undefined )
+                    valor=parseFloat( valor= valor.replace(/,/g, "")); /**Formate numero */
+                else
+                    valor=0
 
-                    if (valor!="" && valor!=undefined )
-                        valor=parseFloat( valor= valor.replace(/,/g, "")); /**Formate numero */
-                    else
-                        valor=0
+                var tasa_cambio=$('#lbl_tasa_cambio').text();
 
-                    var tasa_cambio=$('#lbl_tasa_cambio').text();
+                /** Recupera valores de la cantidad de productos*/
 
-                    /** Recupera valores de la cantidad de productos*/
+                var  producto_actual=input.value;
+                if (producto_actual!="" && producto_actual!=undefined )
+                    producto_actual=parseFloat( producto_actual= producto_actual.replace(/,/g, "")); /**Formate numero */
+                else
+                    producto_actual=0
 
-                    var  producto_actual=input.value;
-                    if (producto_actual!="" && producto_actual!=undefined )
-                        producto_actual=parseFloat( producto_actual= producto_actual.replace(/,/g, "")); /**Formate numero */
-                    else
-                        producto_actual=0
+                var  producto_old=input.oldValue;
+                if (producto_old!="" && producto_old!=undefined )
+                    producto_old=parseFloat( producto_old= producto_old.replace(/,/g, "")); /**Formate numero */
+                else
+                    producto_old=0
+                /********* +++++++++++++++++++++++ ************/
 
-                    var  producto_old=input.oldValue;
-                    if (producto_old!="" && producto_old!=undefined )
-                        producto_old=parseFloat( producto_old= producto_old.replace(/,/g, "")); /**Formate numero */
-                    else
-                        producto_old=0
-                    /********* +++++++++++++++++++++++ ************/
+                var importe_old=producto_old*valor;
+                var importe_new=producto_actual*valor;
 
-                    var importe_old=producto_old*valor;
-                    var importe_new=producto_actual*valor;
+                SubTotal=SubTotal-importe_old
+                SubTotal+=importe_new
+                calcularIva();
+                Total=SubTotal+Iva-Descuento
+                TotalCordoba=Total*parseFloat(tasa_cambio)
 
-                    SubTotal=SubTotal-importe_old
-                    SubTotal+=importe_new
-                    calcularIva();
-                    Total=SubTotal+Iva-Descuento
-                    TotalCordoba=Total*parseFloat(tasa_cambio)
-
-                    $(input).parents('tr').find("input[id*='txt_importe']").val(importe_new);
-                    $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
-                    $('#txt_iva').text(number_format(Iva, 2, ".", ","));
-                    $('#txt_totalPr').text(number_format(SubTotal, 2, ".", ","));
-                    $('#txt_total').text(number_format(Total, 2, ".", ","));
-                    $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
-
-                }, 200);
-
+                $(input).parents('tr').find("input[id*='txt_importe']").val(importe_new);
+                $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
+                $('#txt_iva').text(number_format(Iva, 2, ".", ","));
+                $('#txt_totalPr').text(number_format(SubTotal, 2, ".", ","));
+                $('#txt_total').text(number_format(Total, 2, ".", ","));
+                $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
             }
     }
 
