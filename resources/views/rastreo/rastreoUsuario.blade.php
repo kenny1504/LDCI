@@ -177,7 +177,7 @@
                                 <table id="tblCotizaciones" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th>N.º Cotización</th>
                                             <th>Cliente</th>
                                             <th>Transporte</th>
                                             <th>Destino</th>
