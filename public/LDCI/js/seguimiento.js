@@ -298,7 +298,8 @@ var Iva=0;
                 valor=0
 
             SubTotal=SubTotal-valor
-            Iva=SubTotal*0.15
+            $(this).closest('tr').remove();
+            calcularIva();
             Total=SubTotal+Iva
 
             $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
@@ -306,8 +307,6 @@ var Iva=0;
             $('#txt_total').text(number_format(Total, 2, ".", ","));
 
             /*********************************  *****************  **********************************/
-
-            $(this).closest('tr').remove();
         } else {
             alertError("¡Esta fila no puede ser eliminada!");
         }
@@ -498,6 +497,7 @@ var Iva=0;
             var elem = document.getElementById('txtPrecioServicio');
             elem.oldValue=0
             $("#txtPrecioServicio").val(item['precio']);
+            $("#txtIva").val(item['iva']);
             $("#txtPrecioServicio").change();
 
         } else {
@@ -506,6 +506,9 @@ var Iva=0;
 
                 if ($(this).attr("id") == "cmb_servicio") {
                     $(this).val(item['id_producto']);
+                }
+                if ($(this).attr("id") == "txtIva") {
+                    $(this).val(item['iva']);
                 }
                 if ($(this).attr("id") == "txtPrecioServicio") {
                     $(this).val(item['precio']);
@@ -612,7 +615,7 @@ var Iva=0;
 
             SubTotal=SubTotal-oldvalue
             SubTotal+=valor
-            Iva=SubTotal*0.15
+            calcularIva();
             Total=SubTotal+Iva
 
             $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
@@ -1262,4 +1265,82 @@ var Iva=0;
                 detailwindows.document.write(htmltext);
                 detailwindows.document.close();
             });
+    }
+
+    /** Funcion para si el servicio cobra iva */
+    function  validarServicio(select)
+    {
+        var id_servicio=select.value;
+
+        var TABLA= $("#tblDetalleServicios tbody > tr");
+        servicio=0;
+        TABLA.each(function (e) {
+
+            let ser = $(this).find("select[id*='cmb_servicio']").val();
+
+            if (id_servicio==ser)
+            {
+                servicio++;
+            }
+
+            if (servicio>1)
+            {
+                select.value=""
+                alertError("El servicio ya existe en la factura")
+                $(this).find("select[id*='txtPrecioServicio']").trigger("focus")
+                $(this).find("select[id*='txtPrecioServicio']").trigger("change")
+            }
+
+        });
+
+        if (select.value!="")
+        {
+            var _token= $('input[name=_token]').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/getDetalleServicio/iva', //llamada a la ruta
+                data: {
+                    _token:_token,
+                    id_servicio:id_servicio
+                },
+                success: function (data) {
+                    $(select).parents('tr').find("input[id*='txtIva']").val(data[0].iva);
+                    calcularIva()
+
+                },
+                error: function (err) {
+                    alertError(err.responseText);
+                    showLoad(false);
+                }
+
+            });
+        }
+
+
+    }
+
+    function calcularIva()
+    {
+
+        var TABLA= $("#tblDetalleServicios tbody > tr");
+
+        Iva=0;
+        TABLA.each(function (e) {
+
+            let iva = $(this).find("input[id*='txtIva']").val();
+
+            if (iva=="true")
+            {
+                let precio = $(this).find("input[id*='txtPrecioServicio']").val();
+
+                if (precio!="" && precio!=undefined )
+                    precio=parseFloat( precio= precio.replace(/,/g, "")); /**Formate numero */
+                else
+                    precio=0
+
+                Iva+=precio*0.15;
+            }
+        });
+
     }

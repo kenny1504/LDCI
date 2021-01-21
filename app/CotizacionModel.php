@@ -332,8 +332,18 @@ class CotizacionModel extends Model
     function getDetalleServicio($id_cotizacion)
     {
         $query = new static;
-        $query = DB::select("select id_producto,precio
-                            from  ldci.tb_detalle_cotizacion where id_cotizacion=$id_cotizacion and id_producto is not null");
+        $query = DB::select("select dc.id_producto,dc.precio,p.iva
+                                    from  ldci.tb_detalle_cotizacion dc
+                                    join ldci.tb_producto p on p.id_producto=dc.id_producto
+                                    where id_cotizacion=$id_cotizacion and dc.id_producto is not null");
+        return $query;
+    }
+
+    /** Funcion que recupera si el servicio cobra iva*/
+    function getServicioIva($id_servicio)
+    {
+        $query = new static;
+        $query = DB::select("select iva from ldci.tb_producto where id_producto=$id_servicio");
         return $query;
     }
 

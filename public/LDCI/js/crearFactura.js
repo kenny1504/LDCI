@@ -157,13 +157,10 @@ var Iva=0;
             {
                 let precio= $(input).parents('tr').find("input[id*='txt_precio']");
                 var valor= precio.val();/** Captura el nuevo valor del input*/
-
                 if (valor!="" && valor!=undefined )
                     valor=parseFloat( valor= valor.replace(/,/g, "")); /**Formate numero */
                 else
                     valor=0
-
-                var tasa_cambio=$('#lbl_tasa_cambio').text();
 
                 /** Recupera valores de la cantidad de productos*/
 
@@ -173,23 +170,31 @@ var Iva=0;
                 else
                     producto_actual=0
 
-                var  producto_old=input.oldValue;
-                if (producto_old!="" && producto_old!=undefined )
-                    producto_old=parseFloat( producto_old= producto_old.replace(/,/g, "")); /**Formate numero */
-                else
-                    producto_old=0
-                /********* +++++++++++++++++++++++ ************/
-
-                var importe_old=producto_old*valor;
                 var importe_new=producto_actual*valor;
+                $(input).parents('tr').find("input[id*='txt_importe']").val(importe_new);
 
-                SubTotal=SubTotal-importe_old
-                SubTotal+=importe_new
+                SubTotal=0;
+                var TABLA= $("#tblDetalleProductos tbody > tr");
+                /*Obtención de datos de la tabla dinámica*/
+                TABLA.each(function (e) {
+
+                    let importe = $(this).find("input[id*='txt_importe']").val();
+
+
+                    if (importe!="")
+                        importe=parseFloat( importe= importe.replace(/,/g, "")); /**Formate numero */
+                    else
+                        importe=0
+
+                    SubTotal+=importe;
+                });
+
+
+                var tasa_cambio=$('#lbl_tasa_cambio').text();
                 calcularIva();
                 Total=SubTotal+Iva-Descuento
                 TotalCordoba=Total*parseFloat(tasa_cambio)
 
-                $(input).parents('tr').find("input[id*='txt_importe']").val(importe_new);
                 $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
                 $('#txt_iva').text(number_format(Iva, 2, ".", ","));
                 $('#txt_totalPr').text(number_format(SubTotal, 2, ".", ","));
@@ -206,7 +211,6 @@ var Iva=0;
         var _token= $('input[name=_token]').val();
 
         var TABLA= $("#tblDetalleProductos tbody > tr");
-
         producto=0;
         TABLA.each(function (e) {
 
@@ -230,6 +234,7 @@ var Iva=0;
 
         // Obtener contenedor desde el elemento que cambió
         let fila = $(e.target).closest('tr');
+        $(fila).find("#txt_cantidad").val("");
 
         if (select.value!="")
         {
@@ -246,52 +251,6 @@ var Iva=0;
                     $(fila).find("#txt_precio").val(data[0].precio);
                     $(fila).find("#txtIva").val(data[0].iva);
                     $(fila).find("#txt_precio").trigger("change")
-
-
-                    let precio= $(select).parents('tr').find("input[id*='txt_precio']");
-                    let producto= $(select).parents('tr').find("input[id*='txt_cantidad']");
-                    var oldvalue=  precio[0].attributes.oldvalue.nodeValue /** Captura el anterior valor del input */
-                    var valor= precio.val();/** Captura el nuevo valor del input*/
-
-                    if (valor!="" && valor!=undefined )
-                        valor=parseFloat( valor= valor.replace(/,/g, "")); /**Formate numero */
-                    else
-                        valor=0
-
-                    if (oldvalue!="" && oldvalue!=undefined )
-                        oldvalue=parseFloat( oldvalue= oldvalue.replace(/,/g, ""));
-                    else
-                        oldvalue=0
-
-                    var tasa_cambio=$('#lbl_tasa_cambio').text();
-
-                    /** Recupera valores de la cantidad de productos*/
-
-                    var  producto_actual=producto.val();
-                    if (producto_actual!="" && producto_actual!=undefined )
-                        producto_actual=parseFloat( producto_actual= producto_actual.replace(/,/g, "")); /**Formate numero */
-                    else
-                        producto_actual=0
-
-                    /********* +++++++++++++++++++++++ ************/
-
-
-                    var importe_old=producto_actual*oldvalue;
-                    var importe_new=producto_actual*valor;
-
-                    SubTotal=SubTotal-importe_old
-                    SubTotal+=importe_new
-                    calcularIva();
-                    Total=SubTotal+Iva-Descuento
-                    TotalCordoba=Total*parseFloat(tasa_cambio)
-
-                    $(select).parents('tr').find("input[id*='txt_importe']").val(importe_new);
-                    $('#txt_subtotal').text(number_format(SubTotal, 2, ".", ","));
-                    $('#txt_iva').text(number_format(Iva, 2, ".", ","));
-                    $('#txt_totalPr').text(number_format(SubTotal, 2, ".", ","));
-                    $('#txt_total').text(number_format(Total, 2, ".", ","));
-                    $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
-
 
                 },
                 error: function (err) {
@@ -339,6 +298,7 @@ var Iva=0;
     /** Funcion para eliminar fila */
     $("#tblDetalleProductos").on('click', '.eliminarFila', function () {
 
+
         var tasa_cambio=$('#lbl_tasa_cambio').text();
         var numeroFilas = $("#tblDetalleProductos tbody tr").length;
         if (numeroFilas > 1) {
@@ -358,11 +318,12 @@ var Iva=0;
                 cantidad=parseFloat( cantidad= cantidad.replace(/,/g, ""));
             else
                 cantidad=0
+            $(this).closest('tr').remove();
+            calcularIva();
 
             var importe=cantidad*precio;
 
             SubTotal=SubTotal-importe
-            Iva=SubTotal*0.15
             if (descuento!=0)
                 Descuento=SubTotal*parseFloat(descuento);
             Total=SubTotal+Iva-Descuento
@@ -377,8 +338,6 @@ var Iva=0;
             $('#txt_total_corboba').text(number_format(TotalCordoba, 2, ".", ","));
 
             /*********************************  *****************  **********************************/
-
-            $(this).closest('tr').remove();
         } else {
             alertError("¡Esta fila no puede ser eliminada!");
         }

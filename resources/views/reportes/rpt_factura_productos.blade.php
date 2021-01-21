@@ -250,7 +250,7 @@
                         <td class="text_color alinear">{{$detalle->precio}}</td>
                         <td class="text_color alinear">{{$detalle->dto}}</td>
                         <td class="text_color alinear">{{$detalle->iva}}</td>
-                        <td class="text_color alinear">{{$detalle->total}}</td>
+                        <td class="text_color alinear">{{$detalle->importe}}</td>
                     </tr>
                 @endforeach
                 </tbody>

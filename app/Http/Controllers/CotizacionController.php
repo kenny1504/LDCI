@@ -170,6 +170,14 @@ class CotizacionController extends Controller
         return response()->json($datos);
     }
 
+    /** Funcion que recupera si el servicio cobra iva*/
+    public function getServicioIva(Request $request)
+    {
+        $id_servicio=$request->id_servicio;
+        $datos= (new CotizacionModel)->getServicioIva($id_servicio);
+        return response()->json($datos);
+    }
+
     public  function ActualizarCotizacion(Request $request)
     {
 

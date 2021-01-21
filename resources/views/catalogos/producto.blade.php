@@ -24,11 +24,20 @@
                             <input name="id_Producto" id="id_Producto" readonly class="form-control input-sm">
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-2">
                         <label >Servicio</label>
                         <div title="Dar check si es un servicio" class="form-group">
                             <label class="switch">
                                 <input name="cktipo" id="cktipo" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label >Iva</label>
+                        <div title="Dar check si al producto se le aplica iva" class="form-group">
+                            <label class="switch">
+                                <input name="ckiva" id="ckiva" type="checkbox">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -47,15 +56,6 @@
                         <div class="form-group">
                             <label for="txt_precio">Precio</label>
                             <input onkeypress="return soloNumeros(event,txt_precio);" name="txt_precio" id="txt_precio"  class="form-control input-sm">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label >Iva</label>
-                        <div title="Dar check si al producto se le aplica iva" class="form-group">
-                            <label class="switch">
-                                <input name="ckiva" id="ckiva" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -116,7 +116,7 @@
                                 <th>Descripcion</th>
                                 <th>Precio</th>
                                 <th>Existencia</th>
-                                <th>Iva</th>
+                                <th>Tipo</th>
                                 <th>Seleccione</th>
                             </tr>
                             </thead>

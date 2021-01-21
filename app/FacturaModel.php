@@ -158,19 +158,22 @@ class FacturaModel extends Model
             WHERE c.id_cotizacion=$id_cotizacion
             UNION
             SELECT cd.id_detalle_cotizacion, p.id_producto, p.nombre, null , ' ',
-            coalesce(cd.precio,0) AS precio,coalesce((cd.precio*0.15),0) as iva,
-            coalesce(((coalesce((cd.precio*0.15),0)+(coalesce(cd.precio,0)))),0)total,0 as Dto ,'' as descripcion
+            coalesce(cd.precio,0) AS precio, case when p.iva=false then 0 else
+            coalesce((cd.precio*0.15),0) end as iva,
+            case when p.iva=false then  coalesce(cd.precio,0) else
+            coalesce(((coalesce((cd.precio*0.15),0)+(coalesce(cd.precio,0)))),0) end as total,
+            0 as Dto ,'' as descripcion
             from ldci.tb_cotizacion as c
             JOIN ldci.tb_detalle_cotizacion AS cd ON c.id_cotizacion = cd.id_cotizacion
             JOIN ldci.tb_producto AS p on p.id_producto = cd.id_producto
-            WHERE c.id_cotizacion = $id_cotizacion
+            WHERE c.id_cotizacion =$id_cotizacion
             UNION
             select ca.id_cargo_aplicado as no,ca.id_cargo_aplicado,'MICELANEO' ,null,null,ca.monto,0
             ,ca.monto,0,upper(ca.descricion) as descripcion
             from ldci.tb_cargo_aplicado ca
             join ldci.tb_factura fa on fa.id_factura=ca.id_factura
             join ldci.tb_flete f on f.id_flete=fa.id_flete
-             where f.id_cotizacion=$id_cotizacion and fa.estado=1
+             where f.id_cotizacion=	$id_cotizacion and fa.estado=1
             )as t");
 
         return $query;
@@ -507,16 +510,18 @@ class FacturaModel extends Model
     function getDetalleFactura($codigoFactura)
     {
         $query = new static;
-        $query = DB::select("select row_number() OVER () as no,
-                                 p.id_producto, p.nombre,p.descripcion,df.precio,
-                                 df.cantidad,coalesce((df.cantidad*df.precio),0) total,
-                                 0 as Dto,coalesce(((df.cantidad*df.precio)*0.15),0) as iva,
-                                 coalesce(((df.cantidad*df.precio)*0.15)+(df.cantidad*df.precio),0) as importe
-                                from ldci.tb_detalle_factura df
-                                join ldci.tb_producto p on df.id_producto=p.id_producto
-                                join ldci.tb_factura_cliente fc on fc.id_factura_cliente=df.id_factura_cliente
-                                join ldci.tb_factura f on f.id_factura=fc.id_factura
-                                where f.codigo='$codigoFactura' and f.estado=1");
+        $query = DB::select("select row_number() OVER () as no ,t.* from (select p.id_producto, p.nombre,p.descripcion,df.precio,
+                                    df.cantidad,coalesce((df.cantidad*df.precio),0) total,
+                                    0 as Dto,case when p.iva=false then 0 else
+                                    coalesce(((df.cantidad*df.precio)*0.15),0) end as iva,
+                                    case when p.iva=false then
+                                    coalesce((df.cantidad*df.precio),0) else
+                                     coalesce(((df.cantidad*df.precio)*0.15)+(df.cantidad*df.precio),0) end as importe
+                                    from ldci.tb_detalle_factura df
+                                    join ldci.tb_producto p on df.id_producto=p.id_producto
+                                    join ldci.tb_factura_cliente fc on fc.id_factura_cliente=df.id_factura_cliente
+                                    join ldci.tb_factura f on f.id_factura=fc.id_factura
+                                    where f.codigo='$codigoFactura' and f.estado=1) as t");
 
         return $query;
     }

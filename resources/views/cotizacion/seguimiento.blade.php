@@ -196,18 +196,22 @@
                                         <tr>
                                             <th class=" text-center" width="80%">SERVICIO</th>
                                             <th class=" text-center" width="10%">PRECIO $</th>
+                                            <th style="display:none;" >IVA $</th>
                                             <th class=" text-center" width="10%">ACCIÓN</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="fila-base">
                                             <td width="80%" class="text-center">
-                                                <select  title="Seleccione" class="form-control input-sm" id="cmb_servicio" data-live-search="true">
+                                                <select onchange="validarServicio(this)"  title="Seleccione" class="form-control input-sm" id="cmb_servicio" data-live-search="true">
                                                     <option selected disabled value=""> Seleccione</option>
                                                 </select>
                                             </td>
                                             <td width="10%" class="text-center">
                                                 <input title="Ingrese precio" onFocus="this.oldValue = this.value;" onchange="calcularPresupuesto(this);this.oldValue = this.value;" required onkeypress="return soloNumeros(event,txtPrecioServicio);"  type="text" name="txtPrecioServicio"  id="txtPrecioServicio" class="cantidad text-center form-control input-sm">
+                                            </td>
+                                            <td width="5%" style="display:none;" class=" text-center">
+                                                <input hidden value="0" type="text" name="txtIva"  id="txtIva" class="text-center form-control input-sm">
                                             </td>
                                             <td width="10%" class="text-center">
                                                 <div class="form-group">
