@@ -298,7 +298,7 @@ var Iva=0;
     /** Funcion para eliminar fila */
     $("#tblDetalleProductos").on('click', '.eliminarFila', function () {
 
-
+        debugger;
         var tasa_cambio=$('#lbl_tasa_cambio').text();
         var numeroFilas = $("#tblDetalleProductos tbody tr").length;
         if (numeroFilas > 1) {
@@ -326,6 +326,10 @@ var Iva=0;
             SubTotal=SubTotal-importe
             if (descuento!=0)
                 Descuento=SubTotal*parseFloat(descuento);
+
+            if (descuento==null)
+                Descuento=0;
+
             Total=SubTotal+Iva-Descuento
             TotalCordoba=Total*parseFloat(tasa_cambio)
 
