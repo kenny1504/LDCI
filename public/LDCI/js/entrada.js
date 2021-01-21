@@ -395,6 +395,10 @@ var Total_Entrada=0;
     /** Funcion para agregar un producto desde Entradas */
     function agregarProductoEntrada()
     {
+        var checkbox2=document.getElementById('ck_iva');
+        $('#txt_nombre_p_entrada,#txt_precio_p_entrada,#txt_descripcion_p_entrada').val("");
+        if (checkbox2.checked == true)
+                $('#ck_iva').click();
         /** Configuraciones para subir imagen */
         /** Funcion que permite actualizar o agregar un nuevo registro */
         Dropzone.discover(

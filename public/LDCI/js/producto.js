@@ -160,7 +160,6 @@ var img=null;
                 $('#cktipo').click();
         }
 
-debugger;
         var checkbox2=document.getElementById('ckiva');
 
         /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */

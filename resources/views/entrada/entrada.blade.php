@@ -200,10 +200,19 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-10">
                                         <div class="form-group">
                                             <label for="txt_descripcion_p_entrada">Descripcion</label>
                                             <textarea class="form-control input-sm" id="txt_descripcion_p_entrada" name="txt_descripcion_p_entrada" > </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label >Iva</label>
+                                        <div title="Dar check si al producto se le aplica iva" class="form-group">
+                                            <label class="switch">
+                                                <input name="ck_iva" id="ck_iva" type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
