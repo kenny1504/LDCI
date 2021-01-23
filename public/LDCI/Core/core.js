@@ -16,7 +16,7 @@ var allCountries=null; /** Guarda paises y sus codigos (Telefono) */
             console.log("%c\tAlerta!! \n", "color: red; font-size: x-large");
             console.log("%cEl codigo que ingrese en esta consola que pueda alterar el comportamiento del sistema sera penalizado.\n", "color: green");
         }, 300);
-       $('#btnLeftMenu').click();
+        $('#btnLeftMenu').click();
 
         var input = document.querySelector("#phone");
         select = window.intlTelInput(input, {
@@ -480,7 +480,7 @@ var allCountries=null; /** Guarda paises y sus codigos (Telefono) */
             }
         }
         else
-          alertError("Favor ingrese contraseña actual para efectuar cambios");
+            alertError("Favor ingrese contraseña actual para efectuar cambios");
 
     }
 
@@ -759,9 +759,9 @@ var allCountries=null; /** Guarda paises y sus codigos (Telefono) */
     $(document).off("change", "#cmb_sexo").on("change", "#cmb_sexo" , function () {
 
         if (this.value=='F')
-             $('#imgsexo').prop('src','LDCI/img/userF.png');
+            $('#imgsexo').prop('src','LDCI/img/userF.png');
         else
-             $('#imgsexo').prop('src','LDCI/img/userM.png');
+            $('#imgsexo').prop('src','LDCI/img/userM.png');
     });
 
     /** Funcion  par aplicar formato (Dinero)*/
@@ -787,32 +787,32 @@ var allCountries=null; /** Guarda paises y sus codigos (Telefono) */
     return amount_parts.join('.');
 }
 
-   /** Funcion para Validar Correo Y evitar rebotes en servidor de Correo*/
-   function CorreoVerify(input)
-   {
+    /** Funcion para Validar Correo Y evitar rebotes en servidor de Correo*/
+    function CorreoVerify(input)
+    {
 
        /** Validacion Utilizando api mailboxlayer */
-      var correo=input.value;
+        var correo=input.value;
 
-      $.get( "https://apilayer.net/api/check", { email: correo, access_key : "0f19511937cbc3c4b9ee95205e91641d" } )
-          .done(function( data ) {
+        $.get( "https://apilayer.net/api/check", { email: correo, access_key : "0f19511937cbc3c4b9ee95205e91641d" } )
+            .done(function( data ) {
 
-              if (data.format_valid==true && data.mx_found==true && data.smtp_check==true  )
-                  alertSuccess( "Correo Valido");
-              else
-              {
-                  alertError( "Correo No Valido");
-                  input.value=" ";
-              }
-              console.log(data);
-          });
+                if (data.format_valid==true && data.mx_found==true && data.smtp_check==true  )
+                    alertSuccess( "Correo Valido");
+                else
+                {
+                    alertError( "Correo No Valido");
+                    input.value="";
+                }
+                console.log(data);
+            });
 
-  }
+    }
 
     /** Funcion para validar Contraseña Segura */
     function validar_clave(input)
     {
-          var  contrasenna=input.value
+        var  contrasenna=input.value
         if(contrasenna.length >= 8)
         {
             var mayuscula = false;
@@ -846,10 +846,10 @@ var allCountries=null; /** Guarda paises y sus codigos (Telefono) */
             else
             {
                 alertError("La contraseña debe posser al menos una letra Mayuscula, letras minusculas , un numero y un caractrer especial")
-                input.value=" ";
+                input.value="";
             }
         }
         else
-             alertError("La contraseña debe posser al menos 8 caracteres")
-             input.value=" ";
+            alertError("La contraseña debe posser al menos 8 caracteres")
+            input.value="";
     }
