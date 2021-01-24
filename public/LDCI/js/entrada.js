@@ -126,7 +126,7 @@ var Total_Entrada=0;
             precio=parseFloat( precio= precio.replace(/,/g, ""));
             else
             precio=0
-            Total_Entrada=(precio*cantidad)-Total_Entrada
+            Total_Entrada=Total_Entrada-(precio*cantidad)
             $("#txt_totalEntrada").text(number_format(Total_Entrada, 2, ".", ","))
             /*------------------------------------------------------------------------------/
             /**--------------------------------------------------------------------------- */
