@@ -102,7 +102,7 @@ class FacturaModel extends Model
                             join ldci.tb_flete f on f.id_cotizacion=c.id_cotizacion
                             join ldci.tb_cliente cl on cl.id_cliente=f.id_cliente
                             join ldci.tb_persona p1 on p1.id_persona=cl.id_persona
-                            join ldci.tb_persona p2 on p2.id_persona=f.id_cotizacion
+                            join ldci.tb_persona p2 on p2.id_persona=f.id_consignatario
                             where c.id_cotizacion=$id_cotizacion");
         return $query;
     }
