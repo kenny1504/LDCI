@@ -368,7 +368,7 @@ var Iva=0;
                 $('#txt_destino').val(data[0].destino);
                 $('#txt_origen').val(data[0].origen);
                 $('#cmb_transporte').val(data[0].id_tipo_transporte);
-                $('#txt_nota_adicional').val(data[0].nota);
+                $('#txt_nota_adicional_cliente').val(data[0].nota);
                 $('#txt_descripcion').val(data[0].descripcion);
                 $('#txt_enviarCorreo').val(data[0].correo);
 

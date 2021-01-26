@@ -233,10 +233,15 @@
                         </div>
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <label >Nota adicional</label>
-                                    <textarea readonly class="form-control" id="txt_nota_adicional" name="txt_nota_adicional">
-                                </textarea>
+                                <div class="col-md-6">
+                                    <label >Nota adicional cliente</label>
+                                    <textarea readonly class="form-control" id="txt_nota_adicional_cliente" name="txt_nota_adicional_cliente">
+                                    </textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label >Nota adicional </label>
+                                    <textarea  class="form-control" id="txt_nota_adicional" name="txt_nota_adicional">
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
@@ -244,8 +249,8 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <br>
-                                    <label >Descripcion</label>
-                                    <textarea style="height: 70%;" class="form-control" id="txt_descripcion" name="txt_descripcion">
+                                    <label >Nota Interna</label>
+                                    <textarea style="height: 70%;" class="form-control" id="txt_nota_interna" name="txt_nota_interna">
                                 </textarea>
                                 </div>
                                 <div class=" col-md-4">
