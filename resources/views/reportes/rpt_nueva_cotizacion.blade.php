@@ -271,27 +271,21 @@
                     </tr>
                 </table>
 
-
-
                 <table class=" table-borde_3 table-responsive tbl_tamano_2">
                     <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1 "></th>
-                        <td class="text_color ancho_columna alinear_2 tamano_fuente_1"></td>
-                    </tr>
-                    <tr>
-                        <th class="text_color_c alinear_2 ancho_celda tamano_fuente_1">Subtotal</th>
+                        <th class="text_color_c alinear_2 tamano_fuente_1" style="height: 2.05%">Subtotal</th>
                         <td class="text_color ancho_columna  tamano_fuente_1 alinear">$ {{$informacion->subtotal}}</td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1 ">Descuento</th>
+                        <th class="text_color_c alinear_2 tamano_fuente_1 " style="height: 2.05%">Descuento</th>
                         <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->descuento}}</td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1">Iva</th>
+                        <th class="text_color_c alinear_2 tamano_fuente_1" style="height: 2.05%">Iva</th>
                         <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->iva}}</td>
                     </tr>
                     <tr>
-                        <th class="text_color_c ancho_celda alinear_2 tamano_fuente_1"><strong>Total</strong></th>
+                        <th class="text_color_c alinear_2 tamano_fuente_1" style="height: 2.05%"><strong>Total</strong></th>
                         <td class="text_color  tamano_fuente_1 alinear">$ {{$informacion->total}}</td>
                     </tr>
                 </table>

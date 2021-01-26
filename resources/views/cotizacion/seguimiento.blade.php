@@ -1,27 +1,27 @@
-   <style>
-       textarea {
-           resize: none;
-       }
+    <style>
+        textarea {
+            resize: none;
+        }
 
-       thead tr th {
-           position: sticky;
-           color:white;
-           background-color:#337ab7;
-           text-align: center
-         }
-       .punteado{
-           border-style: dotted;
-           border-width: 1px;
-           border-color: #660033;
-           font-family: verdana, arial;
-           font-size: 10pt;
-       }
-       .precio{
-           margin: 0 0 0px 0!important;
-           padding: 0!important;
-           margin-top: 3%!important;
-       }
-   </style>
+        thead tr th {
+            position: sticky;
+            color:white;
+            background-color:#337ab7;
+            text-align: center
+            }
+        .punteado{
+            border-style: dotted;
+            border-width: 1px;
+            border-color: #660033;
+            font-family: verdana, arial;
+            font-size: 10pt;
+        }
+        .precio{
+            margin: 0 0 0px 0!important;
+            padding: 0!important;
+            margin-top: 3%!important;
+        }
+    </style>
 
     <div class="col-md-11 col-md-offset-2">
         <div class="row" style="margin-left: 12%;" >
@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-md-2 ">
                             <img  class="img-responsive" width="100px"
-                                 src="LDCI/img/Logo-Intermodal.png" alt="LDCI">
+                                src="LDCI/img/Logo-Intermodal.png" alt="LDCI">
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -119,7 +119,7 @@
                             <div id="detallesCarga" class="table-responsive">
                                 <br>
                                 <table class="table table-hover table-striped table-sm"
-                                       id="tblDetalleCarga">
+                                        id="tblDetalleCarga">
                                     <thead>
                                     <tr>
                                         <th class=" text-center" width="5%">UNIDADES</th>
@@ -191,7 +191,7 @@
                                 <div id="detallesServicios" class="table-responsive">
                                     <br>
                                     <table class="table table-hover table-striped table-sm"
-                                           id="tblDetalleServicios">
+                                            id="tblDetalleServicios">
                                         <thead>
                                         <tr>
                                             <th class=" text-center" width="80%">SERVICIO</th>
@@ -453,7 +453,7 @@
         </div>
     </div>
 
-   <div id="ModalCotizaciones" class="modal fade" role="document" >
+    <div id="ModalCotizaciones" class="modal fade" role="document" >
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
@@ -493,130 +493,130 @@
         </div>
     </div>
 
-   <div id="ModalClientes" class="modal fade" role="document" >
-       <div class="modal-dialog modal-lg">
-           <!-- Modal content-->
-           <div class="modal-content">
-               <div class="modal-header" style="align-self: flex-end;" >
-                   <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">×</span>
-                   </a>
-               </div>
-               <div class="modal-body">
-                   <div class="box box-success">
-                       <div class="box-heading text-success">
-                           <div class="row"></div>
-                           <h4 align="center">Busqueda de Registro</h4>
-                       </div>
-                       <div class="box-body">
-                           <div  class="table-responsive">
-                               <table id="tblClientes" class="table table-striped table-bordered">
-                                   <thead>
-                                   <tr>
-                                       <th>No</th>
-                                       <th>Nombre</th>
-                                       <th>Identificacion</th>
-                                       <th>Correo</th>
-                                       <th>Telefono</th>
-                                       <th>Tipo</th>
-                                       <th>Seleccione</th>
-                                   </tr>
-                                   </thead>
-                                   <tbody>
+    <div id="ModalClientes" class="modal fade" role="document" >
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="align-self: flex-end;" >
+                    <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div class="box box-success">
+                        <div class="box-heading text-success">
+                            <div class="row"></div>
+                            <h4 align="center">Busqueda de Registro</h4>
+                        </div>
+                        <div class="box-body">
+                            <div  class="table-responsive">
+                                <table id="tblClientes" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nombre</th>
+                                        <th>Identificacion</th>
+                                        <th>Correo</th>
+                                        <th>Telefono</th>
+                                        <th>Tipo</th>
+                                        <th>Seleccione</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                                   </tbody>
-                               </table>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-   <div id="ModalProveedores" class="modal fade" role="document" >
-       <div class="modal-dialog modal-lg">
-           <!-- Modal content-->
-           <div class="modal-content">
-               <div class="modal-header" style="align-self: flex-end;" >
-                   <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">×</span>
-                   </a>
-               </div>
-               <div class="modal-body">
-                   <div class="box box-success">
-                       <div class="box-heading text-success">
-                           <div class="row"></div>
-                           <h4 align="center">Busqueda de Registro</h4>
-                       </div>
-                       <div class="box-body">
-                           <div  class="table-responsive">
-                               <table id="tblProveedores" class="table table-striped table-bordered">
-                                   <thead>
-                                   <tr>
-                                       <th>No</th>
-                                       <th>Nombre</th>
-                                       <th>Correo</th>
-                                       <th>Telefono</th>
-                                       <th>Seleccione</th>
-                                   </tr>
-                                   </thead>
-                                   <tbody>
+    <div id="ModalProveedores" class="modal fade" role="document" >
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="align-self: flex-end;" >
+                    <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div class="box box-success">
+                        <div class="box-heading text-success">
+                            <div class="row"></div>
+                            <h4 align="center">Busqueda de Registro</h4>
+                        </div>
+                        <div class="box-body">
+                            <div  class="table-responsive">
+                                <table id="tblProveedores" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Telefono</th>
+                                        <th>Seleccione</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                                   </tbody>
-                               </table>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-   <div id="ModalEnviarCorreo" class="modal fade" role="document" >
-       <div class="modal-dialog modal-lg">
-           <!-- Modal content-->
-           <div class="modal-content">
-               <div class="modal-header" style="align-self: flex-end;" >
-                   <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">×</span>
-                   </a>
-               </div>
-               <div class="modal-body">
-                   <div style="width: 730px" class="box box-success">
-                       <div class="box-heading text-success">
-                           <div class="row"></div>
-                           <h4 align="center">¿Desea enviar por correo la cotizacion?</h4>
-                       </div>
-                       <div class="box-body">
-                           <div class="row">
-                               <div class="col-md-12">
-                                   <div class="form-group text-center">
-                                       <label >Correo</label>
-                                       <div class="col-md-12">
-                                           <input  onchange="CorreoVerify(this)" type="text" id="txt_enviarCorreo" name="txt_enviarCorreo" class="text-center form-control input-md">
-                                       </div>
-                                       <label class="text-info">Tambien puede modificar esta direccion de correo</label>
-                                   </div>
-                               </div>
-                           </div>
-                           <div class="row">
-                               <div class="col-md-4">
-                               </div>
-                               <div class="col-md-7">
-                                   <div class="row">
-                                       <div class="col-md-4"><button type="button" class="guardar btn btn-success "  class="close" data-dismiss="modal"  ><i class="fa fa-check"> </i> Si</button></div>
-                                       <div class="col-md-4"><button type="button" class="guardar btn btn-danger " class="close" data-dismiss="modal" onclick="EnviarCorreo()"  ><i class="fa fa-close"> </i>NO</button></div>
-                                   </div>
-                               </div>
-                               <br><br><br><br>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+    <div id="ModalEnviarCorreo" class="modal fade" role="document" >
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="align-self: flex-end;" >
+                    <a type="button" class="close mg-t-15 mg-r-20" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div style="width: 730px" class="box box-success">
+                        <div class="box-heading text-success">
+                            <div class="row"></div>
+                            <h4 align="center">¿Desea enviar por correo la cotizacion?</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group text-center">
+                                        <label >Correo</label>
+                                        <div class="col-md-12">
+                                            <input  onchange="CorreoVerify(this)" type="text" id="txt_enviarCorreo" name="txt_enviarCorreo" class="text-center form-control input-md">
+                                        </div>
+                                        <label class="text-info">Tambien puede modificar esta direccion de correo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-4"><button type="button" class="guardar btn btn-success "  class="close" data-dismiss="modal"  ><i class="fa fa-check"> </i> Si</button></div>
+                                        <div class="col-md-4"><button type="button" class="guardar btn btn-danger " class="close" data-dismiss="modal" onclick="EnviarCorreo()"  ><i class="fa fa-close"> </i>NO</button></div>
+                                    </div>
+                                </div>
+                                <br><br><br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- js -->
 <script src="{{asset("LDCI/js/seguimiento.js")}}" ></script>
