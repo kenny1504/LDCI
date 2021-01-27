@@ -74,18 +74,17 @@ class ReporteController extends Controller
     {
         $id_cotizacion = $request->id_cotizacion;
 
-            $datos = (new CotizacionModel)->getDatosCotizacion($id_cotizacion);
-            $detalle = (new CotizacionModel)->getDetalleCotizacion($id_cotizacion);
-            $data = [
-                'Informacion' => $datos
-            ];
-            $detalle = [
-                'Detalle' => $detalle
-            ];
+        $datos = (new CotizacionModel)->getDatosCotizacion($id_cotizacion);
+        $detalle = (new CotizacionModel)->getDetalleCotizacion($id_cotizacion);
+        $data = [
+            'Informacion' => $datos
+        ];
+        $detalle = [
+            'Detalle' => $detalle
+        ];
 
-            $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4');
-            echo utf8_encode(($pdf->stream('archivo.pdf')));
-
+        $pdf = PDF::loadView('reportes.rpt_nueva_cotizacion', $data, $detalle)->setPaper('a4');
+        echo utf8_encode(($pdf->stream('archivo.pdf')));
     }
 
     /** Funcion para generar factura de una cotizacion*/
@@ -108,7 +107,6 @@ class ReporteController extends Controller
 
         $pdf = PDF::loadView('reportes.rpt_factura', $data)->setPaper('a4');
         echo utf8_encode(($pdf->stream('archivo.pdf')));
-
     }
 
     /** Funcion para generar factura de una venta directa*/
@@ -121,13 +119,11 @@ class ReporteController extends Controller
 
         $data = [
             'Informacion' => $datos,
-             'Detalle' => $detalle,
+            'Detalle' => $detalle,
         ];
 
 
         $pdf = PDF::loadView('reportes.rpt_factura_productos', $data)->setPaper('a4');
         echo utf8_encode(($pdf->stream('archivo.pdf')));
-
     }
-
 }

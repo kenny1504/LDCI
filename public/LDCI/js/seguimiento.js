@@ -336,7 +336,6 @@ var Iva=0;
                 Estado=data[0].estado;
                 if(Estado>2)
                     CargarDatosFlete()
-
                 $('#cmb_estado').val(data[0].estado);
                 $('#cmb_estado').change();
                 $("#btnimprimir ").removeAttr("disabled", "disabled");
@@ -352,11 +351,13 @@ var Iva=0;
                 /** Solo se puede editar informacion de cargar y servicio cuando esten en estado NUEVA o REVISADA  */
                 if(Estado==1 || Estado==2)
                 {
+                    $('#txt_nota_adicional').removeAttr("disabled", "disabled");
                     $("#tblDetalleServicios ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
                     $("#tblDetalleCarga ").find("input,button,textarea,select").removeAttr("disabled", "disabled");
                 }
                 else
                 {
+                    $('#txt_nota_adicional').attr("disabled", "disabled");
                     $("#tblDetalleServicios ").find("input,button,textarea,select").attr("disabled", "disabled");
                     $("#tblDetalleCarga ").find("input,button,textarea,select").attr("disabled", "disabled");
                 }
@@ -368,8 +369,9 @@ var Iva=0;
                 $('#txt_destino').val(data[0].destino);
                 $('#txt_origen').val(data[0].origen);
                 $('#cmb_transporte').val(data[0].id_tipo_transporte);
-                $('#txt_nota_adicional_cliente').val(data[0].nota);
-                $('#txt_descripcion').val(data[0].descripcion);
+                $('#txt_nota_adicional_cliente').val(data[0].nota_cliente);
+                $('#txt_nota_adicional').val(data[0].nota_adicional);
+                $('#txt_nota_interna').val(data[0].descripcion);
                 $('#txt_enviarCorreo').val(data[0].correo);
 
 
@@ -390,7 +392,7 @@ var Iva=0;
                 id_cotizacion:id_cotizacion,
             },
             success: function (response) {
-                   response.forEach(cargarDetalleCarga);
+                    response.forEach(cargarDetalleCarga);
             },
             error: function (err) {
                 alertError(err.responseText);
@@ -423,23 +425,19 @@ var Iva=0;
     function cargarDetalleCarga(item, index) {
 
         if (0 == index) {
-
-
             $("#txtCantidad").val(item['cantidad']);
-            var estado =   document.getElementById('ckEstado');
-            /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
-            if (item['nuevo']==true)
-            {
-                if (estado.checked == false)
-                    $('#ckEstado').click();
-            }
-            else
-            {
-                if (estado.checked == true)
-                    $('#ckEstado').click();
-            }
-
-
+                var estado =   document.getElementById('ckEstado');
+                /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
+                if (item['nuevo']==true)
+                {
+                    if (estado.checked == false)
+                        $('#ckEstado').click();
+                }
+                else
+                {
+                    if (estado.checked == true)
+                        $('#ckEstado').click();
+                }
             $("#cmb_tipo_mercancia").val(item['id_tipo_mercancia']);
             $("#cmb_modo_transporte").val(item['id_tipo_modo_transporte']);
             $("#txt_observacion").val(item['descripcion']);
@@ -457,13 +455,22 @@ var Iva=0;
                     $(this).val(item['cantidad']);
                 }
                 if ($(this).attr("id") == "ckEstado") {
-
+                    let nuevo= $(this).parents("#tblDetalleCarga tbody > tr").find("input[id*='ckEstado']");
                     /** Verifica si ya esta activado el checkbox, de lo contrario lo activa */
                     if (item['nuevo']==true)
                     {
+                        if(nuevo[0].checked==false)
+                        {
                             $(this).click();
+                        }
                     }
-
+                    else
+                    {
+                        if(nuevo[0].checked == true)
+                        {
+                            $(this).click();
+                        }
+                    }
                 }
                 if ($(this).attr("id") == "cmb_tipo_mercancia") {
                     $(this).val(item['id_tipo_mercancia']);
@@ -553,7 +560,7 @@ var Iva=0;
     function changeestado()
     {
 
-       let estado=$('#cmb_estado').val();
+        let estado=$('#cmb_estado').val();
 
         if (estado>2)
             $('.InfoContacto').removeAttr('hidden');
@@ -854,9 +861,9 @@ var Iva=0;
         if (estado!=-1 && estado!=2)
         {
             if (estadonext==estado)
-                   guardar()
-             else
-                   alertError("No es posible guardar cotizacion al estado seleccionado");
+                    guardar()
+            else
+                    alertError("No es posible guardar cotizacion al estado seleccionado");
         }
         else
             guardar()
@@ -959,8 +966,8 @@ var Iva=0;
 
                         if (guardar==true)
                         {
-
-                            var descripcion = $('#txt_descripcion').val();
+                            var nota_adicional = $('#txt_nota_adicional').val();
+                            var nota_interna = $('#txt_nota_interna').val();
                             var correo =$('#txt_enviarCorreo').val();
 
                             showLoad(true);
@@ -971,7 +978,8 @@ var Iva=0;
                                     _token: _token,
                                     tblDetalleCarga: tblDetalleCarga,
                                     tblDetalleServicios: tblDetalleServicios,
-                                    descripcion: descripcion,
+                                    nota_interna: nota_interna,
+                                    nota_adicional: nota_adicional,
                                     estado: estado,
                                     id_cotizacion: id_cotizacion,
                                     correo:correo,
@@ -1004,7 +1012,7 @@ var Iva=0;
                 /** Rechazar una cotizacion */
                 if (estado==-1)
                 {
-                    var descripcion = $('#txt_descripcion').val();
+                    var nota_interna = $('#txt_nota_interna').val();
                     showLoad(true);
 
                     $.ajax({
@@ -1013,7 +1021,7 @@ var Iva=0;
                         data: {
                             _token: _token,
                             id_cotizacion: id_cotizacion,
-                            descripcion:descripcion,
+                            nota_interna:nota_interna,
                             estado:estado
                         },
                         success: function (data) {
@@ -1096,8 +1104,8 @@ var Iva=0;
                 if (guardar==true)
                     {
 
-                      showLoad(true);
-                         $.ajax({
+                    showLoad(true);
+                        $.ajax({
                             type: 'POST',
                             url: '/guardarFlete', //llamada a la ruta
                             data: {
