@@ -21,7 +21,10 @@
                 var htmltext="<embed width=100% height=100% type='application/pdf' src='data:application/pdf,"+escape(data) +"'></enbed>";
                 var detailwindows= window.open("",nombrelogico,parametros);
                 if(detailwindows==null)
-                    alertError("No se puede mostrar PDF, ventana emergente bloquiada");
+                {
+                    alertError("No se puede mostrar PDF, ventana emergente bloqueada.");
+                    alertError("Click en 🔒 para habilitar ventana emergente.");
+                }
                 else
                 {
                     detailwindows.document.write(htmltext);
@@ -52,7 +55,10 @@
                 var htmltext="<embed width=100% height=100% type='application/pdf' src='data:application/pdf,"+escape(data) +"'></enbed>";
                 var detailwindows= window.open("",nombrelogico,parametros);
                 if(detailwindows==null)
-                    alertError("No se puede mostrar PDF, ventana emergente bloquiada");
+                {
+                    alertError("No se puede mostrar PDF, ventana emergente bloqueada.");
+                    alertError("Click en 🔒 para habilitar ventana emergente.");
+                }
                 else
                 {
                     detailwindows.document.write(htmltext);
@@ -83,7 +89,10 @@
                 var htmltext="<embed width=100% height=100% type='application/pdf' src='data:application/pdf,"+escape(data) +"'></enbed>";
                 var detailwindows= window.open("",nombrelogico,parametros);
                 if(detailwindows==null)
-                    alertError("No se puede mostrar PDF, ventana emergente bloquiada");
+                {
+                    alertError("No se puede mostrar PDF, ventana emergente bloqueada.");
+                    alertError("Click en 🔒 para habilitar ventana emergente.");
+                }
                 else
                 {
                     detailwindows.document.write(htmltext);
