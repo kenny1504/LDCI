@@ -1270,8 +1270,16 @@ var Iva=0;
                 var parametros="dependent=yes,locationbar=no,scrollbars=yes,menubar=yes,resizable,screenX=80,screenY=80,width=900,height=1400";
                 var htmltext="<embed width=100% height=100% type='application/pdf' src='data:application/pdf,"+escape(data) +"'></enbed>";
                 var detailwindows= window.open("",nombrelogico,parametros);
-                detailwindows.document.write(htmltext);
-                detailwindows.document.close();
+                if(detailwindows==null)
+                {
+                    alertError("No se puede mostrar PDF, ventana emergente bloqueada.");
+                    alertError("Click en 🔒 para habilitar ventana emergente.");
+                }
+                else
+                {
+                    detailwindows.document.write(htmltext);
+                    detailwindows.document.close();
+                }
             });
     }
 
