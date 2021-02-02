@@ -43,7 +43,6 @@
     }
     /* set the base styles all tags should use */
     .figure.tag::before {
-        position: absolute;
         top: 10%;
         display: block;
         color: white;
